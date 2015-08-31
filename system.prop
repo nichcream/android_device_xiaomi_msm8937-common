@@ -1,5 +1,8 @@
 #System prop for Redmi 3s By TeamMEX
 
+# Art
+dalvik.vm.dex2oat-flags=--no-watch-dog
+
 # Audio
 voice.playback.conc.disabled=true
 voice.record.conc.disabled=false
