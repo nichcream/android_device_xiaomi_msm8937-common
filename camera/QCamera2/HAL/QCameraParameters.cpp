@@ -12442,12 +12442,9 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
     memset(&stream_config_info, 0, sizeof(stream_config_info));
     stream_config_info.num_streams = 0;
 
-    if (m_bStreamsConfigured) {
+    if (resetConfig) {
         LOGH("Reset stream config!!");
         rc = sendStreamConfigInfo(stream_config_info);
-        m_bStreamsConfigured = false;
-    }
-    if (resetConfig) {
         LOGH("Done Resetting stream config!!");
         return rc;
     }
@@ -12684,8 +12681,6 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
     }
 
     rc = sendStreamConfigInfo(stream_config_info);
-    m_bStreamsConfigured = true;
-
     return rc;
 }
 
