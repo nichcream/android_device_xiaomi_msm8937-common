@@ -104,6 +104,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+    libxiaomi_camera \
     Snap \
     libxml2
 
