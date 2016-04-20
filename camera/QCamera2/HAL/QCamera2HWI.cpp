@@ -766,6 +766,7 @@ void QCamera2HardwareInterface::release_recording_frame(
             struct camera_device *device, const void *opaque)
 {
     ATRACE_CALL();
+    int32_t ret = NO_ERROR;
     QCamera2HardwareInterface *hw =
         reinterpret_cast<QCamera2HardwareInterface *>(device->priv);
     if (!hw) {
@@ -779,11 +780,20 @@ void QCamera2HardwareInterface::release_recording_frame(
     LOGD("E camera id %d", hw->getCameraId());
 
     //Close and delete duplicated native handle and FD's.
-    QCameraVideoMemory::closeNativeHandle(opaque, hw->mStoreMetaDataInFrame > 0);
+    if (hw->mVideoMem != NULL) {
+        ret = hw->mVideoMem->closeNativeHandle(opaque,
+                hw->mStoreMetaDataInFrame > 0);
+        if (ret != NO_ERROR) {
+            LOGE("Invalid video metadata");
+            return;
+        }
+    } else {
+        LOGW("Possible FD leak. Release recording called after stop");
+    }
 
     hw->lockAPI();
     qcamera_api_result_t apiResult;
-    int32_t ret = hw->processAPI(QCAMERA_SM_EVT_RELEASE_RECORIDNG_FRAME, (void *)opaque);
+    ret = hw->processAPI(QCAMERA_SM_EVT_RELEASE_RECORIDNG_FRAME, (void *)opaque);
     if (ret == NO_ERROR) {
         hw->waitAPIResult(QCAMERA_SM_EVT_RELEASE_RECORIDNG_FRAME, &apiResult);
     }
@@ -1673,6 +1683,7 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
       mJpegClientHandle(0),
       mJpegHandleOwner(false),
       mMetadataMem(NULL),
+      mVideoMem(NULL),
       mCACDoneReceived(false),
       m_bNeedRestart(false),
       mIgnoredPreviewCount(0)
@@ -2813,6 +2824,7 @@ QCameraMemory *QCamera2HardwareInterface::allocateStreamBuf(
             }
             videoMemory->setVideoInfo(usage, fmt);
             mem = videoMemory;
+            mVideoMem = videoMemory;
         }
         break;
     case CAM_STREAM_TYPE_CALLBACK:
@@ -3144,6 +3156,7 @@ QCameraMemory *QCamera2HardwareInterface::allocateStreamUserBuf(
         }
         video_mem->setVideoInfo(usage, fmt);
         mem = static_cast<QCameraMemory *>(video_mem);
+        mVideoMem = video_mem;
     }
     break;
 
@@ -3584,6 +3597,7 @@ int QCamera2HardwareInterface::startRecording()
     int32_t rc = NO_ERROR;
 
     LOGI("E");
+    mVideoMem = NULL;
     //link meta stream with video channel if low power mode.
     if (isLowPowerMode()) {
         // Find and try to link a metadata stream from preview channel
@@ -3675,6 +3689,9 @@ int QCamera2HardwareInterface::stopRecording()
     }
     int rc = stopChannel(QCAMERA_CH_TYPE_VIDEO);
 
+    // Disable power hint for video encoding
+    m_perfLock.powerHint(POWER_HINT_VIDEO_ENCODE, false);
+    mVideoMem = NULL;
     LOGI("X rc = %d", rc);
     return rc;
 }
