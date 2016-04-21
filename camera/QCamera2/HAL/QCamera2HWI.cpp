@@ -3689,6 +3689,7 @@ int QCamera2HardwareInterface::stopRecording()
     }
     int rc = stopChannel(QCAMERA_CH_TYPE_VIDEO);
 
+    m_cbNotifier.flushVideoNotifications();
     // Disable power hint for video encoding
     m_perfLock.powerHint(POWER_HINT_VIDEO_ENCODE, false);
     mVideoMem = NULL;
