@@ -5,3 +5,27 @@ allow fingerprintd gx_fpd_service:service_manager { find };
 allow fingerprintd fingerprint_service:service_manager { find };
 set_prop(fingerprintd, system_prop)
 
+allow fingerprintd self:capability { setgid setuid dac_override };
+
+#Allow access to tee device
+allow fingerprintd tee_device:chr_file rw_file_perms;
+
+#Allow access to fpc device
+allow fingerprintd sysfs_fpc_dev:file rw_file_perms;
+
+# allow HAL module to read dir contents
+allow fingerprintd fpc_data_file:{ file sock_file } create_file_perms;
+
+# allow HAL module to read/write/unlink contents of this dir
+allow fingerprintd fpc_data_file:dir rw_dir_perms;
+
+# This is required to access fpce sockets
+allow fingerprintd fpce_socket:sock_file create_file_perms;
+
+#Allow access to uhid device
+allow fingerprintd uhid_device:chr_file rw_file_perms;
+
+#Allow access to storage 
+r_dir_file(fingerprintd, storage_file)
+r_dir_file(fingerprintd, mnt_user_file)
+r_dir_file(fingerprintd, fuse)
