@@ -1876,7 +1876,7 @@ void QCameraGrallocMemory::setMaxFPS(int maxFPS)
 
     /* the new fps will be updated in metadata of the next frame enqueued to display*/
     mMaxFPS = maxFPS;
-    LOGH("Setting max fps %d to display", mMaxFPS);
+    LOGH("Setting max fps %d to display", maxFPS);
 }
 
 /*===========================================================================

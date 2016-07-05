@@ -293,7 +293,8 @@ private:
     int mLocalFlag[MM_CAMERA_MAX_NUM_FRAMES];
     struct private_handle_t *mPrivateHandle[MM_CAMERA_MAX_NUM_FRAMES];
     preview_stream_ops_t *mWindow;
-    int mWidth, mHeight, mFormat, mStride, mScanline, mUsage, mMaxFPS;
+    int mWidth, mHeight, mFormat, mStride, mScanline, mUsage;
+    typeof (MetaData_t::refreshrate) mMaxFPS;
     camera_request_memory mGetMemory;
     void* mCallbackCookie;
     camera_memory_t *mCameraMemory[MM_CAMERA_MAX_NUM_FRAMES];
