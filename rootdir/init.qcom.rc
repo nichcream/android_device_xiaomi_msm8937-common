@@ -42,10 +42,6 @@ on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
-    # Support legacy paths
-    symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard0
-
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
 on fs
@@ -406,6 +402,11 @@ service iop /system/bin/iop
     user root
     group root
     disabled
+
+on post-fs
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
 
 service qcomsysd /system/bin/qcom-system-daemon
     class main
