@@ -1190,7 +1190,7 @@ int32_t QCameraPostProcessor::processJpegEvt(qcamera_jpeg_evt_payload_t *evt)
         qcamera_release_data_t release_data;
         memset(&release_data, 0, sizeof(qcamera_release_data_t));
         release_data.data = jpeg_mem;
-        LOGI("[KPI Perf]: PROFILE_JPEG_CB ");
+        LOGI("[KPI Perf]: PROFILE_JPEG_CB");
         rc = sendDataNotify(CAMERA_MSG_COMPRESSED_IMAGE,
                 jpeg_mem,
                 0,
@@ -1246,6 +1246,8 @@ end:
     // wait up data proc thread to do next job,
     // if previous request is blocked due to ongoing jpeg job
     m_dataProcTh.sendCmd(CAMERA_CMD_TYPE_DO_NEXT_JOB, FALSE, FALSE);
+
+    m_parent->m_perfLockMgr.releasePerfLock(PERF_LOCK_TAKE_SNAPSHOT);
 
     return rc;
 }

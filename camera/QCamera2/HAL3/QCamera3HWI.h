@@ -312,7 +312,7 @@ private:
     QCamera3SupportChannel *mAnalysisChannel;
     QCamera3RawDumpChannel *mRawDumpChannel;
     QCamera3RegularChannel *mDummyBatchChannel;
-    QCameraPerfLock m_perfLock;
+    QCameraPerfLockMgr mPerfLockMgr;
 
     uint32_t mChannelHandle;
 
@@ -447,6 +447,7 @@ private:
     uint32_t mFirstFrameNumberInBatch;
     camera3_stream_t mDummyBatchStream;
     bool mNeedSensorRestart;
+    bool mPreviewStarted;
 
     /* sensor output size with current stream configuration */
     QCamera3CropRegionMapper mCropRegionMapper;
@@ -454,7 +455,6 @@ private:
     /* Ldaf calibration data */
     bool mLdafCalibExist;
     uint32_t mLdafCalib[2];
-    bool mPowerHintEnabled;
     int32_t mLastCustIntentFrmNum;
 
     static const QCameraMap<camera_metadata_enum_android_control_effect_mode_t,
