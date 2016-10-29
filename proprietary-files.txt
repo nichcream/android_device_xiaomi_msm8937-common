@@ -1,0 +1,2 @@
+# Perf
+vendor/etc/msm_irqbalance.conf
