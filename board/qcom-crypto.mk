@@ -1,0 +1,5 @@
+# Encryption
+TARGET_HW_DISK_ENCRYPTION := true
+
+# Keystore
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
