@@ -20,7 +20,7 @@ CM_PATH := vendor/cm/device/product
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
 
-# Include common package config fragments
+# Include common product fragments
 include $(CM_PATH)/common/ant.mk
 include $(CM_PATH)/common/audio.mk
 include $(CM_PATH)/common/fingerprint.mk
@@ -30,11 +30,11 @@ include $(CM_PATH)/common/media.mk
 include $(CM_PATH)/common/perf.mk
 include $(CM_PATH)/common/snap.mk
 
-# Include QCOM package config fragments
+# Include QCOM product fragments
 include $(CM_PATH)/qcom/fm.mk
 include $(CM_PATH)/qcom/media.mk
 
-# Include device-specific package config fragments
+# Include device-specific product fragments
 include $(LOCAL_PATH)/product/*.mk
 
 # Inherit proprietary files

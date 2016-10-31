@@ -15,8 +15,37 @@
 #
 
 DEVICE_PATH := device/xiaomi/land
+CM_PATH := vendor/cm/device/board
 
-include $(DEVICE_PATH)/PlatformConfig.mk
+# Inherit common ARM64 board fragments
+include $(CM_PATH)/common/arm64/architecture.mk
+include $(CM_PATH)/common/arm64/binder.mk
+
+# Inherit common board fragments
+include $(CM_PATH)/common/bluetooth.mk
+include $(CM_PATH)/common/bootloader.mk
+include $(CM_PATH)/common/camera.mk
+include $(CM_PATH)/common/cpusets.mk
+include $(CM_PATH)/common/gps.mk
+include $(CM_PATH)/common/lights.mk
+include $(CM_PATH)/common/recovery.mk
+include $(CM_PATH)/common/sepolicy.mk
+
+# Inherit QCOM board fragments
+include $(CM_PATH)/qcom/bluetooth.mk
+include $(CM_PATH)/qcom/cne.mk
+include $(CM_PATH)/qcom/fm.mk
+include $(CM_PATH)/qcom/per-mgr.mk
+include $(CM_PATH)/qcom/platform.mk
+include $(CM_PATH)/qcom/crypto.mk
+include $(CM_PATH)/qcom/ril.mk
+include $(CM_PATH)/qcom/sepolicy.mk
+include $(CM_PATH)/qcom/time.mk
+
+# Inherit Cyanogen board fragments
+include $(CM_PATH)/cyanogen/hardware.mk
+
+# Inherit device-specific board fragments
 include $(DEVICE_PATH)/board/*.mk
 
 # Inherit the proprietary files
