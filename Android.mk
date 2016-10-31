@@ -44,16 +44,22 @@ $(LOCAL_BUILT_MODULE): WCNSS_INI_SYMLINK := $(TARGET_OUT)/etc/firmware/wlan/prim
 $(LOCAL_BUILT_MODULE): ACTUAL_BIN_FILE := /persist/WCNSS_qcom_wlan_nv.bin
 $(LOCAL_BUILT_MODULE): WCNSS_BIN_SYMLINK := $(TARGET_OUT)/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
 
+$(LOCAL_BUILT_MODULE): ACTUAL_MODULE_FILE := /system/lib/modules/pronto/pronto_wlan.ko
+$(LOCAL_BUILT_MODULE): WCNSS_MODULE_SYMLINK := $(TARGET_OUT)/lib/modules/wlan.ko
+
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
 $(LOCAL_BUILT_MODULE):
 	$(hide) echo "Making symlinks for wifi"
 	$(hide) mkdir -p $(dir $@)
 	$(hide) mkdir -p $(dir $(WCNSS_INI_SYMLINK))
+	$(hide) mkdir -p $(dir $(WCNSS_MODULE_SYMLINK))
 	$(hide) rm -rf $@
 	$(hide) rm -rf $(WCNSS_INI_SYMLINK)
 	$(hide) ln -sf $(ACTUAL_INI_FILE) $(WCNSS_INI_SYMLINK)
 	$(hide) rm -rf $(WCNSS_BIN_SYMLINK)
 	$(hide) ln -sf $(ACTUAL_BIN_FILE) $(WCNSS_BIN_SYMLINK)
+	$(hide) rm -rf $(WCNSS_MODULE_SYMLINK)
+	$(hide) ln -sf $(ACTUAL_MODULE_FILE) $(WCNSS_MODULE_SYMLINK)
 	$(hide) touch $@
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
