@@ -38,6 +38,7 @@ include $(CM_PATH)/qcom/crypto.mk
 include $(CM_PATH)/qcom/fm.mk
 include $(CM_PATH)/qcom/per-mgr.mk
 include $(CM_PATH)/qcom/platform.mk
+include $(CM_PATH)/qcom/power.mk
 include $(CM_PATH)/qcom/crypto.mk
 include $(CM_PATH)/qcom/ril.mk
 include $(CM_PATH)/qcom/sepolicy.mk
