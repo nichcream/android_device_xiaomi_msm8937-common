@@ -31,6 +31,7 @@ include $(CM_PATH)/common/perf.mk
 include $(CM_PATH)/common/snap.mk
 
 # Include QCOM product fragments
+include $(CM_PATH)/qcom/display.mk
 include $(CM_PATH)/qcom/fm.mk
 include $(CM_PATH)/qcom/media.mk
 

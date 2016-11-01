@@ -34,6 +34,7 @@ include $(CM_PATH)/common/sepolicy.mk
 # Inherit QCOM board fragments
 include $(CM_PATH)/qcom/bluetooth.mk
 include $(CM_PATH)/qcom/cne.mk
+include $(CM_PATH)/qcom/crypto.mk
 include $(CM_PATH)/qcom/fm.mk
 include $(CM_PATH)/qcom/per-mgr.mk
 include $(CM_PATH)/qcom/platform.mk
