@@ -24,6 +24,9 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 # Inherit from land device
 $(call inherit-product, device/xiaomi/land/device.mk)
 
+# Must define platform before including any common things
+$(call inherit-product, device/xiaomi/land/board/00-qcom-platform-msm8937.mk)
+
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := land
 PRODUCT_MANUFACTURER := Xiaomi
