@@ -123,3 +123,6 @@ on property:sys.boot_completed=1
 
     rm /data/system/perfd/default_values
     start perfd
+
+    swapon_all fstab.qcom
+    write /proc/sys/vm/swappiness 100
