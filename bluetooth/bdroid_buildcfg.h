@@ -19,4 +19,7 @@
 #define _BDROID_BUILDCFG_H
 
 #define BTM_DEF_LOCAL_NAME   "Redmi"
+
+#define BLE_VND_INCLUDED   TRUE
+#define BT_CLEAN_TURN_ON_DISABLED 1
 #endif
