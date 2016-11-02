@@ -513,7 +513,7 @@ bin/xtwifi-client
 bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
-framework/com.qti.location.sdk.jar
+-framework/com.qti.location.sdk.jar
 lib/hw/gps.default.so
 lib/libgps.utils.so
 lib/libloc_api_v02.so
