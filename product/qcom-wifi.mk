@@ -9,10 +9,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+    libQWiFiSoftApCfg \
     libqsap_sdk \
+    libwpa_client \
     wcnss_service
 
 PRODUCT_PACKAGES += \
+    dhcpcd.conf \
     hostapd \
     wpa_supplicant \
     wpa_supplicant.conf
