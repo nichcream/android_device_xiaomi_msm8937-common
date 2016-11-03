@@ -17,6 +17,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.multisim.config=dsds \
     persist.radio.sib16_support=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
+    ro.telephony.call_ring.multiple=false \
     ro.telephony.default_network=20 \
     ro.use_data_netmgrd=true
 
