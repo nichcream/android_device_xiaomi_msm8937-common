@@ -1,3 +1,7 @@
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.msm8937.so
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
