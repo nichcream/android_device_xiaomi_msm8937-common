@@ -94,6 +94,9 @@ lib/libmmjpeg_interface.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_panorama.so
 lib/libqomx_core.so
+vendor/lib/libFaceGrade.so
+vendor/lib/libFaceProc.so
+vendor/lib/libarcsoft_beauty_shot.so
 vendor/lib/libchromaflash.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
@@ -155,6 +158,7 @@ vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libseemore.so
+vendor/lib/libtm_interface.so
 vendor/lib/libts_detected_face_hal.so
 vendor/lib/libts_face_beautify_hal.so
 
