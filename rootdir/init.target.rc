@@ -231,7 +231,6 @@ on charger
     mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
     load_all_props
     setprop persist.sys.usb.config mass_storage
-    start qcom-post-boot
     setprop persist.sys.usb.config mass_storage
     start hvdcp_opti
 

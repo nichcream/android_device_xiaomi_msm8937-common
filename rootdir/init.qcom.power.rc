@@ -1,4 +1,4 @@
-on property:sys.boot_completed=1
+on enable-low-power
     # HMP scheduler settings
     write /proc/sys/kernel/sched_window_stats_policy 3
     write /proc/sys/kernel/sched_ravg_hist_size 3
@@ -124,5 +124,11 @@ on property:sys.boot_completed=1
     rm /data/system/perfd/default_values
     start perfd
 
+on property:sys.boot_completed=1
+    trigger enable-low-power
+
     swapon_all fstab.qcom
     write /proc/sys/vm/swappiness 100
+
+on charger
+    trigger enable-low-power
