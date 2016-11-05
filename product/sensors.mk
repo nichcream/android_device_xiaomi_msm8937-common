@@ -1,6 +1,6 @@
 # Sensors
 PRODUCT_PACKAGES += \
-    sensors.msm8937.so
+    sensors.msm8937
 
 # Permissions
 PRODUCT_COPY_FILES += \
