@@ -11,8 +11,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     libQWiFiSoftApCfg \
     libqsap_sdk \
-    libwpa_client \
-    wcnss_service
+    libwpa_client
 
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
