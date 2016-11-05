@@ -6,7 +6,6 @@ vendor/lib/libfastcvopt.so
 vendor/lib64/libadsprpc.so
 vendor/lib64/libadsp_default_listener.so
 
-
 # ADSP modules
 vendor/lib/rfsa/adsp/libadsp_fd_skel.so
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
@@ -464,6 +463,10 @@ vendor/lib/libmmcamera_isp_scaler_viewfinder44.so
 vendor/lib/libmmcamera_isp_fovcrop_viewfinder40.so
 vendor/lib/libmmcamera_isp_color_xform_encoder40.so
 vendor/lib/libmmcamera_isp_color_xform_viewfinder40.so
+
+# Consumer IR
+lib/hw/consumerir.default.so
+lib64/hw/consumerir.default.so
 
 # DPM
 bin/dpmd
