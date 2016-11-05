@@ -507,6 +507,19 @@ vendor/lib64/libsecureui.so
 vendor/lib64/libsecureui_svcsock.so
 vendor/lib64/libssd.so
 
+# Fingerprint
+bin/gx_fpcmd
+bin/gx_fpd
+lib/hw/fingerprint.default.so
+lib/libcom_fingerprints_service.so
+lib64/hw/fingerprint.default.so
+lib64/hw/fingerprint.goodix.so
+lib64/hw/gxfingerprint.default.so
+lib64/libcom_fingerprints_service.so
+lib64/libfp_client.so
+lib64/libfpnav.so
+lib64/libfpservice.so
+
 # FM
 bin/fm_qsoc_patches
 
