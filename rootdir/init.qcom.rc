@@ -336,6 +336,13 @@ on post-fs-data
     mkdir /data/misc/sensors
     chmod 0775 /data/misc/sensors
 
+on class_start:late_start
+    write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
+
+    copy /system/vendor/qcril.db /data/misc/radio/qcril.db
+    chown radio radio /data/misc/radio/qcril.db
+    write /data/misc/radio/db_check_done 1
+
 service perfd /system/vendor/bin/perfd
    class main
    user root
@@ -994,10 +1001,9 @@ service vm_bms /system/bin/vm_bms
     disabled
 
 service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
-    class core
+    class late_start
     user root
     group root
-    disabled
     writepid /dev/cpuset/system-background/tasks
 
 service wfdservice /system/bin/wfdservice
