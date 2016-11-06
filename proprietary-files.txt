@@ -1339,16 +1339,16 @@ vendor/lib64/sensors.ssc.so
 # Thermal
 etc/thermal-engine.conf
 vendor/bin/thermal-engine
--vendor/lib/libthermalclient.so
--vendor/lib64/libthermalclient.so
+vendor/lib/libthermalclient.so
+vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
 
 # Time services
 -app/TimeService/TimeService.apk
 bin/time_daemon
--vendor/lib/libtime_genoff.so
+vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
--vendor/lib64/libtime_genoff.so
+vendor/lib64/libtime_genoff.so
 vendor/lib64/libTimeService.so
 
 # Widevine
