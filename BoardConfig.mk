@@ -25,6 +25,7 @@ include $(CM_PATH)/common/arm64/binder.mk
 include $(CM_PATH)/common/bluetooth.mk
 include $(CM_PATH)/common/bootloader.mk
 include $(CM_PATH)/common/camera.mk
+include $(CM_PATH)/common/clang.mk
 include $(CM_PATH)/common/cpusets.mk
 include $(CM_PATH)/common/dlmalloc.mk
 include $(CM_PATH)/common/gps.mk
