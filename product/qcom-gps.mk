@@ -2,6 +2,9 @@
 PRODUCT_BOOT_JARS += \
     com.qti.location.sdk
 
+PRODUCT_PACKAGES += \
+    libcurl
+
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
