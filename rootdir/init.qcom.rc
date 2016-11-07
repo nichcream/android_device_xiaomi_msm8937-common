@@ -391,12 +391,6 @@ on class_start:late_start
     chown radio radio /data/misc/radio/qcril.db
     write /data/misc/radio/db_check_done 1
 
-service perfd /system/vendor/bin/perfd
-   class main
-   user root
-   disabled
-   socket perfd seqpacket 0666 root system
-
 service iop /system/bin/iop
     class main
     user root
@@ -918,7 +912,6 @@ service fingerprintd /system/bin/fingerprintd
     socket fpce stream 0666 system system
     user  system
     group system sdcard_rw
-    system system
     disabled
 
 service gx_fpd /system/bin/gx_fpd
@@ -957,6 +950,7 @@ service qseecomd /system/bin/qseecomd
 service perfd /system/vendor/bin/perfd
    class main
    user root
+   socket perfd seqpacket 0666 root system
    disabled
    writepid /dev/cpuset/system-background/tasks
 
@@ -982,7 +976,6 @@ service wcnss-service /system/bin/wcnss_service
     class main
     user system
     group system wifi radio
-    restart
 
 service imsqmidaemon /system/bin/imsqmidaemon
     class main
