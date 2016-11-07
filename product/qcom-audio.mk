@@ -5,7 +5,13 @@ PRODUCT_COPY_FILES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
+    audio.dolby.ds2.enabled=true \
+    audio.playback.mch.downsample=true \
+    audio.safx.pbe.enabled=true \
     ro.qc.sdk.audio.fluencetype=fluence \
     persist.audio.fluence.voicecall=true \
-    persist.audio.fluence.voicerec=false \
-    persist.audio.fluence.speaker=false
+    use.qti.sw.alac.decoder=true \
+    use.qti.sw.ape.decoder=true \
+    voice.conc.fallbackpath=deep-buffer \
+    voice.playback.conc.disabled=true \
+    voice.voip.conc.disabled=true
