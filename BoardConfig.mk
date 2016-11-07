@@ -26,6 +26,7 @@ include $(CM_PATH)/common/bluetooth.mk
 include $(CM_PATH)/common/bootloader.mk
 include $(CM_PATH)/common/camera.mk
 include $(CM_PATH)/common/cpusets.mk
+include $(CM_PATH)/common/dlmalloc.mk
 include $(CM_PATH)/common/gps.mk
 include $(CM_PATH)/common/lights.mk
 include $(CM_PATH)/common/recovery.mk
