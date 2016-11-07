@@ -28,7 +28,6 @@ include $(CM_PATH)/common/fingerprint.mk
 include $(CM_PATH)/common/gello.mk
 include $(CM_PATH)/common/lights.mk
 include $(CM_PATH)/common/media.mk
-include $(CM_PATH)/common/perf.mk
 include $(CM_PATH)/common/snap.mk
 
 # Include QCOM product fragments
