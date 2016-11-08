@@ -38,6 +38,7 @@ include $(CM_PATH)/qcom/bluetooth.mk
 include $(CM_PATH)/qcom/cne.mk
 include $(CM_PATH)/qcom/encryption.mk
 include $(CM_PATH)/qcom/fm.mk
+include $(CM_PATH)/qcom/gps.mk
 include $(CM_PATH)/qcom/per-mgr.mk
 include $(CM_PATH)/qcom/platform.mk
 include $(CM_PATH)/qcom/power.mk
