@@ -1,2 +1,0 @@
-# Lights
-BOARD_LIGHTS_VARIANT := aw2013

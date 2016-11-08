@@ -29,7 +29,6 @@ include $(CM_PATH)/common/clang.mk
 include $(CM_PATH)/common/cpusets.mk
 include $(CM_PATH)/common/dlmalloc.mk
 include $(CM_PATH)/common/gps.mk
-include $(CM_PATH)/common/lights.mk
 include $(CM_PATH)/common/recovery.mk
 include $(CM_PATH)/common/sepolicy.mk
 
