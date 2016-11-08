@@ -3,6 +3,7 @@ PRODUCT_BOOT_JARS += \
     com.qti.location.sdk
 
 PRODUCT_PACKAGES += \
+    gps.default \
     libcurl
 
 # Properties
