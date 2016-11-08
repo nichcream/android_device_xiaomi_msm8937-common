@@ -1348,8 +1348,16 @@ vendor/lib64/libTimeService.so
 # Widevine
 vendor/lib/mediadrm/libwvdrmengine.so
 
-# Wifi
+# Wi-Fi
 bin/cnss-daemon
 bin/cnss_diag
 bin/wcnss_service
+etc/firmware/wlan/prima/WCNSS_cfg.dat
+etc/hostapd/hostapd.accept
+etc/hostapd/hostapd_default.conf
+etc/hostapd/hostapd.deny
+etc/wifi/WCNSS_qcom_cfg.ini
+etc/wifi/fstman.ini
+etc/wifi/p2p_supplicant_overlay.conf
+etc/wifi/wpa_supplicant_overlay.conf
 lib/modules/pronto/pronto_wlan.ko
