@@ -1,2 +1,0 @@
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := msm8937
