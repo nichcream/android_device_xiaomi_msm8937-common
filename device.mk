@@ -23,6 +23,7 @@ DEVICE_PACKAGE_OVERLAYS += \
 # Include common product fragments
 include $(CM_PATH)/common/ant.mk
 include $(CM_PATH)/common/audio.mk
+include $(CM_PATH)/common/bluetooth-le.mk
 include $(CM_PATH)/common/consumerir.mk
 include $(CM_PATH)/common/fingerprint.mk
 include $(CM_PATH)/common/gello.mk
