@@ -30,6 +30,7 @@ include $(CM_PATH)/common/gps.mk
 include $(CM_PATH)/common/lights.mk
 include $(CM_PATH)/common/media.mk
 include $(CM_PATH)/common/snap.mk
+include $(CM_PATH)/common/wifi.mk
 
 # Include QCOM product fragments
 include $(CM_PATH)/qcom/audio.mk
