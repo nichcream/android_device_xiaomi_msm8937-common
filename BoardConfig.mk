@@ -17,6 +17,9 @@
 DEVICE_PATH := device/xiaomi/land
 CM_PATH := vendor/cm/device/board
 
+# Define platform before including any common things
+include $(DEVICE_PATH)/PlatformConfig.mk
+
 # Inherit common ARM64 board fragments
 include $(CM_PATH)/common/arm64/architecture.mk
 include $(CM_PATH)/common/arm64/binder.mk
