@@ -384,6 +384,10 @@ on boot
     chown system drmrpc /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0020/input/input0/secure_touch_enable
     chown system drmrpc /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0020/input/input0/secure_touch
 
+    chown root system /sys/class/leds/red/blink
+    chown root system /sys/class/leds/green/blink
+    chown root system /sys/class/leds/blue/blink
+
 on class_start:late_start
     write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
 
