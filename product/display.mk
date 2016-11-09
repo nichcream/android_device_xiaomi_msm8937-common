@@ -34,12 +34,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_flushrate=0.4 \
     ro.hwui.texture_cache_size=72
 
-# Panel calibration
-PRODUCT_PACKAGES += \
-    qdcm_calib_data_hx8394F_HD720p_video_BOE.xml \
-    qdcm_calib_data_ili9881c_HD720p_video_Tianma.xml \
-    qdcm_calib_data_nt35521s_HD720p_video_EBBG.xml
-
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196609 \
