@@ -77,16 +77,31 @@
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
 
-    <!-- Does the notification LED support multiple colors?
-         Used to decide if the user can change the colors -->
-    <bool name="config_multiColorNotificationLed">true</bool>
-
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveBatteryLed">true</bool>
 
-    <!-- Does the battery LED support multiple colors?
-         Used to decide if the user can change the colors -->
-    <bool name="config_multiColorBatteryLed">true</bool>
+    <!-- What can the LEDs on this device do? If defined, this overrides all of the
+         older settings:
+         com.android.internal.R.bool.config_multiColorNotificationLed
+         com.android.internal.R.bool.config_multiColorBatteryLed
+         org.cyanogenmod.platform.internal.R.bool.config_multipleNotificationLeds
+         com.android.internal.R.bool.config_ledCanPulse
+         org.cyanogenmod.platform.internal.R.bool.config_useSegmentedBatteryLed
+         org.cyanogenmod.platform.internal.R.bool.config_adjustableNotificationLedBrightness
+         Use the following values from NotificationManager:
+         LIGHTS_RGB_NOTIFICATION = 0
+         LIGHTS_RGB_BATTERY = 1
+         LIGHTS_MULTIPLE_LED = 2
+         LIGHTS_LED_PULSE = 3
+         LIGHTS_SEGMENTED_BATTERY_LIGHTS = 4
+         LIGHTS_ADJUSTABLE_NOTIFICATION_BRIGHTNESS = 5
+    -->
+
+    <integer-array translatable="false" name="config_deviceLightCapabilities">
+        <item>0</item>
+        <item>1</item>
+        <item>5</item>
+    </integer-array>
 
     <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
          on the headphone/microphone jack. When false use the older uevent framework. -->
