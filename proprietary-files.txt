@@ -1169,6 +1169,8 @@ vendor/lib/libsmwrapper.so
 
 # Media
 etc/firmware/DE.o.msm8937
+etc/media_codecs_performance.xml
+etc/media_profiles.xml
 lib/libOmxVpp.so
 lib/libvpplibrary.so
 vendor/lib/libI420colorconvert.so
@@ -1215,6 +1217,7 @@ vendor/lib64/libdisp-aba.so
 # QMI
 bin/irsc_util
 etc/permissions/qti_permissions.xml
+etc/sec_config
 vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsutils.so
