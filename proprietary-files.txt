@@ -14,8 +14,16 @@ vendor/lib/rfsa/adsp/libfastcvadsp.so
 vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
 
 # Audio
+etc/audio_platform_info.xml
+etc/audio_policy.conf
+etc/mixer_paths_qrd_sku1.xml
+etc/sound_trigger_mixer_paths.xml
+etc/sound_trigger_platform_info.xml
 lib/hw/audio.primary.msm8937.so
 lib/soundfx/libdirac.so
+vendor/etc/audio_effects.conf
+vendor/etc/audio_output_policy.conf
+vendor/etc/diracmobile.config
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
