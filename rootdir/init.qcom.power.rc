@@ -131,7 +131,7 @@ on enable-low-power
     rm /data/system/perfd/default_values
     start perfd
 
-on property:sys.boot_completed=1
+on class_start:late_start
     trigger enable-low-power
 
 on charger
