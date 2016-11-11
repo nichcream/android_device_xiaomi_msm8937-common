@@ -1368,6 +1368,11 @@ vendor/lib/libTimeService.so
 -vendor/lib64/libtime_genoff.so
 vendor/lib64/libTimeService.so
 
+# Touchscreen
+etc/ft5336_biel_720p.ini
+etc/ft5336_lens_720p.ini
+etc/ft5336_oufei_720p.ini
+
 # Widevine
 vendor/lib/mediadrm/libwvdrmengine.so
 
