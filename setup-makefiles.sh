@@ -50,5 +50,8 @@ cat << EOF >> "$ANDROIDMK"
 
 EOF
 
+# Append the calls to firmware images
+append_firmware_calls_to_makefiles
+
 # We are done!
 write_footers
