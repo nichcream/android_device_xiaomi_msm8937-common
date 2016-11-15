@@ -119,7 +119,6 @@ void vendor_load_properties()
     import_kernel_cmdline(0, import_cmdline);
 
     property_set("ro.product.wt.boardid", board_id);
-    ERROR("Detected board ID=%s\n", board_id);
 
     if (!strcmp(board_id, "S88537AA1")) {
         property_set("ro.build.display.wtid", "SW_S88537AA1_V053_M20_MP_XM");
