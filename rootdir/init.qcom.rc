@@ -388,6 +388,10 @@ on boot
     chown root system /sys/class/leds/green/blink
     chown root system /sys/class/leds/blue/blink
 
+    # IR blaster
+    chown root system /sys/class/leds/infrared/transmit
+    chown root system /sys/class/leds/infrared/brightness
+
 on class_start:late_start
     write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
 
