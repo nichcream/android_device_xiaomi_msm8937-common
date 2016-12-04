@@ -20,6 +20,9 @@ LOCAL_CFLAGS += -D_ANDROID_ -DQCAMERA_REDEFINE_LOG
 # System header file path prefix
 LOCAL_CFLAGS += -DSYSTEM_HEADER_PREFIX=sys
 
+LOCAL_CLANG_CFLAGS += \
+        -Wno-error=enum-conversion
+
 LOCAL_SRC_FILES:= \
         src/mm_qcamera_main_menu.c \
         src/mm_qcamera_app.c \
@@ -114,6 +117,9 @@ LOCAL_CFLAGS += -D_ANDROID_ -DQCAMERA_REDEFINE_LOG
 
 # System header file path prefix
 LOCAL_CFLAGS += -DSYSTEM_HEADER_PREFIX=sys
+
+LOCAL_CLANG_CFLAGS += \
+        -Wno-error=enum-conversion
 
 LOCAL_SRC_FILES:= \
         src/mm_qcamera_main_menu.c \
