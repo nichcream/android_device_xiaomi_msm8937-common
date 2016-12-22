@@ -859,7 +859,11 @@ service gx_fpd /system/bin/gx_fpd
 on property:persist.sys.fp.vendor=switchf
     stop gx_fpd
     setprop persist.sys.fp.vendor searchf
-    start fingerprintd  
+    start fingerprintd
+    setprop ro.boot.fpsensor fpc
+
+on property:persist.sys.fp.vendor=goodix
+    setprop ro.boot.fpsensor gdx
 
 on property:persist.sys.fp.onstart=1
    start fingerprintd
