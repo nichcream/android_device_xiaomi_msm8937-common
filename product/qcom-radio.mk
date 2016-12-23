@@ -20,6 +20,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.mt_sms_ack=20 \
     persist.radio.multisim.config=dsds \
     persist.radio.rat_on=combine \
+    persist.radio.redir_party_num=1 \
     persist.radio.sib16_support=1 \
     ril.subscription.types=NV,RUIM \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
