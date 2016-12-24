@@ -30,8 +30,6 @@ public abstract class CMSensor {
     private static final String TAG = CMSensor.class.getSimpleName();
 
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
-
-    private static final int SENSOR_WAKELOCK_DURATION = 200;
     private static final int BATCH_LATENCY_IN_MS = 100;
 
     private Context mContext;

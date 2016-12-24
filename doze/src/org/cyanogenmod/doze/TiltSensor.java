@@ -32,12 +32,6 @@ public class TiltSensor extends CMSensor {
     }
 
     @Override
-    void enable() {
-        super.enable();
-        mEntryTimestamp = SystemClock.elapsedRealtime();
-    }
-
-    @Override
     void onSensorEvent(SensorEvent event) {
         super.onSensorEvent(event);
 
