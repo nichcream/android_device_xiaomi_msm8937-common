@@ -134,5 +134,11 @@ void vendor_load_properties()
         property_set("ro.build.display.wtid", "SW_S88537EC1_V070_M20_MP_XM");
     }
 
+    if (!strcmp(board_id, "S88537AB1")) {
+        property_set("ro.product.model", "Redmi 3X");
+    } else {
+        property_set("ro.product.model", "Redmi 3S");
+    }
+
     init_alarm_boot_properties();
 }
