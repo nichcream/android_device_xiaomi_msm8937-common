@@ -100,7 +100,7 @@
     <integer-array translatable="false" name="config_deviceLightCapabilities">
         <item>0</item>
         <item>1</item>
-        <item>5</item>
+        <item>3</item>
     </integer-array>
 
     <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
