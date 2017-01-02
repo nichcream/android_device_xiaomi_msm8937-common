@@ -1,3 +1,9 @@
+# FM
+PRODUCT_PACKAGES += \
+    FM2 \
+    libqcomfm_jni \
+    qcom.fmradio
+
 # Init
 PRODUCT_PACKAGES += \
     init.qcom.fm.sh
