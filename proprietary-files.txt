@@ -1245,7 +1245,6 @@ vendor/lib64/libQtiTether.so
 bin/iop
 bin/msm_irqbalance
 lib64/libqti-iop.so
-lib/modules/core_ctl.ko
 vendor/bin/perfd
 vendor/etc/msm_irqbalance.conf
 vendor/lib/libqc-opt.so
