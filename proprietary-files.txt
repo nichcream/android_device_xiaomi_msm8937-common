@@ -1441,4 +1441,3 @@ etc/wifi/WCNSS_qcom_cfg.ini
 etc/wifi/fstman.ini
 etc/wifi/p2p_supplicant_overlay.conf
 etc/wifi/wpa_supplicant_overlay.conf
-lib/modules/pronto/pronto_wlan.ko
