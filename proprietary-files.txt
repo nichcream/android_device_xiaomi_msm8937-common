@@ -1,6 +1,7 @@
 # ADSP
 bin/adsprpcd
 vendor/lib/libadsprpc.so
+vendor/lib/libadsp_default_listener.so
 vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libfastcvopt.so
 vendor/lib64/libadsprpc.so
@@ -21,11 +22,33 @@ vendor/lib/rfsa/adsp/libscveT2T_skel.so
 vendor/lib/rfsa/adsp/libscveTextReco_skel.so
 
 # Audio
+etc/aanc_tuning_mixer.txt
 etc/audio_platform_info.xml
+etc/audio_platform_info_extcodec.xml
 etc/audio_policy.conf
+etc/drc/drc_cfg_5.1.txt
+etc/drc/drc_cfg_AZ.txt
+etc/mixer_paths.xml
+etc/mixer_paths_mtp.xml
+etc/mixer_paths_skuk.xml
+etc/mixer_paths_wcd9306.xml
+etc/mixer_paths_wcd9326.xml
+etc/mixer_paths_wcd9330.xml
+etc/mixer_paths_wcd9335.xml
 etc/mixer_paths_qrd_sku1.xml
+etc/mixer_paths_qrd_sku2.xml
+etc/mixer_paths_qrd_skuh.xml
+etc/mixer_paths_qrd_skui.xml
+etc/mixer_paths_qrd_skum.xml
+etc/mixer_paths_qrd_skun.xml
+etc/mixer_paths_qrd_skuhf.xml
 etc/sound_trigger_mixer_paths.xml
+etc/sound_trigger_mixer_paths_wcd9306.xml
+etc/sound_trigger_mixer_paths_wcd9330.xml
+etc/sound_trigger_mixer_paths_wcd9335.xml
 etc/sound_trigger_platform_info.xml
+etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
+etc/surround_sound_3mic/surround_sound_rec_5.1.cfg
 lib/hw/audio.primary.msm8937.so
 lib/soundfx/libdirac.so
 vendor/etc/audio_effects.conf
@@ -33,20 +56,29 @@ vendor/etc/audio_output_policy.conf
 vendor/etc/diracmobile.config
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
+vendor/lib/libacdbmapper.so
 vendor/lib/libacdbrtac.so
 vendor/lib/libadiertac.so
 vendor/lib/libadm.so
 vendor/lib/libaudcal.so
+vendor/lib/libaudioalsa.so
 vendor/lib/libaudiodevarb.so
+vendor/lib/libdrc.so
+vendor/lib/libqct_resampler.so
+vendor/lib/libsurround_3mic_proc.so
+vendor/lib/libswvdec.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
 vendor/lib64/libacdb-fts.so
 vendor/lib64/libacdbloader.so
+vendor/lib64/libacdbmapper.so
 vendor/lib64/libacdbrtac.so
 vendor/lib64/libadiertac.so
 vendor/lib64/libaudcal.so
+vendor/lib64/libaudioalsa.so
 vendor/lib64/libaudiodevarb.so
+vendor/lib64/libswvdec.so
 
 # Audio ACDB
 etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
@@ -996,6 +1028,9 @@ vendor/lib/libmmcamera_isp_fovcrop_viewfinder40.so
 vendor/lib/libmmcamera_isp_color_xform_encoder40.so
 vendor/lib/libmmcamera_isp_color_xform_viewfinder40.so
 
+# Charger
+bin/hvdcp_opti
+
 # Consumer IR
 lib/hw/consumerir.default.so
 lib64/hw/consumerir.default.so
@@ -1024,10 +1059,15 @@ vendor/lib64/libdpmtcm.so
 # DRM
 bin/qseecomd
 vendor/bin/qseeproxydaemon
+vendor/lib/libcppf.so
+vendor/lib/liboemcrypto.so
 vendor/lib/libQSEEComAPI.so
 vendor/lib64/lib-sec-disp.so
 vendor/lib64/libGPreqcancel.so
 vendor/lib64/libGPreqcancel_svc.so
+vendor/lib64/libGPTEE.so
+vendor/lib64/libmdtp.so
+vendor/lib64/libmdtp_crypto.so
 vendor/lib64/libQSEEComAPI.so
 vendor/lib64/libSecureUILib.so
 vendor/lib64/libStDrvInt.so
@@ -1038,6 +1078,7 @@ vendor/lib64/librpmb.so
 vendor/lib64/libsecureui.so
 vendor/lib64/libsecureui_svcsock.so
 vendor/lib64/libssd.so
+vendor/lib64/libtzdrmgenprov.so
 
 # Display calibration
 -etc/qdcm_calib_data_hx8394F_HD720p_video_BOE.xml
@@ -1095,6 +1136,8 @@ vendor/lib/libloc_ext.so
 vendor/lib/liblocationservice.so
 vendor/lib/liblocationservice_glue.so
 vendor/lib/liblowi_client.so
+vendor/lib/liblowi_wifihal.so
+vendor/lib/liblowi_wifihal_nl.so
 vendor/lib/libquipc_os_api.so
 vendor/lib/libulp2.so
 vendor/lib/libxtadapter.so
@@ -1150,9 +1193,12 @@ vendor/lib/libc2d30_bltlib.so
 vendor/lib/libgsl.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libllvm-qcom.so
+vendor/lib/libmm-disp-apis.so
+vendor/lib/libmm-qdcm.so
 vendor/lib/libmmQSM.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
+vendor/lib/libsc-a3xx.so
 vendor/lib/libscale.so
 vendor/lib/libsd_sdk_display.so
 vendor/lib/libsdm-disp-apis.so
@@ -1182,10 +1228,14 @@ vendor/lib64/libgsl.so
 vendor/lib64/libllvm-glnext.so
 vendor/lib64/libllvm-qcom.so
 vendor/lib64/libmm-disp-apis.so
+vendor/lib64/libmm-dspp-utils.so
+vendor/lib64/libmm-hdcpmgr.so
+vendor/lib64/libmm-qdcm-diag.so
 vendor/lib64/libmm-qdcm.so
 vendor/lib64/libmmQSM.so
 vendor/lib64/librs_adreno.so
 vendor/lib64/librs_adreno_sha1.so
+vendor/lib64/libsc-a3xx.so
 vendor/lib64/libscalar.so
 vendor/lib64/libscale.so
 vendor/lib64/libsd_sdk_display.so
@@ -1225,19 +1275,42 @@ vendor/lib/libsmwrapper.so
 etc/firmware/DE.o.msm8937
 etc/media_codecs_performance.xml
 etc/media_profiles.xml
+lib/libOmxSwVdec.so
+lib/libOmxSwVencMpeg4.so
 lib/libOmxVpp.so
 lib/libvpplibrary.so
+lib64/libOmxSwVdec.so
+lib64/libOmxSwVencMpeg4.so
+vendor/lib/libAlacSwDec.so
+vendor/lib/libApeSwDec.so
+vendor/lib/libFlacSwDec.so
 vendor/lib/libI420colorconvert.so
+vendor/lib/libMpeg4SwEncoder.so
 vendor/lib/libOmxAacDec.so
+vendor/lib/libOmxAlacDec.so
+vendor/lib/libOmxAlacDecSw.so
+vendor/lib/libOmxAmrwbplusDec.so
+vendor/lib/libOmxApeDec.so
+vendor/lib/libOmxApeDecSw.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
+vendor/lib/libOmxWmaDec.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
 vendor/lib/libvqzip.so
+vendor/lib64/libFlacSwDec.so
+vendor/lib64/libMpeg4SwEncoder.so
+vendor/media/LMspeed_508.emd
+vendor/media/PFFprec_600.emd
+
+# Modem
+vendor/lib/libwms.so
+vendor/lib64/libwms.so
 
 # Network
 -priv-app/QtiTetherService/QtiTetherService.apk
 vendor/lib/libconnctrl.so
+vendor/lib/libQtiTether.so
 vendor/lib64/libconnctrl.so
 vendor/lib64/libQtiTether.so
 
@@ -1245,12 +1318,16 @@ vendor/lib64/libQtiTether.so
 bin/iop
 bin/msm_irqbalance
 lib64/libqti-iop.so
+lib64/libqti_performance.so
+lib/libqti_performance.so
 vendor/bin/perfd
 vendor/etc/msm_irqbalance.conf
 vendor/lib/libqc-opt.so
 vendor/lib/libqti-iop-client.so
 vendor/lib/libqti-perfd-client.so
 vendor/lib64/libqc-opt.so
+vendor/lib64/libqti-at.so
+vendor/lib64/libqti-gt.so
 vendor/lib64/libqti-iop-client.so
 vendor/lib64/libqti-perfd-client.so
 
@@ -1265,6 +1342,7 @@ etc/permissions/com.qti.snapdragon.sdk.display.xml
 framework/com.qti.snapdragon.sdk.display.jar
 -vendor/app/colorservice/colorservice.apk
 vendor/bin/mm-pp-dpps
+vendor/lib/libdisp-aba.so
 vendor/lib64/libdisp-aba.so
 
 # QMI
@@ -1335,6 +1413,8 @@ framework/qti-telephony-common.jar
 framework/QtiTelephonyServicelibrary.jar
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/qti
+vendor/lib/liblqe.so
+vendor/lib/libmdmdetect.so
 vendor/lib64/libconfigdb.so
 vendor/lib64/liblqe.so
 vendor/lib64/libmdmdetect.so
@@ -1350,6 +1430,8 @@ bin/ims_rtp_daemon
 bin/imscmservice
 bin/imsdatadaemon
 bin/imsqmidaemon
+etc/permissions/imscm.xml
+framework/imscmlibrary.jar
 -vendor/app/ims/ims.apk
 -vendor/app/imssettings/imssettings.apk
 vendor/lib64/lib-dplmedia.so
@@ -1399,11 +1481,16 @@ etc/sensors/sensor_def_qcomdev.conf
 vendor/lib/hw/activity_recognition.msm8937.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
+vendor/lib/sensor_calibrate.so
 vendor/lib/sensors.ssc.so
 vendor/lib64/hw/activity_recognition.msm8937.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
+vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.ssc.so
+
+# Subsystem restart
+bin/ssr_diag
 
 # Thermal
 etc/thermal-engine.conf
@@ -1424,6 +1511,9 @@ vendor/lib64/libTimeService.so
 etc/ft5336_biel_720p.ini
 etc/ft5336_lens_720p.ini
 etc/ft5336_oufei_720p.ini
+
+# USB
+etc/firmware/ice40.bin
 
 # Widevine
 vendor/lib/mediadrm/libwvdrmengine.so
