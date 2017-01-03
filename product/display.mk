@@ -38,6 +38,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_flushrate=0.4 \
     ro.hwui.texture_cache_size=72
 
+# Permissions
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
+
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196609 \
