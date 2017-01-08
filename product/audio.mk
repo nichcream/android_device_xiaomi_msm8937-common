@@ -26,6 +26,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio_hal.period_size=192 \
     ro.qc.sdk.audio.fluencetype=fluence \
     persist.audio.dirac.speaker=true \
+    persist.audio.fluence.speaker=true \
     persist.audio.fluence.voicecall=true \
     use.qti.sw.alac.decoder=true \
     use.qti.sw.ape.decoder=true \
