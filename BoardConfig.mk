@@ -15,7 +15,7 @@
 #
 
 DEVICE_PATH := device/xiaomi/land
-CM_PATH := vendor/cm/device/board
+CM_PATH := vendor/cm/config/board
 
 # Define platform before including any common things
 include $(DEVICE_PATH)/PlatformConfig.mk

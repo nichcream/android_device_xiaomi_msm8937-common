@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-CM_PATH := vendor/cm/device/product
+CM_PATH := vendor/cm/config/product
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
