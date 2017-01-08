@@ -1,6 +1,5 @@
 # Init scripts
 PRODUCT_PACKAGES += \
-    init.qcom.usb.rc \
     init.qcom.usb.sh
 
 # Permissions

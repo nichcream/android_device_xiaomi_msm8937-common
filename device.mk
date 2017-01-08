@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+DEVICE_PATH := $(LOCAL_PATH)
 CM_PATH := vendor/cm/config/product
 
 # Overlay
@@ -32,6 +33,8 @@ include $(CM_PATH)/common/gello.mk
 include $(CM_PATH)/common/gps.mk
 include $(CM_PATH)/common/lights.mk
 include $(CM_PATH)/common/media.mk
+include $(CM_PATH)/common/net.mk
+include $(CM_PATH)/common/radio.mk
 include $(CM_PATH)/common/snap.mk
 include $(CM_PATH)/common/wifi.mk
 
@@ -40,8 +43,13 @@ include $(CM_PATH)/qcom/audio.mk
 include $(CM_PATH)/qcom/cne.mk
 include $(CM_PATH)/qcom/display.mk
 include $(CM_PATH)/qcom/fm.mk
+include $(CM_PATH)/qcom/gps.mk
+include $(CM_PATH)/qcom/init.mk
 include $(CM_PATH)/qcom/media.mk
 include $(CM_PATH)/qcom/power.mk
+include $(CM_PATH)/qcom/radio.mk
+include $(CM_PATH)/qcom/sensors.mk
+include $(CM_PATH)/qcom/usb.mk
 include $(CM_PATH)/qcom/wifi.mk
 
 # Include Cyanogen product fragments

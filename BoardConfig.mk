@@ -30,7 +30,9 @@ include $(CM_PATH)/common/bootloader.mk
 include $(CM_PATH)/common/camera.mk
 include $(CM_PATH)/common/clang.mk
 include $(CM_PATH)/common/cpusets.mk
+include $(CM_PATH)/common/dexopt.mk
 include $(CM_PATH)/common/dlmalloc.mk
+include $(CM_PATH)/common/filesystem.mk
 include $(CM_PATH)/common/gps.mk
 include $(CM_PATH)/common/sepolicy.mk
 
@@ -38,12 +40,14 @@ include $(CM_PATH)/common/sepolicy.mk
 include $(CM_PATH)/qcom/bluetooth.mk
 include $(CM_PATH)/qcom/bootloader.mk
 include $(CM_PATH)/qcom/cne.mk
+include $(CM_PATH)/qcom/display.mk
 include $(CM_PATH)/qcom/encryption.mk
 include $(CM_PATH)/qcom/fm.mk
 include $(CM_PATH)/qcom/gps.mk
 include $(CM_PATH)/qcom/per-mgr.mk
 include $(CM_PATH)/qcom/platform.mk
 include $(CM_PATH)/qcom/power.mk
+include $(CM_PATH)/qcom/recovery.mk
 include $(CM_PATH)/qcom/ril.mk
 include $(CM_PATH)/qcom/sepolicy.mk
 include $(CM_PATH)/qcom/time.mk

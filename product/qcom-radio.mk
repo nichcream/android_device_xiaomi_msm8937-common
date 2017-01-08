@@ -29,9 +29,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd=true \
     service.qti.ims.enabled=1 \
     telephony.lteOnCdmaDevice=1
-
-# RIL
-PRODUCT_PACKAGES += \
-    libcnefeatureconfig \
-    librmnetctl \
-    libxml2
