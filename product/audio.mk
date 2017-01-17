@@ -28,6 +28,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.dirac.speaker=true \
     persist.audio.fluence.speaker=true \
     persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicerec=true \
     use.qti.sw.alac.decoder=true \
     use.qti.sw.ape.decoder=true \
     use.voice.path.for.pcm.voip=true \
