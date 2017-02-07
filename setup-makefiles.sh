@@ -17,6 +17,9 @@
 
 set -e
 
+# Initial copyright year
+export INITIAL_COPYRIGHT_YEAR=2016
+
 # Required!
 DEVICE=land
 VENDOR=xiaomi
