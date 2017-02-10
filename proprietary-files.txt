@@ -23,7 +23,6 @@ vendor/lib/rfsa/adsp/libscveTextReco_skel.so
 
 # Audio
 etc/aanc_tuning_mixer.txt
-etc/audio_platform_info.xml
 etc/audio_platform_info_extcodec.xml
 etc/audio_policy.conf
 etc/drc/drc_cfg_5.1.txt
