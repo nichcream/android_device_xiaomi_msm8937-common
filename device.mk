@@ -39,6 +39,7 @@ include $(CM_PATH)/common/wifi.mk
 
 # Include QCOM product fragments
 include $(CM_PATH)/qcom/audio.mk
+include $(CM_PATH)/qcom/camera.mk
 include $(CM_PATH)/qcom/cne.mk
 include $(CM_PATH)/qcom/display.mk
 include $(CM_PATH)/qcom/fm.mk
