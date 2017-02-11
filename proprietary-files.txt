@@ -1114,9 +1114,6 @@ lib64/libfp_client.so
 lib64/libfpnav.so
 lib64/libfpservice.so
 
-# FM
-bin/fm_qsoc_patches
-
 # Gatekeeper
 vendor/lib/hw/gatekeeper.msm8937.so
 vendor/lib64/hw/gatekeeper.msm8937.so
