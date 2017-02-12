@@ -1503,7 +1503,6 @@ vendor/lib64/sensors.ssc.so
 bin/ssr_diag
 
 # Thermal
-etc/thermal-engine.conf
 vendor/bin/thermal-engine
 vendor/lib/libthermalclient.so
 vendor/lib64/libthermalclient.so
