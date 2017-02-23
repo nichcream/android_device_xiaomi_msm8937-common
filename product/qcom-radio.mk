@@ -28,8 +28,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.default_network=20 \
     ro.use_data_netmgrd=true \
-    service.qti.ims.enabled=1 \
-    telephony.lteOnCdmaDevice=1
+    service.qti.ims.enabled=0 \
+    telephony.lteOnCdmaDevice=1 \
+    ro.ril.fast.dormancy.rule=0 \
+    ro.ril.hsxpa=0
 
 # RIL
 PRODUCT_PACKAGES += \
