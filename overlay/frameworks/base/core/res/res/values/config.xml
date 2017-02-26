@@ -38,13 +38,20 @@
          backlight values for LUX levels between these control points.
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>8</item>
-        <item>35</item>
-        <item>100</item>
-        <item>300</item>
-        <item>1500</item>
-        <item>3500</item>
-        <item>7000</item>
+        <item>10</item>
+        <item>30</item>
+        <item>80</item>
+        <item>120</item>
+        <item>225</item>
+        <item>320</item>
+        <item>550</item>
+        <item>880</item>
+        <item>1250</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>5000</item>
+        <item>5500</item>
+        <item>7500</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -53,13 +60,20 @@
          The brightness values must be between 0 and 255 and be non-decreasing.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>10</item>
-        <item>20</item>
-        <item>40</item>
-        <item>70</item>
-        <item>110</item>
-        <item>160</item>
-        <item>200</item>
+        <item>11</item>
+        <item>18</item>
+        <item>29</item>
+        <item>34</item>
+        <item>46</item>
+        <item>54</item>
+        <item>69</item>
+        <item>81</item>
+        <item>100</item>
+        <item>123</item>
+        <item>148</item>
+        <item>187</item>
+        <item>196</item>
+        <item>225</item>
         <item>255</item>
     </integer-array>
 
@@ -70,9 +84,17 @@
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
-    <integer name="config_screenBrightnessSettingMinimum">1</integer>
+    <integer name="config_screenBrightnessSettingMinimum">11</integer>
 
     <integer name="config_buttonBrightnessSettingDefault">0</integer>
+
+    <!-- Maximum screen brightness allowed by the power manager.
+         The user is forbidden from setting the brightness above this level. -->
+    <integer name="config_screenBrightnessSettingMaximum">255</integer>
+
+    <!-- Default screen brightness setting.
+         Must be in the range specified by minimum and maximum. -->
+    <integer name="config_screenBrightnessSettingDefault">69</integer>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
@@ -356,11 +378,6 @@
          Refer to power.h for details.
     -->
     <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
-
-    <!-- Screen brightness used to dim the screen while dozing in a very low power state.
-         May be less than the minimum allowed brightness setting
-         that can be set by the user. -->
-    <integer name="config_screenBrightnessDoze">17</integer>
 
     <!-- If true, the doze component is not started until after the screen has been
          turned off and the screen off animation has been performed. -->
