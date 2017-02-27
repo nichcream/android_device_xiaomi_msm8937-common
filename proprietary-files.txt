@@ -1133,6 +1133,8 @@ etc/izat.conf
 etc/lowi.conf
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
+etc/cacert_location.pem
+etc/xtra_root_cert.pem
 etc/sap.conf
 etc/xtwifi.conf
 -framework/com.qti.location.sdk.jar
