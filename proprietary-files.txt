@@ -1122,7 +1122,6 @@ bin/lowi-server
 bin/xtwifi-client
 bin/xtwifi-inet-agent
 etc/flp.conf
-etc/gps.conf
 etc/izat.conf
 etc/lowi.conf
 etc/permissions/com.qti.location.sdk.xml
