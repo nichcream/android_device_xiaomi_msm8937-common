@@ -1,7 +1,6 @@
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.cpp.duplication=false \
-    persist.camera.HAL3.enabled=1
+    persist.camera.cpp.duplication=false
 
 # ZRAM
 PRODUCT_PROPERTY_OVERRIDES += \
