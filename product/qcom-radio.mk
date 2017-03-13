@@ -24,6 +24,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.sib16_support=1 \
     ril.subscription.types=NV,RUIM \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
+    ro.ril.disable.power.collapse=0 \
     ro.ct.device.model=XMP-2016030 \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.default_network=20 \
