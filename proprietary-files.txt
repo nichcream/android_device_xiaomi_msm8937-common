@@ -60,6 +60,7 @@ vendor/lib/libadiertac.so
 vendor/lib/libadm.so
 vendor/lib/libaudcal.so
 vendor/lib/libaudioalsa.so
+vendor/lib/libhwdaphal.so
 vendor/lib/libaudiodevarb.so
 vendor/lib/libdrc.so
 vendor/lib/libqct_resampler.so
@@ -75,6 +76,7 @@ vendor/lib64/libacdbrtac.so
 vendor/lib64/libadiertac.so
 vendor/lib64/libaudcal.so
 vendor/lib64/libaudioalsa.so
+vendor/lib64/libhwdaphal.so
 vendor/lib64/libaudiodevarb.so
 vendor/lib64/libswvdec.so
 
@@ -1311,11 +1313,13 @@ vendor/lib/libOmxApeDecSw.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxWmaDec.so
+vendor/lib/libOmxMux.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
 vendor/lib/libvqzip.so
 vendor/lib64/libFlacSwDec.so
 vendor/lib64/libMpeg4SwEncoder.so
+vendor/lib64/libOmxMux.so
 vendor/media/LMspeed_508.emd
 vendor/media/PFFprec_600.emd
 
