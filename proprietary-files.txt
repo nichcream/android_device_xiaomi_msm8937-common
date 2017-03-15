@@ -23,6 +23,7 @@ vendor/lib/rfsa/adsp/libscveTextReco_skel.so
 
 # Audio
 etc/aanc_tuning_mixer.txt
+etc/audio_platform_info.xml
 etc/audio_platform_info_extcodec.xml
 etc/audio_policy.conf
 etc/drc/drc_cfg_5.1.txt
@@ -48,6 +49,7 @@ etc/sound_trigger_mixer_paths_wcd9335.xml
 etc/sound_trigger_platform_info.xml
 etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
 etc/surround_sound_3mic/surround_sound_rec_5.1.cfg
+lib/hw/audio.primary.msm8937.so
 lib/soundfx/libdirac.so
 vendor/etc/audio_effects.conf
 vendor/etc/audio_output_policy.conf
