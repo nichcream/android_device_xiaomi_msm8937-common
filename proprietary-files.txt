@@ -35,7 +35,6 @@ etc/mixer_paths_wcd9306.xml
 etc/mixer_paths_wcd9326.xml
 etc/mixer_paths_wcd9330.xml
 etc/mixer_paths_wcd9335.xml
-etc/mixer_paths_qrd_sku1.xml
 etc/mixer_paths_qrd_sku2.xml
 etc/mixer_paths_qrd_skuh.xml
 etc/mixer_paths_qrd_skui.xml
