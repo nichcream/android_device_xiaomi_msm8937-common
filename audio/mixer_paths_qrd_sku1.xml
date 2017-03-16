@@ -485,6 +485,8 @@
     </path>
 
     <path name="voice-call">
+	<ctl name="DEC1 Volume" value="84" />
+	<ctl name="DEC2 Volume" value="84" />
         <ctl name="PRI_MI2S_RX_Voice Mixer CSVoice" value="1" />
         <ctl name="Voice_Tx Mixer TERT_MI2S_TX_Voice" value="1" />
     </path>
@@ -911,6 +913,8 @@
 
     <path name="handset-mic">
         <path name="adc1" />
+	<ctl name="DEC1 Volume" value="84" />
+	<ctl name="DEC2 Volume" value="84" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
     </path>
 
@@ -1062,6 +1066,8 @@
     </path>
 
     <path name="handset-stereo-dmic-ef">
+        <ctl name="DEC1 Volume" value="84" />
+        <ctl name="DEC2 Volume" value="84" />
         <path name="speaker-dmic-endfire" />
     </path>
 
