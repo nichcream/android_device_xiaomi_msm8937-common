@@ -1277,7 +1277,7 @@ etc/firmware/a530v3_gpmu.fw2
 etc/firmware/a530v3_seq.fw2
 
 # Keylayout
-usr/keylayout/ft5x06_ts.kl
+usr/keylayout/ft5336_ts.kl
 usr/keylayout/gpio-keys.kl
 usr/keylayout/qpnp_pon.kl
 usr/keylayout/synaptics_dsx.kl
