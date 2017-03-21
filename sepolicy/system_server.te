@@ -1,0 +1,2 @@
+allow system_server radio_prop:property_service set;
+allow system_server zygote:binder call;
