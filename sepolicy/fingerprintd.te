@@ -1,31 +1,19 @@
 #============= fingerprintd ==============
 allow fingerprintd fpc_sysfs:dir { open read search};
 allow fingerprintd fpc_sysfs:file { read open write };
+allow fingerprintd fpc_data_file:dir rw_dir_perms;
+allow fingerprintd fpc_data_file:sock_file { create unlink };
+allow fingerprintd fpc_sysfs:file rw_file_perms;
+allow fingerprintd storage_file:dir search;
+allow fingerprintd tee_device:chr_file rw_file_perms;
+allow fingerprintd uhid_device:chr_file rw_file_perms;
 allow fingerprintd gx_fpd_service:service_manager { find };
 allow fingerprintd fingerprint_service:service_manager { find };
-set_prop(fingerprintd, system_prop)
-
-allow fingerprintd self:capability { setgid setuid dac_override };
-
-#Allow access to tee device
-allow fingerprintd tee_device:chr_file rw_file_perms;
-
-#Allow access to fpc device
-allow fingerprintd sysfs_fpc_dev:file rw_file_perms;
-
-# allow HAL module to read dir contents
-allow fingerprintd fpc_data_file:{ file sock_file } create_file_perms;
-
-# allow HAL module to read/write/unlink contents of this dir
-allow fingerprintd fpc_data_file:dir rw_dir_perms;
-
-# This is required to access fpce sockets
-allow fingerprintd fpce_socket:sock_file create_file_perms;
-
-#Allow access to uhid device
-allow fingerprintd uhid_device:chr_file rw_file_perms;
-
-#Allow access to storage 
+type fpc_socket, file_type;
+type fpc_sysfs, fs_type, sysfs_type;
+type fpc_data_file, file_type, data_file_type;
+r_dir_file(fingerprintd, firmware_file)
 r_dir_file(fingerprintd, storage_file)
 r_dir_file(fingerprintd, mnt_user_file)
 r_dir_file(fingerprintd, fuse)
+set_prop(fingerprintd, system_prop)
