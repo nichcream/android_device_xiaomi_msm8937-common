@@ -1,0 +1,1 @@
+#allow rmt_storage block_device:blk_file { read write };

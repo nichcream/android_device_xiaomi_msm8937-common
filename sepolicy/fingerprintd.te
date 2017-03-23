@@ -2,3 +2,10 @@ allow fingerprintd firmware_file:file { getattr open read };
 allow fingerprintd sysfs:file write;
 allow fingerprintd tee_device:chr_file { ioctl open read write };
 allow fingerprintd uhid_device:chr_file { ioctl open write };
+
+allow fingerprintd fuse:dir search;
+allow fingerprintd fuse:file { getattr open append };
+allow fingerprintd mnt_user_file:dir search;
+allow fingerprintd mnt_user_file:lnk_file read;
+allow fingerprintd storage_file:dir search;
+allow fingerprintd storage_file:lnk_file read;
