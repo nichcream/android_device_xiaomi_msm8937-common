@@ -235,7 +235,9 @@ PRODUCT_PACKAGES += \
 
 # IMS
 PRODUCT_PACKAGES += \
-    com.android.ims.rcsmanager
+    com.android.ims.rcsmanager \
+    android.hidl.manager@1.0-java \
+    android.hidl.base@1.0
 
 # Init
 PRODUCT_PACKAGES += \
