@@ -134,6 +134,7 @@ QCameraStateMachine::QCameraStateMachine(QCamera2HardwareInterface *ctrl) :
 
     m_bDisplayFrame = TRUE;
     m_bPreviewCallbackNeeded = TRUE;
+    m_bPreviewRestartedInternal = FALSE;
 }
 
 /*===========================================================================
@@ -2028,6 +2029,14 @@ int32_t QCameraStateMachine::procEvtPicTakingState(qcamera_sm_evt_enum_t evt,
         {
             // cancel picture first
             rc = m_parent->cancelPicture();
+
+            bool restartPreview = m_parent->isPreviewRestartEnabled();
+            if (restartPreview && m_bPreviewRestartedInternal) {
+                LOGW("preview early restarted, stop preivew now");
+                m_parent->stopPreview();
+                m_bPreviewRestartedInternal = FALSE;
+            }
+
             m_state = QCAMERA_SM_STATE_PREVIEW_STOPPED;
 
             result.status = rc;
@@ -2295,6 +2304,11 @@ int32_t QCameraStateMachine::procEvtPicTakingState(qcamera_sm_evt_enum_t evt,
                     applyDelayedMsgs();
                     rc = m_parent->startPreview();
                 }
+
+                /* set internal preivew restarted flag here,
+                 * because we hw is streaming now
+                 */
+                m_bPreviewRestartedInternal = true;
             }
 
             result.status = rc;
@@ -2320,6 +2334,11 @@ int32_t QCameraStateMachine::procEvtPicTakingState(qcamera_sm_evt_enum_t evt,
                         rc = m_parent->startPreview();
                     }
                 }
+
+                /* reset internal restarted preview flag,
+                 * since we set the state to previewing exciptly
+                 */
+                m_bPreviewRestartedInternal = FALSE;
                 m_state = QCAMERA_SM_STATE_PREVIEWING;
             } else {
                 m_state = QCAMERA_SM_STATE_PREVIEW_STOPPED;
