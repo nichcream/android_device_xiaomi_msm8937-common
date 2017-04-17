@@ -244,6 +244,11 @@ typedef struct{
 
     cam_dimension_t lens_shading_map_size;
 
+#ifdef LEGACY_CAPABILITY
+    float lens_shading_map[3 * CAM_MAX_MAP_WIDTH *
+              CAM_MAX_MAP_HEIGHT];
+#endif
+
     cam_dimension_t geo_correction_map_size;
     float geo_correction_map[2 * 3 * CAM_MAX_MAP_WIDTH *
               CAM_MAX_MAP_HEIGHT];
