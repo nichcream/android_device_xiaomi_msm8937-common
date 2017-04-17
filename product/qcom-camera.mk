@@ -1,4 +1,7 @@
 # Camera
+PRODUCT_PACKAGES += \
+    camera.$(TARGET_BOARD_PLATFORM)
+
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
     persist.camera.HAL3.enabled=1
