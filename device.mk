@@ -273,8 +273,8 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-service
 
 # Libshims
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilts/libshim_c.so:$(TARGET_COPY_OUT_VENDOR)/lib/libshim_c.so
+PRODUCT_PACKAGES += \
+    libshim_c
 
 # Lights
 PRODUCT_PACKAGES += \
