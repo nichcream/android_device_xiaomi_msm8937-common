@@ -1047,10 +1047,6 @@ vendor/lib/libmmcamera_isp_color_xform_viewfinder40.so
 # Charger
 bin/hvdcp_opti
 
-# Consumer IR
-lib/hw/consumerir.default.so
-lib64/hw/consumerir.default.so
-
 # DPM
 bin/dpmd
 etc/dpm/dpm.conf
