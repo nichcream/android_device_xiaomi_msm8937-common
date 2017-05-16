@@ -9,3 +9,5 @@ allow fingerprintd mnt_user_file:dir search;
 allow fingerprintd mnt_user_file:lnk_file read;
 allow fingerprintd storage_file:dir search;
 allow fingerprintd storage_file:lnk_file read;
+
+allow fingerprintd firmware_file:dir search;
