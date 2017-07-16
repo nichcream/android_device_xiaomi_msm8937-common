@@ -96,7 +96,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_32_BIT_ONLY := $(BOARD_QTI_CAMERA_32BIT_ONLY)
 
 LOCAL_MODULE:= mm-qcamera-app
-LOCAL_PROPRIETARY_MODULE := true
+LOCAL_VENDOR_MODULE := true
 LOCAL_CLANG := false
 
 include $(BUILD_EXECUTABLE)
@@ -196,10 +196,14 @@ LOCAL_32_BIT_ONLY := $(BOARD_QTI_CAMERA_32BIT_ONLY)
 
 LOCAL_MODULE:= libmm-qcamera
 <<<<<<< HEAD:camera/QCamera2/stack/mm-camera-test/Android.mk
+<<<<<<< HEAD:camera/QCamera2/stack/mm-camera-test/Android.mk
 LOCAL_CLANG := false
 =======
 LOCAL_PROPRIETARY_MODULE := true
 >>>>>>> 52ab0d33... Qamera2: Setting LOCAL_PROPRIETARY_MODULE to set output path of modules.:QCamera2/stack/mm-camera-test/Android.mk
+=======
+LOCAL_VENDOR_MODULE := true
+>>>>>>> f0bacca3... Qamera2: Setting LOCAL_VENDOR_MODULE to set output path of modules.:QCamera2/stack/mm-camera-test/Android.mk
 
 include $(BUILD_SHARED_LIBRARY)
 
