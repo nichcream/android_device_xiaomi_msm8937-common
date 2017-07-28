@@ -102,28 +102,20 @@
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveBatteryLed">true</bool>
 
-    <!-- What can the LEDs on this device do? If defined, this overrides all of the
-         older settings:
-         com.android.internal.R.bool.config_multiColorNotificationLed
-         com.android.internal.R.bool.config_multiColorBatteryLed
-         org.cyanogenmod.platform.internal.R.bool.config_multipleNotificationLeds
-         com.android.internal.R.bool.config_ledCanPulse
-         org.cyanogenmod.platform.internal.R.bool.config_useSegmentedBatteryLed
-         org.cyanogenmod.platform.internal.R.bool.config_adjustableNotificationLedBrightness
-         Use the following values from NotificationManager:
-         LIGHTS_RGB_NOTIFICATION = 0
-         LIGHTS_RGB_BATTERY = 1
-         LIGHTS_MULTIPLE_LED = 2
-         LIGHTS_LED_PULSE = 3
-         LIGHTS_SEGMENTED_BATTERY_LIGHTS = 4
-         LIGHTS_ADJUSTABLE_NOTIFICATION_BRIGHTNESS = 5
-    -->
+    <!-- All the capabilities of the LEDs on this device, stored as a bit field.
+         This integer should equal the sum of the corresponding value for each
+         of the following capabilities present:
 
-    <integer-array translatable="false" name="config_deviceLightCapabilities">
-        <item>0</item>
-        <item>1</item>
-        <item>3</item>
-    </integer-array>
+         LIGHTS_RGB_NOTIFICATION_LED = 1
+         LIGHTS_RGB_BATTERY_LED = 2
+         LIGHTS_MULTIPLE_NOTIFICATION_LED = 4
+         LIGHTS_PULSATING_LED = 8
+         LIGHTS_SEGMENTED_BATTERY_LED = 16
+         LIGHTS_ADJUSTABLE_NOTIFICATION_LED_BRIGHTNESS = 32
+
+         For example, a device support pulsating, RGB notification and
+         battery LEDs would set this config to 11. -->
+    <integer name="config_deviceLightCapabilities">11</integer>
 
     <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
          on the headphone/microphone jack. When false use the older uevent framework. -->
@@ -212,9 +204,6 @@
 
     <!-- Boolean indicating whether Hotspot 2.0/Passpoint and ANQP queries is enabled -->
     <bool translatable="false" name="config_wifi_hotspot2_enabled">true</bool>
-
-    <!-- IpReachability monitor enable/disable -->
-    <bool translatable="false" name="config_wifi_ipreachability_monitor">false</bool>
 
     <!-- This string array should be overridden by the device to present a list of network
          attributes.  This is used by the connectivity manager to decide which networks can coexist
@@ -325,10 +314,6 @@
     <!-- Is the device capable of hot swapping an UICC Card -->
     <bool name="config_hotswapCapable">true</bool>
 
-    <!-- Flag indicating emergency calls will always use IMS irrespective of the state of
-    the IMS connection -->
-    <bool name="useImsAlwaysForEmergencyCall">false</bool>
-
     <!-- Flag specifying whether VoLTE is available on device -->
     <bool name="config_device_volte_available">true</bool>
 
@@ -420,5 +405,5 @@
 
     <!-- Support in Surfaceflinger for blur layers.
          NOTE: This requires additional hardware-specific code. -->
-    <bool name="config_ui_blur_enabled">true</bool>
+    <bool name="config_uiBlurEnabled">true</bool>
 </resources>
