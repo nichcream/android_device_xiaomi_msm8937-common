@@ -1,5 +1,6 @@
 /*
    Copyright (c) 2016, The CyanogenMod Project
+   Copyright (c) 2017, The XPerience Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -29,6 +30,9 @@
 
 #include <fcntl.h>
 #include <stdlib.h>
+#include <iostream>
+#include <string>
+#include <sstream>
 #include <sys/sysinfo.h>
 
 #include "vendor_init.h"
@@ -36,7 +40,7 @@
 #include "log.h"
 #include "util.h"
 
-static char board_id[PROP_VALUE_MAX];
+static std::string board_id;
 
 //Take care about 3gb ram
 int is3GB()
@@ -46,19 +50,16 @@ int is3GB()
     return sys.totalram > 2048ull * 1024 * 1024;
 }
 
-static void import_cmdline(char *name, int for_emulator)
+static void import_cmdline(const std::string& key,
+        const std::string& value, bool for_emulator __attribute__((unused)))
 {
-    char *value = strchr(name, '=');
-    int name_len = strlen(name);
-    const char s[2] = ":";
+    if (key.empty()) return;
 
-    if (value == 0) return;
-    *value++ = 0;
-    if (name_len == 0) return;
-
-    if (!strcmp(name, "board_id")) {
-        value = strtok(value, s);
-        strlcpy(board_id, value, sizeof(board_id));
+    if (key == "board_id") {
+        std::istringstream iss(value);
+        std::string token;
+        std::getline(iss, token, ':');
+        board_id = token;
     }
 }
 
@@ -93,46 +94,8 @@ static void init_alarm_boot_properties()
      }
 }
 
-void vendor_load_properties()
+void read_ramconfig()
 {
-
-    init_alarm_boot_properties();
-
-    char device[PROP_VALUE_MAX];
-    char RAM[PROP_VALUE_MAX];
-    int rc;
-
-    rc = property_get("ro.xpe.device", device);
-    if (!rc || strncmp(device, "land", PROP_VALUE_MAX))
-        return;
-
-    import_kernel_cmdline(0, import_cmdline);
-
-    property_set("ro.product.wt.boardid", board_id);
-
-    if (!strcmp(board_id, "S88537AA1")) {
-        property_set("ro.build.display.wtid", "SW_S88537AA1_V079_M20_MP_XM");
-    } else if (!strcmp(board_id, "S88537AB1")) {
-        property_set("ro.build.display.wtid", "SW_S88537AB1_V079_M20_MP_XM");
-    } else if (!strcmp(board_id, "S88537AC1")) {
-        property_set("ro.build.display.wtid", "SW_S88537AC1_V079_M20_MP_XM");
-    } else if (!strcmp(board_id, "S88537BA1")) {
-        property_set("ro.build.display.wtid", "SW_S88537BA1_V079_M20_MP_XM");
-        property_set("mm.enable.qcom_parser","196495");
-    } else if (!strcmp(board_id, "S88537CA1")) {
-        property_set("ro.build.display.wtid", "SW_S88537CA1_V079_M20_MP_XM");
-        property_set("mm.enable.qcom_parser","196495");
-    } else if (!strcmp(board_id, "S88537EC1")) {
-        property_set("ro.build.display.wtid", "SW_S88537EC1_V079_M20_MP_XM");
-        property_set("mm.enable.qcom_parser","196495");
-    }
-
-    if (!strcmp(board_id, "S88537AB1")) {
-        property_set("ro.product.model", "Redmi 3X");
-    } else {
-        property_set("ro.product.model", "Redmi 3S");
-    }
-
     if (is3GB()) {
         property_set("dalvik.vm.heapstartsize", "8m");
         property_set("dalvik.vm.heapgrowthlimit", "288m");
@@ -152,7 +115,6 @@ void vendor_load_properties()
         property_set("ro.hwui.text_small_cache_height", "1024");
         property_set("ro.hwui.text_large_cache_width", "2048");
         property_set("ro.hwui.text_large_cache_height", "1024");
-        sprintf(RAM, "_3gb");
     } else {
         property_set("dalvik.vm.heapstartsize", "8m");
         property_set("dalvik.vm.heapgrowthlimit", "192m");
@@ -172,6 +134,50 @@ void vendor_load_properties()
         property_set("ro.hwui.text_small_cache_height", "1024");
         property_set("ro.hwui.text_large_cache_width", "2048");
         property_set("ro.hwui.text_large_cache_height", "2048");
-        RAM[0] = 0;
     }
+}
+
+void variant_properties()
+{
+    if (property_get("ro.xpe.device") != "land")
+        return;
+
+    import_kernel_cmdline(0, import_cmdline);
+    
+    //set board
+    property_set("ro.product.wt.boardid", board_id.c_str());
+
+
+    //Variants
+    if (board_id == "S88537AA1") {
+        property_set("ro.build.display.wtid", "SW_S88537AA1_V079_M20_MP_XM");
+    } else if (board_id == "S88537AB1") {
+        property_set("ro.build.display.wtid", "SW_S88537AB1_V079_M20_MP_XM");
+    } else if (board_id == "S88537AC1") {
+        property_set("ro.build.display.wtid", "SW_S88537AC1_V079_M20_MP_XM");
+    } else if (board_id == "S88537BA1") {
+        property_set("ro.build.display.wtid", "SW_S88537BA1_V079_M20_MP_XM");
+        property_set("mm.enable.qcom_parser", "196495");
+    } else if (board_id == "S88537CA1") {
+        property_set("ro.build.display.wtid", "SW_S88537CA1_V079_M20_MP_XM");
+        property_set("mm.enable.qcom_parser", "196495");
+    } else if (board_id == "S88537EC1") {
+        property_set("ro.build.display.wtid", "SW_S88537EC1_V079_M20_MP_XM");
+        property_set("mm.enable.qcom_parser", "196495");
+    }
+
+    if (board_id == "S88537AB1"){
+        property_set("ro.product.model", "Redmi 3X");
+    } else {
+        property_set("ro.product.model", "Redmi 3S");
+    }
+}
+
+void vendor_load_properties()
+{
+
+    // init 
+    read_ramconfig();
+    init_alarm_boot_properties();
+    variant_properties();
 }
