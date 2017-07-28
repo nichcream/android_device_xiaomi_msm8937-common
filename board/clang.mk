@@ -1,2 +1,2 @@
 # Clang
-USE_CLANG_PLATFORM_BUILD := true
+TARGET_USE_SDCLANG := true
