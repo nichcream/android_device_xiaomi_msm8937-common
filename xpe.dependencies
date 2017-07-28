@@ -6,7 +6,8 @@
   {
     "remote": "Unicorn",
     "repository": "proprietary_vendor_xiaomi",
-    "target_path": "vendor/xiaomi"
+    "target_path": "vendor/xiaomi",
+    "revision:" "xpe-11.1"
   },
   {
     "repository": "android_kernel_xiaomi_msm8937",
