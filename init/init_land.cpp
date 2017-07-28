@@ -29,12 +29,12 @@
 
 #include <fcntl.h>
 #include <stdlib.h>
+#include <sys/sysinfo.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
 #include "log.h"
 #include "util.h"
-#include <sys/sysinfo.h>
 
 static char board_id[PROP_VALUE_MAX];
 
@@ -44,29 +44,6 @@ int is3GB()
     struct sysinfo sys;
     sysinfo(&sys);
     return sys.totalram > 2048ull * 1024 * 1024;
-}
-
-static int read_file2(const char *fname, char *data, int max_size)
-{
-    int fd, rc;
-
-    if (max_size < 1)
-        return 0;
-
-    fd = open(fname, O_RDONLY);
-    if (fd < 0) {
-        ERROR("failed to open '%s'\n", fname);
-        return 0;
-    }
-
-    rc = read(fd, data, max_size - 1);
-    if ((rc > 0) && (rc < max_size))
-        data[rc] = '\0';
-    else
-        data[0] = '\0';
-    close(fd);
-
-    return 1;
 }
 
 static void import_cmdline(char *name, int for_emulator)
@@ -87,37 +64,40 @@ static void import_cmdline(char *name, int for_emulator)
 
 static void init_alarm_boot_properties()
 {
-    char const *alarm_file = "/proc/sys/kernel/boot_reason";
-    char buf[64];
-    char tmp[PROP_VALUE_MAX];
+    int boot_reason;
+    FILE *fp;
 
-    property_get("ro.boot.alarmboot", tmp);
+    fp = fopen("/proc/sys/kernel/boot_reason", "r");
+    fscanf(fp, "%d", &boot_reason);
+    fclose(fp);
 
-    if (read_file2(alarm_file, buf, sizeof(buf))) {
-        /*
-         * Setup ro.alarm_boot value to true when it is RTC triggered boot up
-         * For existing PMIC chips, the following mapping applies
-         * for the value of boot_reason:
-         *
-         * 0 -> unknown
-         * 1 -> hard reset
-         * 2 -> sudden momentary power loss (SMPL)
-         * 3 -> real time clock (RTC)
-         * 4 -> DC charger inserted
-         * 5 -> USB charger insertd
-         * 6 -> PON1 pin toggled (for secondary PMICs)
-         * 7 -> CBLPWR_N pin toggled (for external power supply)
-         * 8 -> KPDPWR_N pin toggled (power key pressed)
-         */
-        if (buf[0] == '3' || !strcmp(tmp,"true"))
-            property_set("ro.alarm_boot", "true");
-        else
-            property_set("ro.alarm_boot", "false");
-    }
+    /*
+     * Setup ro.alarm_boot value to true when it is RTC triggered boot up
+     * For existing PMIC chips, the following mapping applies
+     * for the value of boot_reason:
+     *
+     * 0 -> unknown
+     * 1 -> hard reset
+     * 2 -> sudden momentary power loss (SMPL)
+     * 3 -> real time clock (RTC)
+     * 4 -> DC charger inserted
+     * 5 -> USB charger inserted
+     * 6 -> PON1 pin toggled (for secondary PMICs)
+     * 7 -> CBLPWR_N pin toggled (for external power supply)
+     * 8 -> KPDPWR_N pin toggled (power key pressed)
+     */
+     if (boot_reason == 3) {
+        property_set("ro.alarm_boot", "true");
+     } else {
+        property_set("ro.alarm_boot", "false");
+     }
 }
 
 void vendor_load_properties()
 {
+
+    init_alarm_boot_properties();
+
     char device[PROP_VALUE_MAX];
     char RAM[PROP_VALUE_MAX];
     int rc;
@@ -178,7 +158,7 @@ void vendor_load_properties()
         property_set("dalvik.vm.heapgrowthlimit", "192m");
         property_set("dalvik.vm.heapsize", "512m");
         property_set("dalvik.vm.heaptargetutilization", "0.75");
-        property_set("dalvik.vm.heapminfree", "512m");
+        property_set("dalvik.vm.heapminfree", "2m");
         property_set("dalvik.vm.heapmaxfree", "8m");
         //HWUI
         property_set("ro.hwui.texture_cache_size", "72");
@@ -194,6 +174,4 @@ void vendor_load_properties()
         property_set("ro.hwui.text_large_cache_height", "2048");
         RAM[0] = 0;
     }
-
-    init_alarm_boot_properties();
 }
