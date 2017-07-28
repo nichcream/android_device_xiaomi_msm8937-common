@@ -34,8 +34,17 @@
 #include "property_service.h"
 #include "log.h"
 #include "util.h"
+#include <sys/sysinfo.h>
 
 static char board_id[PROP_VALUE_MAX];
+
+//Take care about 3gb ram
+int is3GB()
+{
+    struct sysinfo sys;
+    sysinfo(&sys);
+    return sys.totalram > 2048ull * 1024 * 1024;
+}
 
 static int read_file2(const char *fname, char *data, int max_size)
 {
@@ -110,9 +119,10 @@ static void init_alarm_boot_properties()
 void vendor_load_properties()
 {
     char device[PROP_VALUE_MAX];
+    char RAM[PROP_VALUE_MAX];
     int rc;
 
-    rc = property_get("ro.cm.device", device);
+    rc = property_get("ro.xpe.device", device);
     if (!rc || strncmp(device, "land", PROP_VALUE_MAX))
         return;
 
@@ -141,6 +151,48 @@ void vendor_load_properties()
         property_set("ro.product.model", "Redmi 3X");
     } else {
         property_set("ro.product.model", "Redmi 3S");
+    }
+
+    if (is3GB()) {
+        property_set("dalvik.vm.heapstartsize", "8m");
+        property_set("dalvik.vm.heapgrowthlimit", "288m");
+        property_set("dalvik.vm.heapsize", "768m");
+        property_set("dalvik.vm.heaptargetutilization", "0.75");
+        property_set("dalvik.vm.heapminfree", "512k");
+        property_set("dalvik.vm.heapmaxfree", "8m");
+        //HWUI
+        property_set("ro.hwui.texture_cache_size", "72");
+        property_set("ro.hwui.layer_cache_size", "48");
+        property_set("ro.hwui.r_buffer_cache_size", "8");
+        property_set("ro.hwui.path_cache_size", "32");
+        property_set("ro.hwui.gradient_cache_size", "1");
+        property_set("ro.hwui.drop_shadow_cache_size", "6");
+        property_set("ro.hwui.texture_cache_flushrate", "0.4");
+        property_set("ro.hwui.text_small_cache_width", "1024");
+        property_set("ro.hwui.text_small_cache_height", "1024");
+        property_set("ro.hwui.text_large_cache_width", "2048");
+        property_set("ro.hwui.text_large_cache_height", "1024");
+        sprintf(RAM, "_3gb");
+    } else {
+        property_set("dalvik.vm.heapstartsize", "8m");
+        property_set("dalvik.vm.heapgrowthlimit", "192m");
+        property_set("dalvik.vm.heapsize", "512m");
+        property_set("dalvik.vm.heaptargetutilization", "0.75");
+        property_set("dalvik.vm.heapminfree", "512m");
+        property_set("dalvik.vm.heapmaxfree", "8m");
+        //HWUI
+        property_set("ro.hwui.texture_cache_size", "72");
+        property_set("ro.hwui.layer_cache_size", "48");
+        property_set("ro.hwui.r_buffer_cache_size", "8");
+        property_set("ro.hwui.path_cache_size", "32");
+        property_set("ro.hwui.gradient_cache_size", "1");
+        property_set("ro.hwui.drop_shadow_cache_size", "6");
+        property_set("ro.hwui.texture_cache_flushrate", "0.4");
+        property_set("ro.hwui.text_small_cache_width", "1024");
+        property_set("ro.hwui.text_small_cache_height", "1024");
+        property_set("ro.hwui.text_large_cache_width", "2048");
+        property_set("ro.hwui.text_large_cache_height", "2048");
+        RAM[0] = 0;
     }
 
     init_alarm_boot_properties();
