@@ -3,7 +3,8 @@ PRODUCT_BOOT_JARS += \
     com.qti.location.sdk
 
 PRODUCT_PACKAGES += \
-    gps.default \
+    gps.msm8937 \
+    libgnsspps \
     libcurl
 
 # Permissions
