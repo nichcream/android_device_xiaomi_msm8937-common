@@ -1,4 +1,3 @@
-ifneq ($(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE),)
 ifneq ($(BUILD_TINY_ANDROID),true)
 
 LOCAL_PATH := $(call my-dir)
@@ -20,7 +19,8 @@ LOCAL_SHARED_LIBRARIES := \
     libutils \
     libcutils \
     libgps.utils \
-    libdl
+    libdl \
+    libloc_pla
 
 LOCAL_SRC_FILES += \
     LocApiBase.cpp \
@@ -35,7 +35,8 @@ LOCAL_CFLAGS += \
 
 LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils \
-    $(TARGET_OUT_HEADERS)/libflp
+    $(TARGET_OUT_HEADERS)/libflp \
+    $(TARGET_OUT_HEADERS)/libloc_pla
 
 LOCAL_COPY_HEADERS_TO:= libloc_core/
 LOCAL_COPY_HEADERS:= \
@@ -55,4 +56,3 @@ LOCAL_PRELINK_MODULE := false
 include $(BUILD_SHARED_LIBRARY)
 
 endif # not BUILD_TINY_ANDROID
-endif # BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE
