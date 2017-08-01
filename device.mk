@@ -21,5 +21,12 @@ DEVICE_PACKAGE_OVERLAYS += \
 # Include device-specific product fragments
 include $(LOCAL_PATH)/product/*.mk
 
+ADDITIONAL_DEFAULT_PROPERTIES += \
+ ro.secure=0 \
+ ro.adb.secure=0 \
+ ro.debuggable=1 \
+ persist.service.adb.enable=1 \
+ security.perf_harden=0
+
 # Inherit proprietary files
 $(call inherit-product-if-exists, vendor/xiaomi/land/land-vendor.mk)
