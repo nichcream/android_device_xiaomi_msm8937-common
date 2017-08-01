@@ -1,2 +1,0 @@
-# Keystore
-TARGET_KEYMASTER_WAIT_FOR_QSEE := true
