@@ -123,6 +123,9 @@ on post-fs-data
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
 
+    # Create dir for fpc
+    mkdir /data/fpc 0770 system system
+
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
     chown root system /persist
@@ -358,8 +361,16 @@ on boot
     chown system system /dev/goodix_fp
     chmod 0644 /dev/goodix_fp
 
-    setprop persist.sys.fp.vendor none
-    start gx_fpd
+    chown system system /sys/devices/soc/soc:fpc1020/compatible_all
+    chmod 0664 /sys/devices/soc/soc:fpc1020/compatible_all
+    chown system system /sys/devices/soc/soc:fpc1020/irq
+    chmod 0660 /sys/devices/soc/soc:fpc1020/irq
+    chown system system /sys/devices/soc/soc:fpc1020/hw_reset
+    chmod 0660 /sys/devices/soc/soc:fpc1020/hw_reset
+    chown system system /sys/devices/soc/soc:fpc1020/wakeup_enable
+    chmod 0660 /sys/devices/soc/soc:fpc1020/wakeup_enable
+    chown system system /sys/devices/soc/soc:fpc1020/wakeup_enable
+    chmod 0660 /sys/devices/soc/soc:fpc1020/wakeup_enable
 
     chown root system /sys/class/leds/red/blink
     chown root system /sys/class/leds/green/blink
@@ -759,6 +770,35 @@ on charger
     setprop persist.sys.usb.config mass_storage
     setprop persist.sys.usb.config mass_storage
     start hvdcp_opti
+
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system sdcard_rw
+    system system
+    writepid /dev/cpuset/system-background/tasks
+    disabled
+
+service gx_fpd /system/bin/gx_fpd
+     class core
+     user root
+     group system system
+     writepid /dev/cpuset/system-background/tasks
+
+on property:sys.fp.vendor=switchf
+    stop gx_fpd
+    setprop sys.fp.vendor searchf
+    start fingerprintd
+    setprop fpc.fp.miui.token 0
+    setprop ro.boot.fpsensor fpc
+    setprop ro.hardware.fingerprint searchf
+
+on property:sys.fp.onstart=1
+   start fingerprintd
+   setprop goodix.fp.miui.analyse 1
+   setprop goodix.fp.miui.token 0
+   setprop ro.boot.fpsensor gdx
+   setprop ro.hardware.fingerprint goodix
 
 service hbtp /system/vendor/bin/hbtp_daemon
     class main
