@@ -1,0 +1,25 @@
+#Bluetooth
+/persist/.bt_nv.bin                             u:object_r:bluetooth_data_file:s0
+
+/system/etc/init\.qcom\.bt\.sh                  u:object_r:bluetooth_loader_exec:s0
+
+# Fpc Fingerprint
+/data/fpc(/.*)?					u:object_r:fpc_data_file:s0
+/dev/socket/fpce(/.*)?				u:object_r:fpce_socket:s0
+/sys/devices/soc/soc:fpc1020(/.*)?		u:object_r:fpc_sysfs:s0
+
+# Goodix Fingerprint
+/dev/gf66xx-spi                             u:object_r:gx_fpd_device:s0
+/dev/ttyACM[0-9]*                           u:object_r:gx_fpd_device:s0
+/dev/goodix_fp*                             u:object_r:gx_fpd_device:s0
+/system/bin/gx_fpd                          u:object_r:gx_fpd_exec:s0
+/data/system/fingerprint(/.*)?              u:object_r:gx_fpd_data_file:s0
+/persist/data/gxfp(/.*)?                    u:object_r:gx_fpd_data_file:s0
+
+
+# Block devices
+/dev/block/bootdevice/by-name/persist		u:object_r:persist_block_device:s0
+
+# Data files
+/data/misc/netmgr/log\.txt			u:object_r:netmgrd_data_file:s0
+
