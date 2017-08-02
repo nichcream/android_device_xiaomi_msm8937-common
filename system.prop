@@ -54,7 +54,7 @@ persist.camera.HAL3.enabled=1
 persist.cne.feature=1
 
 #Display
-ro.opengles.version=196609
+ro.opengles.version=196610
 ro.sf.lcd_density=320
 debug.gralloc.enable_fb_ubwc=1 
 debug.enable.sglscale=1 
