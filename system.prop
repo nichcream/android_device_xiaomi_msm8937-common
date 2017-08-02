@@ -105,6 +105,7 @@ persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
 
 # Shutdown timeout
+sys.vendor.shutdown.waittime=500
 ro.build.shutdown_timeout=0
 
 # SdcardFs
