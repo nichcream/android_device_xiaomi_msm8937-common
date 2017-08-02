@@ -1,3 +1,0 @@
-# Power HAL
-PRODUCT_PACKAGES += \
-    power.$(TARGET_BOARD_PLATFORM)

@@ -1,3 +1,0 @@
-# Lights
-PRODUCT_PACKAGES += \
-    lights.$(TARGET_BOARD_PLATFORM)
