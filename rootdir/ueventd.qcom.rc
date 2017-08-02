@@ -254,3 +254,6 @@
 /sys/devices/soc/soc:fpc1020		irq	        		0660   system     system
 /sys/devices/soc/soc:fpc1020      	wakeup_enable	        	0220   system     system
 /sys/devices/soc/soc:fpc1020      	compatible_all	        	0220   system     system
+
+# For lirc
+/dev/lirc0          0660   system     system
