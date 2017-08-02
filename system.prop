@@ -36,6 +36,7 @@ ro.qualcomm.bluetooth.nap=true
 ro.qualcomm.bluetooth.opp=true 
 ro.qualcomm.bluetooth.pbap=true 
 ro.qualcomm.bt.hci_transport=smd
+qcom.bluetooth.soc=smd
 
 #Camera
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.whatsapp,com.google.android.GoogleCamera 
