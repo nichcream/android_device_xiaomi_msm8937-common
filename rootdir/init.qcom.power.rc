@@ -30,14 +30,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu6/sched_mostly_idle_nr_run 3
     write /sys/devices/system/cpu/cpu7/sched_mostly_idle_nr_run 3
 
-    write /sys/devices/system/cpu/cpu0/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu1/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu2/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu3/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu4/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu5/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu6/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu7/sched_prefer_idle 0
+    write /proc/sys/kernel/sched_prefer_idle 0
 
     write /sys/class/devfreq/soc:qcom,cpubw/governor bw_hwmon
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/io_percent 20
