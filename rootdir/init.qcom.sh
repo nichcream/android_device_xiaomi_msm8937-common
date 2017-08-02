@@ -46,3 +46,10 @@ if [ "$prev_version_info" != "$cur_version_info" ]; then
     chown radio.radio /data/misc/radio/ver_info.txt
 fi
 echo 1 > /data/misc/radio/copy_complete
+
+# Create /persist/alarm if necessary
+if [ ! -d /persist/alarm ]; then
+    mkdir /persist/alarm
+    chown system:system /persist/alarm
+    restorecon /persist/alarm
+fi
