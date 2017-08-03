@@ -54,8 +54,8 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_KERNEL_CONFIG := mido_defconfig # we are using mido since msm8937 and msm8953 are similar.
 TARGET_KERNEL_SOURCE := kernel/xiaomi/msm8953
 #for prebuilt file
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
-BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
