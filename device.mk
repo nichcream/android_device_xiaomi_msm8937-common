@@ -124,10 +124,6 @@ PRODUCT_PACKAGES += \
     libqcomfm_jni \
     qcom.fmradio
 
-# For android_filesystem_config.h
-PRODUCT_PACKAGES += \
-    fs_config_files
-
 # GPS
 PRODUCT_BOOT_JARS += \
     com.qti.location.sdk
