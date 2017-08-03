@@ -49,7 +49,7 @@ ro.config.media_vol_steps=20
 bluetooth.hfp.client=1
 ro.bluetooth.hfp.ver=1.7 
 ro.qualcomm.bt.hci_transport=smd
-#persist.bt.enableAptXHD=true
+persist.vendor.bt.enable.splita2dp=false
 qcom.bluetooth.soc=smd
 
 # Camera
