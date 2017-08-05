@@ -26,6 +26,79 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+target=`getprop ro.board.platform`
+if [ -f /sys/devices/soc0/soc_id ]; then
+    platformid=`cat /sys/devices/soc0/soc_id`
+else
+    platformid=`cat /sys/devices/system/soc/soc0/id`
+fi
+
+#
+# Function to start sensors for DSPS enabled platforms
+#
+start_sensors()
+{
+    if [ -c /dev/msm_dsps -o -c /dev/sensors ]; then
+        chmod -h 775 /persist/sensors
+        chmod -h 664 /persist/sensors/sensors_settings
+        chown -h system.root /persist/sensors/sensors_settings
+
+        mkdir -p /data/misc/sensors
+        chmod -h 775 /data/misc/sensors
+
+        start sensors
+    fi
+}
+
+start_msm_irqbalance_8939()
+{
+	if [ -f /system/bin/msm_irqbalance ]; then
+		case "$platformid" in
+		    "239" | "293" | "294" | "295" | "304")
+			start msm_irqbalance;;
+		esac
+	fi
+}
+
+start_msm_irqbalance()
+{
+	if [ -f /system/bin/msm_irqbalance ]; then
+		start msm_irqbalance
+	fi
+}
+
+start_copying_prebuilt_qcril_db()
+{
+    if [ -f /system/vendor/qcril.db -a ! -f /data/misc/radio/qcril.db ]; then
+        cp /system/vendor/qcril.db /data/misc/radio/qcril.db
+        chown -h radio.radio /data/misc/radio/qcril.db
+    fi
+}
+
+baseband=`getprop ro.baseband`
+echo 1 > /proc/sys/net/ipv6/conf/default/accept_ra_defrtr
+
+start_sensors
+start_msm_irqbalance_8939
+
+if [ -f /sys/class/graphics/fb0/modes ]; then
+	panel_res=`cat /sys/class/graphics/fb0/modes`
+	if [ "${panel_res:5:1}" == "x" ]; then
+		panel_xres=${panel_res:2:3}
+	else
+		panel_xres=${panel_res:2:4}
+	fi
+fi
+
+# Set shared touchpanel nodes ownership (these are proc_symlinks to the real sysfs nodes)
+chown -LR system.system /proc/touchpanel
+
+#
+# Copy qcril.db if needed for RIL
+#
+start_copying_prebuilt_qcril_db
+echo 1 > /data/misc/radio/db_check_done
+
 #
 # Make modem config folder and copy firmware config to that folder for RIL
 #
@@ -71,24 +144,25 @@ fi
 
 # Read adj series and set adj threshold for PPR and ALMK.
 # This is required since adj values change from framework to framework.
-adj_series=`cat /sys/module/lowmemorykiller/parameters/adj`
-adj_1="${adj_series#*,}"
-set_almk_ppr_adj="${adj_1%%,*}"
+#adj_series=`cat /sys/module/lowmemorykiller/parameters/adj`
+#adj_1="${adj_series#*,}"
+#set_almk_ppr_adj="${adj_1%%,*}"
 
 # PPR and ALMK should not act on HOME adj and below.
 # Normalized ADJ for HOME is 6. Hence multiply by 6
 # ADJ score represented as INT in LMK params, actual score can be in decimal
 # Hence add 6 considering a worst case of 0.9 conversion to INT (0.9*6).
-set_almk_ppr_adj=$(((set_almk_ppr_adj * 6) + 6))
-echo $set_almk_ppr_adj > /sys/module/lowmemorykiller/parameters/adj_max_shift
-echo $set_almk_ppr_adj > /sys/module/process_reclaim/parameters/min_score_adj
+#set_almk_ppr_adj=$(((set_almk_ppr_adj * 6) + 6))
+#echo $set_almk_ppr_adj > /sys/module/lowmemorykiller/parameters/adj_max_shift
+#echo $set_almk_ppr_adj > /sys/module/process_reclaim/parameters/min_score_adj
 
-echo 1 > /sys/module/process_reclaim/parameters/enable_process_reclaim
-echo 70 > /sys/module/process_reclaim/parameters/pressure_max
-echo 30 > /sys/module/process_reclaim/parameters/swap_opt_eff
-echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+#echo 1 > /sys/module/process_reclaim/parameters/enable_process_reclaim
+#echo 70 > /sys/module/process_reclaim/parameters/pressure_max
+#echo 30 > /sys/module/process_reclaim/parameters/swap_opt_eff
+#echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 
-echo 10 > /sys/module/process_reclaim/parameters/pressure_min
-echo 1024 > /sys/module/process_reclaim/parameters/per_swap_size
-echo "18432,23040,27648,32256,55296,80640" > /sys/module/lowmemorykiller/parameters/minfree
-echo 81250 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
+#echo 10 > /sys/module/process_reclaim/parameters/pressure_min
+#echo 1024 > /sys/module/process_reclaim/parameters/per_swap_size
+#echo "18432,23040,27648,32256,55296,80640" > /sys/module/lowmemorykiller/parameters/minfree
+#echo 81250 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
+

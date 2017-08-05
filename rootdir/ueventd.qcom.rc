@@ -34,7 +34,7 @@
 /dev/kgsl-2d0             0666   root       root
 /dev/kgsl-2d1             0666   root       root
 /dev/ion                  0664   system     system
-/dev/rtc0                 0660   system     system
+/dev/rtc0                 0640   system     system
 /dev/smd0                 0660   system     system
 /dev/smd4                 0660   system     system
 /dev/smd_cxm_qmi          0640   radio      radio
@@ -115,13 +115,14 @@
 /dev/jpeg2                0660   system     camera
 /dev/jpeg3                0660   system     camera
 /dev/adsprpc-smd          0664   system     system
-/dev/system_health_monitor 0644  radio      system
-/dev/mdss_rotator         0664   system     system
+/dev/system_health_monitor 0640  radio      system
+/dev/fpc1020              0666   system     system
+
 # wlan
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
-/sys/devices/soc/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
-/sys/devices/soc/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
+/sys/devices/soc.0/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
+/sys/devices/soc.0/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
@@ -205,6 +206,17 @@
 /sys/devices/virtual/optical_sensors/lightsensor    ls_poll_delay  0660    input    system
 /sys/devices/virtual/input/input*                   poll           0660    input    system
 /sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
+
+# ctp
+/sys/devices/soc.0/78b9000.i2c/i2c-5/5-0038/sensors/ft5x06-proximity	enable	0660	input	system
+/sys/devices/virtual/gesture/gesture*		enable	0660	input	system
+/sys/devices/virtual/gesture/gesture*		pocket	0660	input	system
+
+# led
+/sys/devices/soc.0/78b5000.i2c/i2c-1/1-0045/leds/red		blink	0660	input	system
+/sys/devices/soc.0/78b5000.i2c/i2c-1/1-0045/leds/green		blink	0660	input	system
+/sys/devices/soc.0/78b5000.i2c/i2c-1/1-0045/leds/blue		blink	0660	input	system
+
 /sys/devices/soc/78b7000.i2c/i2c-3/3-0020/input/input*    secure_touch         0440   system  drmrpc
 /sys/devices/soc/78b7000.i2c/i2c-3/3-0020/input/input*    secure_touch_enable  0660   system  drmrpc
 /sys/devices/soc/78b7000.i2c/i2c-3/3-0038/input/input*    secure_touch         0440   system  drmrpc
@@ -217,9 +229,6 @@
 # wlan
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
-/sys/devices/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan0/queues/rx-* rps_cpus 0660 system system
-/sys/devices/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/p2p0/queues/rx-* rps_cpus 0660 system system
-
 #nfc permissions
 /dev/nfc-nci              0660    nfc         nfc
 /dev/nq-nci               0660    nfc         nfc
@@ -245,15 +254,17 @@
 #ImproveTouch device
 /dev/hbtp_input           0660   system     system
 /dev/hbtp_vm              0660   system     system
+/dev/jdi-bu21150          0660   system     system
+
+# Fingerprint device
+/dev/ontario              0640   system     system
 
 # Add device block for FRP
-/dev/block/platform/soc/7824900.sdhci/by-name/config    0600   system     system
-
-# fpc Fingerprint
-/sys/devices/soc/soc:fpc1020		hw_reset			0220   system     system
-/sys/devices/soc/soc:fpc1020		irq	        		0660   system     system
-/sys/devices/soc/soc:fpc1020      	wakeup_enable	        	0220   system     system
-/sys/devices/soc/soc:fpc1020      	compatible_all	        	0220   system     system
+/dev/block/platform/soc.0/7824900.sdhci/by-name/config    0660   system     system
 
 # For lirc
 /dev/lirc0          0660   system     system
+
+# FPC
+/sys/devices/soc.0/fpc_fpc1020.*        irq             0660        system      system
+/sys/devices/soc.0/fpc_fpc1020.*        enable_wakeup   0660        system      system
