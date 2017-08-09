@@ -103,6 +103,7 @@ PRODUCT_PACKAGES += \
     gralloc.msm8937 \
     hwcomposer.msm8937 \
     libtinyxml \
+    liboverlay \
     memtrack.msm8937
 
 # Display calibration
@@ -148,8 +149,11 @@ PRODUCT_PACKAGES += \
     fstab.qcom \
     init.qcom.rc \
     init.qcom.sh \
+    init.qcom.sensors.sh \
     init.recovery.qcom.rc \
+    init.target.rc \
     ueventd.qcom.rc
+
 
 # Libshims
 PRODUCT_PACKAGES += \

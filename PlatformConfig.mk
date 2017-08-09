@@ -1,2 +1,0 @@
-# Platform
-TARGET_BOARD_PLATFORM := msm8937
