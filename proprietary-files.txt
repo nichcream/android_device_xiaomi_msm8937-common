@@ -1487,6 +1487,10 @@ etc/firmware/modem_config/S88537CA1/row_mcfg_sw.mbn
 etc/firmware/modem_config/S88537EC1/reliance_mcfg_sw.mbn
 etc/firmware/modem_config/S88537EC1/row_mcfg_sw.mbn
 
+#IR
+lib/hw/consumerir.default.so
+lib64/hw/consumerir.default.so
+
 # Sensors
 bin/sensors.qcom
 etc/sensors/hals.conf
@@ -1501,6 +1505,13 @@ vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
 vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.ssc.so
+
+#shims
+lib/libshim_ims_camera.so
+lib64/libshim_ims_camera.so
+lib/libshims_camera.so
+lib/libshims_ims.so
+lib64/libshims_ims.so
 
 # Subsystem restart
 bin/ssr_diag
