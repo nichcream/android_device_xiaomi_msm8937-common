@@ -1,6 +1,6 @@
 /*
    Copyright (c) 2016, The CyanogenMod Project
-   Copyright (c) 2017, The XPerience Project
+             (c) 2017, The XPerience Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -40,15 +40,14 @@
 #include "log.h"
 #include "util.h"
 
-static std::string board_id;
+char const *heapstartsize;
+char const *heapgrowthlimit;
+char const *heapsize;
+char const *heapminfree;
+char const *heapmaxfree;
+char const *large_cache_height;
 
-//Take care about 3gb ram
-int is3GB()
-{
-    struct sysinfo sys;
-    sysinfo(&sys);
-    return sys.totalram > 2048ull * 1024 * 1024;
-}
+static std::string board_id;
 
 static void import_cmdline(const std::string& key,
         const std::string& value, bool for_emulator __attribute__((unused)))
@@ -94,50 +93,33 @@ static void init_alarm_boot_properties()
      }
 }
 
-void read_ramconfig()
+void check_device()
 {
-    if (is3GB()) {
-        property_set("dalvik.vm.heapstartsize", "8m");
-        property_set("dalvik.vm.heapgrowthlimit", "288m");
-        property_set("dalvik.vm.heapsize", "768m");
-        property_set("dalvik.vm.heaptargetutilization", "0.75");
-        property_set("dalvik.vm.heapminfree", "512k");
-        property_set("dalvik.vm.heapmaxfree", "8m");
-        //HWUI
-        property_set("ro.hwui.texture_cache_size", "72");
-        property_set("ro.hwui.layer_cache_size", "48");
-        property_set("ro.hwui.r_buffer_cache_size", "8");
-        property_set("ro.hwui.path_cache_size", "32");
-        property_set("ro.hwui.gradient_cache_size", "1");
-        property_set("ro.hwui.drop_shadow_cache_size", "6");
-        property_set("ro.hwui.texture_cache_flushrate", "0.4");
-        property_set("ro.hwui.text_small_cache_width", "1024");
-        property_set("ro.hwui.text_small_cache_height", "1024");
-        property_set("ro.hwui.text_large_cache_width", "2048");
-        property_set("ro.hwui.text_large_cache_height", "1024");
+    struct sysinfo sys;
+
+    sysinfo(&sys);
+
+    if (sys.totalram > 2048ull * 1024 * 1024) {
+        // from - phone-xxhdpi-3072-dalvik-heap.mk
+        heapstartsize = "8m";
+        heapgrowthlimit = "288m";
+        heapsize = "768m";
+        heapminfree = "512k";
+        heapmaxfree = "8m";
+        large_cache_height = "1024";
     } else {
-        property_set("dalvik.vm.heapstartsize", "8m");
-        property_set("dalvik.vm.heapgrowthlimit", "192m");
-        property_set("dalvik.vm.heapsize", "512m");
-        property_set("dalvik.vm.heaptargetutilization", "0.75");
-        property_set("dalvik.vm.heapminfree", "2m");
-        property_set("dalvik.vm.heapmaxfree", "8m");
-        //HWUI
-        property_set("ro.hwui.texture_cache_size", "72");
-        property_set("ro.hwui.layer_cache_size", "48");
-        property_set("ro.hwui.r_buffer_cache_size", "8");
-        property_set("ro.hwui.path_cache_size", "32");
-        property_set("ro.hwui.gradient_cache_size", "1");
-        property_set("ro.hwui.drop_shadow_cache_size", "6");
-        property_set("ro.hwui.texture_cache_flushrate", "0.4");
-        property_set("ro.hwui.text_small_cache_width", "1024");
-        property_set("ro.hwui.text_small_cache_height", "1024");
-        property_set("ro.hwui.text_large_cache_width", "2048");
-        property_set("ro.hwui.text_large_cache_height", "2048");
-    }
+        // from - phone-xxhdpi-2048-dalvik-heap.mk
+        heapstartsize = "16m";
+        heapgrowthlimit = "192m";
+        heapsize = "512m";
+        heapminfree = "2m";
+        heapmaxfree = "8m";
+        large_cache_height = "1024";
+   }
 }
 
-void variant_properties()
+
+void init_variant_properties()
 {
     if (property_get("ro.xpe.device") != "land")
         return;
@@ -146,7 +128,6 @@ void variant_properties()
     
     //set board
     property_set("ro.product.wt.boardid", board_id.c_str());
-
 
     //Variants
     if (board_id == "S88537AA1") {
@@ -175,9 +156,26 @@ void variant_properties()
 
 void vendor_load_properties()
 {
-
-    // init 
-    read_ramconfig();
     init_alarm_boot_properties();
-    variant_properties();
+    check_device();
+    init_variant_properties();
+
+    property_set("dalvik.vm.heapstartsize", heapstartsize);
+    property_set("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
+    property_set("dalvik.vm.heapsize", heapsize);
+    property_set("dalvik.vm.heaptargetutilization", "0.75");
+    property_set("dalvik.vm.heapminfree", heapminfree);
+    property_set("dalvik.vm.heapmaxfree", heapmaxfree);
+
+    property_set("ro.hwui.texture_cache_size", "72");
+    property_set("ro.hwui.layer_cache_size", "48");
+    property_set("ro.hwui.r_buffer_cache_size", "8");
+    property_set("ro.hwui.path_cache_size", "32");
+    property_set("ro.hwui.gradient_cache_size", "1");
+    property_set("ro.hwui.drop_shadow_cache_size", "6");
+    property_set("o.hwui.texture_cache_flushrate", "0.4");
+    property_set("ro.hwui.text_small_cache_width", "1024");
+    property_set("ro.hwui.text_small_cache_height", "1024");
+    property_set("ro.hwui.text_large_cache_width", "2048");
+    property_set("ro.hwui.text_large_cache_height", large_cache_height);
 }
