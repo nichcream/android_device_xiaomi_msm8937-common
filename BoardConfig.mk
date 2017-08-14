@@ -106,7 +106,6 @@ BOARD_HARDWARE_CLASS += \
 
 # CNE / DPM
 BOARD_USES_QCNE := true
-TARGET_LDPRELOAD := libNimsWrap.so
 
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
