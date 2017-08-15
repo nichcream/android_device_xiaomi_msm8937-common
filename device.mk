@@ -158,18 +158,24 @@ PRODUCT_PACKAGES += \
 
 # Media
 PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libmm-omxcore \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
+    libOmxSwVencHevc \
     libOmxVdec \
     libOmxVenc \
+    libOmxVidcCommon \
+    libextmedia_jni \
     libstagefrighthw
 
 # Media
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
