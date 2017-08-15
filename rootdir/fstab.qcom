@@ -18,3 +18,6 @@
 
 /devices/soc/7864900.sdhci/mmc_host*         /storage/sdcard1   vfat    nosuid,nodev                                        wait,voldmanaged=sdcard1:auto,noemulatedsd,encryptable=footer
 /devices/soc/78db000.usb/msm_hsusb_host*     /storage/usbotg    vfat    nosuid,nodev                                        wait,voldmanaged=usbotg:auto
+
+#ZRAM
+/dev/block/zram0                             none               swap    defaults                                            zramsize=536870912,zramstreams=4
