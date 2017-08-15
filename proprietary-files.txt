@@ -1361,7 +1361,6 @@ vendor/lib64/libdisp-aba.so
 # QMI
 bin/irsc_util
 etc/permissions/qti_permissions.xml
-etc/sec_config
 vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsutils.so
@@ -1496,8 +1495,6 @@ lib64/hw/consumerir.default.so
 
 # Sensors
 bin/sensors.qcom
-etc/sensors/hals.conf
-etc/sensors/sensor_def_qcomdev.conf
 vendor/lib/hw/activity_recognition.msm8937.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
