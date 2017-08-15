@@ -134,6 +134,7 @@
 /dev/adsprpc-smd          0664   system     system
 
 #permissions for audio
+/dev/wcd-dsp-glink        0660   system     audio
 /dev/audio_slimslave      0660   system     audio
 /dev/msm_qcelp            0660   system     audio
 /dev/msm_evrc             0660   system     audio
@@ -209,6 +210,10 @@
 /sys/devices/soc/78b7000.i2c/i2c-3/3-0020/input/input*    secure_touch_enable  0660   system  drmrpc
 /sys/devices/soc/78b7000.i2c/i2c-3/3-0038/input/input*    secure_touch         0440   system  drmrpc
 /sys/devices/soc/78b7000.i2c/i2c-3/3-0038/input/input*    secure_touch_enable  0660   system  drmrpc
+/sys/devices/soc/78b7000.i2c/i2c-3/3-004b/input/input*    secure_touch         0440   system  drmrpc
+/sys/devices/soc/78b7000.i2c/i2c-3/3-004b/input/input*    secure_touch_enable  0660   system  drmrpc
+/sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input*    secure_touch         0440   system  drmrpc
+/sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input*    secure_touch_enable  0660   system  drmrpc
 
 # vm_bms
 /dev/vm_bms               0660   system     system
@@ -248,9 +253,13 @@
 
 # Add device block for FRP
 /dev/block/platform/soc/7824900.sdhci/by-name/config    0600   system     system
+/dev/block/platform/soc/7464900.sdhci/by-name/frp       0600   system     system
+/dev/block/platform/soc/624000.ufshc/by-name/frp        0600   system     system
+/dev/block/platform/soc/1da4000.ufshc/by-name/frp       0600   system     system
 
 # fpc Fingerprint
 /sys/devices/soc/soc:fpc1020		hw_reset			0220   system     system
 /sys/devices/soc/soc:fpc1020		irq	        		0660   system     system
 /sys/devices/soc/soc:fpc1020      	wakeup_enable	        	0220   system     system
 /sys/devices/soc/soc:fpc1020      	compatible_all	        	0220   system     system
+/sys/devices/soc/soc:fpc1020            fingerdown_wait                 0220   system     system
