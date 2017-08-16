@@ -179,6 +179,7 @@ etc/camera/s5k3l8_mono_chromatix.xml
 etc/camera/s5k3m2xm_chromatix.xml
 etc/camera/s5k3m2xm_chromatix_bear.xml
 etc/camera/s5k3m2xx_chromatix.xml
+lib/hw/camera.msm8937.so
 lib/libRecoFace.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_panorama.so
@@ -1284,8 +1285,6 @@ vendor/lib/libsmwrapper.so
 
 # Media
 etc/firmware/DE.o.msm8937
-etc/media_codecs_performance.xml
-etc/media_profiles.xml
 lib/libOmxSwVdec.so
 lib/libOmxSwVencMpeg4.so
 lib/libOmxVpp.so
