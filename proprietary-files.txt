@@ -181,6 +181,7 @@ etc/camera/s5k3m2xm_chromatix_bear.xml
 etc/camera/s5k3m2xx_chromatix.xml
 lib/hw/camera.msm8937.so
 lib/libRecoFace.so
+lib/libmmcamera_interface.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_panorama.so
 vendor/lib/libFaceGrade.so
@@ -1057,7 +1058,7 @@ etc/permissions/dpmapi.xml
 framework/com.qti.dpmframework.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
--priv-app/dpmserviceapp/dpmserviceapp.apk
+#-priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/lib/libdpmctmgr.so
 vendor/lib/libdpmfdmgr.so
 vendor/lib/libdpmframework.so
@@ -1103,9 +1104,11 @@ vendor/lib64/libtzdrmgenprov.so
 bin/gx_fpcmd
 bin/gx_fpd
 lib/hw/fingerprint.default.so
+lib/hw/fingerprint.searchf.so
 lib/libcom_fingerprints_service.so
 lib64/hw/fingerprint.default.so
 lib64/hw/fingerprint.goodix.so
+lib64/hw/fingerprint.searchf.so
 lib64/hw/gxfingerprint.default.so
 lib64/libcom_fingerprints_service.so
 lib64/libfp_client.so
@@ -1176,6 +1179,7 @@ vendor/lib64/libulp2.so
 vendor/lib64/libxt_native.so
 vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
+vendor/lib64/libDRPlugin.so
 vendor/lib64/libdrplugin_client.so
 vendor/lib64/libevent_observer.so
 
@@ -1214,6 +1218,7 @@ vendor/lib/libsc-a3xx.so
 vendor/lib/libscale.so
 vendor/lib/libsd_sdk_display.so
 vendor/lib/libsdm-disp-apis.so
+vendor/lib/vulkan.msm8937.so
 vendor/lib64/egl/eglSubDriverAndroid.so
 vendor/lib64/egl/eglsubAndroid.so
 vendor/lib64/egl/libEGL_adreno.so
@@ -1256,6 +1261,7 @@ vendor/lib64/libsdm-diag.so
 vendor/lib64/libsdm-disp-apis.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libuiblur.so|4b3fabf5ded7c4af531abde681676fc5e9248494
+vendor/lib64/vulkan.msm8937.so
 
 # Graphics firmware
 etc/firmware/a530_gpmu.fw2
