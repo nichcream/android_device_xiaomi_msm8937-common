@@ -1,4 +1,4 @@
-# Common device configuration for Xiaomi Redmi 3S
+# Device Tree Repository for Xiaomi Land (WIP)
 
 ## Spec Sheet
 
@@ -26,7 +26,7 @@
 
 ```
 #
-# Copyright (C) 2017 The XPerience Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

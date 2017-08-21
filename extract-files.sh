@@ -1,7 +1,8 @@
 #!/bin/bash
 #
 # Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2017 The XPerience Project
+# Copyright (C) 2017 The LineageOS Project
+#           (C) 2017 The CMrience Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,9 +26,9 @@ VENDOR=xiaomi
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
-XPe_ROOT="$MY_DIR"/../../..
+CM_ROOT="$MY_DIR"/../../..
 
-HELPER="$XPe_ROOT"/vendor/XPe/build/tools/extract_utils.sh
+HELPER="$CM_ROOT"/vendor/cm/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
@@ -51,7 +52,7 @@ else
 fi
 
 # Initialize the helper
-setup_vendor "$DEVICE" "$VENDOR" "$XPe_ROOT"
+setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT"
 
 extract "$MY_DIR"/proprietary-files.txt "$SRC"
 

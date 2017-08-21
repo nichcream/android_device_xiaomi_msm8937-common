@@ -4,13 +4,8 @@
     "target_path": "device/qcom/common"
   },
   {
-    "remote":      "Unicorn",
-    "repository":  "proprietary_vendor_xiaomi",
-    "target_path": "vendor/xiaomi",
-    "branch":      "xpe-11.1"
-  },
-  {
-    "repository":  "android_kernel_xiaomi_msm8937",
-    "target_path": "kernel/xiaomi/msm8937"
+    "repository":  "android_kernel_xiaomi_msm8953",
+    "target_path": "kernel/xiaomi/msm8937",
+    "revision": "landbring"
   }  
 ]
