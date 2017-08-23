@@ -1299,7 +1299,7 @@ lib64/libOmxSwVdec.so
 lib64/libOmxSwVencMpeg4.so
 vendor/lib/libAlacSwDec.so
 vendor/lib/libApeSwDec.so
-vendor/lib/libFlacSwDec.so
+vendor/lib/libFlacSwDec.so|89c0b9af3d56cd73e07393f2c88ac657659ebf5c
 vendor/lib/libI420colorconvert.so
 vendor/lib/libMpeg4SwEncoder.so
 vendor/lib/libOmxAacDec.so
@@ -1315,7 +1315,7 @@ vendor/lib/libOmxMux.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
 vendor/lib/libvqzip.so
-vendor/lib64/libFlacSwDec.so
+vendor/lib64/libFlacSwDec.so|3029a270f91accb1ea9acd37cbdec6b30b5b6776
 vendor/lib64/libMpeg4SwEncoder.so
 vendor/lib64/libOmxMux.so
 vendor/media/LMspeed_508.emd
