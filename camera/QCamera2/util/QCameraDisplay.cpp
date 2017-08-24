@@ -59,7 +59,8 @@ namespace qcamera {
  *
  * RETURN     : always returns 1
  *==========================================================================*/
-int QCameraDisplay::vsyncEventReceiverCamera(int fd, int events, void* data) {
+int QCameraDisplay::vsyncEventReceiverCamera(__unused int fd,
+                                             __unused int events, void* data) {
     android::DisplayEventReceiver::Event buffer[DISPLAY_EVENT_RECEIVER_ARRAY_SIZE];
     QCameraDisplay* pQCameraDisplay = (QCameraDisplay *) data;
     ssize_t n;
@@ -94,7 +95,7 @@ void* QCameraDisplay::vsyncThreadCamera(void * data)
     looper = new android::Looper(false);
     status_t status = pQCameraDisplay->mDisplayEventReceiver.initCheck();
     if (status != NO_ERROR) {
-        ALOGE("Initialization of DisplayEventReceiver failed with status: %d", status);
+        LOGE("Initialization of DisplayEventReceiver failed with status: %d", status);
         return NULL;
     }
     looper->addFd(pQCameraDisplay->mDisplayEventReceiver.getFd(), 0, ALOOPER_EVENT_INPUT,
@@ -124,9 +125,9 @@ QCameraDisplay::QCameraDisplay()
       mAdditionalVsyncOffsetForWiggle(0),
       mThreadExit(0),
       mNum_vsync_from_vfe_isr_to_presentation_timestamp(0),
-      mSet_timestamp_num_ms_prior_to_vsync(0),
-      mVfe_and_mdp_freq_wiggle_filter_max_ms(0),
-      mVfe_and_mdp_freq_wiggle_filter_min_ms(0)
+      mSet_timestamp_num_ns_prior_to_vsync(0),
+      mVfe_and_mdp_freq_wiggle_filter_max_ns(0),
+      mVfe_and_mdp_freq_wiggle_filter_min_ns(0)
 {
     int rc = NO_ERROR;
 
@@ -135,16 +136,16 @@ QCameraDisplay::QCameraDisplay()
     if (rc == NO_ERROR) {
         char    value[PROPERTY_VALUE_MAX];
         nsecs_t default_vsync_interval;
-        pthread_setname_np(mVsyncThreadCameraHandle, "CAM_Vsync_Thread");
+        pthread_setname_np(mVsyncThreadCameraHandle, "CAM_Vsync");
         // Read a list of properties used for tuning
         property_get("persist.camera.disp.num_vsync", value, "4");
         mNum_vsync_from_vfe_isr_to_presentation_timestamp = atoi(value);
         property_get("persist.camera.disp.ms_to_vsync", value, "2");
-        mSet_timestamp_num_ms_prior_to_vsync = atoi(value);
+        mSet_timestamp_num_ns_prior_to_vsync = atoi(value) * NSEC_PER_MSEC;
         property_get("persist.camera.disp.filter_max", value, "2");
-        mVfe_and_mdp_freq_wiggle_filter_max_ms = atoi(value);
+        mVfe_and_mdp_freq_wiggle_filter_max_ns = atoi(value) * NSEC_PER_MSEC;
         property_get("persist.camera.disp.filter_min", value, "4");
-        mVfe_and_mdp_freq_wiggle_filter_min_ms = atoi(value);
+        mVfe_and_mdp_freq_wiggle_filter_min_ns = atoi(value) * NSEC_PER_MSEC;
         property_get("persist.camera.disp.fps", value, "60");
         if (atoi(value) > 0) {
             default_vsync_interval= s2ns(1) / atoi(value);
@@ -155,13 +156,13 @@ QCameraDisplay::QCameraDisplay()
             mVsyncIntervalHistory[i] = default_vsync_interval;
         }
         LOGD("display jitter num_vsync_from_vfe_isr_to_presentation_timestamp %u \
-                set_timestamp_num_ms_prior_to_vsync %u",
+                set_timestamp_num_ns_prior_to_vsync %llu",
                 mNum_vsync_from_vfe_isr_to_presentation_timestamp,
-                mSet_timestamp_num_ms_prior_to_vsync);
-        LOGD("display jitter vfe_and_mdp_freq_wiggle_filter_max_ms %u \
-                vfe_and_mdp_freq_wiggle_filter_min_ms %u",
-                mVfe_and_mdp_freq_wiggle_filter_max_ms,
-                mVfe_and_mdp_freq_wiggle_filter_min_ms);
+                mSet_timestamp_num_ns_prior_to_vsync);
+        LOGD("display jitter vfe_and_mdp_freq_wiggle_filter_max_ns %llu \
+                vfe_and_mdp_freq_wiggle_filter_min_ns %llu",
+                mVfe_and_mdp_freq_wiggle_filter_max_ns,
+                mVfe_and_mdp_freq_wiggle_filter_min_ns);
     } else {
         mVsyncThreadCameraHandle = 0;
     }
@@ -255,11 +256,11 @@ nsecs_t QCameraDisplay::computePresentationTimeStamp(nsecs_t frameTimeStamp)
                 (mNum_vsync_from_vfe_isr_to_presentation_timestamp * mAvgVsyncInterval);
         if (presentationTimeStamp > mVsyncTimeStamp) {
             timeDifference      = presentationTimeStamp - mVsyncTimeStamp;
-            moveToNextVsync     = mAvgVsyncInterval - mVfe_and_mdp_freq_wiggle_filter_min_ms;
-            keepInCurrentVsync  = mAvgVsyncInterval - mVfe_and_mdp_freq_wiggle_filter_max_ms;
+            moveToNextVsync     = mAvgVsyncInterval - mVfe_and_mdp_freq_wiggle_filter_min_ns;
+            keepInCurrentVsync  = mAvgVsyncInterval - mVfe_and_mdp_freq_wiggle_filter_max_ns;
             vsyncOffset         = timeDifference % mAvgVsyncInterval;
             expectedVsyncOffset = mAvgVsyncInterval -
-                    mSet_timestamp_num_ms_prior_to_vsync - vsyncOffset;
+                    mSet_timestamp_num_ns_prior_to_vsync - vsyncOffset;
             if (vsyncOffset > moveToNextVsync) {
                 mAdditionalVsyncOffsetForWiggle = mAvgVsyncInterval;
             } else if (vsyncOffset < keepInCurrentVsync) {

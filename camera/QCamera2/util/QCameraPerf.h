@@ -35,7 +35,7 @@
 #include <utils/Mutex.h>
 
 // Camera dependencies
-#include "power.h"
+#include "hardware/power.h"
 
 typedef enum {
     ALL_CORES_ONLINE = 0x7FE,
@@ -67,7 +67,6 @@ public:
     bool    isTimerReset();
     void    powerHintInternal(power_hint_t hint, bool enable);
     void    powerHint(power_hint_t hint, bool enable);
-    bool    isPerfLockTimedAcquired() { return (0 <= mPerfLockHandleTimed); }
 
 private:
     int32_t        (*perf_lock_acq)(int, int, int[], int);
