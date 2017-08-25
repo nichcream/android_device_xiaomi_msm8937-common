@@ -355,6 +355,17 @@ on boot
     chown system system /dev/goodix_fp
     chmod 0644 /dev/goodix_fp
 
+    setprop persist.sys.fp.vendor none
+    start gx_fpd
+
+    #xuchao,add the fp sensor infomation,20161107,start
+    on property:persist.sys.fp.vendor=switchf
+	setprop ro.boot.fpsensor fpc
+
+    on property:persist.sys.fp.vendor=goodix
+	setprop ro.boot.fpsensor gdx
+    #xuchao,add the fp sensor infomation,20161107,end
+
     # fingerprint permissions
     chown system system /sys/devices/soc/soc:fpc1020/compatible_all
     chmod 0664 /sys/devices/soc/soc:fpc1020/compatible_all
@@ -587,6 +598,7 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
     user root
     group root
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service wfdservice /system/bin/wfdservice
     class main
@@ -612,6 +624,7 @@ service poweroffhandler /system/bin/poweroffhandler
     
 service fingerprintd /system/bin/fingerprintd
     class late_start
+    socket fpce stream 0666 system system
     user system
     group system sdcard_rw
     system system
@@ -623,21 +636,15 @@ service gx_fpd /system/bin/gx_fpd
     user root
     group system system
     writepid /dev/cpuset/system-background/tasks
+    disabled
 
-on property:sys.fp.vendor=switchf
+on property:persist.sys.fp.vendor=switchf
     stop gx_fpd
-    setprop sys.fp.vendor searchf
-    start fingerprintd
-    setprop fpc.fp.miui.token 0
-    setprop ro.boot.fpsensor fpc
-    setprop ro.hardware.fingerprint searchf
+    setprop persist.sys.fp.vendor searchf
+    start fingerprintd  
 
-on property:sys.fp.onstart=1
-   start fingerprintd
-   setprop goodix.fp.miui.analyse 1
-   setprop goodix.fp.miui.token 0
-   setprop ro.boot.fpsensor gdx
-   setprop ro.hardware.fingerprint goodix
+on property:persist.sys.fp.onstart=1
+   start fingerprintd 
 
 # Start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
