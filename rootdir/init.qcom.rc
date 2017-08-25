@@ -345,26 +345,40 @@ on boot
     # Set the default message loglevel to KERN_INFO
     write /proc/sys/kernel/printk "6 6 1 7"
 
+    #CPU permissions
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_slack
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_slack
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/target_loads
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/target_loads
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/input_boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+
+    # Assume SMP uses shared cpufreq policy for all CPUs
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
     # bond0 used by FST Manager
     chown wifi wifi /sys/class/net/bond0/bonding/queue_id
-
-    # Goodix Fingerprint
-    chown system system /dev/goodix_fp
-    chmod 0644 /dev/goodix_fp
-
-    setprop persist.sys.fp.vendor none
-    start gx_fpd
-
-    #xuchao,add the fp sensor infomation,20161107,start
-    on property:persist.sys.fp.vendor=switchf
-	setprop ro.boot.fpsensor fpc
-
-    on property:persist.sys.fp.vendor=goodix
-	setprop ro.boot.fpsensor gdx
-    #xuchao,add the fp sensor infomation,20161107,end
 
     # fingerprint permissions
     chown system system /sys/devices/soc/soc:fpc1020/compatible_all
@@ -386,12 +400,28 @@ on boot
     chown root system /sys/class/leds/infrared/transmit
     chown root system /sys/class/leds/infrared/brightness
 
+    # Goodix Fingerprint
+    chown system system /dev/goodix_fp
+    chmod 0644 /dev/goodix_fp
+
+    setprop persist.sys.fp.vendor none
+    start gx_fpd
+
+    #xuchao,add the fp sensor infomation,20161107,start
+    on property:persist.sys.fp.vendor=switchf
+	setprop ro.boot.fpsensor fpc
+
+    on property:persist.sys.fp.vendor=goodix
+	setprop ro.boot.fpsensor gdx
+    #xuchao,add the fp sensor infomation,20161107,end
+
 on class_start:late_start
     write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
 
     copy /system/vendor/qcril.db /data/misc/radio/qcril.db
     chown radio radio /data/misc/radio/qcril.db
     write /data/misc/radio/db_check_done 1
+
 
 service iop /system/bin/iop
     class main
@@ -632,11 +662,12 @@ service fingerprintd /system/bin/fingerprintd
     disabled
 
 service gx_fpd /system/bin/gx_fpd
-    class core
-    user root
-    group system system
-    writepid /dev/cpuset/system-background/tasks
-    disabled
+     class core
+     user root
+     group system system
+     oneshot
+     writepid /dev/cpuset/system-background/tasks
+     disabled
 
 on property:persist.sys.fp.vendor=switchf
     stop gx_fpd
