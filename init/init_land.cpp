@@ -35,6 +35,10 @@
 #include <sstream>
 #include <sys/sysinfo.h>
 
+//for cmdline parsing 
+#include "../base/include/android-base/file.h"
+#include "../base/include/android-base/strings.h"
+
 #include "vendor_init.h"
 #include "property_service.h"
 #include "log.h"
@@ -49,6 +53,21 @@ int is3GB()
     sysinfo(&sys);
     return sys.totalram > 2048ull * 1024 * 1024;
 }
+
+//cmdline parser
+void import_kernel_cmdline1(bool in_qemu,
+                           const std::function<void(const std::string&, const std::string&, bool)>&$
+    std::string cmdline;
+    android::base::ReadFileToString("/proc/cmdline", &cmdline);
+
+    for (const auto& entry : android::base::Split(android::base::Trim(cmdline), " ")) {
+        std::vector<std::string> pieces = android::base::Split(entry, "=");
+        if (pieces.size() >= 2) { // lineage's : == 2
+            fn(pieces[0], pieces[1], in_qemu);
+        }
+    }
+}
+
 
 static void import_cmdline(const std::string& key,
         const std::string& value, bool for_emulator __attribute__((unused)))
@@ -142,7 +161,7 @@ void variant_properties()
     if (property_get("ro.xpe.device") != "land")
         return;
 
-    import_kernel_cmdline(0, import_cmdline);
+    import_kernel_cmdline1(0, import_cmdline);
     
     //set board
     property_set("ro.product.wt.boardid", board_id.c_str());
@@ -151,18 +170,44 @@ void variant_properties()
     //Variants
     if (board_id == "S88537AA1") {
         property_set("ro.build.display.wtid", "SW_S88537AA1_V079_M20_MP_XM");
+        property_set("persist.sys.fp.goodix", "0");
+        property_set("persist.sys.fp.onstart", "1");
+        property_set("persist.sys.fp.vendor", "searchf");
+        property_set("ro.boot.fpsensor", "fpc");
+       
     } else if (board_id == "S88537AB1") {
         property_set("ro.build.display.wtid", "SW_S88537AB1_V079_M20_MP_XM");
+        property_set("persist.sys.fp.goodix", "1");
+        property_set("persist.sys.fp.onstart", "0");
+        property_set("persist.sys.fp.vendor", "goodix");
+        property_set("ro.boot.fpsensor", "gdx");
+       
     } else if (board_id == "S88537AC1") {
         property_set("ro.build.display.wtid", "SW_S88537AC1_V079_M20_MP_XM");
+        property_set("persist.sys.fp.goodix", "0");
+        property_set("persist.sys.fp.onstart", "1");
+        property_set("persist.sys.fp.vendor", "searchf");
+        property_set("ro.boot.fpsensor", "fpc");
     } else if (board_id == "S88537BA1") {
         property_set("ro.build.display.wtid", "SW_S88537BA1_V079_M20_MP_XM");
+        property_set("persist.sys.fp.goodix", "0");
+        property_set("persist.sys.fp.onstart", "1");
+        property_set("persist.sys.fp.vendor", "searchf");
+        property_set("ro.boot.fpsensor", "fpc");
         property_set("mm.enable.qcom_parser", "196495");
     } else if (board_id == "S88537CA1") {
         property_set("ro.build.display.wtid", "SW_S88537CA1_V079_M20_MP_XM");
+        property_set("persist.sys.fp.goodix", "0");
+        property_set("persist.sys.fp.onstart", "1");
+        property_set("persist.sys.fp.vendor", "searchf");
+        property_set("ro.boot.fpsensor", "fpc");
         property_set("mm.enable.qcom_parser", "196495");
     } else if (board_id == "S88537EC1") {
         property_set("ro.build.display.wtid", "SW_S88537EC1_V079_M20_MP_XM");
+        property_set("persist.sys.fp.goodix", "0");
+        property_set("persist.sys.fp.onstart", "1");
+        property_set("persist.sys.fp.vendor", "searchf");
+        property_set("ro.boot.fpsensor", "fpc");
         property_set("mm.enable.qcom_parser", "196495");
     }
 
