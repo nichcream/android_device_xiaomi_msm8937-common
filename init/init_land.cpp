@@ -56,7 +56,7 @@ int is3GB()
 
 //cmdline parser
 void import_kernel_cmdline1(bool in_qemu,
-                           const std::function<void(const std::string&, const std::string&, bool)>&$
+                           const std::function<void(const std::string&, const std::string&, bool)>& fn) {
     std::string cmdline;
     android::base::ReadFileToString("/proc/cmdline", &cmdline);
 
