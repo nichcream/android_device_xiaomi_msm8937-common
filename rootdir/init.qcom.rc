@@ -664,17 +664,20 @@ service fingerprintd /system/bin/fingerprintd
     disabled
 
 service gx_fpd /system/bin/gx_fpd
-     class core
-     user root
-     group system system
-     oneshot
-     writepid /dev/cpuset/system-background/tasks
-     disabled
+    class core
+    user root
+    group system system
+    oneshot
+    writepid /dev/cpuset/system-background/tasks
+    disabled
 
 on property:persist.sys.fp.vendor=switchf
     stop gx_fpd
     setprop persist.sys.fp.vendor searchf
     start fingerprintd  
+
+on property:persist.sys.fp.onstart=0
+   start gx_fpd
 
 on property:persist.sys.fp.onstart=1
    start fingerprintd 
