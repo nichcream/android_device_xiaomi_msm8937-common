@@ -409,14 +409,6 @@ on boot
     setprop persist.sys.fp.vendor none
     start gx_fpd
 
-    #xuchao,add the fp sensor infomation,20161107,start
-    on property:persist.sys.fp.vendor=switchf
-	setprop ro.boot.fpsensor fpc
-
-    on property:persist.sys.fp.vendor=goodix
-	setprop ro.boot.fpsensor gdx
-    #xuchao,add the fp sensor infomation,20161107,end
-
 on class_start:late_start
     write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
 
@@ -660,7 +652,6 @@ service fingerprintd /system/bin/fingerprintd
     user system
     group system sdcard_rw
     system system
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 service gx_fpd /system/bin/gx_fpd
@@ -668,19 +659,25 @@ service gx_fpd /system/bin/gx_fpd
     user root
     group system system
     oneshot
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 on property:persist.sys.fp.vendor=switchf
     stop gx_fpd
     setprop persist.sys.fp.vendor searchf
     start fingerprintd  
+    setprop ro.boot.fpsensor fpc
+
+on property:persist.sys.fp.vendor=goodix
+    setprop ro.boot.fpsensor gdx
 
 on property:persist.sys.fp.onstart=0
    start gx_fpd
 
 on property:persist.sys.fp.onstart=1
    start fingerprintd 
+
+on property:ro.boot.fpsensor=gdx
+    setprop ro.hardware.fingerprint goodix
 
 # Start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon

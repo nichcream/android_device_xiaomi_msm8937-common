@@ -1,5 +1,4 @@
 #============= fingerprintd ==============
 allow fingerprintd fpc_sysfs:dir { open read search};
-allow fingerprintd fpc_sysfs:file { read open };
-
+allow fingerprintd fpc_sysfs:file { read open write };
 
