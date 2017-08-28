@@ -59,9 +59,13 @@ camera.display.lmax=1280x720
 persist.camera.stats.test=5
 persist.camera.feature.cac=1
 persist.camera.imglib.cac3=2
+persist.camera.HAL3.enabled=0
 camera.lowpower.record.enable=1
-persist.camera.gyro.disable=0
+persist.camera.gyro.disable=1
+persist.camera.is_type=1
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk
+media.stagefright.legacyencoder=true
+media.stagefright.less-secure=true
 
 #CNE
 persist.cne.feature=1
@@ -99,6 +103,8 @@ ro.gps.agps_provider=1
 ro.sys.sdcardfs=true
 
 #Media
+media.msm8956.version=0
+media.msm8956hw=0
 mm.enable.smoothstreaming=true 
 media.aac_51_output_enabled=true 
 vidc.enc.narrow.searchrange=1 
