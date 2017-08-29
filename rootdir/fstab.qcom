@@ -17,7 +17,7 @@
 /dev/block/bootdevice/by-name/config         /frp               emmc    defaults                                            defaults
 
 /devices/soc/7864900.sdhci/mmc_host*         /storage/sdcard1   vfat    nosuid,nodev                                        wait,voldmanaged=sdcard1:auto,noemulatedsd,encryptable=footer
-/devices/soc/78db000.usb/msm_hsusb_host*     /storage/usbotg    vfat    nosuid,nodev                                        wait,voldmanaged=usbotg:auto
+/devices/soc/78db000.usb/msm_hsusb_host*     /storage/usbotg    auto    nosuid,nodev                                        wait,voldmanaged=usbotg:auto
 
 #ZRAM
 /dev/block/zram0                             none               swap    defaults                                            zramsize=1073741824,zramstreams=4
