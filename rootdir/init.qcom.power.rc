@@ -46,6 +46,7 @@ on boot
     write /sys/devices/system/cpu/cpu5/online 1
     write /sys/devices/system/cpu/cpu6/online 1
     write /sys/devices/system/cpu/cpu7/online 1
+    restorecon -R /sys/devices/system/cpu
 
 on enable-low-power
     # HMP scheduler (big.Little cluster related) settings
@@ -80,7 +81,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/sampling_down_factor 40000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 960000
 
-     # configure governor settings for big cluster
+    # configure governor settings for big cluster
     write /sys/devices/system/cpu/cpu4/online 1
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay 39000
@@ -92,6 +93,8 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor 40000
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 768000
+
+    restorecon -R /sys/devices/system/cpu
 
     # HMP Task packing settings
     write /proc/sys/kernel/sched_small_task 20
@@ -199,6 +202,8 @@ on charger
     write /sys/devices/system/cpu/cpu5/online 0
     write /sys/devices/system/cpu/cpu6/online 0
     write /sys/devices/system/cpu/cpu7/online 0
+
+    restorecon -R /sys/devices/system/cpu
 
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
