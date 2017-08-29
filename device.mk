@@ -103,7 +103,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.msm8937 \
+    libbson \
     libmm-qcamera \
     Snap \
     libxml2
@@ -168,7 +168,8 @@ PRODUCT_PACKAGES += \
 
 # Libshims
 PRODUCT_PACKAGES += \
-    libshims_ims
+    libshims_ims \
+    libshim_camera
 
 # Lights
 PRODUCT_PACKAGES += \
