@@ -177,8 +177,9 @@ PRODUCT_BOOT_JARS += \
 
 PRODUCT_PACKAGES += \
     gps.msm8937 \
+    libcurl \
     libgnsspps \
-    libcurl
+    libshims_get_process_name
 
 # GNSS HAL
 PRODUCT_PACKAGES += \
