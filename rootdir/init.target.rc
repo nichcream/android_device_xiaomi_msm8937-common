@@ -84,7 +84,7 @@ service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
 
 # Start camera provider later for encrypted devices
 on property:vold.decrypt=trigger_restart_framework
-    restart camera-provider-2-4
+    restart vendor.camera-provider-2-4
 
 on init
    #write /dev/stune/top-app/schedtune.colocate 1
