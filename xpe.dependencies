@@ -5,7 +5,6 @@
   },
   {
     "repository":  "android_kernel_xiaomi_msm8937",
-    "target_path": "kernel/xiaomi/msm8937",
-    "branch": "landbring"
+    "target_path": "kernel/xiaomi/msm8937"
   }  
 ]
