@@ -30,7 +30,7 @@
 #define __QCAMERA_HALHEADER_H__
 
 // System dependencies
-#include "hardware/gralloc.h"
+#include "gralloc.h"
 
 // Camera dependencies
 #include "cam_types.h"

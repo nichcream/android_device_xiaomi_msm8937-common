@@ -35,7 +35,7 @@
 #include <utils/Mutex.h>
 
 // Camera dependencies
-#include "hardware/camera3.h"
+#include "camera3.h"
 
 extern "C" {
 #include "mm_camera_interface.h"
@@ -123,6 +123,7 @@ private:
     int allocOneBuffer(struct QCamera3MemInfo &memInfo,
             unsigned int heap_id, size_t size);
     void deallocOneBuffer(struct QCamera3MemInfo &memInfo);
+    bool mQueueAll;
     uint32_t mMaxCnt;
 };
 

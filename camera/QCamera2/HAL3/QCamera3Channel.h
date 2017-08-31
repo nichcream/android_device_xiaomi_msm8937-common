@@ -39,7 +39,7 @@
 // Camera dependencies
 #include "cam_intf.h"
 #include "cam_types.h"
-#include "hardware/camera3.h"
+#include "camera3.h"
 #include "QCamera3HALHeader.h"
 #include "QCamera3Mem.h"
 #include "QCamera3PostProc.h"
@@ -77,7 +77,7 @@ public:
                    mm_camera_ops_t *cam_ops,
                    channel_cb_routine cb_routine,
                    cam_padding_info_t *paddingInfo,
-                   cam_feature_mask_t postprocess_mask,
+                   uint32_t postprocess_mask,
                    void *userData, uint32_t numBuffers);
     virtual ~QCamera3Channel();
 
@@ -131,7 +131,7 @@ protected:
                       cam_dimension_t streamDim,
                       cam_rotation_t streamRotation,
                       uint8_t minStreamBufnum,
-                      cam_feature_mask_t postprocessMask,
+                      uint32_t postprocessMask,
                       cam_is_type_t isType,
                       uint32_t batchSize = 0);
 
@@ -150,7 +150,7 @@ protected:
     QCamera3HeapMemory *mStreamInfoBuf;
     channel_cb_routine mChannelCB;
     //cam_padding_info_t *mPaddingInfo;
-    cam_feature_mask_t mPostProcMask;
+    uint32_t mPostProcMask;
     uint32_t mYUVDump;
     cam_is_type_t mIsType;
     uint32_t mNumBuffers;
@@ -158,9 +158,9 @@ protected:
      * for this flag is true and is selectively set to false for the usecases
      * such as HFR to avoid any performance hit due to mapping/unmapping */
     bool    mPerFrameMapUnmapEnable;
-    uint32_t mFrmNum;
-    uint32_t mDumpFrmCnt;
-    uint32_t mSkipMode;
+    uint32_t frm_num;
+    uint32_t dumpFrmCnt;
+    uint32_t skip_mode;
     uint32_t mDumpSkipCnt;
 };
 
@@ -179,7 +179,7 @@ public:
            void *userData,
            camera3_stream_t *stream,
            cam_stream_type_t stream_type,
-           cam_feature_mask_t postprocess_mask,
+           uint32_t postprocess_mask,
            QCamera3Channel *metadataChannel,
            uint32_t numBuffers = MAX_INFLIGHT_REQUESTS);
 
@@ -273,7 +273,7 @@ public:
                     void *userData,
                     camera3_stream_t *stream,
                     cam_stream_type_t stream_type,
-                    cam_feature_mask_t postprocess_mask,
+                    uint32_t postprocess_mask,
                     QCamera3Channel *metadataChannel,
                     uint32_t numBuffers = MAX_INFLIGHT_REQUESTS);
 
@@ -283,7 +283,6 @@ public:
     virtual uint32_t getStreamTypeMask();
     virtual int32_t queueBatchBuf();
     virtual int32_t initialize(cam_is_type_t isType);
-    using QCamera3ProcessingChannel::request;
     virtual int32_t request(buffer_handle_t *buffer, uint32_t frameNumber);
     virtual reprocess_type_t getReprocessType();
 
@@ -303,7 +302,7 @@ public:
                     mm_camera_ops_t *cam_ops,
                     channel_cb_routine cb_routine,
                     cam_padding_info_t *paddingInfo,
-                    cam_feature_mask_t postprocess_mask,
+                    uint32_t postprocess_mask,
                     void *userData,
                     uint32_t numBuffers = MIN_STREAMING_BUFFER_NUM);
     virtual ~QCamera3MetadataChannel();
@@ -335,7 +334,7 @@ public:
                     cam_padding_info_t *paddingInfo,
                     void *userData,
                     camera3_stream_t *stream,
-                    cam_feature_mask_t postprocess_mask,
+                    uint32_t postprocess_mask,
                     QCamera3Channel *metadataChannel,
                     bool raw_16 = false,
                     uint32_t numBuffers = MAX_INFLIGHT_REQUESTS);
@@ -371,7 +370,7 @@ public:
                     cam_dimension_t rawDumpSize,
                     cam_padding_info_t *paddingInfo,
                     void *userData,
-                    cam_feature_mask_t postprocess_mask, uint32_t numBuffers = 3U);
+                    uint32_t postprocess_mask, uint32_t numBuffers = 3U);
     virtual ~QCamera3RawDumpChannel();
     virtual int32_t initialize(cam_is_type_t isType);
     virtual void streamCbRoutine(mm_camera_super_buf_t *super_frame,
@@ -405,11 +404,10 @@ public:
             void *userData,
             camera3_stream_t *stream,
             cam_stream_type_t stream_type,
-            cam_feature_mask_t postprocess_mask,
+            uint32_t postprocess_mask,
             QCamera3Channel *metadataChannel);
     ~QCamera3YUVChannel();
     virtual int32_t initialize(cam_is_type_t isType);
-    using QCamera3ProcessingChannel::request;
     virtual int32_t request(buffer_handle_t *buffer,
             uint32_t frameNumber,
             camera3_stream_buffer_t* pInputBuffer,
@@ -450,7 +448,6 @@ private:
     bool needsFramePostprocessing(metadata_buffer_t* meta);
     int32_t handleOfflinePpCallback(uint32_t resultFrameNumber,
             Vector<mm_camera_super_buf_t *>& pendingCbs);
-    mm_camera_super_buf_t* getNextPendingCbBuffer();
 };
 
 /* QCamera3PicChannel is for JPEG stream, which contains a YUV stream generated
@@ -465,7 +462,7 @@ public:
             cam_padding_info_t *paddingInfo,
             void *userData,
             camera3_stream_t *stream,
-            cam_feature_mask_t postprocess_mask,
+            uint32_t postprocess_mask,
             bool is4KVideo,
             bool isInputStreamConfigured,
             QCamera3Channel *metadataChannel,
@@ -523,7 +520,7 @@ public:
                             mm_camera_ops_t *cam_ops,
                             channel_cb_routine cb_routine,
                             cam_padding_info_t *paddingInfo,
-                            cam_feature_mask_t postprocess_mask,
+                            uint32_t postprocess_mask,
                             void *userData, void *ch_hdl);
     QCamera3ReprocessChannel();
     virtual ~QCamera3ReprocessChannel();
@@ -532,7 +529,7 @@ public:
     virtual int32_t stop();
     int32_t doReprocessOffline(qcamera_fwk_input_pp_data_t *frame,
             bool isPriorityFrame = false);
-    int32_t doReprocess(int buf_fd,void *buffer, size_t buf_length, int32_t &ret_val,
+    int32_t doReprocess(int buf_fd, size_t buf_length, int32_t &ret_val,
                         mm_camera_super_buf_t *meta_buf);
     int32_t overrideMetadata(qcamera_hal3_pp_buffer_t *pp_buffer,
             mm_camera_buf_def_t *meta_buffer,
@@ -594,12 +591,11 @@ public:
                     uint32_t channel_handle,
                     mm_camera_ops_t *cam_ops,
                     cam_padding_info_t *paddingInfo,
-                    cam_feature_mask_t postprocess_mask,
+                    uint32_t postprocess_mask,
                     cam_stream_type_t streamType,
                     cam_dimension_t *dim,
                     cam_format_t streamFormat,
                     uint8_t hw_analysis_supported,
-                    cam_color_filter_arrangement_t color_arrangement,
                     void *userData,
                     uint32_t numBuffers = MIN_STREAMING_BUFFER_NUM
                     );

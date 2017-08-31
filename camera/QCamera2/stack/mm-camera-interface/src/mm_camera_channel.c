@@ -228,6 +228,7 @@ static void mm_channel_process_stream_buf(mm_camera_cmdcb_t * cmd_cb,
     uint32_t i = 0;
     /* Set expected frame id to a future frame idx, large enough to wait
     * for good_frame_idx_range, and small enough to still capture an image */
+    const uint32_t max_future_frame_offset = MM_CAMERA_MAX_FUTURE_FRAME_WAIT;
     uint8_t needStartZSL = FALSE;
 
     if (NULL == ch_obj) {
@@ -438,6 +439,7 @@ static void mm_channel_process_stream_buf(mm_camera_cmdcb_t * cmd_cb,
              (!ch_obj->bWaitForPrepSnapshotDone)) {
 
         /* dequeue */
+        uint32_t match_frame = 0;
         mm_channel_node_info_t info;
         memset(&info, 0x0, sizeof(info));
 
@@ -505,6 +507,8 @@ static void mm_channel_process_stream_buf(mm_camera_cmdcb_t * cmd_cb,
             }
         }
         if (info.num_nodes > 0) {
+             uint8_t bReady = 0;
+
             /* decrease pending_cnt */
             if (MM_CAMERA_SUPER_BUF_NOTIFY_BURST == notify_mode) {
                 ch_obj->pending_cnt--;
@@ -542,8 +546,6 @@ static void mm_channel_process_stream_buf(mm_camera_cmdcb_t * cmd_cb,
                         //Received all frames for current batch
                         ch_obj->cur_capture_idx++;
                         ch_obj->bundle.superbuf_queue.expected_frame_id =
-                                ch_obj->capture_frame_id[ch_obj->cur_capture_idx];
-                        ch_obj->bundle.superbuf_queue.good_frame_id =
                                 ch_obj->capture_frame_id[ch_obj->cur_capture_idx];
                     } else {
                         LOGH("Need %d frames more for batch %d",
@@ -1509,13 +1511,11 @@ int32_t mm_channel_start(mm_channel_t *my_obj)
         /* init superbuf queue */
         mm_channel_superbuf_queue_init(&my_obj->bundle.superbuf_queue);
         my_obj->bundle.superbuf_queue.num_streams = num_streams_in_bundle_queue;
-        my_obj->bundle.superbuf_queue.expected_frame_id =
-                my_obj->bundle.superbuf_queue.attr.user_expected_frame_id;
+        my_obj->bundle.superbuf_queue.expected_frame_id = 0;
         my_obj->bundle.superbuf_queue.expected_frame_id_without_led = 0;
         my_obj->bundle.superbuf_queue.led_off_start_frame_id = 0;
         my_obj->bundle.superbuf_queue.led_on_start_frame_id = 0;
         my_obj->bundle.superbuf_queue.led_on_num_frames = 0;
-        my_obj->bundle.superbuf_queue.good_frame_id = 0;
 
         for (i = 0; i < num_streams_to_start; i++) {
             /* Only bundle streams that belong to the channel */
@@ -1737,12 +1737,18 @@ int32_t mm_channel_stop(mm_channel_t *my_obj)
             s_objs[i]->linked_stream->is_linked = 0;
             s_objs[i]->linked_stream->linked_obj = NULL;
             pthread_mutex_unlock(&s_objs[i]->linked_stream->buf_lock);
+
+            if (TRUE == my_obj->bundle.is_active) {
+                mm_channel_flush_super_buf_queue(my_obj, 0, s_objs[i]->stream_info->stream_type);
+            }
+            break;
+        } else {
+            continue;
         }
     }
 
     /* destroy super buf cmd thread */
     if (TRUE == my_obj->bundle.is_active) {
-        mm_channel_flush_super_buf_queue(my_obj, 0, CAM_STREAM_TYPE_DEFAULT);
         /* first stop bundle thread */
         mm_camera_cmd_thread_release(&my_obj->cmd_thread);
         mm_camera_cmd_thread_release(&my_obj->cb_thread);
@@ -1753,7 +1759,6 @@ int32_t mm_channel_stop(mm_channel_t *my_obj)
         /* reset few fields in the bundle info */
         my_obj->bundle.is_active = 0;
         my_obj->bundle.superbuf_queue.expected_frame_id = 0;
-        my_obj->bundle.superbuf_queue.good_frame_id = 0;
         my_obj->bundle.superbuf_queue.match_cnt = 0;
     }
 
@@ -2210,16 +2215,19 @@ int32_t mm_channel_map_stream_buf(mm_channel_t *my_obj,
 {
     int32_t rc = -1;
     mm_stream_t* s_obj = mm_channel_util_get_stream_by_handler(my_obj,
-            payload->stream_id);
+                                                               payload->stream_id);
     if (NULL != s_obj) {
         if (s_obj->ch_obj != my_obj) {
             /* No op. on linked streams */
             return 0;
         }
+
         rc = mm_stream_map_buf(s_obj,
-                payload->type, payload->frame_idx,
-                payload->plane_idx, payload->fd,
-                payload->size, payload->buffer);
+                               payload->type,
+                               payload->frame_idx,
+                               payload->plane_idx,
+                               payload->fd,
+                               payload->size);
     }
 
     return rc;
@@ -2352,56 +2360,6 @@ int8_t mm_channel_util_seq_comp_w_rollover(uint32_t v1,
         ret = -1;
     }
 
-    return ret;
-}
-
-/*===========================================================================
- * FUNCTION   : mm_channel_validate_super_buf.
- *
- * DESCRIPTION: Validate incoming buffer with existing super buffer.
- *
- * PARAMETERS :
- *   @ch_obj  : channel object
- *   @queue   : superbuf queue
- *   @buf_info: new buffer from stream
- *
- * RETURN     : int8_t type of validation result
- *              >0  -- Valid frame
- *              =0  -- Cannot validate
- *              <0  -- Invalid frame. Can be freed
- *==========================================================================*/
-int8_t mm_channel_validate_super_buf(mm_channel_t* ch_obj,
-        mm_channel_queue_t *queue, mm_camera_buf_info_t *buf_info)
-{
-    int8_t ret = 0;
-    cam_node_t* node = NULL;
-    struct cam_list *head = NULL;
-    struct cam_list *pos = NULL;
-    mm_channel_queue_node_t* super_buf = NULL;
-
-    (void)ch_obj;
-
-    /* comp */
-    pthread_mutex_lock(&queue->que.lock);
-    head = &queue->que.head.list;
-    /* get the last one in the queue which is possibly having no matching */
-    pos = head->next;
-    while (pos != head) {
-        node = member_of(pos, cam_node_t, list);
-        super_buf = (mm_channel_queue_node_t*)node->data;
-        if (NULL != super_buf) {
-            if ((super_buf->expected_frame) &&
-                    (buf_info->frame_idx == super_buf->frame_idx)) {
-                //This is good frame. Expecting more frames. Keeping this frame.
-                ret = 1;
-                break;
-            } else {
-                pos = pos->next;
-                continue;
-            }
-        }
-    }
-    pthread_mutex_unlock(&queue->que.lock);
     return ret;
 }
 
@@ -2554,8 +2512,7 @@ int32_t mm_channel_handle_metadata(
         if (is_good_frame_idx_range_valid) {
             queue->expected_frame_id =
                 good_frame_idx_range.min_frame_idx;
-            queue->good_frame_id = good_frame_idx_range.min_frame_idx;
-            if((ch_obj->needLEDFlash == TRUE) && (ch_obj->burstSnapNum > 1)) {
+             if((ch_obj->needLEDFlash == TRUE) && (ch_obj->burstSnapNum > 1)) {
                 queue->led_on_start_frame_id =
                 good_frame_idx_range.min_frame_idx;
                 queue->led_off_start_frame_id =
@@ -2584,18 +2541,16 @@ int32_t mm_channel_handle_metadata(
             * in valid range min frame is with led flash and max frame is
             * without led flash */
             queue->expected_frame_id =
-                    good_frame_idx_range.min_frame_idx;
+                good_frame_idx_range.min_frame_idx;
             /* max frame is without led flash */
             queue->expected_frame_id_without_led =
-                    good_frame_idx_range.max_frame_idx;
-            queue->good_frame_id =
-                    good_frame_idx_range.min_frame_idx;
+                good_frame_idx_range.max_frame_idx;
+
         } else if (is_good_frame_idx_range_valid) {
             queue->expected_frame_id =
                     good_frame_idx_range.min_frame_idx;
+
             ch_obj->bracketingState = MM_CHANNEL_BRACKETING_STATE_ACTIVE;
-            queue->good_frame_id =
-                    good_frame_idx_range.min_frame_idx;
         }
 
         if (ch_obj->isConfigCapture && is_good_frame_idx_range_valid
@@ -2613,7 +2568,6 @@ int32_t mm_channel_handle_metadata(
                 queue->expected_frame_id =
                         ch_obj->capture_frame_id[ch_obj->cur_capture_idx];
             }
-            queue->good_frame_id = queue->expected_frame_id;
         }
 
         if ((ch_obj->burstSnapNum > 1) && (ch_obj->needLEDFlash == TRUE)
@@ -2638,27 +2592,6 @@ int32_t mm_channel_handle_metadata(
         IF_META_AVAILABLE(const cam_low_light_mode_t, low_light_level,
             CAM_INTF_META_LOW_LIGHT, metadata) {
             ch_obj->needLowLightZSL = *low_light_level;
-        }
-
-        // For the instant capture case, if AEC settles before expected frame ID from user,
-        // reset the expected frame ID to current frame index.
-        if (queue->attr.user_expected_frame_id > 0) {
-            if (queue->attr.user_expected_frame_id > buf_info->frame_idx) {
-                IF_META_AVAILABLE(const cam_3a_params_t, ae_params,
-                    CAM_INTF_META_AEC_INFO, metadata) {
-                    if (ae_params->settled) {
-                        queue->expected_frame_id = buf_info->frame_idx;
-                        // Reset the expected frame ID from HAL to 0
-                        queue->attr.user_expected_frame_id = 0;
-                        LOGD("AEC settled, reset expected frame ID from user");
-                    }
-                }
-            } else {
-                 // Reset the expected frame ID from HAL to 0 after
-                 // current frame index is greater than expected id.
-                queue->attr.user_expected_frame_id = 0;
-                LOGD("reset expected frame ID from user as it reached the bound");
-            }
         }
     }
 end:
@@ -2714,11 +2647,18 @@ int32_t mm_channel_superbuf_comp_and_enqueue(
         return -1;
     }
 
-    if ((mm_channel_util_seq_comp_w_rollover(buf_info->frame_idx,
-            queue->expected_frame_id) < 0) &&
-            (mm_channel_validate_super_buf(ch_obj, queue, buf_info) <= 0)) {
+    if (mm_channel_util_seq_comp_w_rollover(buf_info->frame_idx,
+                                            queue->expected_frame_id) < 0) {
         LOGH("incoming buf id(%d) is older than expected buf id(%d), will discard it",
                  buf_info->frame_idx, queue->expected_frame_id);
+        mm_channel_qbuf(ch_obj, buf_info->buf);
+        return 0;
+    }
+
+    if((queue->nomatch_frame_id != 0)
+            && (queue->nomatch_frame_id > buf_info->frame_idx)
+            && (buf_info->buf->stream_type == CAM_STREAM_TYPE_METADATA)) {
+        /*Incoming metadata is older than expected*/
         mm_channel_qbuf(ch_obj, buf_info->buf);
         return 0;
     }
@@ -2744,30 +2684,22 @@ int32_t mm_channel_superbuf_comp_and_enqueue(
                 /* find a matched super buf, move to next one */
                 pos = pos->next;
                 continue;
-            } else if (( buf_info->frame_idx == super_buf->frame_idx )
+            } else if ( buf_info->frame_idx == super_buf->frame_idx
                     /*Pick metadata greater than available frameID*/
-                    || ((queue->attr.priority == MM_CAMERA_SUPER_BUF_PRIORITY_LOW)
+                    || ((queue->nomatch_frame_id != 0)
+                    && (queue->nomatch_frame_id <= buf_info->frame_idx)
                     && (super_buf->super_buf[buf_s_idx].frame_idx == 0)
-                    && (buf_info->buf->stream_type == CAM_STREAM_TYPE_METADATA)
-                    && (super_buf->frame_idx < buf_info->frame_idx))
+                    && (buf_info->buf->stream_type == CAM_STREAM_TYPE_METADATA))
                     /*Pick available metadata closest to frameID*/
                     || ((queue->attr.priority == MM_CAMERA_SUPER_BUF_PRIORITY_LOW)
                     && (buf_info->buf->stream_type != CAM_STREAM_TYPE_METADATA)
                     && (super_buf->super_buf[buf_s_idx].frame_idx == 0)
-                    && (super_buf->unmatched_meta_idx > buf_info->frame_idx))){
+                    && (super_buf->frame_idx > buf_info->frame_idx))){
                 /*super buffer frame IDs matching OR In low priority bundling
                 metadata frameID greater than avialbale super buffer frameID  OR
                 metadata frame closest to incoming frameID will be bundled*/
                 found_super_buf = 1;
-                /* If we are filling into a 'meta only' superbuf, make sure to reset
-                the super_buf frame_idx so that missing streams in this superbuf
-                are filled as per matching frame id logic. Note that, in low priority
-                queue, only meta frame id need not match (closest suffices) but
-                the other streams in this superbuf should have same frame id. */
-                if (super_buf->unmatched_meta_idx > 0) {
-                    super_buf->unmatched_meta_idx = 0;
-                    super_buf->frame_idx = buf_info->frame_idx;
-                }
+                queue->nomatch_frame_id = 0;
                 break;
             } else {
                 unmatched_bundles++;
@@ -2820,7 +2752,7 @@ int32_t mm_channel_superbuf_comp_and_enqueue(
                                           + queue->attr.post_frame_skip;
             }
 
-            super_buf->expected_frame = FALSE;
+            super_buf->expected = FALSE;
 
             LOGD("curr = %d, skip = %d , Expected Frame ID: %d",
                      buf_info->frame_idx,
@@ -2856,7 +2788,7 @@ int32_t mm_channel_superbuf_comp_and_enqueue(
             }
         }else {
             if (ch_obj->diverted_frame_id == buf_info->frame_idx) {
-                super_buf->expected_frame = TRUE;
+                super_buf->expected = TRUE;
                 ch_obj->diverted_frame_id = 0;
             }
         }
@@ -2873,7 +2805,7 @@ int32_t mm_channel_superbuf_comp_and_enqueue(
                     && (last_buf_ptr != NULL && last_buf_ptr != pos)) {
                 node = member_of(last_buf_ptr, cam_node_t, list);
                 super_buf = (mm_channel_queue_node_t*)node->data;
-                if (NULL != super_buf && super_buf->expected_frame == FALSE
+                if (NULL != super_buf && super_buf->expected == FALSE
                         && (&node->list != insert_before_buf)) {
                     for (i=0; i<super_buf->num_of_bufs; i++) {
                         if (super_buf->super_buf[i].frame_idx != 0) {
@@ -2918,9 +2850,8 @@ int32_t mm_channel_superbuf_comp_and_enqueue(
                 new_buf->super_buf[buf_s_idx] = *buf_info;
                 new_buf->frame_idx = buf_info->frame_idx;
 
-                if ((ch_obj->diverted_frame_id == buf_info->frame_idx)
-                        || (buf_info->frame_idx == queue->good_frame_id)) {
-                    new_buf->expected_frame = TRUE;
+                if (ch_obj->diverted_frame_id == buf_info->frame_idx) {
+                    new_buf->expected = TRUE;
                     ch_obj->diverted_frame_id = 0;
                 }
 
@@ -2934,7 +2865,7 @@ int32_t mm_channel_superbuf_comp_and_enqueue(
 
                 if(queue->num_streams == 1) {
                     new_buf->matched = 1;
-                    new_buf->expected_frame = FALSE;
+                    new_buf->expected = FALSE;
                     queue->expected_frame_id = buf_info->frame_idx + queue->attr.post_frame_skip;
                     queue->match_cnt++;
                     if (ch_obj->bundle.superbuf_queue.attr.enable_frame_sync) {
@@ -2943,12 +2874,12 @@ int32_t mm_channel_superbuf_comp_and_enqueue(
                         pthread_mutex_unlock(&fs_lock);
                     }
                 }
-                /* In low priority queue, this will become a 'meta only' superbuf. Set the
-                unmatched_frame_idx so that the upcoming stream buffers (other than meta)
-                can be filled into this which are nearest to this idx. */
+
                 if ((queue->attr.priority == MM_CAMERA_SUPER_BUF_PRIORITY_LOW)
-                    && (buf_info->buf->stream_type == CAM_STREAM_TYPE_METADATA)) {
-                    new_buf->unmatched_meta_idx = buf_info->frame_idx;
+                        && (buf_info->buf->stream_type != CAM_STREAM_TYPE_METADATA)) {
+                    LOGD("No metadata matching for frame = %d",
+                             buf_info->frame_idx);
+                    queue->nomatch_frame_id = buf_info->frame_idx;
                 }
             } else {
                 /* No memory */

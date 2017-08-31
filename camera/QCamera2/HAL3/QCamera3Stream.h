@@ -67,7 +67,7 @@ public:
                          cam_rotation_t streamRotation,
                          cam_stream_reproc_config_t* reprocess_config,
                          uint8_t minStreamBufNum,
-                         cam_feature_mask_t postprocess_mask,
+                         uint32_t postprocess_mask,
                          cam_is_type_t is_type,
                          uint32_t batchSize,
                          hal3_stream_cb_routine stream_cb,
@@ -90,7 +90,7 @@ public:
     uint32_t getMyServerID();
 
     int32_t mapBuf(uint8_t buf_type, uint32_t buf_idx,
-            int32_t plane_idx, int fd, void *buffer, size_t size);
+            int32_t plane_idx, int fd, size_t size);
     int32_t unmapBuf(uint8_t buf_type, uint32_t buf_idx, int32_t plane_idx);
     int32_t setParameter(cam_stream_parm_buffer_t &param);
     cam_stream_info_t* getStreamInfo() const {return mStreamInfo; };

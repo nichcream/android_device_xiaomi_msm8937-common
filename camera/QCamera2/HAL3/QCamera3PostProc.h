@@ -31,7 +31,7 @@
 #define __QCamera3_POSTPROC_H__
 
 // Camera dependencies
-#include "hardware/camera3.h"
+#include "camera3.h"
 #include "QCamera3HALHeader.h"
 #include "QCameraCmdThread.h"
 #include "QCameraQueue.h"
@@ -111,7 +111,8 @@ public:
     QCamera3PostProcessor(QCamera3ProcessingChannel *ch_ctrl);
     virtual ~QCamera3PostProcessor();
 
-    int32_t init(QCamera3StreamMem *mMemory);
+    int32_t init(QCamera3StreamMem *mMemory,
+            uint32_t postprocess_mask);
     int32_t initJpeg(jpeg_encode_callback_t jpeg_cb,
             cam_dimension_t *m_max_pic_dim,
             void *user_data);
@@ -143,7 +144,7 @@ private:
             qcamera_fwk_input_pp_data_t *frame,
             jpeg_settings_t *jpeg_settings);
     QCamera3Exif * getExifData(metadata_buffer_t *metadata,
-            jpeg_settings_t *jpeg_settings, bool needJpegExifRotation);
+            jpeg_settings_t *jpeg_settings);
     int32_t encodeData(qcamera_hal3_jpeg_data_t *jpeg_job_data,
                        uint8_t &needNewSess);
     int32_t encodeFWKData(qcamera_hal3_jpeg_data_t *jpeg_job_data,
@@ -159,8 +160,6 @@ private:
 
     static void *dataProcessRoutine(void *data);
 
-    bool needsReprocess(qcamera_fwk_input_pp_data_t *frame);
-
 private:
     QCamera3ProcessingChannel  *m_parent;
     jpeg_encode_callback_t     mJpegCB;
@@ -168,7 +167,7 @@ private:
     mm_jpeg_ops_t              mJpegHandle;
     uint32_t                   mJpegClientHandle;
     uint32_t                   mJpegSessionId;
-    cam_jpeg_metadata_t        mJpegMetadata;
+    uint32_t                   mPostProcMask;
 
     uint32_t                   m_bThumbnailNeeded;
     QCamera3StreamMem          *mOutputMem;

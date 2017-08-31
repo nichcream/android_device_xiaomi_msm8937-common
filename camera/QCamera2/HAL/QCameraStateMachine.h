@@ -174,7 +174,7 @@ typedef struct {
         cam_faces_data_t faces_data;
         cam_hist_stats_t stats_data;
         cam_crop_data_t crop_data;
-        cam_asd_decision_t asd_data;
+        cam_auto_scene_t asd_data;
         cam_flash_mode_t led_data;
         cam_awb_params_t awb_data;
         cam_3a_params_t ae_data;
@@ -200,6 +200,8 @@ public:
     bool isRecording();
     void releaseThread();
 
+    bool isDisplayFrameNeeded() { return m_bDisplayFrame; };
+    int32_t setDisplayFrame(bool enabled) {m_bDisplayFrame=enabled; return 0;};
     bool isPreviewCallbackNeeded() { return m_bPreviewCallbackNeeded; };
     int32_t setPreviewCallbackNeeded(bool enabled) {m_bPreviewCallbackNeeded=enabled; return 0;};
 private:
@@ -255,6 +257,8 @@ private:
     bool m_bPreviewDelayedRestart;        // Preview delayed restart
     int32_t m_DelayedMsgs;
     bool m_RestoreZSL;
+
+    bool m_bDisplayFrame;
     bool m_bPreviewCallbackNeeded;
 };
 

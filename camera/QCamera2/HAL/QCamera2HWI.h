@@ -168,9 +168,7 @@ public:
     static void releaseNotifications(void *data, void *user_data);
     static bool matchSnapshotNotifications(void *data, void *user_data);
     static bool matchPreviewNotifications(void *data, void *user_data);
-    static bool matchTimestampNotifications(void *data, void *user_data);
     virtual int32_t flushPreviewNotifications();
-    virtual int32_t flushVideoNotifications();
 private:
 
     camera_notify_callback         mNotifyCb;
@@ -219,7 +217,6 @@ public:
     static int pre_take_picture(struct camera_device *);
     static int take_picture(struct camera_device *);
     int takeLiveSnapshot_internal();
-    int cancelLiveSnapshot_internal();
     int takeBackendPic_internal(bool *JpegMemOpt, char *raw_format);
     void clearIntPendingEvents();
     void checkIntPicPending(bool JpegMemOpt, char *raw_format);
@@ -257,8 +254,6 @@ public:
             void);
     int32_t setRelatedCamSyncInfo(
             cam_sync_related_sensors_event_info_t* info);
-    bool isFrameSyncEnabled(void);
-    int32_t setFrameSyncEnabled(bool enable);
     int32_t setMpoComposition(bool enable);
     bool getMpoComposition(void);
     bool getRecordingHintValue(void);
@@ -279,14 +274,14 @@ public:
     virtual QCameraHeapMemory *allocateMiscBuf(cam_stream_info_t *streamInfo);
     virtual QCameraMemory *allocateStreamUserBuf(cam_stream_info_t *streamInfo);
     virtual void waitForDeferredAlloc(cam_stream_type_t stream_type);
-    static uint32_t sessionId[MM_CAMERA_MAX_NUM_SENSORS];
+
     // Implementation of QCameraThermalCallback
     virtual int thermalEvtHandle(qcamera_thermal_level_enum_t *level,
             void *userdata, void *data);
 
     virtual int recalcFPSRange(int &minFPS, int &maxFPS,
             const float &minVideoFPS, const float &maxVideoFPS,
-            cam_fps_range_t &adjustedRange, bool bRecordingHint);
+            cam_fps_range_t &adjustedRange);
 
     friend class QCameraStateMachine;
     friend class QCameraPostProcessor;
@@ -302,7 +297,6 @@ public:
     int32_t getJpegHandleInfo(mm_jpeg_ops_t *ops,
             mm_jpeg_mpo_ops_t *mpo_ops, uint32_t *pJpegClientHandle);
     uint32_t getCameraId() { return mCameraId; };
-    bool bLiveSnapshot;
 private:
     int setPreviewWindow(struct preview_stream_ops *window);
     int setCallBacks(
@@ -358,8 +352,7 @@ private:
             const int minFPSi, const int maxFPSi,
             const float &minVideoFPS, const float &maxVideoFPS,
             cam_fps_range_t &adjustedRange,
-            enum msm_vfe_frame_skip_pattern &skipPattern,
-            bool bRecordingHint);
+            enum msm_vfe_frame_skip_pattern &skipPattern);
     int updateThermalLevel(void *level);
 
     // update entris to set parameters and check if restart is needed
@@ -393,7 +386,7 @@ private:
     int32_t processAutoFocusEvent(cam_auto_focus_data_t &focus_data);
     int32_t processZoomEvent(cam_crop_data_t &crop_info);
     int32_t processPrepSnapshotDoneEvent(cam_prep_snapshot_state_t prep_snapshot_state);
-    int32_t processASDUpdate(cam_asd_decision_t asd_decision);
+    int32_t processASDUpdate(cam_auto_scene_t scene);
     int32_t processJpegNotify(qcamera_jpeg_evt_payload_t *jpeg_job);
     int32_t processHDRData(cam_asd_hdr_scene_data_t hdr_scene);
     int32_t processRetroAECUnlock();
@@ -451,7 +444,7 @@ private:
     int32_t setHistogram(bool histogram_en);
     int32_t setFaceDetection(bool enabled);
     int32_t prepareHardwareForSnapshot(int32_t afNeeded);
-    bool needProcessPreviewFrame(uint32_t frameID);
+    bool needProcessPreviewFrame();
     bool needSendPreviewCallback();
     bool isNoDisplayMode() {return mParameters.isNoDisplayMode();};
     bool isZSLMode() {return mParameters.isZSLMode();};
@@ -561,15 +554,6 @@ private:
     inline bool getNeedRestart() {return m_bNeedRestart;}
     inline void setNeedRestart(bool needRestart) {m_bNeedRestart = needRestart;}
 
-    /*Start display skip. Skip starts after
-    skipCnt number of frames from current frame*/
-    void setDisplaySkip(bool enabled, uint8_t skipCnt = 0);
-    /*Caller can specify range frameID to skip.
-    if end is 0, all the frames after start will be skipped*/
-    void setDisplayFrameSkip(uint32_t start = 0, uint32_t end = 0);
-    /*Verifies if frameId is valid to skip*/
-    bool isDisplayFrameToSkip(uint32_t frameId);
-
 private:
     camera_device_t   mCameraDevice;
     uint32_t          mCameraId;
@@ -631,7 +615,6 @@ private:
     pthread_t mLiveSnapshotThread;
     pthread_t mIntPicThread;
     bool mFlashNeeded;
-    bool mFlashConfigured;
     uint32_t mDeviceRotation;
     uint32_t mCaptureRotation;
     uint32_t mJpegExifRotation;
@@ -650,8 +633,6 @@ private:
     int mPLastFrameCount;
     nsecs_t mPLastFpsTime;
     double mPFps;
-    bool mLowLightConfigured;
-    uint8_t mInstantAecFrameCount;
 
     //eztune variables for communication with eztune server at backend
     bool m_bIntJpegEvtPending;
@@ -755,6 +736,7 @@ private:
     mm_jpeg_mpo_ops_t     mJpegMpoHandle;
     uint32_t              mJpegClientHandle;
     bool                  mJpegHandleOwner;
+
    //ts add for makeup
 #ifdef TARGET_TS_MAKEUP
     TSRect mFaceRect;
@@ -782,17 +764,8 @@ private:
     bool m_bNeedRestart;
     Mutex mMapLock;
     Condition mMapCond;
-
-    //Used to decide the next frameID to be skipped
-    uint32_t mLastPreviewFrameID;
-    //FrameID to start frame skip.
-    uint32_t mFrameSkipStart;
-    /*FrameID to stop frameskip. If this is not set,
-    all frames are skipped till we set this*/
-    uint32_t mFrameSkipEnd;
-    //The offset between BOOTTIME and MONOTONIC timestamps
-    nsecs_t mBootToMonoTimestampOffset;
-    bool bDepthAFCallbacks;
+    // Count to determine the number of preview frames ignored for displaying.
+    uint8_t mIgnoredPreviewCount;
 };
 
 }; // namespace qcamera
