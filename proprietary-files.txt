@@ -22,14 +22,8 @@ vendor/lib/rfsa/adsp/libscveT2T_skel.so
 vendor/lib/rfsa/adsp/libscveTextReco_skel.so
 
 # Audio
-etc/aanc_tuning_mixer.txt
-etc/audio_platform_info.xml
-etc/audio_platform_info_extcodec.xml
-etc/audio_policy.conf
 etc/drc/drc_cfg_5.1.txt
 etc/drc/drc_cfg_AZ.txt
-etc/mixer_paths.xml
-etc/mixer_paths_mtp.xml
 etc/mixer_paths_skuk.xml
 etc/mixer_paths_wcd9306.xml
 etc/mixer_paths_wcd9326.xml
@@ -41,16 +35,13 @@ etc/mixer_paths_qrd_skui.xml
 etc/mixer_paths_qrd_skum.xml
 etc/mixer_paths_qrd_skun.xml
 etc/mixer_paths_qrd_skuhf.xml
-etc/sound_trigger_mixer_paths.xml
 etc/sound_trigger_mixer_paths_wcd9306.xml
 etc/sound_trigger_mixer_paths_wcd9330.xml
 etc/sound_trigger_mixer_paths_wcd9335.xml
-etc/sound_trigger_platform_info.xml
 etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
 etc/surround_sound_3mic/surround_sound_rec_5.1.cfg
 lib/hw/audio.primary.msm8937.so
 lib/soundfx/libdirac.so
-vendor/etc/audio_effects.conf
 vendor/etc/audio_output_policy.conf
 vendor/etc/diracmobile.config
 vendor/lib/libacdb-fts.so
@@ -146,6 +137,7 @@ vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
 # Camera
+bin/mm-qcamera-app
 bin/mm-qcamera-daemon
 etc/camera/ofilm_s5k5e8_chromatix.xml
 etc/camera/ov13853_q13853a_chromatix.xml
@@ -179,7 +171,11 @@ etc/camera/s5k3l8_mono_chromatix.xml
 etc/camera/s5k3m2xm_chromatix.xml
 etc/camera/s5k3m2xm_chromatix_bear.xml
 etc/camera/s5k3m2xx_chromatix.xml
+lib/hw/camera.msm8937
 lib/libRecoFace.so
+lib/libmm-qcamera.so
+lib/libmmcamera_interface.so
+lib/libmmjpeg_interface.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_panorama.so
 vendor/lib/libFaceGrade.so
@@ -292,8 +288,8 @@ vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libseemore.so
 vendor/lib/libtm_interface.so
-vendor/lib/libts_detected_face_hal.so
-vendor/lib/libts_face_beautify_hal.so
+-vendor/lib/libts_detected_face_hal.so
+-vendor/lib/libts_face_beautify_hal.so
 vendor/lib/libtrueportrait.so
 vendor/lib/libubifocus.so
 
@@ -1101,10 +1097,10 @@ vendor/lib64/libtzdrmgenprov.so
 # Fingerprint
 bin/gx_fpcmd
 bin/gx_fpd
-lib/hw/fingerprint.default.so
+lib/hw/fingerprint.msm8937.so #:lib/hw/fingerprint.msm8937.so
 lib/hw/fingerprint.searchf.so
 lib/libcom_fingerprints_service.so
-lib64/hw/fingerprint.default.so
+lib64/hw/fingerprint.msm8937.so #:lib64/hw/fingerprint.msm8937.so
 lib64/hw/fingerprint.goodix.so
 lib64/hw/fingerprint.searchf.so
 lib64/hw/gxfingerprint.default.so
@@ -1136,7 +1132,7 @@ lib/libloc_api_v02.so
 lib/libloc_ds_api.so
 lib64/libloc_api_v02.so
 lib64/libloc_ds_api.so
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
+#-priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/bin/slim_daemon
 vendor/lib/hw/flp.default.so
 vendor/lib/libalarmservice_jni.so
@@ -1202,21 +1198,25 @@ vendor/lib/libOpenCL.so
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/libadreno_utils.so
 vendor/lib/libbccQTI.so
+vendor/lib/libc2d30-a3xx.so
+vendor/lib/libc2d30-a4xx.so
 vendor/lib/libc2d30-a5xx.so
 vendor/lib/libc2d30_bltlib.so
 vendor/lib/libgsl.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libllvm-qcom.so
+vendor/lib/libllvm-qgl.so
 vendor/lib/libmm-disp-apis.so
 vendor/lib/libmm-qdcm.so
 vendor/lib/libmmQSM.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
+vendor/lib/libsc-a2xx.so
 vendor/lib/libsc-a3xx.so
 vendor/lib/libscale.so
 vendor/lib/libsd_sdk_display.so
 vendor/lib/libsdm-disp-apis.so
-vendor/lib/vulkan.msm8937.so
+vendor/lib/hw/vulkan.msm8937.so
 vendor/lib64/egl/eglSubDriverAndroid.so
 vendor/lib64/egl/eglsubAndroid.so
 vendor/lib64/egl/libEGL_adreno.so
@@ -1237,6 +1237,8 @@ vendor/lib64/libOpenCL.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/libadreno_utils.so
 vendor/lib64/libbccQTI.so
+vendor/lib64/libc2d30-a3xx.so
+vendor/lib64/libc2d30-a4xx.so
 vendor/lib64/libc2d30-a5xx.so
 vendor/lib64/libc2d30_bltlib.so
 vendor/lib64/libgsl.so
@@ -1259,7 +1261,7 @@ vendor/lib64/libsdm-diag.so
 vendor/lib64/libsdm-disp-apis.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libuiblur.so|4b3fabf5ded7c4af531abde681676fc5e9248494
-vendor/lib64/vulkan.msm8937.so
+vendor/lib64/hw/vulkan.msm8937.so
 
 # Graphics firmware
 etc/firmware/a530_gpmu.fw2
@@ -1281,6 +1283,7 @@ usr/keylayout/synaptics_rmi4_i2c.kl
 # Keystore
 vendor/lib/hw/keystore.msm8937.so
 vendor/lib64/hw/keystore.msm8937.so
+vendor/lib64/hw/keystore.default.so
 
 # Listen
 vendor/lib/hw/sound_trigger.primary.msm8937.so
@@ -1289,12 +1292,8 @@ vendor/lib/libsmwrapper.so
 
 # Media
 etc/firmware/DE.o.msm8937
-lib/libOmxSwVdec.so
-lib/libOmxSwVencMpeg4.so
 lib/libOmxVpp.so
 lib/libvpplibrary.so
-lib64/libOmxSwVdec.so
-lib64/libOmxSwVencMpeg4.so
 vendor/lib/libAlacSwDec.so
 vendor/lib/libApeSwDec.so
 vendor/lib/libFlacSwDec.so|89c0b9af3d56cd73e07393f2c88ac657659ebf5c
@@ -1314,7 +1313,6 @@ vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
 vendor/lib/libvqzip.so
 vendor/lib64/libFlacSwDec.so|3029a270f91accb1ea9acd37cbdec6b30b5b6776
-vendor/lib64/libMpeg4SwEncoder.so
 vendor/lib64/libOmxMux.so
 vendor/media/LMspeed_508.emd
 vendor/media/PFFprec_600.emd
@@ -1508,13 +1506,6 @@ vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
 vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.ssc.so
-
-#shims
-lib/libshim_ims_camera.so
-lib64/libshim_ims_camera.so
-lib/libshims_camera.so
-lib/libshims_ims.so
-lib64/libshims_ims.so
 
 # Subsystem restart
 bin/ssr_diag
