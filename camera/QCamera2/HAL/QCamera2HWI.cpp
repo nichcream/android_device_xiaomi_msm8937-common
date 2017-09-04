@@ -410,6 +410,9 @@ void QCamera2HardwareInterface::stop_preview(struct camera_device *device)
     LOGI("[KPI Perf]: E PROFILE_STOP_PREVIEW camera id %d",
              hw->getCameraId());
 
+    // Disable power Hint for preview
+    hw->m_perfLock.powerHint(POWER_HINT_CAM_PREVIEW, false);
+
     hw->m_perfLock.lock_acq();
     hw->lockAPI();
     qcamera_api_result_t apiResult;
@@ -3436,6 +3439,11 @@ int QCamera2HardwareInterface::startPreview()
     }
     m_perfLock.lock_rel();
 
+    if (rc == NO_ERROR) {
+        // Set power Hint for preview
+        m_perfLock.powerHint(POWER_HINT_CAM_PREVIEW, true);
+    }
+
     LOGI("X rc = %d", rc);
     return rc;
 }
@@ -3464,6 +3472,9 @@ int QCamera2HardwareInterface::stopPreview()
     LOGI("E");
     mNumPreviewFaces = -1;
     mActiveAF = false;
+
+    // Disable power Hint for preview
+    m_perfLock.powerHint(POWER_HINT_CAM_PREVIEW, false);
 
     m_perfLock.lock_acq();
 
