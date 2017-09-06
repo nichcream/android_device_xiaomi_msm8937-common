@@ -258,8 +258,8 @@
 /dev/block/platform/soc/1da4000.ufshc/by-name/frp       0600   system     system
 
 # fpc Fingerprint
-/sys/devices/soc/soc:fpc1020		hw_reset			0220   system     system
+/sys/devices/soc/soc:fpc1020		hw_reset			0660   system     system
 /sys/devices/soc/soc:fpc1020		irq	        		0660   system     system
-/sys/devices/soc/soc:fpc1020      	wakeup_enable	        	0220   system     system
-/sys/devices/soc/soc:fpc1020      	compatible_all	        	0220   system     system
-/sys/devices/soc/soc:fpc1020            fingerdown_wait                 0220   system     system
+/sys/devices/soc/soc:fpc1020      	wakeup_enable	        	0660   system     system
+/sys/devices/soc/soc:fpc1020      	compatible_all	        	0660   system     system
+/sys/devices/soc/soc:fpc1020            fingerdown_wait                 0660   system     system
