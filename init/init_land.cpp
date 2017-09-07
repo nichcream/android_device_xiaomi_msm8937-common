@@ -186,10 +186,11 @@ void variant_properties()
     } else if (board_id == "S88537AC1") {
         property_set("ro.build.display.wtid", "SW_S88537AC1_V079_M20_MP_XM");
         property_set("ro.miui.support_fingerprint", "false");
-        property_set("persist.sys.fp.goodix", "0");
+        property_set("persist.sys.fp.goodix", "1");
         property_set("persist.sys.fp.onstart", "0");
-        property_set("persist.sys.fp.vendor", "none");
-        property_set("ro.boot.fpsensor", "none");
+        property_set("persist.sys.fp.vendor", "goodix");
+        property_set("ro.boot.fpsensor", "gdx");
+        property_set("ro.hardware.fingerprint", "goodix");
     } else if (board_id == "S88537BA1") {
         property_set("ro.miui.support_fingerprint", "true");
         property_set("ro.build.display.wtid", "SW_S88537BA1_V079_M20_MP_XM");
