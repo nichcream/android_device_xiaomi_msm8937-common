@@ -230,6 +230,13 @@ do
 done
 shift $(($OPTIND-1))
 
+# wait for wcnss_service
+while [ "$wcnss" != "0" ]
+do
+    sleep 0.1
+    wcnss="`getprop wlan.driver.ath`"
+done
+
 # Note that "hci_qcomm_init -e" prints expressions to set the shell variables
 # BTS_DEVICE, BTS_TYPE, BTS_BAUD, and BTS_ADDRESS.
 
