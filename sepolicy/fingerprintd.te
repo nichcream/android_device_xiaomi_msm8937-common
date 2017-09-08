@@ -10,6 +10,9 @@ allow fingerprintd firmware_file:dir search;
 allow fingerprintd firmware_file:file { read open getattr };
 allow fingerprintd uhid_device:chr_file rw_file_perms;
 allow fingerprintd gx_fpd_service:service_manager { find };
+allow fingerprintd storage_file:dir search;
+allow fingerprintd storage_file:lnk_file read;
+
 
 allow fingerprintd sysfs:file write;
 set_prop(fingerprintd, system_prop)
