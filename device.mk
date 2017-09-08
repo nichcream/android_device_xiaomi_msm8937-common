@@ -168,8 +168,7 @@ PRODUCT_PACKAGES += \
 # Libshims
 PRODUCT_PACKAGES += \
     libshims_ims \
-    libshim_camera \
-    libshim_sensors
+    libshim_camera
 
 # Lights
 PRODUCT_PACKAGES += \

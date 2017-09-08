@@ -5,9 +5,9 @@ on boot
 
     # Update foreground and background cpusets
     # Reserve CPU 7 for the top app
-    write /dev/cpuset/foreground/cpus 0-6
+    write /dev/cpuset/foreground/cpus 0-7
     write /dev/cpuset/foreground/boost/cpus 0-3
-    write /dev/cpuset/background/cpus 4-6
+    write /dev/cpuset/background/cpus 4-5
     write /dev/cpuset/system-background/cpus 4-6
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/camera-daemon/cpus 4-7
@@ -144,7 +144,6 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu6/online 1
     write /sys/devices/system/cpu/cpu7/online 1
 
-
     # Re-enable thermal core_control
     write /sys/module/msm_thermal/core_control/enabled 1
 
@@ -161,8 +160,11 @@ on enable-low-power
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
     # HMP scheduler (big.Little cluster related) settings
-    write /proc/sys/kernel/sched_upmigrate 93
-    write /proc/sys/kernel/sched_downmigrate 83
+    write /proc/sys/kernel/sched_upmigrate_min_nice 9
+    write /proc/sys/kernel/sched_spill_load 85
+    write /proc/sys/kernel/sched_upmigrate 85
+    write /proc/sys/kernel/sched_downmigrate 55
+    write /proc/sys/kernel/sched_boost 1
 
     # Enable sched guided freq control
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
@@ -174,6 +176,19 @@ on enable-low-power
 
     # Enable dynamic clock gating
     write /sys/module/lpm_levels/lpm_workarounds/dynamic_clock_gating 1
+
+    # Core control
+    write /sys/devices/system/cpu/cpu0/core_ctl/max_cpus 4
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 2
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres 75
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres 55
+    write /sys/devices/system/cpu/cpu0/core_ctl/offline_delay_ms 100
+    write /sys/devices/system/cpu/cpu0/core_ctl/is_big_cluster 1
+    write /sys/devices/system/cpu/cpu0/core_ctl/not_preferred "0 0 1 1"
+
+    # Disable core control
+    write /sys/devices/system/cpu/cpu0/core_ctl/disable 1
+    write /sys/devices/system/cpu/cpu4/core_ctl/disable 1
 
     # Set per_process_reclaim tuning parameters
     write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
