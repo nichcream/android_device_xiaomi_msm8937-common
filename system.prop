@@ -4,8 +4,10 @@
 dalvik.vm.dex2oat-flags=--no-watch-dog
 
 # use max threads for dex2oat
-dalvik.vm.dex2oat-threads=8
-ro.sys.fw.dex2oat_thread_count=8
+# Optimal dex2oat threads for faster app installation
+dalvik.vm.boot-dex2oat-threads=3
+dalvik.vm.dex2oat-threads=3
+dalvik.vm.bg-dex2oat-threads=2
 
 # Audio
 voice.playback.conc.disabled=true
@@ -133,6 +135,13 @@ ro.core_ctl_max_cpu=4
 ro.vendor.at_library=libqti-at.so 
 ro.vendor.extension_library=libqti-perfd-client.so 
 ro.vendor.gt_library=libqti-gt.so
+
+#Trim properties
+ro.sys.fw.use_trim_settings=true
+ro.sys.fw.empty_app_percent=50
+ro.sys.fw.trim_empty_percent=100
+ro.sys.fw.trim_cache_percent=100
+ro.sys.fw.trim_enable_memory=2147483648
 
 #RIL
 DEVICE_PROVISIONED=1 
