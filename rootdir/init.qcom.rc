@@ -38,7 +38,7 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
-    export LD_SHIM_LIBS "/system/vendor/lib64/lib-imsvt.so|libshims_ims.so:/system/bin/mm-qcamera-daemon|libshim_camera.so:/system/lib/hw/camera.msm8937.so|camera.shim.msm8937.so:/system/lib/libgui.so|libshim_parcel:/system/vendor/lib/libmmcamera2_stats_modules.so|libshim_camera.so:/system/vendor/lib/libmmcamera2_sensor_modules.so|libshim_sensors"
+    export LD_SHIM_LIBS "/system/vendor/lib64/lib-imsvt.so|libshims_ims.so:/system/bin/mm-qcamera-daemon|libshim_camera.so:/system/lib/hw/camera.msm8937.so|camera.shim.msm8937.so:/system/vendor/lib/libmmcamera2_stats_modules.so|libshim_camera.so:/system/vendor/lib/libmmcamera2_sensor_modules.so|libshim_sensors"
 
     # Set permissions for persist partition
     mkdir /persist 0771 root system
