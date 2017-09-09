@@ -34,6 +34,8 @@ inline const char* BtmGetDefaultName()
 }
 
 #define BTM_DEF_LOCAL_NAME BtmGetDefaultName()
+#define MAX_ACL_CONNECTIONS 16
+#define MAX_L2CAP_CHANNELS 16
 #define BLE_VND_INCLUDED   TRUE
 #define BT_CLEAN_TURN_ON_DISABLED 1
 #define BTM_WBS_INCLUDED TRUE

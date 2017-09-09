@@ -141,7 +141,7 @@ BOARD_HARDWARE_CLASS += \
     hardware/cyanogen/cmhw
 
 # CNE / DPM
-BOARD_USES_QCNE := true
+#BOARD_USES_QCNE := true
 
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
