@@ -808,7 +808,7 @@ service adsprpcd /system/bin/adsprpcd
     user media
     group media
 
-service per_mgr /system/bin/pm-service
+service per_mgr /system/vendor/bin/pm-service
     class core
     user system
     group system net_raw

@@ -13,6 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
 [system/bin/imsdatadaemon]
 user: AID_SYSTEM
@@ -27,6 +28,18 @@ mode: 0755
 caps: NET_BIND_SERVICE
 
 [system/bin/pm-service]
+user: AID_SYSTEM
+group: AID_SYSTEM
+mode: 0755
+caps: NET_BIND_SERVICE
+
+[system/vendor/bin/pm-service]
+user: AID_SYSTEM
+group: AID_SYSTEM
+mode: 0755
+caps: NET_BIND_SERVICE
+
+[vendor/bin/pm-service]
 user: AID_SYSTEM
 group: AID_SYSTEM
 mode: 0755
