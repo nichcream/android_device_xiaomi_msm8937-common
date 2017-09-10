@@ -212,6 +212,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
 
+# Healthd HAL
+PRODUCT_PACKAGES += \
+    android.hardware.health@1.0-impl \
+    android.hardware.health@1.0-convert \
+    android.hardware.health@1.0-service
+
 # Gatekeeper HAL
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl
