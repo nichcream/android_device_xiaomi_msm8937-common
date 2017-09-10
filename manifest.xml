@@ -74,5 +74,15 @@
            <instance>slot2</instance>
        </interface>
    </hal>
+    <!-- IMS RTP Service -->
+    <hal format="hidl">
+        <name>com.qualcomm.qti.imsrtpservice</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IRTPService</name>
+            <instance>imsrtpservice</instance>
+        </interface>
+    </hal>
 </manifest>
 
