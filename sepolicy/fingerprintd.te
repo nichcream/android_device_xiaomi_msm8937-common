@@ -1,17 +1,22 @@
 #============= fingerprintd ==============
 type fpc_socket, file_type;
 
+allow fingerprintd firmware_file:dir search;
+allow fingerprintd firmware_file:file { read open getattr };
+allow fingerprintd fingerprint_service:service_manager { find };
 allow fingerprintd fpc_sysfs:dir { open read search};
 allow fingerprintd fpc_sysfs:file { read open write };
 allow fingerprintd gx_fpd_service:service_manager { find };
-allow fingerprintd fingerprint_service:service_manager { find };
-allow fingerprintd tee_device:chr_file { ioctl read write open };
-allow fingerprintd firmware_file:dir search;
-allow fingerprintd firmware_file:file { read open getattr };
-allow fingerprintd uhid_device:chr_file rw_file_perms;
+allow fingerprintd media_rw_data_file:dir search;
+allow fingerprintd media_rw_data_file:file { append getattr open};
+allow fingerprintd mnt_user_file:dir search;
+allow fingerprintd mnt_user_file:lnk_file read;
+allow fingerprintd sdcardfs:dir search;
+allow fingerprintd sdcardfs:file { append getattr open};
 allow fingerprintd storage_file:dir search;
 allow fingerprintd storage_file:lnk_file read;
-
+allow fingerprintd tee_device:chr_file { ioctl read write open };
+allow fingerprintd uhid_device:chr_file rw_file_perms;
 
 allow fingerprintd sysfs:file write;
 set_prop(fingerprintd, system_prop)
