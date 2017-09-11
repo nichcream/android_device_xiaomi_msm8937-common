@@ -1311,9 +1311,11 @@ vendor/lib/libOmxWmaDec.so
 vendor/lib/libOmxMux.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
+vendor/lib/libstagefright_soft_flacdec.so
 vendor/lib/libvqzip.so
 vendor/lib64/libFlacSwDec.so|3029a270f91accb1ea9acd37cbdec6b30b5b6776
 vendor/lib64/libOmxMux.so
+vendor/lib64/libstagefright_soft_flacdec.so
 vendor/media/LMspeed_508.emd
 vendor/media/PFFprec_600.emd
 
