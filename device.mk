@@ -241,15 +241,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
 
-PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-
 #for internal debug we can remove this
 ADDITIONAL_DEFAULT_PROPERTIES += \
- ro.secure=0 \
- ro.adb.secure=0 \
- ro.debuggable=1 \
- persist.service.adb.enable=1 \
- security.perf_harden=0
+    ro.secure=0 \
+    ro.adb.secure=0 \
+    ro.debuggable=1 \
+    persist.service.adb.enable=1 \
+    security.perf_harden=0
 
 # Inherit proprietary files
 $(call inherit-product-if-exists, vendor/xiaomi/land/land-vendor.mk)
