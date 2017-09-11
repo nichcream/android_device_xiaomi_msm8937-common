@@ -76,6 +76,8 @@ persist.camera.is_type=1
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
 persist.camera.HAL3.enabled=0
+persist.ts.postmakeup=true
+persist.ts.rtmakeup=true
 
 #CNE
 persist.cne.feature=1
