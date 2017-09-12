@@ -17,4 +17,3 @@
     <!-- Zero shutter lag-->
     <string name="pref_camera_zsl_default" translatable="false">on</string>
 </resources>
-</resources>
