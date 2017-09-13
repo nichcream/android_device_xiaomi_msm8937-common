@@ -72,6 +72,7 @@ LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/stack/common \
         $(LOCAL_PATH)/stack/mm-camera-interface/inc \
         $(LOCAL_PATH)/util \
+        $(LOCAL_PATH)/HAL3 \
         hardware/libhardware/include/hardware \
         $(call project-path-for,qcom-media)/libstagefrighthw \
         $(call project-path-for,qcom-media)/mm-core/inc \
@@ -120,5 +121,4 @@ LOCAL_32_BIT_ONLY := $(BOARD_QTI_CAMERA_32BIT_ONLY)
 include $(BUILD_SHARED_LIBRARY)
 
 include $(call first-makefiles-under,$(LOCAL_PATH))
-
 endif
