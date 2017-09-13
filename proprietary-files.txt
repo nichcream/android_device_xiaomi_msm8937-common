@@ -40,7 +40,6 @@ etc/sound_trigger_mixer_paths_wcd9330.xml
 etc/sound_trigger_mixer_paths_wcd9335.xml
 etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
 etc/surround_sound_3mic/surround_sound_rec_5.1.cfg
-lib/hw/audio.primary.msm8937.so
 lib/soundfx/libdirac.so
 vendor/etc/audio_output_policy.conf
 vendor/etc/diracmobile.config
@@ -171,9 +170,7 @@ etc/camera/s5k3l8_mono_chromatix.xml
 etc/camera/s5k3m2xm_chromatix.xml
 etc/camera/s5k3m2xm_chromatix_bear.xml
 etc/camera/s5k3m2xx_chromatix.xml
-lib/hw/camera.msm8937
 lib/libRecoFace.so
-lib/libmm-qcamera.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
 lib/libmorpho_memory_allocator.so

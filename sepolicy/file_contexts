@@ -1,3 +1,6 @@
+#bluetooth loader
+/system/etc/init\.qcom\.bt				 u:object_r:bluetooth_loader_exec:s0
+
 # Fpc Fingerprint
 /dev/socket/fpce                                                      u:object_r:fpc_socket:s0
 /data/fpc(/.*)?                                                       u:object_r:fpc_data_file:s0
