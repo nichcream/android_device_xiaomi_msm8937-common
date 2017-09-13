@@ -53,14 +53,15 @@ qcom.bluetooth.soc=smd
 #Camera
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk
 persist.camera.isp.clock.optmz=0
-vidc.enc.dcvs.extra-buff-count=2
 camera.display.umax=1920x1080
 camera.display.lmax=1280x720
 media.camera.ts.monotonic=1
 persist.camera.imglib.cac3=2
 persist.camera.gyro.disable=0
+persist.camera.gyro.android=1
 camera.lowpower.record.enable=1
 persist.camera.is_type=1
+vidc.enc.narrow.searchrange=1
 persist.ts.postmakeup=true
 persist.ts.rtmakeup=true
 
@@ -107,6 +108,8 @@ media.aac_51_output_enabled=true
 vidc.enc.narrow.searchrange=1 
 drm.service.enabled=true
 vidc.disable.split.mode=1
+persist.debug.wfd.enable=1
+persist.hwc.enable_vds=1
 
 #netmgrd
 persist.data.netmgrd.qos.enable=true
