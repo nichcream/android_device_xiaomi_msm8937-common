@@ -406,9 +406,6 @@ on boot
     chown system system /dev/goodix_fp
     chmod 0644 /dev/goodix_fp
 
-    setprop persist.sys.fp.vendor none
-    start gx_fpd
-
 on class_start:late_start
     write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
 
@@ -655,7 +652,7 @@ service fingerprintd /system/bin/fingerprintd
     disabled
 
 service gx_fpd /system/bin/gx_fpd
-    class late_start
+    class core
     user root
     group system system
     oneshot
@@ -664,28 +661,25 @@ service gx_fpd /system/bin/gx_fpd
 on property:persist.sys.fp.vendor=switchf
     stop gx_fpd
     setprop persist.sys.fp.vendor searchf
-    start fingerprintd  
+    start fingerprintd
+    setprop fpc.fp.miui.token 0
     setprop ro.boot.fpsensor fpc
+    setprop ro.hardware.fingerprint searchf
+    setprop persist.sys.fp.onstart=1
 
 on property:persist.sys.fp.vendor=goodix
-    setprop ro.boot.fpsensor gdx
-
-on property:ro.boot.fpsensor=fpc
-    setprop persist.sys.fp.goodix 0
-    setprop ro.hardware.fingerprint fpc
-
-on property:ro.boot.fpsensor=gdx
-    setprop persist.sys.fp.goodix 1
-    setprop ro.hardware.fingerprint gdx
+   #start fingerprintd
+   setprop goodix.fp.miui.analyse 1
+   setprop goodix.fp.miui.token 0
+   setprop ro.boot.fpsensor gdx
+   setprop ro.hardware.fingerprint goodix
+   setprop persist.sys.fp.onstart=0
 
 on property:persist.sys.fp.onstart=0
    start gx_fpd
 
 on property:persist.sys.fp.onstart=1
    start fingerprintd 
-
-on property:ro.boot.fpsensor=gdx
-    setprop ro.hardware.fingerprint goodix
 
 # Start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
