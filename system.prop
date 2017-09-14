@@ -5,8 +5,8 @@ dalvik.vm.dex2oat-flags=--no-watch-dog
 
 # use max threads for dex2oat
 # Optimal dex2oat threads for faster app installation
-dalvik.vm.boot-dex2oat-threads=3
-dalvik.vm.dex2oat-threads=3
+dalvik.vm.boot-dex2oat-threads=8
+dalvik.vm.dex2oat-threads=8
 dalvik.vm.bg-dex2oat-threads=2
 
 # Audio
@@ -63,6 +63,7 @@ camera.lowpower.record.enable=1
 persist.camera.is_type=1
 persist.ts.postmakeup=true
 persist.ts.rtmakeup=true
+persist.camera.HAL3.enabled=1
 
 #CNE
 persist.cne.feature=1
