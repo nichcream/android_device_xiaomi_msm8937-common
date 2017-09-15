@@ -405,6 +405,9 @@ on boot
     # Goodix Fingerprint
     chown system system /dev/goodix_fp
     chmod 0644 /dev/goodix_fp
+    
+    setprop persist.sys.fp.vendor none
+    start gx_fpd
 
 on class_start:late_start
     write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
