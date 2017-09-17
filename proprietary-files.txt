@@ -21,6 +21,11 @@ vendor/lib/rfsa/adsp/libscveObjectSegmentation_skel.so
 vendor/lib/rfsa/adsp/libscveT2T_skel.so
 vendor/lib/rfsa/adsp/libscveTextReco_skel.so
 
+#APTX HD
+vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so
+vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so
+vendor/lib/libaptXScheduler.so
+
 # Audio
 etc/drc/drc_cfg_5.1.txt
 etc/drc/drc_cfg_AZ.txt
