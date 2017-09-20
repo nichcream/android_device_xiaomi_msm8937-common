@@ -311,6 +311,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libtinyxml2
 
+# Telephony packages
+PRODUCT_PACKAGES += \
+    ims-ext-common \
+    telephony-ext
+
 # Thermal
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf
