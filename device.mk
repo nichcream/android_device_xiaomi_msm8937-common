@@ -173,6 +173,10 @@ PRODUCT_PACKAGES += \
     init.recovery.qcom.rc \
     ueventd.qcom.rc
 
+#custom keylayout
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/keylayout/msm8952-sku1-snd-card_Button_Jack.kl:system/usr/keylayout/msm8952-sku1-snd-card_Button_Jack.kl
+
 # Libshims
 PRODUCT_PACKAGES += \
     libshims_ims \
