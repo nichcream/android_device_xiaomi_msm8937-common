@@ -5,9 +5,6 @@
 /dev/socket/fpce                                         u:object_r:fpc_socket:s0
 /data/fpc(/.*)?                                          u:object_r:fpc_data_file:s0
 /data/fpcd(/.*)?                                         u:object_r:fpc_data_file:s0
-/sys/devices/soc0/fpc_fpc1020.*/hw_reset                 u:object_r:fpc_sysfs:s0
-/sys/devices/soc0/fpc_fpc1020.*/irq                      u:object_r:fpc_sysfs:s0
-/sys/devices/soc0/fpc_fpc1020.*/wakeup_enable            u:object_r:fpc_sysfs:s0
 /sys/devices/soc/soc:fpc1020/hw_reset                    u:object_r:fpc_sysfs:s0
 /sys/devices/soc/soc:fpc1020/irq                         u:object_r:fpc_sysfs:s0
 /sys/devices/soc/soc:fpc1020/wakeup_enable               u:object_r:fpc_sysfs:s0
@@ -21,8 +18,7 @@
 /system/bin/gx_fpd                          u:object_r:gx_fpd_exec:s0
 /data/system/fingerprint(/.*)?              u:object_r:gx_fpd_data_file:s0
 /persist/data/gxfp(/.*)?                    u:object_r:gx_fpd_data_file:s0
-/persist/data/gxfp                          u:object_r:gx_fpd_data_file:s0
-#sys/devices/soc/soc:goodix_fp/goodix_fp 
+/persist/data/gxfp                          u:object_r:gx_fpd_data_file:s0 
 
 
 # Block devices
