@@ -351,13 +351,6 @@ if [ ! -d /persist/alarm ]; then
     restorecon /persist/alarm
 fi
 
-#set fingerprint params
-if [ -d /sys/class/goodix_fp ]; then
-    setprop persist.sys.fp.sensor goodix
-else
-    setprop persist.sys.fp.sensor fpc
-fi
-
 # Set Memory paremeters.
 #
 # Set per_process_reclaim tuning parameters
