@@ -391,8 +391,8 @@ on boot
     chmod 0660 /sys/devices/soc/soc:fpc1020/hw_reset
     chown system system /sys/devices/soc/soc:fpc1020/wakeup_enable
     chmod 0660 /sys/devices/soc/soc:fpc1020/wakeup_enable
-    chown system system /sys/devices/soc/soc:fpc1020/wakeup_enable
-    chmod 0660 /sys/devices/soc/soc:fpc1020/wakeup_enable
+    chown system system /sys/devices/soc/soc:fpc1020/spi_prepare
+    chmod 0660 /sys/devices/soc/soc:fpc1020/spi_prepare
 
     chown root system /sys/class/leds/red/blink
     chown root system /sys/class/leds/green/blink
