@@ -263,6 +263,11 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.service.adb.enable=1 \
     security.perf_harden=0
 
+#WCNSS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
+
 # WCNSS Service
 PRODUCT_PACKAGES += \
     wcnss_service
