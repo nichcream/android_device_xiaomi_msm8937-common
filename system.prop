@@ -52,16 +52,10 @@ qcom.bluetooth.soc=smd
 
 #Camera
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk
-persist.camera.isp.clock.optmz=0
+persist.camera.is_type=1
+persist.camera.gyro.android=1
 camera.display.umax=1920x1080
 camera.display.lmax=1280x720
-media.camera.ts.monotonic=0
-persist.camera.imglib.cac3=2
-persist.camera.gyro.disable=0
-persist.camera.gyro.android=1
-camera.lowpower.record.enable=1
-persist.camera.is_type=1
-vidc.enc.narrow.searchrange=1
 persist.ts.postmakeup=true
 persist.ts.rtmakeup=true
 persist.camera.HAL3.enabled=1
@@ -80,6 +74,7 @@ dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false 
 persist.hwc.enable_vds=1 
 persist.hwc.mdpcomp.enable=true
+persist.debug.wfd.enable=1
 
 # DRM
 drm.service.enabled=true
@@ -105,12 +100,11 @@ ro.sys.sdcardfs=true
 media.msm8956.version=0
 media.msm8956hw=0
 mm.enable.smoothstreaming=true 
+mmp.enable.3g2=true
 media.aac_51_output_enabled=true 
 vidc.enc.narrow.searchrange=1 
 drm.service.enabled=true
 vidc.disable.split.mode=1
-persist.debug.wfd.enable=1
-persist.hwc.enable_vds=1
 
 #netmgrd
 persist.data.netmgrd.qos.enable=true
@@ -134,6 +128,9 @@ ro.sys.fw.trim_empty_percent=100
 ro.sys.fw.trim_cache_percent=100
 ro.sys.fw.trim_enable_memory=2147483648
 
+#system props for time-services
+persist.timed.enable=true
+
 #RIL
 DEVICE_PROVISIONED=1 
 persist.data.iwlan.enable=false 
@@ -145,7 +142,6 @@ persist.dbg.ims_volte_enable=1
 persist.dbg.wfc_avail_ovr=1 
 persist.radio.calls.on.ims=true 
 persist.radio.csvt.enabled=false 
-persist.radio.custom_ecc=0 
 persist.radio.jbims=0 
 persist.dbg.vt_avail_ovr=1 
 persist.radio.apm_sim_not_pwdn=1 
