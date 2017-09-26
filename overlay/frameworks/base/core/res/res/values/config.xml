@@ -161,6 +161,10 @@
             3 - Launch assist intent
             4 - Voice Search
             5 - In-app Search
+            6 - Launch camera
+            7 - Sleep
+            8 - Last app
+            9 - Toggle split screen
          This needs to match the constants in
          policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
     -->
@@ -173,6 +177,10 @@
             3 - Launch assist intent
             4 - Voice Search
             5 - In-app Search
+            6 - Launch camera
+            7 - Sleep
+            8 - Last app
+            9 - Toggle split screen
          This needs to match the constants in
          policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
     -->
