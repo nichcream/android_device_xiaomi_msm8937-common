@@ -67,12 +67,12 @@ persist.dpm.feature=1
 #Display
 ro.opengles.version=196610
 ro.sf.lcd_density=320
-debug.gralloc.enable_fb_ubwc=1 
-debug.enable.sglscale=1 
-debug.mdpcomp.logs=0 
-dev.pm.dyn_samplingrate=1 
-persist.demo.hdmirotationlock=false 
-persist.hwc.enable_vds=1 
+debug.gralloc.enable_fb_ubwc=1
+debug.enable.sglscale=1
+debug.mdpcomp.logs=0
+dev.pm.dyn_samplingrate=1
+persist.demo.hdmirotationlock=false
+persist.hwc.enable_vds=1
 persist.hwc.mdpcomp.enable=true
 persist.debug.wfd.enable=1
 
@@ -89,8 +89,8 @@ ro.fm.transmitter=false
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 
 #GPS
-persist.gps.qc_nlp_in_use=1 
-persist.loc.nlp_name=com.qualcomm.location 
+persist.gps.qc_nlp_in_use=1
+persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
 
 # SdcardFs
@@ -99,10 +99,10 @@ ro.sys.sdcardfs=true
 #Media
 media.msm8956.version=0
 media.msm8956hw=0
-mm.enable.smoothstreaming=true 
+mm.enable.smoothstreaming=true
 mmp.enable.3g2=true
-media.aac_51_output_enabled=true 
-vidc.enc.narrow.searchrange=1 
+media.aac_51_output_enabled=true
+vidc.enc.narrow.searchrange=1
 drm.service.enabled=true
 vidc.disable.split.mode=1
 
@@ -112,13 +112,13 @@ ro.use_data_netmgrd=true
 persist.data.mode=concurrent
 
 #Perf
-ro.sys.fw.dex2oat_thread_count=4 
+ro.sys.fw.dex2oat_thread_count=4
 ro.sys.fw.use_trim_settings=true
-ro.am.reschedule_service=true 
-ro.core_ctl_min_cpu=2 
-ro.core_ctl_max_cpu=4 
-ro.vendor.at_library=libqti-at.so 
-ro.vendor.extension_library=libqti-perfd-client.so 
+ro.am.reschedule_service=true
+ro.core_ctl_min_cpu=2
+ro.core_ctl_max_cpu=4
+ro.vendor.at_library=libqti-at.so
+ro.vendor.extension_library=libqti-perfd-client.so
 ro.vendor.gt_library=libqti-gt.so
 
 #Trim properties
@@ -132,37 +132,36 @@ ro.sys.fw.trim_enable_memory=2147483648
 persist.timed.enable=true
 
 #RIL
-DEVICE_PROVISIONED=1 
-persist.data.iwlan.enable=false 
-persist.data.mode=concurrent 
-persist.dbg.volte_avail_ovr=1 
-persist.dbg.vt_avail_ovr=1 
-persist.radio.DROPSETENABLE=1 
-persist.dbg.ims_volte_enable=1 
-persist.dbg.wfc_avail_ovr=1 
-persist.radio.calls.on.ims=true 
-persist.radio.csvt.enabled=false 
-persist.radio.jbims=0 
-persist.dbg.vt_avail_ovr=1 
-persist.radio.apm_sim_not_pwdn=1 
-persist.radio.custom_ecc=1 
-persist.radio.force_on_dc=true 
-persist.radio.ignore_dom_time=5 
-persist.radio.mt_sms_ack=20 
-persist.data.qmi.adb_logmask=0 
-persist.radio.multisim.config=dsds 
-persist.radio.rat_on=combine 
-persist.radio.sib16_support=1 
-ril.subscription.types=NV,RUIM 
-rild.libpath=/vendor/lib64/libril-qc-qmi-1.so 
-ril.ecclist=000,08,100,101,102,110,112,118,119,120,122,911,999 
-ril.ecclist1=000,08,100,101,102,110,112,118,119,120,122,911,999 
-ro.ril.disable.power.collapse=0 
-ro.ct.device.model=XMP-2016030 
-ro.telephony.call_ring.multiple=false 
-ro.telephony.default_network=20 
-service.qti.ims.enabled=1 
-telephony.lteOnCdmaDevice=1 
-ro.ril.fast.dormancy.rule=0 
+DEVICE_PROVISIONED=1
+persist.data.iwlan.enable=false
+persist.data.mode=concurrent
+persist.dbg.volte_avail_ovr=1
+persist.dbg.vt_avail_ovr=1
+persist.radio.DROPSETENABLE=1
+persist.dbg.ims_volte_enable=1
+persist.dbg.wfc_avail_ovr=1
+persist.radio.calls.on.ims=true
+persist.radio.csvt.enabled=false
+persist.radio.jbims=0
+persist.dbg.vt_avail_ovr=1
+persist.radio.apm_sim_not_pwdn=1
+persist.radio.custom_ecc=1
+persist.radio.force_on_dc=true
+persist.radio.ignore_dom_time=5
+persist.radio.mt_sms_ack=20
+persist.data.qmi.adb_logmask=0
+persist.radio.multisim.config=dsds
+persist.radio.rat_on=combine
+persist.radio.sib16_support=1
+ril.subscription.types=NV,RUIM
+rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+ril.ecclist=000,08,100,101,102,110,112,118,119,120,122,911,999
+ril.ecclist1=000,08,100,101,102,110,112,118,119,120,122,911,999
+ro.ril.disable.power.collapse=0
+ro.ct.device.model=XMP-2016030
+ro.telephony.call_ring.multiple=false
+ro.telephony.default_network=20
+service.qti.ims.enabled=1
+telephony.lteOnCdmaDevice=1
+ro.ril.fast.dormancy.rule=0
 ro.ril.hsxpa=0
-
