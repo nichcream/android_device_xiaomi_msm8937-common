@@ -1,3 +1,4 @@
+allow init { domain -lmkd -crash_dump }:process noatsecure;
 allow init cameraserver:fd use;
 allow init hal_graphics_allocator_default:fd { use };
 allow init graphics_device:chr_file write;
