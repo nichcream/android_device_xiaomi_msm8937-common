@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    Copyright (c) 2015-16 The Linux Foundation. All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are
+    met:
+        * Redistributions of source code must retain the above copyright
+          notice, this list of conditions and the following disclaimer.
+        * Redistributions in binary form must reproduce the above
+          copyright notice, this list of conditions and the following
+          disclaimer in the documentation and/or other materials provided
+          with the distribution.
+        * Neither the name of The Linux Foundation nor the names of its
+          contributors may be used to endorse or promote products derived
+          from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+    WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+    ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+    BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+    BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+    WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+    OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
 <mixer>
     <!-- These are the initial mixer settings -->
     <ctl name="Voice Rx Device Mute" id="0" value="0" />
@@ -19,19 +48,21 @@
     <ctl name="Voip Evrc Min Max Rate Config" id="0" value="1" />
     <ctl name="Voip Evrc Min Max Rate Config" id="1" value="4" />
     <ctl name="Voip Dtx Mode" value="0" />
-    <ctl name="TTY Mode" value="OFF" />
+    <ctl name="TTY Mode" value="Off" />
     <ctl name="HPHL Volume" value="9" />
     <ctl name="HPHR Volume" value="9" />
-    <ctl name="RX1 Digital Volume" value="84" />
-    <ctl name="RX2 Digital Volume" value="84" />
-    <ctl name="RX3 Digital Volume" value="84" />
+    <ctl name="RX1 Digital Volume" value="87" />
+    <ctl name="RX2 Digital Volume" value="87" />
+    <ctl name="RX3 Digital Volume" value="87" />
     <ctl name="IIR1 INP1 Volume" value="84" />
     <ctl name="IIR1 INP2 Volume" value="84" />
     <ctl name="IIR1 INP3 Volume" value="84" />
     <ctl name="IIR1 INP4 Volume" value="84" />
+    <!-- +bug 196716,zhangjianming.wt,MODIFY,20160111,other can not reciving sound  -->
     <ctl name="ADC1 Volume" value="4" />
     <ctl name="ADC2 Volume" value="4" />
     <ctl name="ADC3 Volume" value="4" />
+    <!-- +bug 196716,zhangjianming.wt,MODIFY,20160111,other can not reciving sound  -->
     <ctl name="DEC1 Volume" value="84" />
     <ctl name="DEC2 Volume" value="84" />
     <ctl name="DEC2 MUX" value="ZERO" />
@@ -51,11 +82,16 @@
     <ctl name="EAR_S" value="ZERO" />
     <ctl name="HPHL" value="ZERO" />
     <ctl name="HPHR" value="ZERO" />
+    <ctl name="Lineout_1 amp" value="DISABLE"/> 
+    <ctl name="headset amp" value="DISABLE"/>
+    <ctl name="SPK DAC Switch" value="0" />
     <ctl name="SPK" value="ZERO" />
     <ctl name="WSA Spk Switch" value="ZERO" />
     <ctl name="SpkrMono WSA_RDAC" value="ZERO" />
-    <ctl name="SpkrMono BOOST Switch" value="1" />
     <ctl name="EAR PA Gain" value="POS_6_DB" />
+    <ctl name="MICBIAS CAPLESS Switch" value="0" />
+    <ctl name="EAR PA Boost" value="ENABLE" />
+    <ctl name="SpkrMono BOOST Switch" value="1" />
     <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     <ctl name="EAR PA Boost" value="ENABLE" />
     <ctl name="MI2S_RX Channels" value="One" />
@@ -99,6 +135,17 @@
     <ctl name="Voice2_Tx Mixer AFE_PCM_TX_Voice2" value="0" />
     <!-- Voice2 end -->
 
+    <!-- VoLTE -->
+    <ctl name="PRI_MI2S_RX_Voice Mixer VoLTE" value="0" />
+    <ctl name="VoLTE_Tx Mixer TERT_MI2S_TX_VoLTE" value="0" />
+    <ctl name="HDMI_RX_Voice Mixer VoLTE" value="0" />
+    <ctl name="VoLTE_Tx Mixer SLIM_0_TX_VoLTE" value="0" />
+    <ctl name="INTERNAL_BT_SCO_RX_Voice Mixer VoLTE" value="0" />
+    <ctl name="VoLTE_Tx Mixer INTERNAL_BT_SCO_TX_VoLTE" value="0" />
+    <ctl name="AFE_PCM_RX_Voice Mixer VoLTE" value="0" />
+    <ctl name="VoLTE_Tx Mixer AFE_PCM_TX_VoLTE" value="0" />
+    <!-- VoLTE end -->
+
     <!-- VoWLAN -->
     <ctl name="PRI_MI2S_RX_Voice Mixer VoWLAN" value="0" />
     <ctl name="VoWLAN_Tx Mixer TERT_MI2S_TX_VoWLAN" value="0" />
@@ -135,13 +182,30 @@
     <ctl name="Voip_Tx Mixer INTERNAL_BT_SCO_TX_Voip" value="0" />
     <!-- Voip end -->
 
+    <!-- Multimode Voice1 -->
+    <ctl name="PRI_MI2S_RX_Voice Mixer VoiceMMode1" value="0" />
+    <ctl name="VoiceMMode1_Tx Mixer TERT_MI2S_TX_MMode1" value="0" />
+    <ctl name="INTERNAL_BT_SCO_RX_Voice Mixer VoiceMMode1" value="0" />
+    <ctl name="VoiceMMode1_Tx Mixer INT_BT_SCO_TX_MMode1" value="0" />
+    <ctl name="AFE_PCM_RX_Voice Mixer VoiceMMode1" value="0" />
+    <ctl name="VoiceMMode1_Tx Mixer AFE_PCM_TX_MMode1" value="0" />
+    <!-- Multimode Voice1 end -->
+
+    <!-- Multimode Voice2 -->
+    <ctl name="PRI_MI2S_RX_Voice Mixer VoiceMMode2" value="0" />
+    <ctl name="VoiceMMode2_Tx Mixer TERT_MI2S_TX_MMode2" value="0" />
+    <ctl name="INTERNAL_BT_SCO_RX_Voice Mixer VoiceMMode2" value="0" />
+    <ctl name="VoiceMMode2_Tx Mixer INT_BT_SCO_TX_MMode2" value="0" />
+    <ctl name="AFE_PCM_RX_Voice Mixer VoiceMMode2" value="0" />
+    <ctl name="VoiceMMode2_Tx Mixer AFE_PCM_TX_MMode2" value="0" />
+    <!-- Multimode Voice2 end -->
+
     <!-- fm -->
     <ctl name="Internal FM RX Volume" value="0" />
     <ctl name="PRI_MI2S_RX Port Mixer INTERNAL_FM_TX" value="0" />
     <ctl name="MI2S_DL_HL Switch" value="1" />
     <ctl name="MultiMedia1 Mixer INTERNAL_FM_TX" value="0" />
     <ctl name="MultiMedia2 Mixer INTERNAL_FM_TX" value="0" />
-    <ctl name="MultiMedia5 Mixer INTERNAL_FM_TX" value="0" />
     <ctl name="INTERNAL_FM_RX Audio Mixer MultiMedia1" value="0" />
     <ctl name="INTERNAL_FM_RX Audio Mixer MultiMedia5" value="0" />
     <!-- fm end -->
@@ -277,40 +341,6 @@
         <ctl name="INTERNAL_FM_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
-    <path name="audio-ull-playback">
-        <ctl name="PRI_MI2S_RX Audio Mixer MultiMedia3" value="1" />
-    </path>
-
-    <path name="audio-ull-playback headphones">
-       <path name="audio-ull-playback" />
-    </path>
-
-    <path name="audio-ull-playback speaker-protected">
-        <path name="audio-ull-playback" />
-    </path>
-
-    <path name="audio-ull-playback bt-sco">
-        <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia3" value="1" />
-    </path>
-
-    <path name="audio-ull-playback bt-sco-wb">
-        <ctl name="Internal BTSCO SampleRate" value="BTSCO_RATE_16KHZ" />
-        <path name="audio-ull-playback bt-sco" />
-    </path>
-
-    <path name="audio-ull-playback afe-proxy">
-        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia3" value="1" />
-    </path>
-
-    <path name="audio-ull-playback usb-headphones">
-        <path name="audio-ull-playback afe-proxy" />
-    </path>
-
-    <path name="audio-ull-playback speaker-and-usb-headphones">
-        <path name="audio-ull-playback usb-headphones" />
-        <path name="audio-ull-playback" />
-    </path>
-
     <path name="compress-offload-playback">
         <ctl name="PRI_MI2S_RX Audio Mixer MultiMedia4" value="1" />
     </path>
@@ -346,6 +376,10 @@
 
     <path name="compress-offload-playback2 bt-sco">
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia7" value="1" />
+    </path>
+
+    <path name="compress-offload-playback2 afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia7" value="1" />
     </path>
 
     <path name="compress-offload-playback transmission-fm">
@@ -451,6 +485,8 @@
     </path>
 
     <path name="voice-call">
+	<ctl name="DEC1 Volume" value="84" />
+	<ctl name="DEC2 Volume" value="84" />
         <ctl name="PRI_MI2S_RX_Voice Mixer CSVoice" value="1" />
         <ctl name="Voice_Tx Mixer TERT_MI2S_TX_Voice" value="1" />
     </path>
@@ -780,15 +816,15 @@
         <path name="compress-voip-call bt-sco" />
     </path>
 
+    <path name="compress-voip-call afe-proxy">
+        <ctl name="AFE_PCM_RX_Voice Mixer Voip" value='1' />
+        <ctl name="Voip_Tx Mixer AFE_PCM_TX_Voip" value='1' />
+    </path>
+
     <path name="afe-proxy-playback afe-proxy">
     </path>
 
     <path name="afe-proxy-record afe-proxy">
-    </path>
-
-    <path name="compress-voip-call afe-proxy">
-        <ctl name="AFE_PCM_RX_Voice Mixer Voip" value='1' />
-        <ctl name="Voip_Tx Mixer AFE_PCM_TX_Voip" value='1' />
     </path>
 
     <path name="qchat-call">
@@ -808,15 +844,19 @@
 
     <!-- These are actual sound device specific mixer settings -->
     <path name="adc1">
+<!-- +bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
         <ctl name="ADC1 Volume" value="6" />
         <ctl name="DEC1 MUX" value="ADC1" />
+<!-- -bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
     </path>
 
     <path name="adc2">
+<!-- +bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
         <ctl name="ADC2 Volume" value="6" />
+<!-- -bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
         <ctl name="DEC1 MUX" value="ADC2" />
+        <ctl name="MICBIAS CAPLESS Switch" value="1" />
     </path>
-
     <path name="adc3">
         <ctl name="ADC3 Volume" value="6" />
         <ctl name="DEC1 MUX" value="ADC2" />
@@ -824,9 +864,12 @@
     </path>
 
     <path name="speaker">
-        <ctl name="RX3 MIX1 INP1" value="RX1" />
-        <ctl name="SPK" value="Switch" />
-    </path>
+        <ctl name="MI2S_RX Channels" value="One" />
+        <ctl name="RX2 MIX1 INP1" value="RX2" />
+        <ctl name="RDAC2 MUX" value="RX2" />
+        <ctl name="HPHR" value="Switch" />
+        <ctl name="Lineout_1 amp" value="ENABLE"/>
+   </path>
 
     <path name="wsa-speaker">
         <ctl name="RX1 MIX1 INP1" value="RX1" />
@@ -837,7 +880,7 @@
    </path>
 
    <path name="spkr-rx-calib">
-        <ctl name="PRI_MI2S_RX_DL_HL Switch" value="1" />
+        <ctl name="PRI_MI2S_RX_DL_HL Switch"  value="1" />
     </path>
 
     <path name="vi-feedback">
@@ -853,23 +896,25 @@
         <path name="wsa-speaker" />
         <ctl name="PRI_MI2S_RX_VI_FB_MUX" value="SENARY_TX" />
         <ctl name="SpkrMono VISENSE Switch" value="1" />
-    </path>
+   </path>
 
-   <path name="speaker-mic">
+    <path name="speaker-mic">
         <path name="adc1" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
-   </path>
+    </path>
 
     <path name="handset">
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="RDAC2 MUX" value="RX1" />
-        <ctl name="RX1 Digital Volume" value="84" />
+        <ctl name="RX1 Digital Volume" value="87" />
         <ctl name="EAR PA Gain" value="POS_6_DB" />
         <ctl name="EAR_S" value="Switch" />
     </path>
 
     <path name="handset-mic">
         <path name="adc1" />
+	<ctl name="DEC1 Volume" value="84" />
+	<ctl name="DEC2 Volume" value="84" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
     </path>
 
@@ -880,6 +925,7 @@
         <ctl name="RDAC2 MUX" value="RX2" />
         <ctl name="HPHL" value="Switch" />
         <ctl name="HPHR" value="Switch" />
+        <ctl name="headset amp" value="ENABLE"/>
     </path>
 
     <path name="headset-mic">
@@ -909,7 +955,6 @@
         <ctl name="IIR1 INP1 Volume" value="53" />
     </path>
 
-
     <path name="voice-handset">
         <path name="handset" />
     </path>
@@ -922,8 +967,15 @@
         <path name="wsa-speaker" />
     </path>
 
+    <!-- bug 212709,zhangjianming2.wt,modify,20160920,fixed is to voice voulme smaller-->
+    <path name="handfree-mic">
+	<path name="adc3" />
+	<ctl name="DEC1 MUX" value="ADC2" />
+	<ctl name="ADC2 MUX" value="INP3" />
+    </path>
+
     <path name="voice-speaker-mic">
-        <path name="speaker-mic" />
+      <path name="handfree-mic" />
     </path>
 
     <path name="voice-headphones">
@@ -935,8 +987,8 @@
     </path>
 
     <path name="speaker-and-headphones">
-        <path name="speaker" />
         <path name="headphones" />
+        <ctl name="Lineout_1 amp" value="DUALMODE"/>
     </path>
 
     <path name="usb-headphones">
@@ -981,7 +1033,9 @@
     <!-- Dual MIC devices -->
     <path name="speaker-dmic-endfire">
         <path name="adc1" />
+<!-- +bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
         <ctl name="ADC3 Volume" value="6" />
+<!-- -bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
         <ctl name="DEC2 MUX" value="ADC2" />
         <ctl name="MI2S_TX Channels" value="Two" />
         <ctl name="ADC2 MUX" value="INP3" />
@@ -1012,6 +1066,8 @@
     </path>
 
     <path name="handset-stereo-dmic-ef">
+        <ctl name="DEC1 Volume" value="84" />
+        <ctl name="DEC2 Volume" value="84" />
         <path name="speaker-dmic-endfire" />
     </path>
 
@@ -1074,6 +1130,10 @@
         <path name="adc1" />
     </path>
 
+    <path name="listen-handset-mic">
+        <path name="adc1" />
+    </path>
+
     <path name="ADSP testfwk">
         <ctl name="MI2S_DL_HL Switch" value="1" />
     </path>
@@ -1082,6 +1142,48 @@
     </path>
 
     <path name="voice-tx">
+    </path>
+
+    <path name="audio-ull-playback">
+        <ctl name="PRI_MI2S_RX Audio Mixer MultiMedia3" value="1" />
+    </path>
+
+    <path name="audio-ull-playback speaker-protected">
+        <path name="audio-ull-playback" />
+    </path>
+
+    <path name="audio-ull-playback headphones">
+        <path name="audio-ull-playback" />
+    </path>
+
+    <path name="audio-ull-playback bt-sco">
+        <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia3" value="1" />
+    </path>
+
+    <path name="audio-ull-playback bt-sco-wb">
+        <ctl name="Internal BTSCO SampleRate" value="BTSCO_RATE_16KHZ" />
+        <path name="audio-ull-playback bt-sco" />
+    </path>
+
+    <path name="audio-ull-playback afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia3" value="1" />
+    </path>
+
+    <path name="audio-ull-playback hdmi">
+    </path>
+
+    <path name="audio-ull-playback speaker-and-hdmi">
+        <path name="audio-ull-playback hdmi" />
+        <path name="audio-ull-playback" />
+    </path>
+
+    <path name="audio-ull-playback usb-headphones">
+        <path name="audio-ull-playback afe-proxy" />
+    </path>
+
+    <path name="audio-ull-playback speaker-and-usb-headphones">
+        <path name="audio-ull-playback usb-headphones" />
+        <path name="audio-ull-playback" />
     </path>
 
     <path name="line">
