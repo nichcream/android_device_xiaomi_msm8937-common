@@ -16,12 +16,6 @@
      for different hardware or product builds. -->
 <resources>
 
-    <!-- Opens back camera using openLegacy() and forces api v1 -->
-    <bool name="back_camera_open_legacy">true</bool>
-
-    <!-- Opens front camera using openLegacy() and forces api v1 -->
-    <bool name="front_camera_open_legacy">true</bool>
-
     <!-- This value may be tweaked to save memory on low RAM devices. The value
          is the percentage of camera preview height/width to scale to. -->
     <integer name="panorama_frame_size_reduction">100</integer>

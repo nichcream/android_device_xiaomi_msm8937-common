@@ -1099,10 +1099,10 @@ vendor/lib64/libtzdrmgenprov.so
 # Fingerprint
 bin/gx_fpcmd
 bin/gx_fpd
-lib/hw/fingerprint.msm8937.so #:lib/hw/fingerprint.msm8937.so
+lib/hw/fingerprint.default.so:lib/hw/fingerprint.msm8937.so
 lib/hw/fingerprint.searchf.so
 lib/libcom_fingerprints_service.so
-lib64/hw/fingerprint.msm8937.so #:lib64/hw/fingerprint.msm8937.so
+lib64/hw/fingerprint.default.so:lib64/hw/fingerprint.msm8937.so
 lib64/hw/fingerprint.goodix.so
 lib64/hw/fingerprint.searchf.so
 lib64/hw/gxfingerprint.default.so
@@ -1283,9 +1283,9 @@ usr/keylayout/synaptics_dsx.kl
 usr/keylayout/synaptics_rmi4_i2c.kl
 
 # Keystore
+lib64/hw/keystore.default.so
 vendor/lib/hw/keystore.msm8937.so
 vendor/lib64/hw/keystore.msm8937.so
-vendor/lib64/hw/keystore.default.so
 
 # Listen
 vendor/lib/hw/sound_trigger.primary.msm8937.so
