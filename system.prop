@@ -45,6 +45,8 @@ audio.offload.passthrough=false
 audio.dolby.ds2.hardbypass=true
 flac.sw.decoder.24bit.support=true
 qcom.hw.aac.encoder=true
+ro.config.vc_call_vol_steps=8
+ro.config.media_vol_steps=20
 
 #Bluetooth
 ro.bluetooth.hfp.ver=1.7 
