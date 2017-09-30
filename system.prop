@@ -62,7 +62,6 @@ camera.display.lmax=1280x720
 persist.ts.postmakeup=true
 persist.ts.rtmakeup=true
 persist.camera.HAL3.enabled=1
-media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
 
 #CNE
