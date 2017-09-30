@@ -180,6 +180,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libshims_ims \
     libshim_ims_camera \
+    libshim_camera \
     libshims_camera
 
 # Lights
