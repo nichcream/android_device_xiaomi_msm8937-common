@@ -58,8 +58,6 @@ persist.camera.gyro.android=1
 media.camera.ts.monotonic=0
 persist.ts.postmakeup=true
 persist.ts.rtmakeup=true
-media.stagefright.codecremote=false
-media.stagefright.legacyencoder=true
 
 #CNE
 persist.cne.feature=1
