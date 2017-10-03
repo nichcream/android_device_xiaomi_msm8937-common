@@ -59,6 +59,7 @@ persist.camera.time.monotonic=1
 media.camera.ts.monotonic=0
 persist.ts.postmakeup=true
 persist.ts.rtmakeup=true
+media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
 
 #CNE
