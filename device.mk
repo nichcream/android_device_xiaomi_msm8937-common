@@ -105,10 +105,8 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.msm8937 \
     libmm-qcamera \
-    Snap \
-    libxml2
+    Snap
 
 # Consumerir
 PRODUCT_PACKAGES += \
@@ -231,7 +229,8 @@ PRODUCT_PACKAGES += \
 # RIL
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
-    librmnetctl
+    librmnetctl \
+    libxml2
 
 # Sensors
 PRODUCT_PACKAGES += \
