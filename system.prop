@@ -55,7 +55,6 @@ qcom.bluetooth.soc=smd
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk
 persist.camera.is_type=1
 persist.camera.gyro.android=1
-persist.camera.time.monotonic=1
 media.camera.ts.monotonic=0
 persist.ts.postmakeup=true
 persist.ts.rtmakeup=true
