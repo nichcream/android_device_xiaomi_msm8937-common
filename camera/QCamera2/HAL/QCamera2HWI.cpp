@@ -1654,6 +1654,7 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
       mPLastFrameCount(0),
       mPLastFpsTime(0),
       mPFps(0),
+      mLowLightConfigured(false),
       m_bIntJpegEvtPending(false),
       m_bIntRawEvtPending(false),
       mReprocJob(0),
@@ -3910,9 +3911,9 @@ int32_t QCamera2HardwareInterface::unconfigureAdvancedCapture()
             rc = mParameters.stopAEBracket();
         } else if ((mParameters.isChromaFlashEnabled())
                 || (mFlashNeeded && !mLongshotEnabled)
-                || (mParameters.getLowLightLevel() != CAM_LOW_LIGHT_OFF)
+                || (mLowLightConfigured == true)
                 || (mParameters.getManualCaptureMode() >= CAM_MANUAL_CAPTURE_TYPE_2)) {
-            rc = mParameters.resetFrameCapture(TRUE);
+            rc = mParameters.resetFrameCapture(TRUE, mLowLightConfigured);
         } else if (mParameters.isUbiFocusEnabled() || mParameters.isUbiRefocus()) {
             rc = configureAFBracketing(false);
         } else if (mParameters.isOptiZoomEnabled()) {
@@ -4004,6 +4005,9 @@ int32_t QCamera2HardwareInterface::configureAdvancedCapture()
             || (mParameters.getLowLightLevel() != CAM_LOW_LIGHT_OFF)
             || (mParameters.getManualCaptureMode() >= CAM_MANUAL_CAPTURE_TYPE_2)) {
         rc = mParameters.configFrameCapture(TRUE);
+        if (mParameters.getLowLightLevel() != CAM_LOW_LIGHT_OFF) {
+            mLowLightConfigured = true;
+        }
     } else if (mFlashNeeded && !mLongshotEnabled) {
         rc = mParameters.configFrameCapture(TRUE);
         bDisplay = true;
@@ -4282,8 +4286,10 @@ int32_t QCamera2HardwareInterface::stopAdvancedCapture(
     } else if (mParameters.isChromaFlashEnabled()
             || (mFlashNeeded && !mLongshotEnabled)
             || (mParameters.getLowLightLevel() != CAM_LOW_LIGHT_OFF)
+            || (mLowLightConfigured == true)
             || (mParameters.getManualCaptureMode() >= CAM_MANUAL_CAPTURE_TYPE_2)) {
         rc = pChannel->stopAdvancedCapture(MM_CAMERA_FRAME_CAPTURE);
+        mLowLightConfigured = false;
     } else if(mParameters.isHDREnabled()
             || mParameters.isAEBracketEnabled()) {
         rc = pChannel->stopAdvancedCapture(MM_CAMERA_AE_BRACKETING);
