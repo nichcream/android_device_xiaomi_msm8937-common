@@ -127,8 +127,8 @@ PRODUCT_PACKAGES += \
     libjni_livedisplay
 
 # Doze mode
-PRODUCT_PACKAGES += \
-    XiaomiDoze
+#PRODUCT_PACKAGES += \
+#    XiaomiDoze
 
 # DRM
 PRODUCT_PACKAGES += \
