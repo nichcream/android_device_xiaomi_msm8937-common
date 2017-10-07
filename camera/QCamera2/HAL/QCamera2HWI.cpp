@@ -3722,6 +3722,8 @@ int QCamera2HardwareInterface::autoFocus()
     cam_focus_mode_type focusMode = mParameters.getFocusMode();
     LOGH("E");
 
+    m_currentFocusState = CAM_AF_STATE_INACTIVE;
+
     switch (focusMode) {
     case CAM_FOCUS_MODE_AUTO:
     case CAM_FOCUS_MODE_MACRO:
@@ -6687,7 +6689,7 @@ int32_t QCamera2HardwareInterface::addPreviewChannel()
         }
     }
 
-    if (((mParameters.fdModeInVideo())
+    if (((mParameters.isFDInVideoEnabled())
             || (mParameters.getDcrf() == true)
             || (mParameters.getRecordingHintValue() != true))
             && (!mParameters.isSecureMode())) {
@@ -7896,7 +7898,7 @@ int32_t QCamera2HardwareInterface::preparePreview()
                 sendCommand(CAMERA_CMD_LONGSHOT_OFF, arg, arg);
             }
             if (mParameters.isFaceDetectionEnabled()
-                    && (!mParameters.fdModeInVideo())) {
+                    && (!mParameters.isFDInVideoEnabled())) {
                 sendCommand(CAMERA_CMD_STOP_FACE_DETECTION, arg, arg);
             }
             if (mParameters.isHistogramEnabled()) {

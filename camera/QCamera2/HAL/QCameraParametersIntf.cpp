@@ -1280,11 +1280,11 @@ int32_t QCameraParametersIntf::bundleRelatedCameras(bool sync, uint32_t sessioni
     return mImpl->bundleRelatedCameras(sync, sessionid);
 }
 
-uint8_t QCameraParametersIntf::fdModeInVideo()
+bool QCameraParametersIntf::isFDInVideoEnabled()
 {
     Mutex::Autolock lock(mLock);
     CHECK_PARAM_INTF(mImpl);
-    return mImpl->fdModeInVideo();
+    return mImpl->isFDInVideoEnabled();
 }
 
 bool QCameraParametersIntf::isOEMFeatEnabled()

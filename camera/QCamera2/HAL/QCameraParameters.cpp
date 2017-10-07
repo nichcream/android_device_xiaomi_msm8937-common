@@ -4123,7 +4123,7 @@ int32_t QCameraParameters::setRecordingHint(const QCameraParameters& params)
                 updateParamEntry(KEY_RECORDING_HINT, str);
                 setRecordingHintValue(value);
                 if (getFaceDetectionOption() == true) {
-                    if (!fdModeInVideo()) {
+                    if (!isFDInVideoEnabled()) {
                         setFaceDetection(value > 0 ? false : true, false);
                     } else {
                         setFaceDetection(true, false);
@@ -9085,7 +9085,6 @@ int32_t QCameraParameters::setTruePortrait(const char *truePortraitStr)
         if (value != NAME_NOT_FOUND) {
             m_bTruePortraitOn = (value != 0);
             updateParamEntry(KEY_QC_TRUE_PORTRAIT, truePortraitStr);
-            setFaceDetection(m_bFaceDetectionOn, false);
             return NO_ERROR;
         }
     }
@@ -11101,24 +11100,13 @@ int32_t QCameraParameters::setFaceDetection(bool enabled, bool initCommit)
         if (getRecordingHintValue() > 0) {
             faceProcMask = 0;
             faceProcMask |= CAM_FACE_PROCESS_MASK_FOCUS;
-            if (fdModeInVideo() == CAM_FACE_PROCESS_MASK_DETECTION) {
-                faceProcMask |= CAM_FACE_PROCESS_MASK_DETECTION;
-            }
         } else {
             faceProcMask |= CAM_FACE_PROCESS_MASK_FOCUS;
             faceProcMask |= CAM_FACE_PROCESS_MASK_DETECTION;
         }
-        if (isTruePortraitEnabled()) {
-            LOGL("QCameraParameters::setFaceDetection trueportrait enabled");
-            faceProcMask |= CAM_FACE_PROCESS_MASK_GAZE;
-        } else {
-            LOGL("QCameraParameters::setFaceDetection trueportrait disabled");
-            faceProcMask &= ~CAM_FACE_PROCESS_MASK_GAZE;
-        }
     } else {
         faceProcMask &= ~(CAM_FACE_PROCESS_MASK_DETECTION
-                | CAM_FACE_PROCESS_MASK_FOCUS
-                | CAM_FACE_PROCESS_MASK_GAZE);
+                | CAM_FACE_PROCESS_MASK_FOCUS);
     }
 
     if(m_nFaceProcMask == faceProcMask) {
@@ -12454,9 +12442,12 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
     memset(&stream_config_info, 0, sizeof(stream_config_info));
     stream_config_info.num_streams = 0;
 
-    if (resetConfig) {
+    if (m_bStreamsConfigured) {
         LOGH("Reset stream config!!");
         rc = sendStreamConfigInfo(stream_config_info);
+        m_bStreamsConfigured = false;
+    }
+    if (resetConfig) {
         LOGH("Done Resetting stream config!!");
         return rc;
     }
@@ -12564,7 +12555,7 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
         /* Analysis stream is needed by DCRF regardless of recording hint */
         if ((getDcrf() == true) ||
                 (getRecordingHintValue() != true) ||
-                (fdModeInVideo())) {
+                (isFDInVideoEnabled())) {
             stream_config_info.type[stream_config_info.num_streams] =
                     CAM_STREAM_TYPE_ANALYSIS;
             getStreamDimension(CAM_STREAM_TYPE_ANALYSIS,
@@ -12693,6 +12684,8 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
     }
 
     rc = sendStreamConfigInfo(stream_config_info);
+    m_bStreamsConfigured = true;
+
     return rc;
 }
 
@@ -13821,30 +13814,28 @@ void QCameraParameters::setLowLightCapture()
 }
 
 /*===========================================================================
- * FUNCTION   : fdModeInVideo
+ * FUNCTION   : isFDInVideoEnabled
  *
  * DESCRIPTION: FD in Video change
  *
  * PARAMETERS : none
  *
- * RETURN     : FD Mode in Video
- *              0 : If FD in Video disabled
- *              1 : If FD in Video enabled for Detection, focus
- *              2 : If FD in Video enabled only for focus
+ * RETURN     : TRUE  : If FD in Video enabled
+ *              FALSE : If FD in Video disabled
  *==========================================================================*/
-uint8_t QCameraParameters::fdModeInVideo()
+bool QCameraParameters::isFDInVideoEnabled()
 {
     char value[PROPERTY_VALUE_MAX];
-    uint8_t fdvideo = 0;
+    bool fdvideo = FALSE;
 
     if (!m_pCapability->hw_analysis_supported) {
-        return 0;
+        return FALSE;
     }
 
     property_get("persist.camera.fdvideo", value, "0");
-    fdvideo = (atoi(value) > 0) ? atoi(value) : 0;
+    fdvideo = (atoi(value) > 0) ? TRUE : FALSE;
 
-    LOGD("FD mode in Video : %d", fdvideo);
+    LOGD("FD in Video enabled : %d", fdvideo);
     return fdvideo;
 }
 

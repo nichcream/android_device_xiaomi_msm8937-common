@@ -812,7 +812,7 @@ public:
     int32_t getRelatedCamCalibration(
             cam_related_system_calibration_data_t* calib);
     int32_t bundleRelatedCameras(bool sync, uint32_t sessionid);
-    uint8_t fdModeInVideo();
+    bool isFDInVideoEnabled();
     bool isOEMFeatEnabled() { return m_bOEMFeatEnabled; }
 
     int32_t setZslMode(bool value);
@@ -1146,6 +1146,7 @@ private:
     int8_t mTotalPPCount;
     int8_t mCurPPCount;
     int32_t mZoomLevel;
+    bool m_bStreamsConfigured;
     int32_t mParmZoomLevel;
     bool m_bIsLowMemoryDevice;
     int32_t mCds_mode;
