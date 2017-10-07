@@ -553,8 +553,6 @@ bool QCameraParametersIntf::isDISEnabled()
     return mImpl->isDISEnabled();
 }
 
-cam_is_type_t QCameraParametersIntf::getISType()
-
 bool QCameraParametersIntf::isAVTimerEnabled()
 {
     Mutex::Autolock lock(mLock);
@@ -562,6 +560,7 @@ bool QCameraParametersIntf::isAVTimerEnabled()
     return mImpl->isAVTimerEnabled();
 }
 
+cam_is_type_t QCameraParametersIntf::getISType()
 {
     Mutex::Autolock lock(mLock);
     CHECK_PARAM_INTF(mImpl);
