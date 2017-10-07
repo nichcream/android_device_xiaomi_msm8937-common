@@ -17,7 +17,6 @@
 #
 
 DEVICE_PATH := device/xiaomi/land
-BLOCK_BASED_OTA := false
 
 # Architecture
 TARGET_ARCH 	    	:= arm64
