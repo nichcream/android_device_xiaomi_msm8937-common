@@ -55,7 +55,7 @@ ro.qualcomm.bt.hci_transport=smd
 qcom.bluetooth.soc=smd
 
 #Camera
-camera.hal1.packagelist=com.skype.raider,com.google.android.talk
+camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.whatsapp
 persist.camera.is_type=1
 persist.camera.gyro.android=1
 persist.camera.time.monotonic=1
