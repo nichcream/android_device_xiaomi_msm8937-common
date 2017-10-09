@@ -108,7 +108,6 @@ PRODUCT_PACKAGES += \
     mm-qcamera-app \
     camera.msm8937 \
     libmm-qcamera \
-    libmmcamera_interface \
     libmmjpeg_interface \
     SnapdragonCamera
 
