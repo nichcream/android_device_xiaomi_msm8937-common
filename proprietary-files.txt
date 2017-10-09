@@ -1293,11 +1293,12 @@ vendor/lib/libsmwrapper.so
 etc/firmware/DE.o.msm8937
 lib/libOmxVpp.so
 lib/libvpplibrary.so
+lib/libstagefright_soft_flacdec.so
+lib64/libstagefright_soft_flacdec.so
 vendor/lib/libAlacSwDec.so
 vendor/lib/libApeSwDec.so
 vendor/lib/libFlacSwDec.so|89c0b9af3d56cd73e07393f2c88ac657659ebf5c
 vendor/lib/libI420colorconvert.so
-vendor/lib/libMpeg4SwEncoder.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAlacDec.so
 vendor/lib/libOmxAlacDecSw.so
@@ -1310,11 +1311,10 @@ vendor/lib/libOmxWmaDec.so
 vendor/lib/libOmxMux.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
-vendor/lib/libstagefright_soft_flacdec.so
 vendor/lib/libvqzip.so
+vendor/lib64/libMpeg4SwEncoder.so
 vendor/lib64/libFlacSwDec.so|3029a270f91accb1ea9acd37cbdec6b30b5b6776
 vendor/lib64/libOmxMux.so
-vendor/lib64/libstagefright_soft_flacdec.so
 vendor/media/LMspeed_508.emd
 vendor/media/PFFprec_600.emd
 
