@@ -1098,11 +1098,9 @@ vendor/lib64/libtzdrmgenprov.so
 bin/gx_fpcmd
 bin/gx_fpd
 lib/hw/fingerprint.default.so:lib/hw/fingerprint.msm8937.so
-lib/hw/fingerprint.searchf.so
 lib/libcom_fingerprints_service.so
 lib64/hw/fingerprint.default.so:lib64/hw/fingerprint.msm8937.so
 lib64/hw/fingerprint.goodix.so
-lib64/hw/fingerprint.searchf.so
 lib64/hw/gxfingerprint.default.so
 lib64/libcom_fingerprints_service.so
 lib64/libfp_client.so
@@ -1244,6 +1242,7 @@ vendor/lib64/libc2d30_bltlib.so
 vendor/lib64/libgsl.so
 vendor/lib64/libllvm-glnext.so
 vendor/lib64/libllvm-qcom.so
+vendor/lib64/libllvm-qgl.so
 vendor/lib64/libmm-disp-apis.so
 vendor/lib64/libmm-dspp-utils.so
 vendor/lib64/libmm-hdcpmgr.so
