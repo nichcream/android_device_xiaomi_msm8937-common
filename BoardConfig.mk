@@ -214,6 +214,8 @@ TARGET_POWERHAL_VARIANT := qcom
 # RIL
 #TARGET_RIL_VARIANT := caf
 
+QCOM_DISPLAY_VARIANT := msm8937
+
 # Recovery
 TARGET_RECOVERY_FSTAB 		 := $(DEVICE_PATH)/rootdir/fstab.qcom
 TARGET_RECOVERY_UI_LIB		 := librecovery_ui_msm
