@@ -143,7 +143,10 @@ ro.sys.fw.trim_enable_memory=2147483648
 #system props for time-services
 persist.timed.enable=true
 
-#Qualcomm Quickcharge 2.0
+#USB
+persist.service.adb.enable=1
+persist.service.debuggable=1
+persist.sys.usb.config=mtp,adb
 persist.usb.hvdcp.detect=true
 
 #RIL
