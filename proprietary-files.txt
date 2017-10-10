@@ -141,7 +141,6 @@ vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
 # Camera
-bin/mm-qcamera-app
 bin/mm-qcamera-daemon
 etc/camera/ofilm_s5k5e8_chromatix.xml
 etc/camera/ov13853_q13853a_chromatix.xml
