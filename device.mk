@@ -110,7 +110,7 @@ PRODUCT_PACKAGES += \
     libmm-qcamera \
     libmmcamera_interface \
     libmmjpeg_interface \
-    Snap
+    SnapdragonCamera
 
 # Consumerir
 PRODUCT_PACKAGES += \
