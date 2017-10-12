@@ -1472,10 +1472,12 @@ bin/imscmservice|0b3cc1e3dedcbcfa60633db344c0f622f1812459
 bin/imsdatadaemon|e44dabe3dc093dade15691df8b4329495e614b1e
 bin/imsqmidaemon|35826dc5a6ad5a50a8df384884264156c85af782
 etc/permissions/imscm.xml|8b99ec26c783966bbea1fcb8e72c7c0206a4e802
+etc/permissions/qti-vzw-ims-internal.xml
 framework/imscmlibrary.jar|0c24d6540c06efede52169c1445272f43748180f
 framework/rcsimssettings.jar|566a0f637344ca3182aca33753e404977fc77ecc
 -vendor/app/ims/ims.apk|d9e709f6e4c5bb971ec33ea3538c8bc23856806a
 -vendor/app/imssettings/imssettings.apk|e652c67b7bf6863e0c3cddc9b80439788883ffd2
+-vendor/framework/qti-vzw-ims-internal.jar
 vendor/lib64/lib-dplmedia.so|9f8c41a42240397f54441ba6cc1d975a22eefec5
 vendor/lib64/lib-ims-rcscmjni.so|af39ee3bd691d5316632a2d449254fbb42e30a09
 vendor/lib64/lib-imsSDP.so|270ba6d653e22fbae26cba740e55d62e02626569
