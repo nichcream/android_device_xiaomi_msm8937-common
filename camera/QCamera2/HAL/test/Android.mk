@@ -18,6 +18,7 @@ LOCAL_SHARED_LIBRARIES:= \
     libskia \
     libstagefright \
     libstagefright_foundation \
+    liblog \
 
 ifneq (1,$(filter 1,$(shell echo "$$(( $(PLATFORM_SDK_VERSION) >= 18 ))" )))
 
