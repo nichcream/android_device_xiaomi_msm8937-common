@@ -27,7 +27,7 @@ $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := land
-PRODUCT_MANUFACTURER := Xiaomi
+PRODUCT_MANUFACTURER := Wingtech
 PRODUCT_NAME := xpe_land
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
