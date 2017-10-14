@@ -56,13 +56,14 @@ qcom.bluetooth.soc=smd
 
 #Camera
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.whatsapp
+camera2.portability.force_api=1
 persist.camera.is_type=1
-persist.camera.gyro.android=1
+persist.camera.gyro.disable=1
 persist.camera.time.monotonic=0
 media.camera.ts.monotonic=false
-camera.disable_zsl_mode=1
 persist.camera.cpp.duplication=false
-persist.camera.HAL3.enabled=0
+vidc.enc.dcvs.extra-buff-count=2
+#persist.camera.HAL3.enabled=0
 persist.ts.postmakeup=true
 persist.ts.rtmakeup=true
 
