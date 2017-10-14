@@ -1045,14 +1045,14 @@ bin/hvdcp_opti
 
 # DPM
 bin/dpmd
-etc/dpm/dpm.conf
-etc/dpm/nsrm/NsrmConfiguration.xml
+etc/dpm/dpm.conf|b7cb0520a5a4284380ae43c7f28d8fac81f5271f
+etc/dpm/nsrm/NsrmConfiguration.xml|e544112e870d378621d4d4004c24d33bd99eec4c
 etc/permissions/com.qti.dpmframework.xml
 etc/permissions/dpmapi.xml
 framework/com.qti.dpmframework.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
-#-priv-app/dpmserviceapp/dpmserviceapp.apk
+-priv-app/dpmserviceapp/dpmserviceapp.apk|b1fca92058d4b24610af379d8acfaf1b89b772d5
 vendor/lib/libdpmctmgr.so
 vendor/lib/libdpmfdmgr.so
 vendor/lib/libdpmframework.so
@@ -1246,7 +1246,7 @@ vendor/lib64/libc2d30_bltlib.so
 vendor/lib64/libgsl.so
 vendor/lib64/libllvm-glnext.so
 vendor/lib64/libllvm-qcom.so
-vendor/lib64/libllvm-qgl.so
+vendor/lib64/libllvm-qgl.so|6586cc2b0f4e35fbaf3fdad6de1cd8bbb805c244
 vendor/lib64/libmm-disp-apis.so
 vendor/lib64/libmm-dspp-utils.so
 vendor/lib64/libmm-hdcpmgr.so
@@ -1293,8 +1293,8 @@ vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
-# Media
-etc/firmware/DE.o.msm8937
+# Media - from santoni (Redmi 4X)
+etc/firmware/DE.o.msm8937|62c8a6ce7e6d81c3b9778d92db126e02a54e692f
 lib/libOmxSwVdec.so|708449a8a7398b3340bd9dad2281060f93cdfff2
 lib/libOmxSwVencMpeg4.so|a5656b290b1a951eac5c29dab9c72593b0131590
 lib/libOmxVpp.so|2ff6daa35af6e06bc8d8cf13ef90c7fb6e928532
@@ -1341,8 +1341,8 @@ vendor/lib64/libOmxEvrcDec.so|7b732a2d5712b495752df88f12815c63ba0d2e4c
 vendor/lib64/libOmxMux.so|a0bcd4bf81649e9cd6191fb1b56e94c5d72433a7
 vendor/lib64/libOmxQcelp13Dec.so|05076719b67291caf83cf0312d01077df6908eb4
 vendor/lib64/libOmxWmaDec.so|524a82675bcdbffed9f81c83e97dea2691d311dc
-vendor/media/LMspeed_508.emd
-vendor/media/PFFprec_600.emd
+vendor/media/LMspeed_508.emd|392b2150ecd454501a5951874a002ba80e40fc74
+vendor/media/PFFprec_600.emd|2e9e82a710ddeffa2ceb16bbbff980cd4013b3d8
 
 # Modem
 vendor/lib/libwms.so
@@ -1467,18 +1467,18 @@ vendor/lib64/librilqmiservices.so
 vendor/lib64/libsettings.so
 vendor/qcril.db
 
-# Radio - IMS - from oxygen (MiMax 2)
+# Radio - IMS - from oxygen (MiMax 2) / op3 (OnePlus 3)
 bin/ims_rtp_daemon|2155d928832594933ebfb79ee29319ff5d3e250c
 bin/imscmservice|0b3cc1e3dedcbcfa60633db344c0f622f1812459
 bin/imsdatadaemon|e44dabe3dc093dade15691df8b4329495e614b1e
 bin/imsqmidaemon|35826dc5a6ad5a50a8df384884264156c85af782
 etc/permissions/imscm.xml|8b99ec26c783966bbea1fcb8e72c7c0206a4e802
-etc/permissions/qti-vzw-ims-internal.xml
+etc/permissions/qti-vzw-ims-internal.xml|0fd2dd6e1209824758289fdadd4a3e2a33c01b99
 framework/imscmlibrary.jar|0c24d6540c06efede52169c1445272f43748180f
 framework/rcsimssettings.jar|566a0f637344ca3182aca33753e404977fc77ecc
--vendor/app/ims/ims.apk|d9e709f6e4c5bb971ec33ea3538c8bc23856806a
+-vendor/app/ims/ims.apk|66fa3ab695d7be55a334cbee6e9c94d60089ac2a
 -vendor/app/imssettings/imssettings.apk|e652c67b7bf6863e0c3cddc9b80439788883ffd2
--vendor/framework/qti-vzw-ims-internal.jar
+-vendor/framework/qti-vzw-ims-internal.jar|5cfd76b7a140396f6f192695f7fde8100062b7c7
 vendor/lib64/lib-dplmedia.so|9f8c41a42240397f54441ba6cc1d975a22eefec5
 vendor/lib64/lib-ims-rcscmjni.so|af39ee3bd691d5316632a2d449254fbb42e30a09
 vendor/lib64/lib-imsSDP.so|270ba6d653e22fbae26cba740e55d62e02626569
