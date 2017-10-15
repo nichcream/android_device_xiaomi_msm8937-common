@@ -1045,14 +1045,14 @@ bin/hvdcp_opti
 
 # DPM
 bin/dpmd
-etc/dpm/dpm.conf|b7cb0520a5a4284380ae43c7f28d8fac81f5271f
-etc/dpm/nsrm/NsrmConfiguration.xml|e544112e870d378621d4d4004c24d33bd99eec4c
+etc/dpm/dpm.conf
+etc/dpm/nsrm/NsrmConfiguration.xml
 etc/permissions/com.qti.dpmframework.xml
 etc/permissions/dpmapi.xml
 framework/com.qti.dpmframework.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
--priv-app/dpmserviceapp/dpmserviceapp.apk|b1fca92058d4b24610af379d8acfaf1b89b772d5
+-priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/lib/libdpmctmgr.so
 vendor/lib/libdpmfdmgr.so
 vendor/lib/libdpmframework.so
