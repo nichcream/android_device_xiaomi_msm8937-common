@@ -1,4 +1,4 @@
-# Device Tree Repository for Xiaomi Land (WIP)
+# Device Tree Repository for Xiaomi Redmi 3S (Land)
 
 ## Spec Sheet
 
