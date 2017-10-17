@@ -1052,7 +1052,6 @@ etc/permissions/dpmapi.xml
 framework/com.qti.dpmframework.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
--priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/lib/libdpmctmgr.so
 vendor/lib/libdpmfdmgr.so
 vendor/lib/libdpmframework.so
