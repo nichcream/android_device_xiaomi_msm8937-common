@@ -249,11 +249,14 @@ PRODUCT_COPY_FILES += \
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
+    libqsap_sdk \
     libQWiFiSoftApCfg \
-    libwcnss_qmi \
+    libwpa_client \
     hostapd \
+    dhcpcd.conf \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    wcnss_service
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -263,10 +266,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
-
-# WCNSS Service
-PRODUCT_PACKAGES += \
-    wcnss_service
 
 # Inherit proprietary files
 $(call inherit-product-if-exists, vendor/xiaomi/land/land-vendor.mk)
