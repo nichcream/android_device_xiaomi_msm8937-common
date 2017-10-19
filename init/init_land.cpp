@@ -162,7 +162,7 @@ void read_ramconfig()
 
 void variant_properties()
 {
-    if (property_get("ro.xpe.device") != "land")
+    if (property_get("ro.validus.device") != "land")
         return;
 
     import_kernel_cmdline1(0, import_cmdline);
