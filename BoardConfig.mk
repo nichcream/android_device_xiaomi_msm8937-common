@@ -175,6 +175,9 @@ TARGET_RECOVERY_DEVICE_MODULES := libinit_land
 # Keystore
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
+# Lockscreen real time charging current values
+BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
+
 # Malloc
 MALLOC_SVELTE := true
 
@@ -188,7 +191,6 @@ BOARD_FLASH_BLOCK_SIZE 		   := 131072
 TARGET_USERIMAGES_USE_EXT4         := true
 TARGET_USERIMAGES_USE_F2FS         := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE  := ext4
-
 
 # Peripheral manager
 TARGET_PER_MGR_ENABLED := true
