@@ -117,6 +117,7 @@ mmp.enable.3g2=true
 media.aac_51_output_enabled=true
 vidc.enc.narrow.searchrange=1
 drm.service.enabled=true
+persist.media.treble_omx=false
 vidc.disable.split.mode=1
 
 #netmgrd
