@@ -112,7 +112,7 @@ vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
 
 # CNE
-bin/cnd
+bin/cnd|2fce079f01b8734b091115284ce9143fd7c3bacc
 etc/cne/SwimConfig.xml
 etc/cne/andsfCne.xml
 etc/permissions/ConnectivityExt.xml
@@ -123,8 +123,8 @@ framework/cneapiclient.jar
 framework/com.quicinc.cne.jar
 -priv-app/CNEService/CNEService.apk
 vendor/lib/libNimsWrap.so
-vendor/lib/libcne.so
-vendor/lib/libcneapiclient.so
+vendor/lib/libcne.so|15be855967d0176334f551dc10ce25e378f24f67
+vendor/lib/libcneapiclient.so|793a338850908e077e7b65873fca10b2b53a7f4a
 vendor/lib/libcneconn.so
 vendor/lib/libcneqmiutils.so
 vendor/lib/libvendorconn.so
@@ -1479,7 +1479,9 @@ vendor/lib64/libril-qcril-hook-oem.so
 vendor/lib64/libsystem_health_mon.so
 vendor/lib64/libril-qc-ltedirectdisc.so
 vendor/lib64/librilqmiservices.so
-vendor/lib64/libsettings.so
+vendor/lib64/libprotobuf-cpp-shit.so|4a23785f83283032d612b0df54d1425f919ed431
+vendor/lib64/libprotobuf-cpp-biss.so|abb7166ffcca68808ab09e5ea7f6530615fee860
+vendor/lib64/libsettings.so|166b91d81b7906901b35bce23779b58a2299873e
 vendor/qcril.db
 
 # Radio - IMS - from marmite (Wileyfox Swift 2/Plus/X)
