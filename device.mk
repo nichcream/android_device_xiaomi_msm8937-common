@@ -129,6 +129,10 @@ PRODUCT_PACKAGES += \
     libqomx_core \
     SnapdragonCamera
 
+#configStore HIDL HAL service
+PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.0-service
+
 # Consumerir
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
