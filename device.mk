@@ -181,6 +181,14 @@ PRODUCT_PACKAGES += \
     libgnsspps \
     libshims_get_process_name
 
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/gps/etc/flp.conf:system/etc/flp.conf \
+    $(DEVICE_PATH)/gps/etc/gps.conf:system/etc/gps.conf \
+    $(DEVICE_PATH)/gps/etc/izat.conf:system/etc/izat.conf \
+    $(DEVICE_PATH)/gps/etc/lowi.conf:system/etc/lowi.conf \
+    $(DEVICE_PATH)/gps/etc/sap.conf:system/etc/sap.conf \
+    $(DEVICE_PATH)/gps/etc/xtwifi.conf:system/etc/xtwifi.conf
+
 # GNSS HAL
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl
