@@ -592,7 +592,7 @@ service hcidump /system/bin/sh /system/etc/hcidump.sh
 service charger /charger
     class charger
     group graphics system
-    seclabel u:r:healthd:s0
+    seclabel u:r:charger:s0
 
 service qbcharger /charger -m 1
     disabled
