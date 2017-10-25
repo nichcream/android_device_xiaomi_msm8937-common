@@ -1,0 +1,5 @@
+allow untrusted_app rootfs:dir { read };
+allow untrusted_app mnt_media_rw_file:dir { getattr };
+allow untrusted_app sysfs:file r_file_perms;
+allow untrusted_app sdcardfs:file { setattr getattr rw_file_perms create_file_perms };
+allow untrusted_app sdcardfs:dir rw_dir_perms;
