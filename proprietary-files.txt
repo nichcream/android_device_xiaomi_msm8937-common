@@ -1565,8 +1565,8 @@ vendor/lib/libWVStreamControlAPI_L3.so|61673304827483d44b735a3dd08f0783d10ce92d
 vendor/lib/mediadrm/libwvdrmengine.so|a042f8ae03dc79bc52992f0ce280267d7cf5dc70
 
 # Wi-Fi
-bin/cnss-daemon
-bin/cnss_diag
+bin/cnss-daemon|bde94e1929fa4612385b85d4afa734f555404353
+bin/cnss_diag|364434afd66b04a6f3f6d75a523c16174c379dc3
 etc/hostapd/hostapd.accept
 etc/hostapd/hostapd_default.conf
 etc/hostapd/hostapd.deny
