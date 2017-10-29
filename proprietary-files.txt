@@ -1478,7 +1478,7 @@ framework/imscmlibrary.jar|0c24d6540c06efede52169c1445272f43748180f
 framework/rcsimssettings.jar|566a0f637344ca3182aca33753e404977fc77ecc
 -vendor/app/ims/ims.apk|66fa3ab695d7be55a334cbee6e9c94d60089ac2a
 -vendor/app/imssettings/imssettings.apk|a09f0bb900fb91d849b94eee031e6d6a15f20611
--vendor/framework/qti-vzw-ims-internal.jar|5cfd76b7a140396f6f192695f7fde8100062b7c7
+vendor/framework/qti-vzw-ims-internal.jar|5cfd76b7a140396f6f192695f7fde8100062b7c7
 vendor/lib64/lib-dplmedia.so|0e8432850800be42f1e1c9c3d745e01010dce165
 vendor/lib64/lib-ims-rcscmjni.so|646dd28ba785bdc9a0b1a49f468ae6cbc1804d5a
 vendor/lib64/lib-imsSDP.so|8b33852eef6511fbd25a26938c8b32ef8fd8f5da
