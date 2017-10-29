@@ -332,7 +332,6 @@ QCamera3HardwareInterface::QCamera3HardwareInterface(uint32_t cameraId,
       mAnalysisChannel(NULL),
       mRawDumpChannel(NULL),
       mDummyBatchChannel(NULL),
-      mPerfLockMgr(),
       mChannelHandle(0),
       mFirstConfiguration(true),
       mFlush(false),
@@ -359,12 +358,13 @@ QCamera3HardwareInterface::QCamera3HardwareInterface(uint32_t cameraId,
       mOpMode(CAMERA3_STREAM_CONFIGURATION_NORMAL_MODE),
       mFirstFrameNumberInBatch(0),
       mNeedSensorRestart(false),
-      mPreviewStarted(false),
       mLdafCalibExist(false),
+      mPowerHintEnabled(false),
       mLastCustIntentFrmNum(-1),
       mState(CLOSED)
 {
     getLogLevel();
+    m_perfLock.lock_init();
     mCameraDevice.common.tag = HARDWARE_DEVICE_TAG;
     mCameraDevice.common.version = CAMERA_DEVICE_API_VERSION_3_3;
     mCameraDevice.common.close = close_camera_device;
@@ -432,9 +432,11 @@ QCamera3HardwareInterface::~QCamera3HardwareInterface()
 {
     LOGD("E");
 
-    // Disable power hint and enable the perf lock for close camera
-    mPerfLockMgr.releasePerfLock(PERF_LOCK_POWERHINT_ENCODE);
-    mPerfLockMgr.acquirePerfLock(PERF_LOCK_CLOSE_CAMERA);
+    /* Turn off current power hint before acquiring perfLock in case they
+     * conflict with each other */
+    disablePowerHint();
+
+    m_perfLock.lock_acq();
 
     /* We need to stop all streams before deleting any stream */
     if (mRawDumpChannel) {
@@ -535,7 +537,8 @@ QCamera3HardwareInterface::~QCamera3HardwareInterface()
         if (mDefaultMetadata[i])
             free_camera_metadata(mDefaultMetadata[i]);
 
-    mPerfLockMgr.releasePerfLock(PERF_LOCK_CLOSE_CAMERA);
+    m_perfLock.lock_rel();
+    m_perfLock.lock_deinit();
 
     pthread_cond_destroy(&mRequestCond);
 
@@ -632,17 +635,17 @@ int QCamera3HardwareInterface::openCamera(struct hw_device_t **hw_device)
         return PERMISSION_DENIED;
     }
 
-    mPerfLockMgr.acquirePerfLock(PERF_LOCK_OPEN_CAMERA);
+    m_perfLock.lock_acq();
     LOGI("[KPI Perf]: E PROFILE_OPEN_CAMERA camera id %d",
              mCameraId);
 
     rc = openCamera();
     if (rc == 0) {
         *hw_device = &mCameraDevice.common;
-    } else {
+    } else
         *hw_device = NULL;
-    }
 
+    m_perfLock.lock_rel();
     LOGI("[KPI Perf]: X PROFILE_OPEN_CAMERA camera id %d, rc: %d",
              mCameraId, rc);
 
@@ -1062,6 +1065,42 @@ int32_t QCamera3HardwareInterface::getSensorOutputSize(cam_dimension_t &sensor_d
 }
 
 /*==============================================================================
+ * FUNCTION   : enablePowerHint
+ *
+ * DESCRIPTION: enable single powerhint for preview and different video modes.
+ *
+ * PARAMETERS :
+ *
+ * RETURN     : NULL
+ *
+ *==========================================================================*/
+void QCamera3HardwareInterface::enablePowerHint()
+{
+    if (!mPowerHintEnabled) {
+        m_perfLock.powerHint(POWER_HINT_VIDEO_ENCODE, true);
+        mPowerHintEnabled = true;
+    }
+}
+
+/*==============================================================================
+ * FUNCTION   : disablePowerHint
+ *
+ * DESCRIPTION: disable current powerhint.
+ *
+ * PARAMETERS :
+ *
+ * RETURN     : NULL
+ *
+ *==========================================================================*/
+void QCamera3HardwareInterface::disablePowerHint()
+{
+    if (mPowerHintEnabled) {
+        m_perfLock.powerHint(POWER_HINT_VIDEO_ENCODE, false);
+        mPowerHintEnabled = false;
+    }
+}
+
+/*==============================================================================
  * FUNCTION   : addToPPFeatureMask
  *
  * DESCRIPTION: add additional features to pp feature mask based on
@@ -1172,9 +1211,9 @@ int QCamera3HardwareInterface::configureStreams(
     int rc = 0;
 
     // Acquire perfLock before configure streams
-    mPerfLockMgr.acquirePerfLock(PERF_LOCK_START_PREVIEW);
+    m_perfLock.lock_acq();
     rc = configureStreamsPerfLocked(streamList);
-    mPerfLockMgr.releasePerfLock(PERF_LOCK_START_PREVIEW);
+    m_perfLock.lock_rel();
 
     return rc;
 }
@@ -2896,8 +2935,15 @@ void QCamera3HardwareInterface::hdrPlusPerfLock(
     if ((p_frame_number_valid != NULL) && *p_frame_number_valid) {
         if ((p_frame_number != NULL) &&
                 (mLastCustIntentFrmNum == (int32_t)*p_frame_number)) {
-            mPerfLockMgr.acquirePerfLock(PERF_LOCK_TAKE_SNAPSHOT, HDR_PLUS_PERF_TIME_OUT);
+            m_perfLock.lock_acq_timed(HDR_PLUS_PERF_TIME_OUT);
         }
+    }
+
+    //release lock after perf lock timer is expired. If lock is already released,
+    //isTimerReset returns false
+    if (m_perfLock.isTimerReset()) {
+        mLastCustIntentFrmNum = -1;
+        m_perfLock.lock_rel_timed();
     }
 }
 
@@ -3003,11 +3049,6 @@ void QCamera3HardwareInterface::handleBufferWithLock(
             LOGD("All buffers returned to HAL continue flush");
             pthread_cond_signal(&mBuffersCond);
         }
-
-    if (buffer->stream->format == HAL_PIXEL_FORMAT_BLOB) {
-        mPerfLockMgr.releasePerfLock(PERF_LOCK_TAKE_SNAPSHOT);
-    }
-
         return;
     }
     /* Nothing to be done during error state */
@@ -3142,18 +3183,6 @@ void QCamera3HardwareInterface::handleBufferWithLock(
             }
         }
     }
-
-    if (mPreviewStarted == false) {
-        QCamera3Channel *channel = (QCamera3Channel *)buffer->stream->priv;
-        if ((1U << CAM_STREAM_TYPE_PREVIEW) == channel->getStreamTypeMask()) {
-            mPerfLockMgr.releasePerfLock(PERF_LOCK_START_PREVIEW);
-            mPerfLockMgr.releasePerfLock(PERF_LOCK_OPEN_CAMERA);
-            mPreviewStarted = true;
-
-            // Set power hint for preview
-            mPerfLockMgr.acquirePerfLock(PERF_LOCK_POWERHINT_ENCODE, 0);
-        }
-    }
 }
 
 /*===========================================================================
@@ -3252,7 +3281,7 @@ int QCamera3HardwareInterface::processCaptureRequest(
                 return rc;
             }
         }
-        mPerfLockMgr.acquirePerfLock(PERF_LOCK_START_PREVIEW);
+        m_perfLock.lock_acq();
         /* get eis information for stream configuration */
         cam_is_type_t is_type;
         char is_type_value[PROPERTY_VALUE_MAX];
@@ -3527,12 +3556,15 @@ int QCamera3HardwareInterface::processCaptureRequest(
 
         goto no_error;
 error_exit:
-        mPerfLockMgr.releasePerfLock(PERF_LOCK_START_PREVIEW);
+        m_perfLock.lock_rel();
         return rc;
 no_error:
+        m_perfLock.lock_rel();
+
         mWokenUpByDaemon = false;
         mPendingLiveRequest = 0;
         mFirstConfiguration = false;
+        enablePowerHint();
     }
 
     uint32_t frameNumber = request->frame_number;
@@ -3598,7 +3630,6 @@ no_error:
 
     if (blob_request) {
         KPI_ATRACE_INT("SNAPSHOT", 1);
-        mPerfLockMgr.acquirePerfLock(PERF_LOCK_TAKE_SNAPSHOT);
     }
     if (blob_request && mRawDumpChannel) {
         LOGD("Trigger Raw based on blob request if Raw dump is enabled");
