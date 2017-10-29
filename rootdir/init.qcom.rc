@@ -50,12 +50,14 @@ on init
 
 on fs
     mount_all fstab.qcom
-    swapon_all fstab.qcom
-    write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/swappiness 100
 
     mkdir /persist/data 0700 system system
     restorecon_recursive /persist
+
+on post-fs
+    swapon_all /fstab.qcom
+    write /proc/sys/vm/page-cluster 0
+    write /proc/sys/vm/swappiness 100
 
 # msm specific files that need to be created on /data
 on post-fs-data
