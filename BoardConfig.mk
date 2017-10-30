@@ -175,8 +175,8 @@ TARGET_QCOM_NO_FM_FIRMWARE         := true
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/fs_config/file_caps.fs
 
 # GPS
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := true
 USE_DEVICE_SPECIFIC_GPS := true
-TARGET_NO_RPC           := true
 
 # Init
 TARGET_INIT_VENDOR_LIB         := libinit_land
