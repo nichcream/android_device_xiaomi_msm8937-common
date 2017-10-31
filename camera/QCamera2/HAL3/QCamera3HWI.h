@@ -62,7 +62,6 @@ namespace qcamera {
 #endif
 
 /* Time related macros */
-typedef int64_t nsecs_t;
 #define NSEC_PER_SEC 1000000000LLU
 #define NSEC_PER_USEC 1000LLU
 #define NSEC_PER_33MSEC 33000000LLU
@@ -290,6 +289,7 @@ private:
     int32_t notifyErrorForPendingRequests();
     int32_t getReprocessibleOutputStreamId(uint32_t &id);
     int32_t handleCameraDeviceError();
+    nsecs_t getBootToMonoTimeOffset();
 
     bool isOnEncoder(const cam_dimension_t max_viewfinder_size,
             uint32_t width, uint32_t height);
@@ -496,6 +496,9 @@ private:
     uint32_t mSurfaceStridePadding;
 
     State mState;
+    //The offset between BOOTTIME and MONOTONIC timestamps
+    nsecs_t mBootToMonoTimestampOffset;
+    bool mUseAVTimer;
 };
 
 }; // namespace qcamera
