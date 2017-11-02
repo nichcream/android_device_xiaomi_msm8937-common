@@ -1468,7 +1468,7 @@ vendor/lib64/libsettings.so
 vendor/qcril.db
 
 # Radio - IMS - from oxygen (MiMax 2) / op3 (OnePlus 3/3T)
-bin/ims_rtp_daemon|1a3dc8ba908e614ca8d8dcd691c1f6288bc481e7
+bin/ims_rtp_daemon
 bin/imscmservice|8c1340911fbaf588656ddcd714090eb02d4bd2a2
 bin/imsdatadaemon|28b2586436889f6fb7feb1e674285841a8204daa
 bin/imsqmidaemon|e6406fd94063d7262604f660ec0595b07dc91717
@@ -1482,8 +1482,8 @@ vendor/framework/qti-vzw-ims-internal.jar|5cfd76b7a140396f6f192695f7fde8100062b7
 vendor/lib64/lib-dplmedia.so|0e8432850800be42f1e1c9c3d745e01010dce165
 vendor/lib64/lib-ims-rcscmjni.so|646dd28ba785bdc9a0b1a49f468ae6cbc1804d5a
 vendor/lib64/lib-imsSDP.so|8b33852eef6511fbd25a26938c8b32ef8fd8f5da
-vendor/lib64/lib-imscamera.so|8e68d0bef6f21f86803d93ca412efc5b3c0e5f8e
-vendor/lib64/lib-imsdpl.so|bea80fc8c54cb975d35357fbc86131e40458ab8f
+vendor/lib64/lib-imscamera.so
+vendor/lib64/lib-imsdpl.so
 vendor/lib64/lib-imsqimf.so|fb721698e9551a6dcd4c44de3913e21ded54d702
 vendor/lib64/lib-imsrcs.so|945bc31afd8920b43833101e97e3586d4e69e53a
 vendor/lib64/lib-imsrcscm.so|552a795ce4e207c658296f542eafce37e80e2c71
@@ -1494,12 +1494,12 @@ vendor/lib64/lib-imsvt.so|759456f6200edda1ff3ab5b053288fedab3ca034
 vendor/lib64/lib-imsxml.so|0c532634c0001aeb741de05b9889d70cafedb1ef
 vendor/lib64/lib-rcsimssjni.so|cbe01553a416f34fc7e6e72ed3e60be08cc71745
 vendor/lib64/lib-rcsjni.so|15ea55d164c00be1373d461955a8b9c03b0d7277
-vendor/lib64/lib-rtpcommon.so|dd7e5fdfa37af17b26a721b364ad04c5433bb8f4
-vendor/lib64/lib-rtpcore.so|7d1608e3faedfde2f71f77d0415b80277ff81ff4
-vendor/lib64/lib-rtpdaemoninterface.so|81c58e6bd3f15cb790f039c596a9206cda964b0f
-vendor/lib64/lib-rtpsl.so|15431549520b01ad944e16320e235ff3c676da3e
-vendor/lib64/libimscamera_jni.so|211d628170968c4a3c4d5119eda7fcd16d2bae4f
-vendor/lib64/libimsmedia_jni.so|09b67223ad11ebf9ce966a5aa05cd9512f65559e
+vendor/lib64/lib-rtpcommon.so
+vendor/lib64/lib-rtpcore.so
+vendor/lib64/lib-rtpdaemoninterface.so
+vendor/lib64/lib-rtpsl.so
+vendor/lib64/libimscamera_jni.so
+vendor/lib64/libimsmedia_jni.so
 vendor/lib64/librcc.so|aca1095ebc27692488f8a09f619541695655bc2b
 vendor/lib64/libvoice-svc.so|30c0ac9838dc28ee819ad5fce1fecf13e3766b17
 
