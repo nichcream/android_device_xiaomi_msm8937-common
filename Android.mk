@@ -155,6 +155,20 @@ $(VENUS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(VENUS_SYMLINKS)
 
+MODEM_IMAGES := \
+   modem.b00 modem.b01 modem.b3 modem.b14 modem.b15 modem.b19 \
+   modem.b20 modem.b21 modem.b22 modem.b23 modem.b24 modem.mdt \
+   modem_pr
+
+MODEM_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(MODEM_IMAGES)))
+$(WIDEVINE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "modem firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(MODEM_SYMLINKS)
+
 WIDEVINE_IMAGES := \
    widevine.b00 widevine.b01 widevine.b02 widevine.b03 \
    widevine.b04 widevine.b05 widevine.b06 widevine.mdt
@@ -167,6 +181,20 @@ $(WIDEVINE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware/image/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WIDEVINE_SYMLINKS)
+
+WCNSS_IMAGES := \
+   wcnss.b00 wcnss.b01 wcnss.b02 wcnss.b04 \
+   wcnss.b06 wcnss.b09 wcnss.b10 wcnss.b11 \
+   wcnss.b12 wcnss.mdt
+
+WCNSS_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(WCNSS_IMAGES)))
+$(WIDEVINE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "wcnss firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(WCNSS_SYMLINKS)
 
 RFS_MSM_ADSP_SYMLINKS := $(TARGET_OUT)/rfs/msm/adsp/
 $(RFS_MSM_ADSP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
