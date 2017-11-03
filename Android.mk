@@ -161,7 +161,7 @@ MODEM_IMAGES := \
    modem_pr
 
 MODEM_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(MODEM_IMAGES)))
-$(WIDEVINE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+$(MODEM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "modem firmware link: $@"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
@@ -188,7 +188,7 @@ WCNSS_IMAGES := \
    wcnss.b12 wcnss.mdt
 
 WCNSS_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(WCNSS_IMAGES)))
-$(WIDEVINE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+$(WCNSS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "wcnss firmware link: $@"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
