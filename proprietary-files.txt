@@ -1291,9 +1291,8 @@ vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
-# Media - from santoni (Redmi 4X) / crackling (Wileyfox Swift)
+# Media - from santoni (Redmi 4X)
 etc/firmware/DE.o.msm8937|62c8a6ce7e6d81c3b9778d92db126e02a54e692f
-lib/libOmxVdecHevc.so|ec53293c9dd8f6be731b4485c9b4c7f0aca9b542
 lib/libOmxSwVdec.so|708449a8a7398b3340bd9dad2281060f93cdfff2
 lib/libOmxSwVencMpeg4.so|a5656b290b1a951eac5c29dab9c72593b0131590
 lib/libOmxVpp.so|2ff6daa35af6e06bc8d8cf13ef90c7fb6e928532
@@ -1318,7 +1317,6 @@ vendor/lib/libOmxAmrwbplusDec.so|256863271da6e118e551a365254a7a2b242ef557
 vendor/lib/libOmxApeDec.so|b4e0c203e7d65c951e024292f6b009c6507a362e
 vendor/lib/libOmxApeDecSw.so|c23c0b6b0b82ee58edcd852b984862c6cb8ee317
 vendor/lib/libOmxEvrcDec.so|700989d4fbb775e44c0b27201fe77dc6621211ee
-vendor/lib/libHevcSwDecoder.so|0972a49766ea1b4f9f3e734c1e3a6aa27910cc09
 vendor/lib/libOmxMux.so|b96194758137ce863a5c6e8f88d948a1cd4e0aea
 vendor/lib/libOmxQcelp13Dec.so|e2afcd0d0f6598e92585a629a16cf99469ec2b3a
 vendor/lib/libOmxVideoDSMode.so|9e24664c350e3e34c0f6a732abd3acb274185420
