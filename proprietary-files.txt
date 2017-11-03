@@ -1477,7 +1477,7 @@ framework/rcsimssettings.jar|566a0f637344ca3182aca33753e404977fc77ecc
 -vendor/app/ims/ims.apk|66fa3ab695d7be55a334cbee6e9c94d60089ac2a
 -vendor/app/imssettings/imssettings.apk|a09f0bb900fb91d849b94eee031e6d6a15f20611
 vendor/framework/qti-vzw-ims-internal.jar|5cfd76b7a140396f6f192695f7fde8100062b7c7
-vendor/lib64/lib-dplmedia.so|0e8432850800be42f1e1c9c3d745e01010dce165
+vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-ims-rcscmjni.so|646dd28ba785bdc9a0b1a49f468ae6cbc1804d5a
 vendor/lib64/lib-imsSDP.so|8b33852eef6511fbd25a26938c8b32ef8fd8f5da
 vendor/lib64/lib-imscamera.so
@@ -1488,7 +1488,7 @@ vendor/lib64/lib-imsrcscm.so|552a795ce4e207c658296f542eafce37e80e2c71
 vendor/lib64/lib-imsrcscmclient.so|df7450460a61167c20436f7d76f5d32159bb5071
 vendor/lib64/lib-imsrcscmservice.so|9df9a7cb2eae38f4f98264ebb7dda89ebdea054c
 vendor/lib64/lib-imss.so|823a53e3c0dd31465ad4f9df81c8f66307a6b28d
-vendor/lib64/lib-imsvt.so|759456f6200edda1ff3ab5b053288fedab3ca034
+vendor/lib64/lib-imsvt.so
 vendor/lib64/lib-imsxml.so|0c532634c0001aeb741de05b9889d70cafedb1ef
 vendor/lib64/lib-rcsimssjni.so|cbe01553a416f34fc7e6e72ed3e60be08cc71745
 vendor/lib64/lib-rcsjni.so|15ea55d164c00be1373d461955a8b9c03b0d7277
