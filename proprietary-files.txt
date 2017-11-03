@@ -1287,6 +1287,13 @@ etc/firmware/a530v2_seq.fw2
 etc/firmware/a530v3_gpmu.fw2
 etc/firmware/a530v3_seq.fw2
 
+#hbtp
+etc/firmware/hbtp/hbtpcfg_8917.dat
+etc/firmware/hbtp/hbtpcfg.dat
+etc/firmware/hbtp/qtc800s_dsp.bin
+etc/firmware/qtc800s.bin
+etc/firmware/qtc800s.cfg
+
 # Keylayout
 usr/keylayout/gpio-keys.kl
 usr/keylayout/qpnp_pon.kl
