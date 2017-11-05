@@ -2,6 +2,11 @@
 
 #define NS_PER_S 1000000000
 
+void timespec_from_ms(timespec& ts, const int ms) {
+  ts.tv_sec = ms / 1000;
+  ts.tv_nsec = (ms % 1000) * 1000000;
+}
+
 bool timespec_from_absolute_timespec(timespec& ts, const timespec& abs_ts, clockid_t clock) {
   clock_gettime(clock, &ts);
   ts.tv_sec = abs_ts.tv_sec - ts.tv_sec;
