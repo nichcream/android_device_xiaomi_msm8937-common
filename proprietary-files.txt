@@ -292,6 +292,17 @@ vendor/lib/libtm_interface.so
 -vendor/lib/libts_face_beautify_hal.so
 vendor/lib/libtrueportrait.so
 vendor/lib/libubifocus.so
+vendor/lib64/libmmcamera_dbg.so
+vendor/lib64/libmmcamera_tintless_algo.so
+vendor/lib64/libmmcamera_tintless_bg_pca_algo.so
+vendor/lib64/libmmcamera2_frame_algorithm.so
+vendor/lib64/libmmcamera2_is.so
+vendor/lib64/libmmcamera2_q3a_core.so
+vendor/lib64/libmmcamera2_stats_algorithm.so
+vendor/lib64/libmmsw_detail_enhancement.so
+vendor/lib64/libmmsw_math.so
+vendor/lib64/libmmsw_opencl.so
+vendor/lib64/libmmsw_platform.so
 
 # Camera actuators
 vendor/lib/libactuator_ad5816g.so
