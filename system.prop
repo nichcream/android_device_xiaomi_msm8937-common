@@ -180,6 +180,7 @@ ro.ril.disable.power.collapse=0
 ro.ct.device.model=XMP-2016030
 ro.telephony.call_ring.multiple=false
 ro.telephony.default_network=20,20
+ro.com.android.mobiledata=false
 service.qti.ims.enabled=1
 telephony.lteOnCdmaDevice=1
 ro.ril.fast.dormancy.rule=0
