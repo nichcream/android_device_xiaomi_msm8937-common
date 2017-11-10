@@ -259,8 +259,7 @@ PRODUCT_PACKAGES += \
     hostapd \
     dhcpcd.conf \
     wpa_supplicant \
-    wpa_supplicant.conf \
-    wcnss_service
+    wpa_supplicant.conf
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
