@@ -15,7 +15,6 @@
    limitations under the License.
 -->
 <resources>
-    <bool name="profile_supported_a2dp_sink">true</bool>
     <bool name="profile_supported_hfpclient">true</bool>
     <bool name="pbap_include_photos_in_vcard">true</bool>
     <bool name="profile_supported_avrcp_controller">true</bool>
