@@ -1327,6 +1327,7 @@ vendor/lib/libAlacSwDec.so|9e19cdf730a1279f3cdfafc23d0385cecc15840d
 vendor/lib/libApeSwDec.so|5185623c3ebc0c814d6339ec646a0757da6a49b4
 vendor/lib/libFlacSwDec.so|89c0b9af3d56cd73e07393f2c88ac657659ebf5c
 vendor/lib/libI420colorconvert.so|87e6014400b4878c4df3eb7ad6f9085010a2be99
+vendor/lib/libmm-color-convertor.so|1bc9d00c211d44f98541f98dd84776a83da7ac2c
 vendor/lib/libmmosal.so|354ac7af33b7ead6856161ac19d8c019c74732dc
 vendor/lib/libMpeg4SwEncoder.so|197bebfe233f137f1a80bca43a0f79c89f0af19f
 vendor/lib/libomx-dts.so|ad49ef05c67af4ed8b488d77992d7f76b2e66f85
