@@ -20,4 +20,4 @@
 /devices/soc/78db000.usb/msm_hsusb_host*     auto               auto    defaults                                            wait,voldmanaged=usbotg:auto
 
 #ZRAM
-/dev/block/zram0                             none               swap    defaults                                            zramsize=1073741824,zramstreams=4
+/dev/block/zram0                             none               swap    defaults                                            zramsize=1073741824,max_comp_streams=4
