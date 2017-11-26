@@ -384,6 +384,8 @@ PRODUCT_PACKAGES += \
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libcld80211 \
+    hostapd \
+    hostapd_default.conf \
     wificond \
     wifilogd \
     libwpa_client \
