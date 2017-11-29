@@ -174,7 +174,6 @@ etc/camera/s5k3m2xm_chromatix.xml
 etc/camera/s5k3m2xm_chromatix_bear.xml
 etc/camera/s5k3m2xx_chromatix.xml
 lib/libRecoFace.so
-lib/libmmcamera_interface.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_panorama.so
 vendor/lib/libFaceGrade.so
