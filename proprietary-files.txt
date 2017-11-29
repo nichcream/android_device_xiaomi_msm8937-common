@@ -1075,30 +1075,31 @@ vendor/lib64/libdpmframework.so
 vendor/lib64/libdpmnsrm.so
 vendor/lib64/libdpmtcm.so
 
-# DRM
-bin/qseecomd
-vendor/bin/mdtpd
-vendor/bin/qseeproxydaemon
-vendor/lib/libcppf.so
-vendor/lib/liboemcrypto.so
-vendor/lib/libQSEEComAPI.so
-vendor/lib64/lib-sec-disp.so
-vendor/lib64/libGPreqcancel.so
-vendor/lib64/libGPreqcancel_svc.so
-vendor/lib64/libGPTEE.so
-vendor/lib64/libmdtp.so
-vendor/lib64/libmdtp_crypto.so
-vendor/lib64/libQSEEComAPI.so
-vendor/lib64/libSecureUILib.so
-vendor/lib64/libStDrvInt.so
-vendor/lib64/libdrmfs.so
-vendor/lib64/libdrmtime.so
-vendor/lib64/libqisl.so
-vendor/lib64/librpmb.so
-vendor/lib64/libsecureui.so
-vendor/lib64/libsecureui_svcsock.so
-vendor/lib64/libssd.so
-vendor/lib64/libtzdrmgenprov.so
+# DRM - from santoni (Redmi 4X)
+bin/qseecomd|68ae01eaee55d70351479733366d06a6ca70c5cf
+vendor/bin/mdtpd|4287f9496af4642c63114f4ded06ee5566f99560
+vendor/bin/qseeproxydaemon|3bcecc1b1e8c384d92f6f4fbceea9269f55e1c68
+vendor/lib/libcppf.so|eb3d08b467fd60221d7553b9c1044452d9529f1a
+vendor/lib/liboemcrypto.so|95f5ead8c12ca55fd5af080de4ba70129a548620
+vendor/lib/libQSEEComAPI.so|24f4b4dd22e5f9fd8c294daa5cd5f61164daece1
+vendor/lib64/lib-sec-disp.so|b63079bae59950547b3eff35a25e3d6df60b201a
+vendor/lib64/libGPreqcancel.so|5704727e4273bfc8d76adc6afec7033add63cf74
+vendor/lib64/libGPreqcancel_svc.so|831404b1b4e665f96af9eb7a19d1395a692e1f17
+vendor/lib64/libGPTEE.so|358528521b139414830e0546a6489747ec984648
+vendor/lib64/libmdtp.so|ea5a8dbb66e9500298ad70d424506be64f99ce1e
+vendor/lib64/libmdtp_crypto.so|8c07c4c720716e53217d8176fb5ebcc2f4cfd77f
+vendor/lib64/libQSEEComAPI.so|c9a2520406cc8b2604653918b05739de20c65e0c
+vendor/lib64/libSecureUILib.so|8f3ad5efda01d463e356b9162b7bf014967e03dc
+vendor/lib64/libStDrvInt.so|fbf4fbbba53bb5a37150a57d93febc3423ca03b4
+vendor/lib64/libdrmfs.so|26793d1eac0152389e6109078ec7c7165911a6c5
+vendor/lib64/libdrmtime.so|c1169d9a47c768ab722a961db4c614584e9e08d8
+vendor/lib64/libqisl.so|ec58d28d0764005385d19f0a5a7378af05f9a3e9
+vendor/lib64/librpmb.so|aa4a8a24fcd64902d3553220f3f281ce6b5899a4
+vendor/lib64/libsecureui.so|2d6c069f3af5bf43f5b9617069a4dd623f9f59f7
+vendor/lib64/libsecureui_svcsock.so|fcf1955031fdaee82f695a1eae5fa412359bd2bf
+vendor/lib64/libsecureuisvc_jni.so|215e58171abf0e1b6590b04dd0ae7c5367dcea70
+vendor/lib64/libssd.so|c1b6da24786138f8a2f19b797d2f16f88da434f2
+vendor/lib64/libtzdrmgenprov.so|28476f814435420885c4b9551e88b016e9705c54
 
 # Display calibration
 -etc/qdcm_calib_data_hx8394F_HD720p_video_BOE.xml
@@ -1301,10 +1302,11 @@ usr/keylayout/qpnp_pon.kl
 usr/keylayout/synaptics_dsx.kl
 usr/keylayout/synaptics_rmi4_i2c.kl
 
-# Keystore
-lib64/hw/keystore.default.so
-vendor/lib/hw/keystore.msm8937.so
-vendor/lib64/hw/keystore.msm8937.so
+# Keystore - from santoni (Redmi 4X)
+lib/hw/keystore.default.so|4fe3fd34eebf4cc6a68f16324fe26b0856db2d78
+lib64/hw/keystore.default.so|395e0c74b5c7a1d27fd8400745c8b4d792d2c5a6
+vendor/lib/hw/keystore.msm8937.so|2e93bba00f17931a02354f05ab83b25da4cc172a
+vendor/lib64/hw/keystore.msm8937.so|c3a99d799c53c153f4d7f3f758d60923b8c1cda5
 
 # Listen
 vendor/lib/hw/sound_trigger.primary.msm8937.so
