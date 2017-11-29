@@ -460,6 +460,8 @@ on property:persist.env.fastdorm.enabled=true
 service cnd /system/bin/cnd
     class main
     socket cnd stream 660 root inet
+#    writepid /dev/cpuset/system-background/tasks
+    setenv LD_LIBRARY_PATH /system/vendor/lib64
 
 service dpmd /system/bin/dpmd
     class late_start
@@ -508,6 +510,7 @@ service netmgrd /system/bin/netmgrd
     class main
     group system wakelock
 #    writepid /dev/cpuset/system-background/tasks
+    setenv LD_LIBRARY_PATH /system/vendor/lib64
 
 service qti /system/vendor/bin/qti
     class main
