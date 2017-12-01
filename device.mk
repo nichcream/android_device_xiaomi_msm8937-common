@@ -126,6 +126,7 @@ PRODUCT_PACKAGES += \
     libmm-qcamera \
     libmmcamera_interface \
     libmmjpeg_interface \
+    libqomx_core \
     SnapdragonCamera
 
 # Consumerir
