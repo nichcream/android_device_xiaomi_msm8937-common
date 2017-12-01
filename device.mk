@@ -248,7 +248,6 @@ PRODUCT_COPY_FILES += \
 # Libshims
 PRODUCT_PACKAGES += \
     libshims_ims \
-    libshim_ims_camera \
     libshim_camera \
     libshims_camera \
     libshims_sensor
