@@ -33,7 +33,7 @@
 #include <stdlib.h>
 #include <utils/Errors.h>
 #include <cutils/properties.h>
-#include <gui/SensorManager.h>
+#include <sensor/SensorManager.h>
 
 // Camera dependencies
 #ifdef QCAMERA_HAL1_SUPPORT

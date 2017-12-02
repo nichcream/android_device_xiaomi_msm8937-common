@@ -33,7 +33,7 @@
 // Camera dependencies
 #include "hardware/camera_common.h"
 
-#include <gui/SensorManager.h>
+#include <sensor/SensorManager.h>
 
 namespace qcamera {
 

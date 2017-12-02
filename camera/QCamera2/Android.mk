@@ -83,8 +83,7 @@ LOCAL_C_INCLUDES := \
         system/core/include/cutils \
         system/core/include/system \
         system/media/camera/include/system \
-        frameworks/native/include \
-        frameworks/native/include/media/openmax
+        frameworks/native/libs/sensor/include
 
 #HAL 1.0 Include paths
 LOCAL_C_INCLUDES += \
