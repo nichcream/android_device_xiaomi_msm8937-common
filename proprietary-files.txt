@@ -112,7 +112,7 @@ vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
 
 # CNE
-bin/cnd|2fce079f01b8734b091115284ce9143fd7c3bacc
+bin/cnd:vendor/bin/cnd|2fce079f01b8734b091115284ce9143fd7c3bacc
 etc/cne/SwimConfig.xml
 etc/cne/andsfCne.xml
 etc/permissions/ConnectivityExt.xml
@@ -1075,7 +1075,7 @@ vendor/lib64/libdpmnsrm.so
 vendor/lib64/libdpmtcm.so
 
 # DRM - from santoni (Redmi 4X)
-bin/qseecomd|68ae01eaee55d70351479733366d06a6ca70c5cf
+bin/qseecomd:vendor/bin/qseecomd|68ae01eaee55d70351479733366d06a6ca70c5cf
 vendor/bin/mdtpd|4287f9496af4642c63114f4ded06ee5566f99560
 vendor/bin/qseeproxydaemon|3bcecc1b1e8c384d92f6f4fbceea9269f55e1c68
 vendor/lib/libcppf.so|eb3d08b467fd60221d7553b9c1044452d9529f1a
@@ -1388,8 +1388,8 @@ vendor/lib64/libqti-iop-client.so
 vendor/lib64/libqti-perfd-client.so
 
 # Peripheral manager
-bin/pm-proxy
-bin/pm-service
+bin/pm-proxy:vendor/bin/pm-proxy
+bin/pm-service:vendor/bin/pm-service
 vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
@@ -1485,10 +1485,10 @@ vendor/lib64/libsettings.so|166b91d81b7906901b35bce23779b58a2299873e
 vendor/qcril.db
 
 # Radio - IMS - from marmite (Wileyfox Swift 2/Plus/X)
-bin/ims_rtp_daemon|b42c3957e4676d9672b7fc9055cd814349f5336a
-bin/imscmservice|3306a52f51172202e66b3092d97b14ed918cf006
-bin/imsdatadaemon|8696ca3c35e4eefe5751be7a10010ca86712a0cf
-bin/imsqmidaemon|c683d2dbb25bea55865137f38f8d9618cd29398c
+bin/ims_rtp_daemon:vendor/bin/ims_rtp_daemon|b42c3957e4676d9672b7fc9055cd814349f5336a
+bin/imscmservice:vendor/bin/imscmservice|3306a52f51172202e66b3092d97b14ed918cf006
+bin/imsdatadaemon:vendor/bin/imsdatadaemon|8696ca3c35e4eefe5751be7a10010ca86712a0cf
+bin/imsqmidaemon:vendor/bin/imsqmidaemon|c683d2dbb25bea55865137f38f8d9618cd29398c
 etc/permissions/imscm.xml|8b99ec26c783966bbea1fcb8e72c7c0206a4e802
 etc/permissions/qti-vzw-ims-internal.xml|3e41b645dd4ad8bad6775c103a34bfd7a507a4f7
 -framework/imscmlibrary.jar|0c24d6540c06efede52169c1445272f43748180f
@@ -1566,7 +1566,7 @@ lib/hw/consumerir.default.so
 lib64/hw/consumerir.default.so
 
 # Sensors
-bin/sensors.qcom
+bin/sensors.qcom:vendor/bin/sensors.qcom
 vendor/lib/hw/activity_recognition.msm8937.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
