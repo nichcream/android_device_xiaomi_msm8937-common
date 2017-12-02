@@ -17,12 +17,12 @@
     "remote":      "Unicorn",
     "repository":  "proprietary_vendor_xiaomi",
     "target_path": "vendor/xiaomi",
-    "branch":      "xpe-11.1"
+    "branch":      "or8.0"
   } ,
   {
     "remote":      "github",
-    "repository":  "nichcream/packages_apps_SnapdragonCamera",
+    "repository":  "packages_apps_SnapdragonCamera",
     "target_path": "packages/apps/SnapdragonCamera",
-    "branch":      "n7.1-8937"
+    "branch":      "or8.0"
   }  
 ]
