@@ -557,13 +557,6 @@ service qcom-sh /system/bin/sh /init.qcom.sh
     user root
     oneshot
 
-service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
-    class late_start
-    user root
-    group root
-    oneshot
-    disabled
-
 service ril-daemon1 /vendor/bin/hw/rild -c 2
     class main
     socket rild2 stream 660 root radio
