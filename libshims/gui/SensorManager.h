@@ -26,7 +26,7 @@
 #include <utils/Singleton.h>
 #include <utils/Vector.h>
 #include <utils/String8.h>
-#include <gui/SensorEventQueue.h>
+#include <sensor/SensorEventQueue.h>
 // ----------------------------------------------------------------------------
 // Concrete types for the NDK
 struct ASensorManager { };
@@ -43,7 +43,7 @@ class SensorManager :
 public:
     static SensorManager& getInstanceForPackage(const String16& packageName);
     ~SensorManager();
-    ssize_t getSensorList(Sensor const* const** list) const;
+    ssize_t getSensorList(Sensor const* const** list);
     Sensor const* getDefaultSensor(int type);
     sp<SensorEventQueue> createEventQueue(String8 packageName = String8(""), int mode = 0);
     bool isDataInjectionEnabled();
@@ -51,7 +51,7 @@ private:
     // DeathRecipient interface
     void sensorManagerDied();
     SensorManager(const String16& opPackageName);
-    status_t assertStateLocked() const;
+    status_t assertStateLocked();
 private:
     static Mutex sLock;
     static std::map<String16, SensorManager*> sPackageInstances;

@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 #define LOG_TAG "sensor"
+#include <gui/SensorManager.h>
 #include <utils/Log.h>
 #include <android/looper.h>
 #include <android/sensor.h>
 #include <utils/RefBase.h>
 #include <utils/Looper.h>
 #include <utils/Timers.h>
-#include <gui/Sensor.h>
-#include <gui/SensorManager.h>
-#include <gui/SensorEventQueue.h>
+#include <sensor/Sensor.h>
+#include <sensor/SensorEventQueue.h>
 #include <poll.h>
 using android::sp;
 using android::Sensor;
