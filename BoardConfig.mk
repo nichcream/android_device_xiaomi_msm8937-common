@@ -173,7 +173,7 @@ BOARD_HAVE_QCOM_FM                 := true
 TARGET_QCOM_NO_FM_FIRMWARE         := true
 
 # Filesystem
-TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/fs_config/file_caps.fs
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/fs_config/file_caps.fs
 
 # GPS
 USE_DEVICE_SPECIFIC_GPS := true
