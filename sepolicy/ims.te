@@ -1,2 +1,0 @@
-#============= ims ==============
-allow ims self:capability { net_admin net_raw };

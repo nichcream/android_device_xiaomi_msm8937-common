@@ -1,1 +1,2 @@
-allow cameraserver sysfs:file { write };
+#============= cameraserver ==============
+allow cameraserver debugfs_tracing:file { open write };

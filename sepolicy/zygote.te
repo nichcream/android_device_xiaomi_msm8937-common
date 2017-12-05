@@ -1,2 +1,4 @@
 #============= zygote ==============
 allow zygote self:capability sys_nice;
+allow zygote debugfs_tracing:file { getattr open write };
+

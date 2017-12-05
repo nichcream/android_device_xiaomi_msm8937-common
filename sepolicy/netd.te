@@ -1,1 +1,3 @@
-allow netd firmware_file:dir search;
+#============= netd ==============
+allow netd self:capability sys_module;
+
