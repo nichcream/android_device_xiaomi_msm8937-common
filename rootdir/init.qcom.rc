@@ -38,7 +38,7 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
-    export LD_SHIM_LIBS "/system/vendor/lib64/lib-imsvt.so|libshims_ims.so:/system/bin/mm-qcamera-daemon|libshims_camera.so:/system/bin/mm-qcamera-daemon|libshim_camera.so:system/vendor/lib64/libizat_core.so|libshims_get_process_name.so:/system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so:system/vendor/lib64/liblowi_wifihal_nl.so|libshims_is_wifi_driver_loaded.so:/system/vendor/bin/slim_daemon|libshims_sensor.so"
+    export LD_SHIM_LIBS "/system/vendor/lib64/lib-imsvt.so|libshims_ims.so:/system/vendor/lib64/libizat_core.so|libshims_get_process_name.so:/system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so:/system/vendor/lib64/liblowi_wifihal_nl.so|libshims_is_wifi_driver_loaded.so:/system/bin/mm-qcamera-daemon|libshims_camera.so:/system/bin/mm-qcamera-daemon|libshim_camera.so:/system/vendor/lib64/lib-imscamera.so|libshim_ims_camera.so:/system/vendor/bin/slim_daemon|libshims_sensor.so:/system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_camera.so"
 
     # Set permissions for persist partition
     mkdir /persist 0771 root system
@@ -52,7 +52,6 @@ on init
     chown wifi wifi /sys/module/wlan/parameters/fwpath
 
 on fs
-
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
@@ -62,11 +61,12 @@ on fs
     restorecon_recursive /persist
 
 on post-fs
+    start qseecomd
     swapon_all /fstab.qcom
     write /proc/sys/vm/page-cluster 0
     write /proc/sys/vm/swappiness 100
-    start qseecomd
     chmod 0755 /sys/kernel/debug/tracing
+
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -157,6 +157,12 @@ on post-fs-data
     mkdir /data/system 0775 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+   
+    # Mark wifi driver as unloaded - "ok" indicates loaded
+    setprop wlan.driver.status not_ok
+
     #Create directories for Location services
     mkdir /data/misc/location 0770 gps gps
     mkdir /data/misc/location/mq 0770 gps gps
@@ -168,9 +174,6 @@ on post-fs-data
     #Create directory from IMS services
     mkdir /data/shared 0755
     chown system system /data/shared
-    
-    #Create directory for hostapd
-    mkdir /data/hostapd 0770 system wifi
 
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
@@ -210,6 +213,10 @@ on post-fs-data
     chown radio radio /data/misc/radio/copy_complete
     chmod 0660 /data/misc/radio/copy_complete
 
+    # copy prebuilt qcril.db files always
+    copy /system/vendor/qcril.db /data/misc/radio/qcril_prebuilt.db
+    chown radio radio /data/misc/radio/qcril_prebuilt.db
+    chmod 0660 /data/misc/radio/qcril_prebuilt.db
     # File flags for prebuilt ril db file
     write /data/misc/radio/prebuilt_db_support 1
     chown radio radio /data/misc/radio/prebuilt_db_support
@@ -392,12 +399,6 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-    # Wifi firmware reload path
-    chown wifi wifi /sys/module/wlan/parameters/fwpath
-
-    # Mark wifi driver as unloaded - "ok" indicates loaded
-    setprop wlan.driver.status not_ok
-
     # bond0 used by FST Manager
     chown wifi wifi /sys/class/net/bond0/bonding/queue_id
 
@@ -424,7 +425,7 @@ on boot
     # Goodix Fingerprint
     chown system system /dev/goodix_fp
     chmod 0644 /dev/goodix_fp
-    
+
     setprop persist.sys.fp.vendor none
     start gx_fpd
 
@@ -434,7 +435,6 @@ on class_start:late_start
     copy /system/vendor/qcril.db /data/misc/radio/qcril.db
     chown radio radio /data/misc/radio/qcril.db
     write /data/misc/radio/db_check_done 1
-
 
 service iop /system/bin/iop
     class main
@@ -462,12 +462,6 @@ on property:vold.decrypt=trigger_restart_framework
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-service cnd /system/bin/cnd
-    class main
-    socket cnd stream 660 root inet
-#    writepid /dev/cpuset/system-background/tasks
-    setenv LD_LIBRARY_PATH /system/vendor/lib64
-
 service dpmd /system/bin/dpmd
     class late_start
     socket dpmd stream 660 root system
@@ -484,7 +478,7 @@ service rmt_storage /system/bin/rmt_storage
     group wakelock
 
 service tftp_server /system/bin/tftp_server
-   class main
+   class core
    user root
 
 service config_bt_addr /system/bin/btnvtool -O
@@ -493,12 +487,16 @@ service config_bt_addr /system/bin/btnvtool -O
     group bluetooth radio
     oneshot
 
+service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
+    class core
+    user root
+    oneshot
+
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
     disabled
-    seclabel u:r:bluetooth_loader:s0
     oneshot
 
 on property:bluetooth.hciattach=true
@@ -515,7 +513,6 @@ service netmgrd /system/bin/netmgrd
     class main
     group system wakelock
 #    writepid /dev/cpuset/system-background/tasks
-    setenv LD_LIBRARY_PATH /system/vendor/lib64
 
 service qti /system/vendor/bin/qti
     class main
@@ -523,7 +520,7 @@ service qti /system/vendor/bin/qti
     group radio net_raw diag usb net_admin
 #    writepid /dev/cpuset/system-background/tasks
 
-service sensors /system/bin/sensors.qcom
+service sensors /system/vendor/bin/sensors.qcom
     class core
     user root
     group root
@@ -534,15 +531,17 @@ service sensors /system/bin/sensors.qcom
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
 
-service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
+service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
+    -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
+    -I/system/etc/wifi/p2p_supplicant_overlay.conf -N \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets \
+    -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
-    #   we will start as root and wpa_supplicant will switch to user wifi
-    #   after setting up the capabilities required for WEXT
-    #   user wifi
-    #   group wifi inet keystore
+#   we will start as root and wpa_supplicant will switch to user wifi
+#   after setting up the capabilities required for WEXT
+#   user wifi
+#   group wifi inet keystore
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
@@ -551,8 +550,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
-    group gps inet net_raw diag net_admin wifi
-#    writepid /dev/cpuset/system-background/tasks
+    group gps inet qcom_diag wifi
 
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
@@ -564,7 +562,7 @@ service ril-daemon1 /vendor/bin/hw/rild -c 2
     socket rild2 stream 660 root radio
     socket rild-debug2 stream 660 radio system
     user radio
-    group radio cache inet misc audio sdcard_r sdcard_rw diag log
+    group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
 service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh
@@ -623,7 +621,7 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
 service wfdservice /system/bin/wfdservice
     class main
     user system
-    group audio camera inet net_bt_stack drmrpc media_rw media input net_admin
+    group audio camera inet bluetooth drmrpc media_rw media input net_admin
     #removed these because of limit of 12 groups
     #graphics net_bt net_bt_admin bluetooth
     disabled
@@ -654,7 +652,7 @@ service fps_hal /vendor/bin/hw/android.hardware.biometrics.fingerprint@2.0-servi
     disabled
 
 service gx_fpd /system/bin/gx_fpd
-    class core
+    class late_start
     user root
     group system system
     oneshot
@@ -665,19 +663,26 @@ on property:persist.sys.fp.vendor=switchf
     setprop persist.sys.fp.vendor searchf
     start fps_hal
     setprop ro.boot.fpsensor fpc
-    setprop ro.hardware.fingerprint searchf
-    setprop persist.sys.fp.onstart=1
 
 on property:persist.sys.fp.vendor=goodix
-   setprop ro.boot.fpsensor gdx
-   setprop ro.hardware.fingerprint goodix
-   setprop persist.sys.fp.onstart=0
+    setprop ro.boot.fpsensor gdx
+
+on property:ro.boot.fpsensor=fpc
+    setprop persist.sys.fp.goodix 0
+    setprop ro.hardware.fingerprint fpc
+
+on property:ro.boot.fpsensor=gdx
+    setprop persist.sys.fp.goodix 1
+    setprop ro.hardware.fingerprint gdx
 
 on property:persist.sys.fp.onstart=0
    start gx_fpd
 
 on property:persist.sys.fp.onstart=1
    start fps_hal
+
+on property:ro.boot.fpsensor=gdx
+    setprop ro.hardware.fingerprint goodix
 
 # Start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
@@ -735,36 +740,43 @@ service imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
-    group radio net_raw log diag
+    group radio log diag
     disabled
 
 on property:service.qti.ims.enabled=1
     start imsqmidaemon
 
-service imsdatadaemon /system/bin/imsdatadaemon
+service imsdatadaemon /system/vendor/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
-    group system wifi radio inet net_raw log diag net_admin
+    group system wifi radio inet log diag
     disabled
 
 on property:sys.ims.QMI_DAEMON_STATUS=1
+    start imsdatadaemon
+
+on property:vendor.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
 service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
     class main
     user system
     socket ims_rtpd stream 0660 system radio
-    group radio net_raw diag diag inet log
+    group radio diag inet log
     disabled
 
 service imscmservice /system/vendor/bin/imscmservice
     class main
     user system
-    group radio net_raw diag diag log
+    group radio diag inet log
     disabled
 
 on property:sys.ims.DATA_DAEMON_STATUS=1
+    start ims_rtp_daemon
+    start imscmservice
+
+on property:vendor.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
     start imscmservice
 
@@ -816,6 +828,18 @@ service per_mgr /system/vendor/bin/pm-service
     class core
     user system
     group system net_raw
+
+service per_proxy /system/vendor/bin/pm-proxy
+    class core
+    user system
+    group system
+    disabled
+
+on property:init.svc.per_mgr=running
+    start per_proxy
+
+on property:sys.shutdown.requested=*
+    stop per_proxy
 
 service hvdcp_opti /system/bin/hvdcp_opti
     class main

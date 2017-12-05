@@ -30,7 +30,7 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Permissions
 PRODUCT_COPY_FILES += \
-#    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
+    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
@@ -65,10 +65,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
 
 # ANT
-#PRODUCT_PACKAGES += \
-#    AntHalService \
-#    com.dsi.ant.antradio_library \
-#    libantradio
+PRODUCT_PACKAGES += \
+    AntHalService \
+    com.dsi.ant.antradio_library \
+    libantradio
 
 #Audio
 PRODUCT_PACKAGES += \
@@ -79,15 +79,13 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     libaudio-resampler \
     libqcompostprocbundle \
-    libqcomvisualizer \
     libqcomvoiceprocessing \
-    libvolumelistener \
     tinymix
 
+#Audio HIDL
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl \
-    android.hardware.broadcastradio@1.0-impl \
     android.hardware.soundtrigger@2.0-impl
 
 #Audio mixer
@@ -111,16 +109,13 @@ PRODUCT_COPY_FILES += \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/system/etc/r_submix_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/system/etc/usb_audio_policy_configuration.xml
 
-# Bluetooth
+# Bluetooth HIDL
 PRODUCT_PACKAGES += \
     libbt-vendor \
     android.hardware.bluetooth@1.0-impl
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.device@1.0-impl.legacy \
-    camera.device@3.2-impl \
-    android.hardware.camera.provider@2.4-impl.legacy \
     mm-qcamera-app \
     camera.msm8937 \
     libmm-qcamera \
@@ -129,43 +124,53 @@ PRODUCT_PACKAGES += \
     libqomx_core \
     SnapdragonCamera
 
+# Camera HIDL HAL
+PRODUCT_PACKAGES += \
+    camera.device@1.0-impl.legacy \
+    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-impl.legacy
+
 #configStore HIDL HAL service
 PRODUCT_PACKAGES += \
     android.hardware.configstore@1.0-service
 
 # Consumerir
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-impl \
     consumerir.msm8937
+
+# Consumerir HIDL
+PRODUCT_PACKAGES += \
+    android.hardware.ir@1.0-impl \
 
 # Display
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-impl \
-    android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.1-impl \
-    android.hardware.graphics.composer@2.1-service \
-    android.hardware.graphics.mapper@2.0-impl \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.renderscript@1.0-impl \
     copybit.msm8937 \
     gralloc.msm8937 \
     hwcomposer.msm8937 \
-    libgenlock \
     libtinyxml \
     memtrack.msm8937
+
+#Display HIDL
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.renderscript@1.0-impl
 
 # Display calibration
 PRODUCT_PACKAGES += \
     libjni_livedisplay
 
-# Doze mode
-#PRODUCT_PACKAGES += \
-#    XiaomiDoze
-
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl \
     libprotobuf-cpp-lite
+
+# DRM HIDL
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl
 
 # Fingerprint
 PRODUCT_PACKAGES += \
@@ -173,14 +178,17 @@ PRODUCT_PACKAGES += \
 
 # FM
 PRODUCT_PACKAGES += \
-    FM2 \
-    libfmjni \
-    libqcomfm_jni \
-    qcom.fmradio
+    FMRadio \
+    libfmjni
 
 # Gatekeeper HAL
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl
+    android.hardware.gatekeeper@1.0-impl \
+    android.hardware.gatekeeper@1.0-service
+
+# GNSS HAL
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl
 
 # GPS
 PRODUCT_BOOT_JARS += \
@@ -188,10 +196,8 @@ PRODUCT_BOOT_JARS += \
 
 PRODUCT_PACKAGES += \
     gps.msm8937 \
-    libcurl \
     libgnsspps \
-    libshims_get_process_name \
-    libshims_is_wifi_driver_loaded
+    libcurl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:system/etc/flp.conf \
@@ -201,23 +207,19 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf \
     $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/etc/xtwifi.conf
 
-# GNSS HAL
-PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl
-
-# HIDL
+# HIDL Manifest
 PRODUCT_COPY_FILES += \
 $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
 
-# Healthd HAL
+#Healthd hal
 PRODUCT_PACKAGES += \
     android.hardware.health@1.0-impl \
     android.hardware.health@1.0-convert \
     android.hardware.health@1.0-service
 
-# Gatekeeper HAL
+# IMS
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl
+    com.android.ims.rcsmanager
 
 # Init
 PRODUCT_PACKAGES += \
@@ -237,25 +239,35 @@ PRODUCT_PACKAGES += \
     init.recovery.qcom.rc \
     ueventd.qcom.rc
 
-# Keylayout
+#custom keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/ft5x06_720p.kl:system/usr/keylayout/ft5x06_720p.kl \
     $(LOCAL_PATH)/keylayout/ist30xx_ts_input.kl:system/usr/keylayout/ist30xx_ts_input.kl \
     $(LOCAL_PATH)/keylayout/msm8952-sku1-snd-card_Button_Jack.kl:system/usr/keylayout/msm8952-sku1-snd-card_Button_Jack.kl \
     $(LOCAL_PATH)/keylayout/uinput-fpc.kl:system/usr/keylayout/uinput-fpc.kl \
     $(LOCAL_PATH)/keylayout/uinput-gdx.kl:system/usr/keylayout/uinput-gdx.kl
+ 
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
 
 # Libshims
 PRODUCT_PACKAGES += \
     libshims_ims \
-    libshim_camera \
+    libshims_is_wifi_driver_loaded \
+    libshims_get_process_name \
     libshims_camera \
+    libshim_camera \
     libshims_sensor
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
     lights.msm8937
+
+#Light HIDL
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl
 
 # Media
 PRODUCT_PACKAGES += \
@@ -269,6 +281,10 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
+#media OMX
+PRODUCT_PACKAGES += \
+    android.hardware.media.omx@1.0-impl
+
 # Media
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
@@ -279,6 +295,12 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
 #NET
+PRODUCT_PACKAGES += \
+    netutils-wrapper-1.0 \
+    android.system.net.netd@1.0 \
+    libandroid_net \
+    libandroid_net_32
+
 # IPv6
 PRODUCT_PACKAGES += \
     ebtables \
@@ -298,37 +320,35 @@ PRODUCT_COPY_FILES += \
 
 # Power HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
     power.msm8937
 
-# RenderScript HAL
+# Power HIDL
 PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
+    android.hardware.power@1.0-impl
 
 # RIL
 PRODUCT_PACKAGES += \
-    android.hardware.radio@1.0-impl \
     libcnefeatureconfig \
     librmnetctl \
-    libxml2 \
-    rild_socket
+    libprotobuf-cpp-full \
+    rild_socket \
+    libxml2
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy
+    $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    sensors.land
+    sensors.msm8937
+
+# Sensors HIDL
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sensors/hals.conf:system/vendor/etc/sensors/hals.conf \
-    $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:system/vendor/etc/sensors/sensor_def_qcomdev.conf
-
-#Touchscreen
-PRODUCT_PACKAGES += \
-    libtinyxml2
+    $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
+    $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:system/etc/sensors/sensor_def_qcomdev.conf
 
 # Telephony packages
 PRODUCT_PACKAGES += \
@@ -339,20 +359,30 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf
 
-# Vibrator
+#Thermal
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl
+   android.hardware.thermal@1.0-impl \
+   android.hardware.thermal@1.0-service
+
+# USB HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
+
+#vibrator HIDL HAL
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service
+
+# WiFi HAL
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
     libcld80211 \
-    libqsap_sdk \
-    libQWiFiSoftApCfg \
-    libwpa_client \
     wificond \
     wifilogd \
-    dhcpcd.conf \
+    libwpa_client \
     wpa_supplicant \
     wpa_supplicant.conf
 
@@ -364,6 +394,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
+
+PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 # Inherit proprietary files
 $(call inherit-product-if-exists, vendor/xiaomi/land/land-vendor.mk)
