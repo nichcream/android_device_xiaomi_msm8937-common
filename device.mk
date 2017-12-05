@@ -28,6 +28,10 @@ TARGET_SCREEN_WIDTH := 720
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
+# Copy prebuilt libc - REMOVE ASAP
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilts/libc.so:system/lib/libc.so
+
 # Permissions
 PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.dsi.ant.antradio_library.xml \
