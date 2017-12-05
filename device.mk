@@ -344,10 +344,6 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    sensors.msm8937
-
-# Sensors HIDL
-PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl
 
 PRODUCT_COPY_FILES += \
