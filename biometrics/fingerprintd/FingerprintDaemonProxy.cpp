@@ -203,7 +203,7 @@ int64_t FingerprintDaemonProxy::openHal() {
 
     if (kVersion != device->version) {
         ALOGE("Wrong fp version. Expected %d, got %d", kVersion, device->version);
-        return 0;
+        // return 0;
     }
 
     mDevice = reinterpret_cast<fingerprint_device_t*>(device);

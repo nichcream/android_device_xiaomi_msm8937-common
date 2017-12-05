@@ -5,3 +5,4 @@ service fps_hal /vendor/bin/hw/android.hardware.biometrics.fingerprint@2.0-servi
     class late_start
     user system
     group system input
+    disabled
