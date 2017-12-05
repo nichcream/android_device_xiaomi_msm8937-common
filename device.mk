@@ -261,6 +261,10 @@ PRODUCT_PACKAGES += \
     libshim_camera \
     libshims_sensor
 
+# Copy prebuilt libc - temp hack for camera till executable shimming is fixed
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/libshims/libc.so:system/lib/libc.so
+
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8937
