@@ -1679,8 +1679,11 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
     mCameraDevice.ops = &mCameraOps;
     mCameraDevice.priv = this;
 
+#ifndef USE_DISPLAY_SERVICE
     mCameraDisplay = new QCameraDisplay();
-
+#else
+    mCameraDisplay = QCameraDisplay::instance();
+#endif
     pthread_condattr_t mCondAttr;
 
     pthread_condattr_init(&mCondAttr);
@@ -1714,12 +1717,6 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
     mDeferredWorkThread.launch(deferredWorkRoutine, this);
     mDeferredWorkThread.sendCmd(CAMERA_CMD_TYPE_START_DATA_PROC, FALSE, FALSE);
     m_perfLock.lock_init();
-
-#ifdef USE_DISPLAY_SERVICE
-    DeferWorkArgs args;
-    memset(&args, 0, sizeof(args));
-    queueDeferredWork(CMD_DEF_DISPLAY_INIT, args);
-#endif //USE_DISPLAY_SERVICE
 
     pthread_mutex_init(&mGrallocLock, NULL);
     mEnqueuedBuffers = 0;
@@ -1769,10 +1766,6 @@ QCamera2HardwareInterface::~QCamera2HardwareInterface()
     m_perfLock.lock_rel();
     m_perfLock.lock_deinit();
 
-    if (mCameraDisplay != NULL) {
-         delete mCameraDisplay;
-         mCameraDisplay = NULL;
-    }
     pthread_mutex_destroy(&m_lock);
     pthread_cond_destroy(&m_cond);
     pthread_mutex_destroy(&m_evtLock);
@@ -9611,13 +9604,6 @@ void *QCamera2HardwareInterface::deferredWorkRoutine(void *obj)
                         job_status = bgTask->bgFunction(bgTask->bgArgs);
                     }
                     break;
-#ifdef USE_DISPLAY_SERVICE
-                case CMD_DEF_DISPLAY_INIT:
-                    {
-                        pme->mCameraDisplay->init();
-                    }
-                    break;
-#endif //USE_DISPLAY_SERVICE
                 default:
                     LOGE("Incorrect command : %d", dw->cmd);
                 }
