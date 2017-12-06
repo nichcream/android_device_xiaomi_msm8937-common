@@ -226,7 +226,7 @@ TARGET_RELEASETOOLS_EXTENSIONS 	 := device/qcom/common
 # SELinux
 #BOARD_SEPOLICY_DIRS += \
 #    $(DEVICE_PATH)/sepolicy
-#include device/qcom/sepolicy/sepolicy.mk
+include device/qcom/sepolicy/sepolicy.mk
 
 # Time
 BOARD_USES_QC_TIME_SERVICES := true
