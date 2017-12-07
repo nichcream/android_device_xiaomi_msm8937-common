@@ -611,12 +611,12 @@ on property:persist.radio.otaconfig=0
 on property:persist.radio.otaconfig=1
     setprop persist.radio.start_ota_daemon 1
 
-service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
-    class late_start
-    user root
-    group root
-    disabled
-    writepid /dev/cpuset/system-background/tasks
+#service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+#    class late_start
+#    user root
+#    group root
+#    disabled
+#    writepid /dev/cpuset/system-background/tasks
 
 service wfdservice /system/bin/wfdservice
     class main
