@@ -1,0 +1,9 @@
+# THIS SHOULD BE REMOVED IN ANDROID-8.1
+# Allow sensor hals to access and use gralloc memory allocated by
+# android.hardware.graphics.allocator
+allow hal_sensors_default hal_graphics_allocator_default:fd use;
+allow hal_sensors_default ion_device:chr_file r_file_perms;
+
+# allow sensor hal to use lock for keeping system awake for wake up
+# events delivery.
+wakelock_use(hal_sensors_default);
