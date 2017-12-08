@@ -1,3 +1,4 @@
 #============= priv_app ==============
 allow priv_app device:dir { read open };
 allow priv_app rfs_system_file:dir getattr;
+allow priv_app storage_stub_file:dir { getattr search open read };
