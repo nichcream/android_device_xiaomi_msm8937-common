@@ -1,2 +1,3 @@
 #============= cameraserver ==============
 allow cameraserver debugfs_tracing:file { open write };
+allow cameraserver socket_device:sock_file { rw_file_perms };

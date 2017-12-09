@@ -1,4 +1,5 @@
 allow untrusted_app_25 camera_prop:file { getattr open read };
+allow untrusted_app_25 camera_data_file:dir { getattr open read };
 allow untrusted_app_25 proc_stat:file { getattr open read };
 allow untrusted_app_25 sdcardfs:lnk_file { getattr open read };
 allow untrusted_app_25 mnt_media_rw_file:dir { getattr open read };

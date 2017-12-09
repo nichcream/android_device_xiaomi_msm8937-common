@@ -1,4 +1,5 @@
 allow init cameraserver:fd use;
+allow init hal_graphics_allocator_default:fd { use };
 allow init graphics_device:chr_file write;
 allow init hal_camera_default:fd use;
 allow init ion_device:chr_file { ioctl write };
