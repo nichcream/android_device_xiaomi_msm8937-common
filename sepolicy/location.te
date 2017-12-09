@@ -1,4 +1,4 @@
 allow location self:capability net_raw;
-allow location system_data_file:sock_file { write open create};
+allow location system_data_file:sock_file { write open create };
 allow location sensorservice_service:service_manager find;
 allow location permission_service:service_manager find;
