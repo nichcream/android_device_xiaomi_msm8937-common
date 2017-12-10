@@ -257,6 +257,7 @@ PRODUCT_PACKAGES += \
     libshims_ims \
     libshims_is_wifi_driver_loaded \
     libshims_get_process_name \
+    libshim_atomic \
     libshims_camera \
     libshim_camera \
     libshims_sensor
