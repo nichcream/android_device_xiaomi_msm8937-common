@@ -32,3 +32,4 @@ allow init uio_device:chr_file write;
 allow init vfat:file { getattr open read };
 allow init video_device:chr_file { ioctl write };
 allow init debugfs_tracing:file { open read write };
+allow init sensors_device:chr_file { ioctl write };
