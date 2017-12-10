@@ -27,6 +27,7 @@ allow init socket_device:sock_file { create setattr };
 allow init system_data_file:sock_file write;
 allow init system_server:fd use;
 allow init system_server:unix_stream_socket { read write };
+allow init system_server:binder call;
 allow init tee_device:chr_file { write };
 allow init uio_device:chr_file write;
 allow init vfat:file { getattr open read };
