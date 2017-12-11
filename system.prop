@@ -100,6 +100,9 @@ persist.gps.qc_nlp_in_use=1
 persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
 
+# SdcardFs
+ro.sys.sdcardfs=false
+
 #Media
 media.msm8956.version=0
 media.msm8956hw=0
