@@ -1565,20 +1565,18 @@ etc/firmware/modem_config/S88537EC1/row_mcfg_sw.mbn
 lib/hw/consumerir.default.so
 lib64/hw/consumerir.default.so
 
-# Sensors - from op3 (Oneplus 3/3T)
-vendor/bin/sensors.qcom|164c7eb8f17115fec78b067b922b9e34b51282d8
-vendor/lib/hw/activity_recognition.msm8953.so:vendor/lib/hw/activity_recognition.msm8937.so|a93ab9aa549c2ce5b9ba5b1b8d62a192a66a6c1a
-vendor/lib/libsensor1.so|d8d2f53a261c045d814e5a70ba1194c2f0075942
-vendor/lib/libsensor_reg.so|586cff9ab58b09be6b3632f422a55a7e264fe520
-vendor/lib/libsensor_thresh.so|8c64fb39d33fb743600a9aece5d4f8b5fa8358c9
-vendor/lib/libsensor_user_cal.so|0f274211bf092fbcfd68b0b65a5225c3371f410a
-vendor/lib/sensors.ssc.so|08f3823f5cf90ff4adc7a471509c5c0875ee061d
-vendor/lib64/hw/activity_recognition.msm8953.so:vendor/lib64/hw/activity_recognition.msm8937.so|747cfeefc8e957d75f7b7e80f7842f8723413431
-vendor/lib64/libsensor1.so|4ecd556a15acefd3e7b17daa0af35ef071b29919
-vendor/lib64/libsensor_reg.so|f351d9d86c928a56c787e566aa5daf581fbc356d
-vendor/lib64/libsensor_thresh.so|33b33d000bc8d577463277a13c443b499b342980
-vendor/lib64/libsensor_user_cal.so|fe6fb4ae9388bf7b3cc6e98dd2b1c6426be1bb07
-vendor/lib64/sensors.ssc.so|f1cb1ce05b6a20f2346f75b4c671eb92e731624e
+# Sensors - from marmite (Wileyfox Swift 2/2X)
+bin/sensors.qcom:vendor/bin/sensors.qcom|f09a6afdd652814e677fd4d6390ce9384eced7e7
+vendor/lib/hw/activity_recognition.msm8937.so|b0c34d4d260dd057ea9bd69c633d52833af68496
+vendor/lib/libsensor1.so|eca43845595ee7d6f04cb5793bdcb203efa9041b
+vendor/lib/libsensor_reg.so|33d1d17cc95129f021241c409e5586b76a4f0ae7
+vendor/lib/sensor_calibrate.so|5799fd41e6b7bbfe124997089936261a30c0b632
+vendor/lib/sensors.ssc.so|37e186f0e76d21cc88f9dffa58576730bccc38bd
+vendor/lib64/hw/activity_recognition.msm8937.so|5f97ab20e6fa48d06e78a00820073953efe5f7a4
+vendor/lib64/libsensor1.so|11246e09e73eac8d8b0518ab735e0ffaf3496b1a
+vendor/lib64/libsensor_reg.so|348dcaa5ada92efd425e1d959f04aa1a292e6b56
+vendor/lib64/sensor_calibrate.so|46533b465135d03c7be53cdaccc4b417ebec68f8
+vendor/lib64/sensors.ssc.so|d9dcdfb449998ac7d005180546283e4a938c2b2c
 
 # Subsystem restart
 bin/ssr_diag
