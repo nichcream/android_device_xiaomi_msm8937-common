@@ -229,9 +229,9 @@ on post-fs-data
     # qti-logkit data
     mkdir /data/misc/qti-logkit/ 0771 system system
     mkdir /data/misc/qti-logkit/shared-privileged/ 2770 system system
-    mkdir /data/misc/qti-logkit/shared-public/ 2770 system qcom_diag
+    mkdir /data/misc/qti-logkit/shared-public/ 2770 system oem_2901
     mkdir /data/misc/qti-logkit/socket-privileged/ 2770 system system
-    mkdir /data/misc/qti-logkit/socket-public/ 2750 system qcom_diag
+    mkdir /data/misc/qti-logkit/socket-public/ 2750 system oem_2901
     mkdir /data/misc/qti-logkit/logdata/ 2750 system shell
 
     # Sensors
@@ -518,7 +518,7 @@ service netmgrd /system/bin/netmgrd
 service qti /system/vendor/bin/qti
     class main
     user radio
-    group radio net_raw qcom_diag usb net_admin
+    group radio net_raw oem_2901 usb net_admin
 #    writepid /dev/cpuset/system-background/tasks
 
 service sensors /system/vendor/bin/sensors.qcom
@@ -551,7 +551,7 @@ service wpa_supplicant /system/vendor/bin/hw/wpa_supplicant \
 service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
-    group gps inet qcom_diag wifi
+    group gps inet oem_2901 wifi
 
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
@@ -563,7 +563,7 @@ service ril-daemon1 /vendor/bin/hw/rild -c 2
     socket rild2 stream 660 root radio
     socket rild-debug2 stream 660 radio system
     user radio
-    group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
+    group radio cache inet misc audio sdcard_r sdcard_rw diag oem_2901 log
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
 service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh

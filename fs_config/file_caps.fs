@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+[AID_QTI_DIAG]
+value:2901
 
 [system/vendor/bin/imsdatadaemon]
 user: AID_SYSTEM
