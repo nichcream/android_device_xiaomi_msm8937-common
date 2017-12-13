@@ -4,13 +4,6 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_CLANG_CFLAGS += \
-        -Wno-error=unused-private-field \
-        -Wno-error=strlcpy-strlcat-size \
-        -Wno-error=gnu-designator \
-        -Wno-error=unused-variable \
-        -Wno-error=format
-
 LOCAL_SRC_FILES := \
         util/QCameraBufferMaps.cpp \
         util/QCameraCmdThread.cpp \
@@ -82,11 +75,13 @@ LOCAL_C_INCLUDES := \
         $(call project-path-for,qcom-media)/mm-core/inc \
         system/core/include/cutils \
         system/core/include/system \
-        system/media/camera/include/system
+        system/media/camera/include/system \
+        frameworks/native/include \
+        frameworks/native/include/media/openmax
 
 #HAL 1.0 Include paths
 LOCAL_C_INCLUDES += \
-        $(LOCAL_PATH)/HAL
+        $(call project-path-for,qcom-camera)/QCamera2/HAL
 
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
@@ -108,8 +103,10 @@ LOCAL_C_INCLUDES += \
 LOCAL_C_INCLUDES += \
         $(call project-path-for,qcom-display)/libqservice
 LOCAL_SHARED_LIBRARIES := libcamera_client liblog libhardware libutils libcutils libdl libsync libgui
+LOCAL_SHARED_LIBRARIES += libsensor libstagefrighthw libhidltransport android.hidl.token@1.0-utils android.hardware.graphics.bufferqueue@1.0
 LOCAL_SHARED_LIBRARIES += libmmcamera_interface libmmjpeg_interface libui libcamera_metadata
 LOCAL_SHARED_LIBRARIES += libqdMetaData libqservice libbinder
+LOCAL_STATIC_LIBRARIES := libarect libbase
 ifeq ($(TARGET_TS_MAKEUP),true)
 LOCAL_SHARED_LIBRARIES += libts_face_beautify_hal libts_detected_face_hal
 endif

@@ -31,7 +31,6 @@
 #define __QCAMERADISPLAY_H__
 
 #include <gui/DisplayEventReceiver.h>
-#undef epoll_event
 #include <android/looper.h>
 #include <utils/Looper.h>
 

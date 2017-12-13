@@ -515,6 +515,7 @@ QCamera3HardwareInterface::~QCamera3HardwareInterface()
             stream_config_info.buffer_info.min_buffers = MIN_INFLIGHT_REQUESTS;
             stream_config_info.buffer_info.max_buffers =
                     m_bIs4KVideo ? 0 : MAX_INFLIGHT_REQUESTS;
+            clear_metadata_buffer(mParameters);
             ADD_SET_PARAM_ENTRY_TO_BATCH(mParameters, CAM_INTF_META_STREAM_INFO,
                     stream_config_info);
             int rc = mCameraHandle->ops->set_parms(mCameraHandle->camera_handle, mParameters);
@@ -2732,13 +2733,14 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
 
         // Check whether any stream buffer corresponding to this is dropped or not
         // If dropped, then send the ERROR_BUFFER for the corresponding stream
+        // The API does not expect a blob buffer to be dropped
         if (p_cam_frame_drop && p_cam_frame_drop->frame_dropped) {
             /* Clear notify_msg structure */
             camera3_notify_msg_t notify_msg;
             memset(&notify_msg, 0, sizeof(camera3_notify_msg_t));
             for (List<RequestedBufferInfo>::iterator j = i->buffers.begin();
                     j != i->buffers.end(); j++) {
-//               if (j->stream->format != HAL_PIXEL_FORMAT_BLOB) {
+               if (j->stream->format != HAL_PIXEL_FORMAT_BLOB) {
                    QCamera3ProcessingChannel *channel = (QCamera3ProcessingChannel *)j->stream->priv;
                    uint32_t streamID = channel->getStreamID(channel->getStreamTypeMask());
                    for (uint32_t k = 0; k < p_cam_frame_drop->cam_stream_ID.num_streams; k++) {
@@ -2760,10 +2762,10 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                            mPendingFrameDropList.push_back(PendingFrameDrop);
                       }
                    }
-//               } else {
-//                   LOGE("JPEG buffer dropped for frame number %d",
-//                            i->frame_number);
-//               }
+               } else {
+                   LOGE("JPEG buffer dropped for frame number %d",
+                            i->frame_number);
+               }
             }
         }
 

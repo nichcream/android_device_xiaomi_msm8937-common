@@ -10,9 +10,8 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS := -Werror \
                    -g -O0
 
-LOCAL_C_INCLUDES := $(TOP)/frameworks/native/include/media/openmax \
-                    $(LOCAL_PATH)/../qexif \
-                    $(call project-path-for,qcom-media)/mm-core/inc
+LOCAL_C_INCLUDES := frameworks/native/include/media/openmax \
+                    $(LOCAL_PATH)/../qexif
 
 LOCAL_INC_FILES := qomx_core.h \
                    QOMX_JpegExtensions.h
