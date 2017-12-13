@@ -263,7 +263,7 @@ PRODUCT_PACKAGES += \
 
 # Copy prebuilt libc - temp hack for camera till executable shimming is fixed
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/libshims/libc.so:system/lib/libc.so
+    $(LOCAL_PATH)/libshims/prebuilts/lib/libc.so:system/lib/libc.so
 
 # Lights
 PRODUCT_PACKAGES += \
