@@ -301,12 +301,13 @@
     <!-- Indicate whether closing the lid causes the device to go to sleep and opening
          it causes the device to wake up.
          The default is false. -->
-    <bool name="config_lidControlsSleep">true</bool>
+    <bool name="config_lidControlsSleep">false</bool>
 
     <!-- Default value for proximity check on screen wake
          NOTE ! - Enable for devices that have a fast response
          proximity sensor (ideally < 300ms) -->
-    <bool name="config_proximityCheckOnWake">false</bool>
+    <bool name="config_proximityCheckOnWake">true</bool>
+    <integer name="config_proximityCheckTimeout">100</integer>
 
     <!-- Indicate whether to allow the device to suspend when the screen is off
          due to the proximity sensor.  This resource should only be set to true
@@ -456,7 +457,7 @@
     <!-- bool name="config_uiBlurEnabled">true</bool -->
 
     <!-- Whether notify fingerprint client of successful cancelled authentication -->
-    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool>
+<!--    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool> -->
 
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
