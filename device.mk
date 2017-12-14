@@ -215,7 +215,8 @@ PRODUCT_COPY_FILES += \
 
 # HIDL Manifest
 PRODUCT_COPY_FILES += \
-$(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
+    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml \
+    $(LOCAL_PATH)/compatibility_matrix.xml:system/vendor/compatibility_matrix.xml
 
 #Healthd hal
 PRODUCT_PACKAGES += \
