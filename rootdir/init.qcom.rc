@@ -36,6 +36,8 @@ on early-init
 
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
+    chown root system /dev/kmsg
+    chmod 0620 /dev/kmsg
 
 on init
     export LD_SHIM_LIBS "/system/vendor/lib64/lib-imsvt.so|libshims_ims.so:/system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so:/system/bin/mm-qcamera-daemon|libshims_camera.so:/system/bin/mm-qcamera-daemon|libshim_camera.so:/system/vendor/lib64/lib-imscamera.so|libshim_ims_camera.so:/system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_camera.so"
@@ -66,7 +68,6 @@ on post-fs
     write /proc/sys/vm/page-cluster 0
     write /proc/sys/vm/swappiness 100
     chmod 0755 /sys/kernel/debug/tracing
-
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -100,15 +101,20 @@ on post-fs-data
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
     # Create the directories used by the Wireless subsystem
+    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi/sockets 0770 wifi wifi
+    mkdir /data/vendor/wifi/hostapd 0770 wifi wifi
+    mkdir /data/vendor/wifi/hostapd/ctrl 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    mkdir /data/misc/dhcp 0777 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
     #create netmgr log dir
-    mkdir /data/misc/netmgr 0770 radio radio
-    chmod 0770 /data/misc/netmgr
+    mkdir /data/vendor/netmgr 0770 radio radio
+    chmod 0770 /data/vendor/netmgr
 
     # Create the directories used by CnE subsystem
     mkdir /data/connectivity 0771 system system
@@ -122,11 +128,11 @@ on post-fs-data
     chown system system /data/dpm/nsrm
 
     # Create directory used by audio subsystem
-    mkdir /data/misc/audio 0770 audio audio
+    mkdir /data/vendor/misc/audio 0770 audio audio
 
     # Create directory for audio delta files
-    mkdir /data/misc/audio/acdbdata 0770 media audio
-    mkdir /data/misc/audio/acdbdata/delta 0770 media audio
+    mkdir /data/vendor/misc/audio/acdbdata 0770 media audio
+    mkdir /data/vendor/misc/audio/acdbdata/delta 0770 media audio
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
@@ -164,12 +170,9 @@ on post-fs-data
     setprop wlan.driver.status not_ok
 
     #Create directories for Location services
-    mkdir /data/misc/location 0770 gps gps
-    mkdir /data/misc/location/mq 0770 gps gps
-    mkdir /data/misc/location/xtwifi 0770 gps gps
-    mkdir /data/misc/location/gpsone_d 0770 system gps
-    mkdir /data/misc/location/quipc 0770 gps system
-    mkdir /data/misc/location/gsiff 0770 gps gps
+    mkdir /data/vendor/location 0770 gps gps
+    mkdir /data/vendor/location/mq 0770 gps gps
+    mkdir /data/vendor/location/xtwifi 0770 gps gps
 
     #Create directory from IMS services
     mkdir /data/shared 0755
@@ -178,11 +181,11 @@ on post-fs-data
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
 
-    mkdir /data/audio/ 0770 media audio
+    mkdir /data/vendor/audio/ 0770 media audio
 
     # Create a folder for audio delta files
-    mkdir /data/audio/acdbdata 0770 media audio
-    mkdir /data/audio/acdbdata/delta 0770 media audio
+    mkdir /data/vendor/audio/acdbdata 0770 media audio
+    mkdir /data/vendor/audio/acdbdata/delta 0770 media audio
 
     setprop vold.post_fs_data_done 1
 
@@ -202,11 +205,12 @@ on post-fs-data
     #mkdir /data/misc/SelfHost/socket/ 2770 system system
 
     #Create PERFD deamon related dirs
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
+    mkdir /data/vendor/perfd 0770 root system
+    chmod 2770 /data/vendor/perfd
+    rm /data/vendor/perfd/default_values
 
     #Create IOP  deamon related dirs
-    mkdir /data/misc/iop 0770 root system
+    mkdir /data/vendor/iop 0770 root system
 
     # Mark the copy complete flag to not completed
     write /data/misc/radio/copy_complete 0
@@ -235,6 +239,7 @@ on post-fs-data
 
     # Sensors
     chmod 0775 /persist/sensors
+    mkdir /persist/sensors/registry/registry
     chmod 0664 /persist/sensors/sensors_settings
     chown system root /persist/sensors/sensors_settings
 
@@ -303,6 +308,9 @@ on boot
     mkdir /persist/bluetooth 0770 bluetooth bluetooth
     mkdir /persist/misc 0770 system system
     mkdir /persist/time 0770 system system
+
+    # Create directory used for display
+    mkdir /persist/display 0770 system graphics
 
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
@@ -436,7 +444,7 @@ on class_start:late_start
     chown radio radio /data/misc/radio/qcril.db
     write /data/misc/radio/db_check_done 1
 
-service iop /system/bin/iop
+service iop /vendor/bin/iop
     class main
     user root
     group root
@@ -447,6 +455,7 @@ on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
     #WDSP FW boot sysfs node used by STHAL
     chown media audio /sys/kernel/wdsp0/boot
+    chown media audio /sys/kernel/wcd_cpe0/fw_na
 
 #bug156417 zhaoqf_sh add Allow usb charging to be disabled peristently
 on property:persist.sys.chgdisabled=1
@@ -462,12 +471,18 @@ on property:vold.decrypt=trigger_restart_framework
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
+service cnd /system/vendor/bin/cnd
+    class main
+    user system
+    group system wifi inet radio wakelock net_admin
+    #writepid /dev/cpuset/system-background/tasks
+
 service dpmd /system/bin/dpmd
     class late_start
     socket dpmd stream 660 root system
     group system readproc
 
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
     user root
     oneshot
@@ -514,13 +529,13 @@ service netmgrd /system/bin/netmgrd
     group system wakelock
 #    writepid /dev/cpuset/system-background/tasks
 
-service qti /system/vendor/bin/qti
+service qti /vendor/bin/qti
     class main
     user radio
     group radio net_raw oem_2901 usb net_admin
 #    writepid /dev/cpuset/system-background/tasks
 
-service sensors /system/vendor/bin/sensors.qcom
+service sensors /vendor/bin/sensors.qcom
     class core
     user root
     group root
@@ -611,12 +626,11 @@ on property:persist.radio.otaconfig=0
 on property:persist.radio.otaconfig=1
     setprop persist.radio.start_ota_daemon 1
 
-#service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
-#    class late_start
+#service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+#    class core
 #    user root
 #    group root
 #    disabled
-#    writepid /dev/cpuset/system-background/tasks
 
 service wfdservice /system/bin/wfdservice
     class main
@@ -691,20 +705,12 @@ on property:persist.usb.chgdisabled=1
 on property:persist.usb.chgdisabled=0
     write /sys/class/power_supply/battery/charging_enabled 1
 
-service qseecomd /system/vendor/bin/qseecomd
+service qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
 
-service perfd /system/vendor/bin/perfd
-    class main
-    user root
-    group root readproc
-    socket perfd seqpacket 0666 root system
-    disabled
-#    writepid /dev/cpuset/system-background/tasks
-
-service thermal-engine /system/vendor/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine
     class main
     user root
     socket thermal-send-client stream 0666 system system
@@ -718,12 +724,12 @@ service time_daemon /system/bin/time_daemon
     user root
     group root
 
-service audiod /system/bin/audiod
+service audiod /system/vendor/bin/audiod
     class late_start
     user system
     group system
 
-service wcnss-service /system/bin/wcnss_service
+service wcnss-service /system/vendor/bin/wcnss_service
     class main
     user system
     group system wifi radio
@@ -773,7 +779,7 @@ on property:vendor.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
     start imscmservice
 
-service ppd /system/vendor/bin/mm-pp-dpps
+service ppd /vendor/bin/mm-pp-dpps
     class late_start
     disabled
     user system
@@ -812,17 +818,18 @@ service hbtp /system/vendor/bin/hbtp_daemon
     group system
     disabled
 
-service adsprpcd /system/bin/adsprpcd
+service adsprpcd /system/vendor/bin/adsprpcd
     class main
     user media
     group media
 
-service per_mgr /system/vendor/bin/pm-service
+service per_mgr /vendor/bin/pm-service
     class core
     user system
     group system net_raw
+    ioprio rt 4
 
-service per_proxy /system/vendor/bin/pm-proxy
+service per_proxy /vendor/bin/pm-proxy
     class core
     user system
     group system
