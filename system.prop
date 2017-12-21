@@ -82,6 +82,7 @@ dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 debug.enable.sglscale=1
 sdm.debug.disable_skip_validate=1
+debug.sf.recomputecrop=0
 persist.debug.wfd.enable=1
 persist.hwc.enable_vds=1
 
