@@ -841,6 +841,12 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
+service energy-awareness /system/vendor/bin/energy-awareness
+    class main
+    user root
+    group system
+    oneshot
+
 service hvdcp_opti /system/bin/hvdcp_opti
     class main
     user root
