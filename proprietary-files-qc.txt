@@ -111,26 +111,6 @@ bin/hvdcp_opti
 lib/hw/consumerir.default.so
 lib64/hw/consumerir.default.so
 
-# DPM - from santoni (Redmi 4X)
-bin/dpmd
-etc/dpm/dpm.conf
-etc/dpm/nsrm/NsrmConfiguration.xml
-etc/permissions/com.qti.dpmframework.xml
-etc/permissions/dpmapi.xml
-framework/com.qti.dpmframework.jar
-framework/dpmapi.jar
-framework/tcmclient.jar
-vendor/lib/libdpmctmgr.so
-vendor/lib/libdpmfdmgr.so
-vendor/lib/libdpmframework.so
-vendor/lib/libdpmnsrm.so
-vendor/lib/libdpmtcm.so
-vendor/lib64/libdpmctmgr.so
-vendor/lib64/libdpmfdmgr.so
-vendor/lib64/libdpmframework.so
-vendor/lib64/libdpmnsrm.so
-vendor/lib64/libdpmtcm.so
-
 # DRM - from OnePlus 3/3T
 vendor/bin/qseecomd
 vendor/lib/libQSEEComAPI.so
@@ -331,13 +311,6 @@ vendor/media/PFFprec_600.emd
 # Modem - from santoni (Redmi 4X)
 vendor/lib/libwms.so
 vendor/lib64/libwms.so
-
-# Network - from santoni (Redmi 4X)
--priv-app/QtiTetherService/QtiTetherService.apk
-vendor/lib/libconnctrl.so
-vendor/lib/libQtiTether.so
-vendor/lib64/libconnctrl.so
-vendor/lib64/libQtiTether.so
 
 # Perf - from tissot (Mi A1)
 lib/vendor.qti.hardware.iop@1.0.so
