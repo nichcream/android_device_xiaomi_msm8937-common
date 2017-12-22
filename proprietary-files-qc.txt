@@ -382,6 +382,10 @@ vendor/lib/libdisp-aba.so
 vendor/lib64/libdisp-aba.so
 
 # QMI - from tissot (Mi A1)
+lib/libdiag_system.so
+lib/libqmi_cci_system.so
+lib64/libdiag_system.so
+lib64/libqmi_cci_system.so
 etc/permissions/qti_permissions.xml
 vendor/bin/irsc_util
 vendor/lib/libdiag.so
