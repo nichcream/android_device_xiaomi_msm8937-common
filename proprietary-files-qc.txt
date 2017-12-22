@@ -131,7 +131,7 @@ vendor/lib64/libdpmframework.so
 vendor/lib64/libdpmnsrm.so
 vendor/lib64/libdpmtcm.so
 
-# DRM - from tissot (Mi A1)
+# DRM - from OnePlus 3/3T
 vendor/bin/qseecomd
 vendor/lib/libQSEEComAPI.so
 vendor/lib/libStDrvInt.so
@@ -139,7 +139,7 @@ vendor/lib/libcppf.so
 vendor/lib/libqisl.so
 vendor/lib/librpmb.so
 vendor/lib/libssd.so
-#vendor/lib64/lib-sec-disp.so
+vendor/lib64/lib-sec-disp.so
 vendor/lib64/libGPreqcancel.so
 vendor/lib64/libGPreqcancel_svc.so
 vendor/lib64/libQSEEComAPI.so
@@ -193,16 +193,14 @@ vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
 vendor/lib64/vendor.qti.gnss@1.0_vendor.so
 
-# Graphics - from tissot (Mi A1)
-lib/libsd_sdk_display.so
-lib64/libsd_sdk_display.so
+# Graphics - from OnePlus 3/3T
 vendor/lib/egl/eglSubDriverAndroid.so
 vendor/lib/egl/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
 vendor/lib/egl/libGLESv2_adreno.so
 vendor/lib/egl/libQTapGLES.so
 vendor/lib/egl/libq3dtools_adreno.so
-vendor/lib/hw/vulkan.msm8953.so:vendor/lib/hw/vulkan.msm8937.so
+vendor/lib/hw/vulkan.msm8996.so:vendor/lib/hw/vulkan.msm8937.so
 vendor/lib/libC2D2.so
 vendor/lib/libCB.so
 vendor/lib/libOpenCL.so
@@ -221,6 +219,7 @@ vendor/lib/libmm-qdcm.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/libscalar.so
+vendor/lib/libsd_sdk_display.so
 vendor/lib/libsdm-color.so
 vendor/lib/libsdm-diag.so
 -vendor/lib/libsdm-disp-vndapis.so
@@ -232,7 +231,7 @@ vendor/lib64/egl/libGLESv1_CM_adreno.so
 vendor/lib64/egl/libGLESv2_adreno.so
 vendor/lib64/egl/libQTapGLES.so
 vendor/lib64/egl/libq3dtools_adreno.so
-vendor/lib64/hw/vulkan.msm8953.so:vendor/lib64/hw/vulkan.msm8937.so
+vendor/lib64/hw/vulkan.msm8996.so:vendor/lib64/hw/vulkan.msm8937.so
 vendor/lib64/libC2D2.so
 vendor/lib64/libCB.so
 vendor/lib64/libOpenCL.so
@@ -252,14 +251,13 @@ vendor/lib64/libmm-qdcm.so
 vendor/lib64/librs_adreno.so
 vendor/lib64/librs_adreno_sha1.so
 vendor/lib64/libscalar.so
+vendor/lib64/libsd_sdk_display.so
 vendor/lib64/libsdm-color.so
 vendor/lib64/libsdm-diag.so
 -vendor/lib64/libsdm-disp-vndapis.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libtinyxml2_1.so
-
-# Graphics - from santoni (Redmi 4X)
-vendor/lib64/libuiblur.so|4b3fabf5ded7c4af531abde681676fc5e9248494
+vendor/lib64/libuiblur.so
 
 # Graphics firmware - from santoni (Redmi 4X)
 etc/firmware/a530_gpmu.fw2
