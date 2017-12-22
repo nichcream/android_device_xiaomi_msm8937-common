@@ -322,8 +322,13 @@ vendor/lib64/libmm-color-convertor.so
 vendor/lib64/libvpplibrary.so
 
 # Media - from santoni (Redmi 4X)
-#vendor/media/LMspeed_508.emd|392b2150ecd454501a5951874a002ba80e40fc74
-#vendor/media/PFFprec_600.emd|2e9e82a710ddeffa2ceb16bbbff98
+etc/firmware/DE.o.msm8937
+lib/libOmxSwVdec.so
+lib/libOmxSwVencMpeg4.so
+lib64/libOmxSwVdec.so
+lib64/libOmxSwVencMpeg4.so
+vendor/media/LMspeed_508.emd
+vendor/media/PFFprec_600.emd
 
 # Modem - from santoni (Redmi 4X)
 vendor/lib/libwms.so
