@@ -23,7 +23,7 @@ etc/sound_trigger_mixer_paths_wcd9335.xml
 etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
 etc/surround_sound_3mic/surround_sound_rec_5.1.cfg
 lib/soundfx/libdirac.so
-#lib/libDiracAPI_SHARED.so
+lib/libDiracAPI_SHARED.so
 vendor/etc/diracmobile.config
 vendor/lib/libhwdaphal.so
 vendor/lib64/libhwdaphal.so
