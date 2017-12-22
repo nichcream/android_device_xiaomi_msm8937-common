@@ -220,9 +220,6 @@ TARGET_RECOVERY_FSTAB 		 := $(DEVICE_PATH)/rootdir/fstab.qcom
 #TARGET_RECOVERY_UPDATER_LIBS  	 := librecovery_updater_msm
 TARGET_RELEASETOOLS_EXTENSIONS 	 := device/qcom/common
 
-# Sensors
-USE_SENSOR_MULTI_HAL := true
-
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
