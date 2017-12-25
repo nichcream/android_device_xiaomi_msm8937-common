@@ -365,8 +365,7 @@ PRODUCT_COPY_FILES += \
 
 # Telephony packages
 PRODUCT_PACKAGES += \
-    ims-ext-common \
-    telephony-ext
+    ims-ext-common
 
 # Thermal
 PRODUCT_COPY_FILES += \
