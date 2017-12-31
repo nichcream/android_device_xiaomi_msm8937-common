@@ -418,8 +418,7 @@ etc/permissions/telephonyservice.xml
 -framework/QtiTelephonyServicelibrary.jar
 -framework/qcrilhook.jar
 -framework/qti-telephony-common.jar
--framework/telephony-ext.jar
-#lib64/libparam.so
+framework/telephony-ext.jar
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/hw/rild
 vendor/bin/ipacm-diag
