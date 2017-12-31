@@ -269,6 +269,15 @@ vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
 # Media - from tissot (Mi A1)
+lib/libmmosal.so
+lib/libOmxMux.so
+lib/libstagefright_soft_flacdec.so
+lib64/libmmosal.so
+lib64/libOmxMux.so
+lib64/libstagefright_soft_flacdec.so
+vendor/lib/libAlacSwDec.so
+vendor/lib/libApeSwDec.so
+vendor/lib/libFlacSwDec.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAlacDec.so
@@ -283,9 +292,14 @@ vendor/lib/libOmxVideoDSMode.so
 vendor/lib/libOmxVpp.so
 vendor/lib/libOmxWmaDec.so
 -vendor/lib/libgpustats.so
+vendor/lib/libmmosal_proprietary.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libvpplibrary.so
 vendor/lib/libvqzip.so
+vendor/lib/libomx-dts.so
+vendor/lib64/libAlacSwDec.so
+vendor/lib64/libApeSwDec.so
+vendor/lib64/libFlacSwDec.so
 vendor/lib64/libI420colorconvert.so
 vendor/lib64/libOmxAacDec.so
 vendor/lib64/libOmxAlacDec.so
@@ -299,6 +313,7 @@ vendor/lib64/libOmxQcelp13Dec.so
 vendor/lib64/libOmxVpp.so
 vendor/lib64/libOmxWmaDec.so
 -vendor/lib64/libgpustats.so
+vendor/lib/libmmosal_proprietary.so
 vendor/lib64/libmm-color-convertor.so
 vendor/lib64/libvpplibrary.so
 
