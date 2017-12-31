@@ -25,8 +25,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.qcom.power.rc
-import init.qcom.usb.rc
+import /vendor/etc/init/hw/init.qcom.power.rc
+import /vendor/etc/init/hw/init.qcom.usb.rc
 
 on early-init
     mkdir /firmware 0771 system system
@@ -57,14 +57,14 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    mount_all fstab.qcom
+    mount_all /vendor/etc/fstab.qcom
 
     mkdir /persist/data 0700 system system
     restorecon_recursive /persist
 
 on post-fs
     start qseecomd
-    swapon_all /fstab.qcom
+    swapon_all /vendor/etc/fstab.qcom
     write /proc/sys/vm/page-cluster 0
     write /proc/sys/vm/swappiness 100
     chmod 0755 /sys/kernel/debug/tracing
@@ -484,6 +484,11 @@ service cnd /system/vendor/bin/cnd
     group system wifi inet radio wakelock net_admin
     #writepid /dev/cpuset/system-background/tasks
 
+service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
+    class main
+    user system
+    group system
+
 service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
     user root
@@ -499,18 +504,26 @@ service tftp_server /vendor/bin/tftp_server
    class core
    user root
 
-service config_bt_addr /system/bin/btnvtool -O
+on property:wc_transport.start_hci=true
+    start start_hci_filter
+
+on property:wc_transport.start_hci=false
+    stop start_hci_filter
+
+service start_hci_filter /system/vendor/bin/wcnss_filter
+    class late_start
+    user bluetooth
+    group bluetooth diag system wakelock
+    seclabel u:r:bluetooth:s0
+    disabled
+
+service config_bt_addr /system/vendor/bin/btnvtool -O
     class core
     user bluetooth
     group bluetooth radio
     oneshot
 
-service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
-    class core
-    user root
-    oneshot
-
-service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
+service hciattach /system//vendor/bin/hci_qcomm_init -e
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
@@ -519,6 +532,10 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
 
 on property:bluetooth.hciattach=true
     start hciattach
+    setprop bluetooth.status on
+
+on property:bluetooth.hciattach=false
+    setprop bluetooth.status off
 
 #FM
 on property:hw.fm.init=0
@@ -555,6 +572,11 @@ service sensors /vendor/bin/sensors.qcom
     group root
 #    writepid /dev/cpuset/system-background/tasks
 
+service qvop-daemon /vendor/bin/qvop-daemon
+    class late_start
+    user system
+    group system drmrpc
+
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
 # but only if ro.data.large_tcp_window_size property is set.
 on property:ro.data.large_tcp_window_size=true
@@ -581,7 +603,7 @@ service loc_launcher /system/vendor/bin/loc_launcher
     class late_start
     group gps inet oem_2901 wifi
 
-service qcom-sh /system/bin/sh /init.qcom.sh
+service qcom-sh /vendor/bin/init.qcom.sh
     class late_start
     user root
     oneshot
@@ -621,16 +643,6 @@ service charger /charger
     group graphics system
     seclabel u:r:charger:s0
 
-service qbcharger /charger -m 1
-    disabled
-    oneshot
-
-on property:sys.qbcharger.enable=true
-    start qbcharger
-
-on property:sys.qbcharger.enable=false
-    stop qbcharger
-
 #+first boot,jiangtao.wt,add 20150810
 on property:sys.installed.running=1
     write /sys/power/wake_lock InstalldWakeLock
@@ -644,11 +656,11 @@ on property:persist.radio.otaconfig=0
 on property:persist.radio.otaconfig=1
     setprop persist.radio.start_ota_daemon 1
 
-#service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
-#    class core
-#    user root
-#    group root
-#    disabled
+service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+    class core
+    user root
+    group root
+    disabled
 
 service wfdservice /system/bin/wfdservice
     class main
@@ -737,8 +749,8 @@ service thermal-engine /vendor/bin/thermal-engine
     socket thermal-send-rule stream 0660 system system
     group root
 
-service time_daemon /system/bin/time_daemon
-    class late_start
+service time_daemon /system/vendor/bin/time_daemon
+    class main
     user root
     group root
 
@@ -758,10 +770,6 @@ service imsqmidaemon /system/vendor/bin/imsqmidaemon
     user system
     socket ims_qmid stream 0660 system radio
     group radio log diag
-    disabled
-
-on property:service.qti.ims.enabled=1
-    start imsqmidaemon
 
 service imsdatadaemon /system/vendor/bin/imsdatadaemon
     class main
@@ -770,32 +778,24 @@ service imsdatadaemon /system/vendor/bin/imsdatadaemon
     group system wifi radio inet log diag
     disabled
 
-on property:sys.ims.QMI_DAEMON_STATUS=1
-    start imsdatadaemon
-
 on property:vendor.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
 service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
-    class main
-    user system
-    socket ims_rtpd stream 0660 system radio
-    group radio diag inet log
-    disabled
+   class main
+   user system
+   group radio diag inet log
+   disabled
 
-service imscmservice /system/vendor/bin/imscmservice
-    class main
-    user system
-    group radio diag inet log
-    disabled
-
-on property:sys.ims.DATA_DAEMON_STATUS=1
-    start ims_rtp_daemon
-    start imscmservice
+service vendor.imsrcsservice /system/vendor/bin/imsrcsd
+   class main
+   user system
+   group radio diag inet log
+   disabled
 
 on property:vendor.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
-    start imscmservice
+    start vendor.imsrcsservice
 
 service ppd /vendor/bin/mm-pp-dpps
     class late_start
@@ -865,7 +865,7 @@ service energy-awareness /system/vendor/bin/energy-awareness
     group system
     oneshot
 
-service hvdcp_opti /system/bin/hvdcp_opti
+service hvdcp_opti /system/vendor/bin/hvdcp_opti
     class main
     user root
     group root

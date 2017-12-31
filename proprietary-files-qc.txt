@@ -53,9 +53,10 @@ vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
 
-# Bluetooth - from santoni (Redmi 4X)
-bin/btnvtool
-bin/hci_qcomm_init
+# Bluetooth - from tissot (Mi A1)
+vendor/bin/btnvtool
+vendor/bin/hci_qcomm_init
+vendor/bin/wcnss_filter
 vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
 
@@ -104,12 +105,8 @@ vendor/lib64/libcneqmiutils.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
-# Charger
-bin/hvdcp_opti
-
-# Consumer IR - from santoni (Redmi 4X)
-lib/hw/consumerir.default.so
-lib64/hw/consumerir.default.so
+# Charger - from tissot (Mi A1)
+vendor/bin/hvdcp_opti
 
 # DRM - from OnePlus 3/3T
 vendor/bin/qseecomd
@@ -279,7 +276,6 @@ vendor/lib/libOmxVpp.so
 vendor/lib/libOmxWmaDec.so
 -vendor/lib/libgpustats.so
 vendor/lib/libmm-color-convertor.so
-#vendor/lib/libvpphvx.so
 vendor/lib/libvpplibrary.so
 vendor/lib/libvqzip.so
 vendor/lib64/libI420colorconvert.so
@@ -296,7 +292,6 @@ vendor/lib64/libOmxVpp.so
 vendor/lib64/libOmxWmaDec.so
 -vendor/lib64/libgpustats.so
 vendor/lib64/libmm-color-convertor.so
-#vendor/lib64/libvpphvx.so
 vendor/lib64/libvpplibrary.so
 
 # Media - from santoni (Redmi 4X)
@@ -308,7 +303,7 @@ lib64/libOmxSwVencMpeg4.so
 vendor/media/LMspeed_508.emd
 vendor/media/PFFprec_600.emd
 
-# Modem - from santoni (Redmi 4X)
+# Modem - from tissot (Mi A1)
 vendor/lib/libwms.so
 vendor/lib64/libwms.so
 
@@ -395,15 +390,13 @@ vendor/lib64/libsmemlog.so
 # Radio - from tissot (Mi A1)
 -app/SimSettings/SimSettings.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
-etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/telephonyservice.xml
 -framework/QtiTelephonyServicelibrary.jar
--framework/qcnvitems.jar
 -framework/qcrilhook.jar
 -framework/qti-telephony-common.jar
 -framework/telephony-ext.jar
-lib64/libparam.so
+#lib64/libparam.so
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/hw/rild
 vendor/bin/ipacm-diag
@@ -448,66 +441,57 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0_vendor.so
 vendor/radio/qcril_database/qcril.db
 
-# Radio - IMS - from marmite (Wileyfox Swift 2/Plus/X)
-bin/ims_rtp_daemon:vendor/bin/ims_rtp_daemon|b42c3957e4676d9672b7fc9055cd814349f5336a
-bin/imscmservice:vendor/bin/imscmservice|3306a52f51172202e66b3092d97b14ed918cf006
-bin/imsdatadaemon:vendor/bin/imsdatadaemon|8696ca3c35e4eefe5751be7a10010ca86712a0cf
-bin/imsqmidaemon:vendor/bin/imsqmidaemon|c683d2dbb25bea55865137f38f8d9618cd29398c
-etc/permissions/imscm.xml|8b99ec26c783966bbea1fcb8e72c7c0206a4e802
-etc/permissions/qti-vzw-ims-internal.xml|3e41b645dd4ad8bad6775c103a34bfd7a507a4f7
--framework/imscmlibrary.jar|0c24d6540c06efede52169c1445272f43748180f
--framework/rcsimssettings.jar|566a0f637344ca3182aca33753e404977fc77ecc
--vendor/app/ims/ims.apk|b0eab39d2287c99b6265cb8c61f7f88f24ab510f
--vendor/app/imssettings/imssettings.apk|4d6467327c769c4ffe8a354b14280a976835aba2
-vendor/framework/qti-vzw-ims-internal.jar|23be09b76e11f8e590337d4bb2353d2d26228db9
-vendor/lib/lib-imscamera.so|651d57c3a3a019cfd7258dc0e957cd111e609822
-vendor/lib/lib-dplmedia.so|bce031b954275aa122fdbe69be1f4145d89fbfd6
-vendor/lib/lib-ims-rcscmjni.so|5be14cd7a69709f673297ab175cb011a6f2fd1a3
-vendor/lib/lib-imsSDP.so|ecb7d8cc4810f1985649a1adcfe8d826f16e931a
-vendor/lib/lib-imscamera.so|651d57c3a3a019cfd7258dc0e957cd111e609822
-vendor/lib/lib-imsdpl.so|32fe5e493c656afeeab6b1740e0c165cd3b68248
-vendor/lib/lib-imsqimf.so|d9cb7deee7242cf7f8126a250e21e2f9c0a1c84a
-vendor/lib/lib-imsrcs.so|ccffb9b297dc9e4236d59a574c73d1d00b15350f
-vendor/lib/lib-imsrcscm.so|e91fb45d7e2ba4fdc27d9dbe63721fc072072db8
-vendor/lib/lib-imsrcscmclient.so|d5d319cacd1c9fb5b8e76962ca97997de514359f
-vendor/lib/lib-imsrcscmservice.so|75eef124e07260a244a579bce2cf62c14f794406
-vendor/lib/lib-imss.so|ebc6d3a074a7f12ce22281c48ed9cea06930db32
-vendor/lib/lib-imsvt.so|ff66e33993fd60e3a34e42b6ffe6ea8112439dc8
-vendor/lib/lib-imsxml.so|9dc567b2fc47682525937e0b37c119649cf9c1a5
-vendor/lib/lib-rcsimssjni.so|4823ef7722b02a26a7c84de2296109a5dc50e24b
-vendor/lib/lib-rcsjni.so|6d5668eddd28e4d4d57f870eba30d53e48156dc7
-vendor/lib/lib-rtpcommon.so|00d82328107d61970fcb5b3033ef6198957aa2eb
-vendor/lib/lib-rtpcore.so|04d9f9798d872b1711da1fb835958fd42072b3fe
-vendor/lib/lib-rtpdaemoninterface.so|947dd47ed46e9ac2426ab3facb6c0eefc07fa167
-vendor/lib/lib-rtpsl.so|11bf73bd6140a3c70bfb283ba5cc0373a177065e
-vendor/lib/libimscamera_jni.so|e19c10d9d8f388a045345b5f374c6712fd18c979
-vendor/lib/libimsmedia_jni.so|6d936682177b2c0ee9bb9765f9e2adbc7743c68c
-vendor/lib/librcc.so|97447844fc80c44a660728dfa9f842f19ca981d7
-vendor/lib/libvoice-svc.so|461f8e3e49403a2a7cf6738766cb583782c3d812
-vendor/lib64/lib-imscamera.so|537f65754bc8e85fddf82bbf2993b75e44fe427c
-vendor/lib64/lib-dplmedia.so|11737d2f7245ddcb8bc4fcf235abdc32ccdefaca
-vendor/lib64/lib-ims-rcscmjni.so|5cf87236fe9a2dda7b4c7a282b3946ffb8609c81
-vendor/lib64/lib-imsSDP.so|0a37e3b49922d7fed495db52513f701fa28fe54c
-vendor/lib64/lib-imscamera.so|537f65754bc8e85fddf82bbf2993b75e44fe427c
-vendor/lib64/lib-imsdpl.so|8be37b2e0ceaa4e287e7ab9fb4d17bedcd8f712c
-vendor/lib64/lib-imsqimf.so|01e8bed23ffad0b27379bdbd927548fffc4de2e2
-vendor/lib64/lib-imsrcs.so|ff88ab4087eafa0206aa1a5be6aa0a28c611a3e6
-vendor/lib64/lib-imsrcscm.so|bb378e14cbe0d8f8227892590fe8a32e792dc256
-vendor/lib64/lib-imsrcscmclient.so|981d4a32a11fec37a1679387cf93d13beb28718e
-vendor/lib64/lib-imsrcscmservice.so|32ee13a8994755224a4eba068aa5383460a907af
-vendor/lib64/lib-imss.so|1c38a841d69fb4296a70f41f571dba0dea8bdd13
-vendor/lib64/lib-imsvt.so|c7f03c48c0c26822ef6ae3599a4c34b30c2308b3
-vendor/lib64/lib-imsxml.so|c8be1232cf02c90035e103e1d279736608db7b85
-vendor/lib64/lib-rcsimssjni.so|b2bd695eaf42be1e1d19a3d366355d063384646d
-vendor/lib64/lib-rcsjni.so|e9373a2ada40f3bb2993d7f0477e0ee1fa32923b
-vendor/lib64/lib-rtpcommon.so|639e6d1a3a99c65bdba325f53e170e958fb42ae0
-vendor/lib64/lib-rtpcore.so|4d2c62b936d132cb5e7fcca14b8fe7fc3454c48d
-vendor/lib64/lib-rtpdaemoninterface.so|b296cdd53de85f59f806605236f81ab0fe36c5df
-vendor/lib64/lib-rtpsl.so|bd98dc52ae1aa61a8cae04301ed6918ab3351084
-vendor/lib64/libimscamera_jni.so|211d628170968c4a3c4d5119eda7fcd16d2bae4f
-vendor/lib64/libimsmedia_jni.so|09b67223ad11ebf9ce966a5aa05cd9512f65559e
-vendor/lib64/librcc.so|ae13bb98026b50378a3002c8759e918aeac52af5
-vendor/lib64/libvoice-svc.so|698f87b376ba1547c9defb17c71e37c662e84e10
+# Radio - IMS - from tissot (Mi A1)
+-app/ims/ims.apk
+-app/imssettings/imssettings.apk
+etc/permissions/qti-vzw-ims-internal.xml
+lib/com.qualcomm.qti.imscmservice@1.0.so
+lib/lib-imscamera.so
+lib/lib-imsvideocodec.so
+lib/lib-imsvtextutils.so
+lib/lib-imsvtutils.so
+lib/libdiag_system.so
+lib/libimscamera_jni.so
+lib/libimsmedia_jni.so
+lib/libqdMetaData.system.so
+lib/librcc.so
+lib/vendor.qti.imsrtpservice@1.0.so
+lib64/com.qualcomm.qti.imscmservice@1.0.so
+lib64/lib-imscamera.so
+lib64/lib-imsvideocodec.so
+lib64/lib-imsvt.so
+lib64/lib-imsvtextutils.so
+lib64/lib-imsvtutils.so
+lib64/libdiag_system.so
+lib64/libimscamera_jni.so
+lib64/libimsmedia_jni.so
+lib64/libqdMetaData.system.so
+lib64/librcc.so
+lib64/vendor.qti.imsrtpservice@1.0.so
+vendor/bin/ims_rtp_daemon
+vendor/bin/imsdatadaemon
+vendor/bin/imsqmidaemon
+vendor/bin/imsrcsd
+vendor/framework/qti-vzw-ims-internal.jar
+vendor/lib/com.qualcomm.qti.imscmservice@1.0_vendor.so
+vendor/lib/lib-imscmservice.so
+vendor/lib/lib-uceservice.so
+vendor/lib/vendor.qti.imsrtpservice@1.0-service-Impl.so
+vendor/lib/vendor.qti.imsrtpservice@1.0_vendor.so
+vendor/lib64/com.qualcomm.qti.imscmservice@1.0_vendor.so
+vendor/lib64/lib-dplmedia.so
+vendor/lib64/lib-imsSDP.so
+vendor/lib64/lib-imscmservice.so
+vendor/lib64/lib-imsdpl.so
+vendor/lib64/lib-imsqimf.so
+vendor/lib64/lib-imsxml.so
+vendor/lib64/lib-rtpcommon.so
+vendor/lib64/lib-rtpcore.so
+vendor/lib64/lib-rtpdaemoninterface.so
+vendor/lib64/lib-rtpsl.so
+vendor/lib64/lib-uceservice.so
+vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
+vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so
 
 # Sensors - from tissot (Mi A1)
 lib/libsensor1.so
@@ -533,24 +517,24 @@ vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.ssc.so
 vendor/lib64/vendor.qti.hardware.sensorscalibrate@1.0.so
 
-# Thermal - from santoni (Redmi 4X)
+# Thermal - from tissot (Mi A1)
+vendor/etc/thermal-engine.conf
 vendor/bin/thermal-engine
-vendor/lib/libthermalclient.so
-vendor/lib64/libthermalclient.so
+-vendor/lib/libthermalclient.so
+-vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
 
-# Time services - from santoni (Redmi 4X)
--app/TimeService/TimeService.apk
-bin/time_daemon
+# Time services - from tissot (Mi A1)
+-vendor/app/TimeService/TimeService.apk
+vendor/bin/time_daemon
 -vendor/lib/libtime_genoff.so
-vendor/lib/libTimeService.so
 -vendor/lib64/libtime_genoff.so
-vendor/lib64/libTimeService.so
 
-# Widevine - from marmite (Wileyfox Swift 2/Plus/X)
-vendor/lib/libwvdrm_L3.so|7e77482481197997294a834bfbc817a01b6075cd
-vendor/lib/libWVStreamControlAPI_L3.so|61673304827483d44b735a3dd08f0783d10ce92d
-vendor/lib/mediadrm/libwvdrmengine.so|a042f8ae03dc79bc52992f0ce280267d7cf5dc70
+# Widevine - from tissot (Mi A1)
+vendor/bin/hw/android.hardware.drm@1.0-service.widevine
+vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc
+vendor/lib/mediadrm/libwvdrmengine.so
+vendor/lib/libwvhidl.so
 
 # Wi-Fi - from tissot (Mi A1)
 vendor/bin/wcnss_service
