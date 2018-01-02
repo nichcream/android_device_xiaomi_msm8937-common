@@ -29,6 +29,7 @@
  */
 
 #include <android-base/properties.h>
+#include <android-base/logging.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <iostream>
@@ -48,6 +49,8 @@
 static std::string board_id;
 using android::base::GetProperty;
 using android::base::Trim;
+using android::init::property_set;
+using android::init::import_kernel_cmdline;
 
 //Take care about 3gb ram
 int is3GB()
@@ -93,8 +96,8 @@ static void init_alarm_boot_properties()
     std::string power_off_alarm;
     std::string reboot_reason = GetProperty("ro.boot.alarmboot","");
 
-    if (read_file(boot_reason_file, &boot_reason)
-            && read_file(power_off_alarm_file, &power_off_alarm)) {
+    if (android::base::ReadFileToString(boot_reason_file, &boot_reason)
+            && android::base::ReadFileToString(power_off_alarm_file, &power_off_alarm)) {
         /*
          * Setup ro.alarm_boot value to true when it is RTC triggered boot up
          * For existing PMIC chips, the following mapping applies
@@ -171,7 +174,7 @@ void variant_properties()
         return;
 
     import_kernel_cmdline1(0, import_cmdline);
-    
+
     //set board
     property_set("ro.product.wt.boardid", board_id.c_str());
 
@@ -213,7 +216,7 @@ void variant_properties()
 void vendor_load_properties()
 {
 
-    // init 
+    // init
     read_ramconfig();
     init_alarm_boot_properties();
     variant_properties();
