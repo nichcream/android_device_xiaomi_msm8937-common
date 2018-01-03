@@ -108,27 +108,51 @@ vendor/lib64/libxml.so
 # Charger - from tissot (Mi A1)
 vendor/bin/hvdcp_opti
 
-# DRM - from OnePlus 3/3T
+# DRM - from tissot (Mi A1)
+lib/libGPTEE_system.so
+lib/libQTEEConnector_system.so
+lib/vendor.qti.hardware.qteeconnector@1.0.so
+lib64/libGPTEE_system.so
+lib64/libQTEEConnector_system.so
+lib64/vendor.qti.hardware.qteeconnector@1.0.so
 vendor/bin/qseecomd
-vendor/lib/libQSEEComAPI.so
-vendor/lib/libStDrvInt.so
+vendor/bin/hw/vendor.qti.hardware.qteeconnector@1.0-service
+vendor/etc/init/vendor.qti.hardware.qteeconnector@1.0-service.rc
 vendor/lib/libcppf.so
+vendor/lib/libdrmfs.so
+vendor/lib/libdrmtime.so
+vendor/lib/libGPreqcancel_svc.so
+vendor/lib/libGPreqcancel.so
 vendor/lib/libqisl.so
+vendor/lib/libQSEEComAPI.so
 vendor/lib/librpmb.so
+vendor/lib/libsecureui_svcsock.so
+vendor/lib/libsecureui.so
+vendor/lib/libSecureUILib.so
 vendor/lib/libssd.so
-vendor/lib64/lib-sec-disp.so
-vendor/lib64/libGPreqcancel.so
-vendor/lib64/libGPreqcancel_svc.so
-vendor/lib64/libQSEEComAPI.so
-vendor/lib64/libSecureUILib.so
-vendor/lib64/libStDrvInt.so
+vendor/lib/libStDrvInt.so
+vendor/lib/libtzdrmgenprov.so
+vendor/lib/libGPTEE_vendor.so
+vendor/lib/libQTEEConnector_vendor.so
+vendor/lib/vendor.qti.hardware.qteeconnector@1.0_vendor.so
+vendor/lib/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
 vendor/lib64/libdrmfs.so
 vendor/lib64/libdrmtime.so
+vendor/lib64/libGPreqcancel_svc.so
+vendor/lib64/libGPreqcancel.so
 vendor/lib64/libqisl.so
+vendor/lib64/libQSEEComAPI.so
 vendor/lib64/librpmb.so
-vendor/lib64/libsecureui.so
 vendor/lib64/libsecureui_svcsock.so
+vendor/lib64/libsecureui.so
+vendor/lib64/libSecureUILib.so
 vendor/lib64/libssd.so
+vendor/lib64/libStDrvInt.so
+vendor/lib64/libtzdrmgenprov.so
+vendor/lib64/libGPTEE_vendor.so
+vendor/lib64/libQTEEConnector_vendor.so
+vendor/lib64/vendor.qti.hardware.qteeconnector@1.0_vendor.so
+vendor/lib64/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
 
 # FM - from tissot (Mi A1)
 -lib/vendor.qti.hardware.fm@1.0.so
@@ -263,10 +287,19 @@ lib64/hw/keystore.default.so
 vendor/lib/hw/keystore.msm8953.so:vendor/lib/hw/keystore.msm8937.so
 vendor/lib64/hw/keystore.msm8953.so:vendor/lib64/hw/keystore.msm8937.so
 
+# Keymaster - from Mi A1 (tissot)
+vendor/lib/libkeymasterutils.so
+vendor/lib/libkeymasterprovision.so
+vendor/lib/libkeymasterdeviceutils.so
+vendor/lib64/libkeymasterutils.so
+vendor/lib64/libkeymasterprovision.so
+vendor/lib64/libkeymasterdeviceutils.so
+
 # Listen - from tissot (Mi A1)
 vendor/lib/hw/sound_trigger.primary.msm8953.so:vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
+vendor/lib64/hw/sound_trigger.primary.msm8953.so:vendor/lib64/hw/sound_trigger.primary.msm8937.so
 
 # Media - from tissot (Mi A1)
 lib/libmmosal.so
@@ -366,9 +399,35 @@ vendor/lib64/libperipheral_client.so
 
 # Postprocessing - from tissot (Mi A1)
 etc/permissions/com.qti.snapdragon.sdk.display.xml
+framework/com.qti.snapdragon.sdk.display.jar
+lib/libdisplayconfig.so
+lib/vendor.display.color@1.0.so
+lib/vendor.display.config@1.0.so
+lib/vendor.display.postproc@1.0.so
+lib64/libdisplayconfig.so
+lib64/vendor.display.color@1.0.so
+lib64/vendor.display.config@1.0.so
+lib64/vendor.display.postproc@1.0.so
+-vendor/app/colorservice/colorservice.apk
 vendor/bin/mm-pp-dpps
+vendor/bin/hw/vendor.display.color@1.0-service
+vendor/etc/init/vendor.display.color@1.0-service.rc
 vendor/lib/libdisp-aba.so
+vendor/lib/vendor.display.color@1.0_vendor.so
+vendor/lib64/vendor.display.config@1.0_vendor.so
+vendor/lib/vendor.display.postproc@1.0_vendor.so
 vendor/lib64/libdisp-aba.so
+vendor/lib64/vendor.display.color@1.0_vendor.so
+vendor/lib64/vendor.display.config@1.0_vendor.so
+vendor/lib64/vendor.display.postproc@1.0_vendor.so
+
+# QDutils - from tissot (Mi A1)
+lib/vendor.qti.hardware.qdutils_disp@1.0.so
+lib64/vendor.qti.hardware.qdutils_disp@1.0.so
+vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti
+vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc
+vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so
+vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0_vendor.so
 
 # QMI - from tissot (Mi A1)
 lib/libdiag_system.so
@@ -411,9 +470,12 @@ vendor/lib64/libqmiservices.so
 vendor/lib64/libsmemlog.so
 
 # Radio - from tissot (Mi A1)
+-app/datastatusnotification/datastatusnotification.apk
 -app/SimSettings/SimSettings.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
+-app/radioconfig/radioconfig.apk
 etc/permissions/qcrilhook.xml
+etc/permissions/radioconfig.xml
 etc/permissions/telephonyservice.xml
 -framework/QtiTelephonyServicelibrary.jar
 -framework/qcrilhook.jar
@@ -423,6 +485,7 @@ framework/telephony-ext.jar
 vendor/bin/hw/rild
 vendor/bin/ipacm-diag
 vendor/bin/netmgrd
+vendor/bin/port-bridge
 vendor/bin/qti
 vendor/bin/rmt_storage
 vendor/bin/tftp_server
@@ -467,14 +530,17 @@ vendor/radio/qcril_database/qcril.db
 -app/ims/ims.apk
 -app/imssettings/imssettings.apk
 etc/permissions/qti-vzw-ims-internal.xml
+framework/rcs_service_api.jar
+framework/rcs_service_aidl.jar
 lib/com.qualcomm.qti.imscmservice@1.0.so
 lib/lib-imscamera.so
 lib/lib-imsvideocodec.so
 lib/lib-imsvtextutils.so
 lib/lib-imsvtutils.so
-lib/libdiag_system.so
 lib/libimscamera_jni.so
 lib/libimsmedia_jni.so
+lib/libmmrtpdecoder.so
+lib/libmmrtpencoder.so
 lib/libqdMetaData.system.so
 lib/librcc.so
 lib/vendor.qti.imsrtpservice@1.0.so
@@ -484,9 +550,10 @@ lib64/lib-imsvideocodec.so
 lib64/lib-imsvt.so
 lib64/lib-imsvtextutils.so
 lib64/lib-imsvtutils.so
-lib64/libdiag_system.so
 lib64/libimscamera_jni.so
 lib64/libimsmedia_jni.so
+lib64/libmmrtpdecoder.so
+lib64/libmmrtpencoder.so
 lib64/libqdMetaData.system.so
 lib64/librcc.so
 lib64/vendor.qti.imsrtpservice@1.0.so
