@@ -1,0 +1,6 @@
+allow hwservicemanager init:process getattr;
+allow hwservicemanager init:dir search;
+allow hwservicemanager init:file { read open };
+allow hwservicemanager fps_hal:dir { search read open };
+allow hwservicemanager fps_hal:file { read open };
+allow hwservicemanager fps_hal:process getattr;

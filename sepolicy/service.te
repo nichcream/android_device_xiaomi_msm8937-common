@@ -1,1 +1,2 @@
 type gx_fpd_service, service_manager_type;
+type fp_service, service_manager_type;

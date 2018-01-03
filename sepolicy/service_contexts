@@ -1,2 +1,2 @@
-# Goodix Fingerprint
 goodix.fp                        u:object_r:gx_fpd_service:s0
+persist.sys.fp.sensor            u:object_r:fp_service:s0

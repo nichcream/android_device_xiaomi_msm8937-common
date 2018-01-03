@@ -1,0 +1,9 @@
+allow fps_hal sysfs:dir { read open write };
+allow fps_hal sysfs:file { read open write };
+allow fps_hal fpc_sysfs:file { write open read  };
+allow fps_hal tee_device:chr_file { read write open ioctl };
+allow fps_hal vfat:file { read open getattr };
+allow fps_hal fingerprintd_data_file:dir { write };
+allow fps_hal hwservicemanager_prop:file { read open getattr };
+allow fps_hal ion_device:chr_file { read open write ioctl };
+allow fps_hal uhid_device:chr_file { read open write ioctl };

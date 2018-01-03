@@ -1,3 +1,12 @@
 allow servicemanager init:dir search;
 allow servicemanager init:file { open read };
 allow servicemanager init:process getattr;
+allow servicemanager fps_hal:dir search;
+allow servicemanager fps_hal:file { read open };
+allow servicemanager fps_hal:process getattr;
+allow servicemanager mdtpdaemon:file { read open };
+allow servicemanager mdtpdaemon:dir search;
+allow servicemanager mdtpdaemon:process getattr;
+allow servicemanager qseeproxy:file { read open };
+allow servicemanager qseeproxy:dir search;
+allow servicemanager qseeproxy:process getattr;
