@@ -266,6 +266,7 @@ vendor/lib64/libsdm-diag.so
 -vendor/lib64/libsdm-disp-vndapis.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libtinyxml2_1.so
+
 vendor/lib64/libuiblur.so
 
 # Graphics firmware - from santoni (Redmi 4X)
@@ -278,10 +279,6 @@ etc/firmware/a530v2_seq.fw2
 etc/firmware/a530v3_gpmu.fw2
 etc/firmware/a530v3_seq.fw2
 etc/firmware/a540_gpmu.fw2
-
-# Keystore - from santoni (Redmi 4X)
-lib/hw/keystore.default.so
-lib64/hw/keystore.default.so
 
 # Keystore - from tissot (Mi A1)
 vendor/lib/hw/keystore.msm8953.so:vendor/lib/hw/keystore.msm8937.so
