@@ -70,7 +70,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:system/etc/permissions/privapp-permissions-qti.xml
 
 # ANT
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     AntHalService \
     com.dsi.ant.antradio_library \
     libantradio
@@ -135,7 +135,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
-    android.hardware.camera.provider@2.4-impl
+    android.hardware.camera.provider@2.4-impl \
+    vendor.qti.hardware.camera.device@1.0 \
+    vendor.qti.hardware.camera.device@1.0_vendor
 
 #configStore HIDL HAL service
 PRODUCT_PACKAGES += \
@@ -255,8 +257,7 @@ PRODUCT_COPY_FILES += \
  
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl \
-    android.hardware.keymaster@3.0-service
+    android.hardware.keymaster@3.0-impl
 
 # Libshims
 PRODUCT_PACKAGES += \
@@ -291,7 +292,7 @@ PRODUCT_PACKAGES += \
 
 #media OMX
 PRODUCT_PACKAGES += \
-    android.hardware.media.omx@1.0-impl
+    android.hardware.media.omx@1.0-service
 
 # Media
 PRODUCT_COPY_FILES += \
