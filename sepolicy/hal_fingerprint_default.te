@@ -23,4 +23,6 @@ allow hal_fingerprint_default storage_file:lnk_file read;
 
 allow hal_fingerprint_default servicemanager:binder { call transfer };
 allow hal_fingerprint_default hwservicemanager:binder { call transfer };
+
+add_service(hal_fingerprint_default, fingerprintd_custom_service);
 r_dir_file(hal_fingerprint_default, firmware_file)
