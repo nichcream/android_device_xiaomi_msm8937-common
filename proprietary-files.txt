@@ -986,13 +986,6 @@ lib64/libfp_client.so
 lib64/libfpnav.so
 lib64/libfpservice.so
 
-#hbtp
-etc/firmware/hbtp/hbtpcfg_8917.dat
-etc/firmware/hbtp/hbtpcfg.dat
-etc/firmware/hbtp/qtc800s_dsp.bin
-etc/firmware/qtc800s.bin
-etc/firmware/qtc800s.cfg
-
 # Keylayout
 usr/keylayout/gpio-keys.kl
 usr/keylayout/qpnp_pon.kl
