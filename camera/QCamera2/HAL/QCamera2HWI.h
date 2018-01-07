@@ -764,7 +764,7 @@ private:
     uint32_t mSurfaceStridePadding;
 
     //QCamera Display Object
-    QCameraDisplay mCameraDisplay;
+    //QCameraDisplay mCameraDisplay;
 
     bool m_bNeedRestart;
     Mutex mMapLock;
