@@ -139,7 +139,7 @@ WITH_CM_CHARGER := false
 #BOARD_HARDWARE_CLASS += \
 #    hardware/cyanogen/cmhw
 
-# CNE / DPM
+# CNE
 BOARD_USES_QCNE := true
 
 # Dexpreopt
