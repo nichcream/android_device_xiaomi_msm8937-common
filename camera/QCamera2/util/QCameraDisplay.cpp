@@ -126,6 +126,39 @@ QCameraDisplay*
 QCameraDisplay::mCameraDisplay = NULL;
 
 /*===========================================================================
+ * FUNCTION   : onRegistration
+ *
+ * DESCRIPTION: DisplayService registered notification callback from hwservice.
+ *              Calling init to get display service.
+ *
+ * PARAMETERS :
+ *   @fqName  : fully-qualified instance name (UNUSED).
+ *   @name    : string by which display service is registerd.
+ *   @preexisting: If true, this means the registration was
+ *                 pre-existing at the time this IServiceNotification
+ *                 object is itself registered. Otherwise, this means
+ *                 onRegistration is triggered by a newly registered
+ *                 service.
+ *
+ * RETURN     : void.Just to fullfill the type requirement of thread function.
+ *==========================================================================*/
+Return<void>
+QCameraDisplay::ServiceRegisterNotification::onRegistration(const hidl_string & /*fqName*/,
+                                                                  const hidl_string & /*name*/,
+                                                                  bool /*preexisting*/)
+{
+    if(mCameraDisplay->mDisplayService != nullptr)
+    {
+        return Return<void>();
+    }
+
+    LOGD("Display service is available, get the interface");
+    mCameraDisplay->init();
+
+    return Return<void>();
+}
+
+/*===========================================================================
  * FUNCTION   : instance
  *
  * DESCRIPTION: create singleton instance of QCameraDisplay
@@ -140,10 +173,8 @@ QCameraDisplay::instance()
     if(mCameraDisplay == NULL)
     {
         mCameraDisplay = new QCameraDisplay();
-    }
-    if(!mCameraDisplay->m_bInitDone)
-    {
-        mCameraDisplay->init();
+        mCameraDisplay->mRegistrationCB = new ServiceRegisterNotification();
+        IDisplayService::registerForNotifications("", mCameraDisplay->mRegistrationCB);
     }
     return mCameraDisplay;
 }
@@ -248,8 +279,6 @@ QCameraDisplay::QCameraDisplay()
       } else {
           mVsyncThreadCameraHandle = 0;
       }
-#else
-    init();
 #endif //USE_DISPLAY_SERVICE
 }
 
@@ -273,6 +302,7 @@ QCameraDisplay::~QCameraDisplay()
     mDeathRecipient.clear();
     mDisplayEventReceiver.clear();
     mDisplayService.clear();
+    mRegistrationCB.clear();
 #else
     mThreadExit = 1;
     if (mVsyncThreadCameraHandle != 0) {
