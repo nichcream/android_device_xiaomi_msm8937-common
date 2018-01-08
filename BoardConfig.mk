@@ -49,7 +49,6 @@ BOARD_KERNEL_CMDLINE 		:= androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hc
 BOARD_KERNEL_IMAGE_NAME 	:= Image.gz-dtb
 BOARD_KERNEL_PAGESIZE 		:=  2048
 BOARD_MKBOOTIMG_ARGS 		:= --ramdisk_offset 0x01000000 --second_offset 0x00f00000 --tags_offset 0x00000100
-TARGET_KERNEL_APPEND_DTB 	:= true
 TARGET_KERNEL_CONFIG 		:= land_defconfig
 TARGET_KERNEL_SOURCE 		:= kernel/xiaomi/msm8937
 TARGET_KERNEL_HAVE_EXFAT	:= true
