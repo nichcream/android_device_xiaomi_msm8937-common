@@ -536,10 +536,8 @@ vendor/lib64/libperipheral_client.so
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 framework/com.qti.snapdragon.sdk.display.jar
 lib/vendor.display.color@1.0.so
-lib/vendor.display.config@1.0.so
 lib/vendor.display.postproc@1.0.so
 lib64/vendor.display.color@1.0.so
-lib64/vendor.display.config@1.0.so
 lib64/vendor.display.postproc@1.0.so
 -vendor/app/colorservice/colorservice.apk
 vendor/bin/mm-pp-dpps
@@ -547,11 +545,9 @@ vendor/bin/hw/vendor.display.color@1.0-service
 vendor/etc/init/vendor.display.color@1.0-service.rc
 vendor/lib/libdisp-aba.so
 vendor/lib/vendor.display.color@1.0_vendor.so
-vendor/lib64/vendor.display.config@1.0_vendor.so
 vendor/lib/vendor.display.postproc@1.0_vendor.so
 vendor/lib64/libdisp-aba.so
 vendor/lib64/vendor.display.color@1.0_vendor.so
-vendor/lib64/vendor.display.config@1.0_vendor.so
 vendor/lib64/vendor.display.postproc@1.0_vendor.so
 
 # QDutils - from tissot (Mi A1)
