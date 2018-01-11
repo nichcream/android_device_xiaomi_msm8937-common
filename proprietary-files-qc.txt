@@ -72,9 +72,16 @@ vendor/lib64/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
 vendor/lib64/libbtnv.so
 
 # CNE - from tissot (Mi A1)
+etc/cne/andsfCne.xml
+etc/cne/SwimConfig.xml
+etc/permissions/cneapiclient.xml
 etc/permissions/com.quicinc.cne.xml
+-framework/cneapiclient.jar
 -framework/com.quicinc.cne.api-V1.0-java.jar
 -framework/com.quicinc.cne.jar
+-priv-app/CNEService/CNEService.apk
+lib/libvendorconn.so
+lib64/libvendorconn.so
 vendor/bin/cnd
 vendor/etc/cne/wqeclient/ATT/ATT_profile1.xml
 vendor/etc/cne/wqeclient/ATT/ATT_profile2.xml
