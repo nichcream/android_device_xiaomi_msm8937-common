@@ -77,22 +77,26 @@ PRODUCT_COPY_FILES += \
 
 #Audio
 PRODUCT_PACKAGES += \
-    audiod \
     audio.a2dp.default \
     audio.primary.msm8937 \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
     libqcompostprocbundle \
+    libqcomvisualizer \
     libqcomvoiceprocessing \
+    libvolumelistener \
     tinymix
 
 #Audio HIDL
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
+    android.hardware.audio@2.0-service \
     android.hardware.audio.effect@2.0-impl \
+    android.hardware.audio.effect@2.0-service \
     android.hardware.broadcastradio@1.0-impl \
-    android.hardware.soundtrigger@2.0-impl
+    android.hardware.soundtrigger@2.0-impl \
+    android.hardware.soundtrigger@2.0-service
 
 #Audio mixer
 PRODUCT_COPY_FILES += \
@@ -183,7 +187,8 @@ PRODUCT_PACKAGES += \
 # DRM HIDL
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
-    android.hardware.drm@1.0-service
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.0-service.widevine
 
 # Fingerprint
 PRODUCT_PACKAGES += \
@@ -260,7 +265,8 @@ PRODUCT_COPY_FILES += \
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
 
 # Libshims
 PRODUCT_PACKAGES += \
@@ -279,7 +285,8 @@ PRODUCT_PACKAGES += \
 
 #Light HIDL
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service
 
 # IRQ
 PRODUCT_COPY_FILES += \
