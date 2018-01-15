@@ -23,4 +23,4 @@
 /devices/soc/78db000.usb/msm_hsusb_host*     auto               auto    defaults                                            voldmanaged=usb:auto
 
 #ZRAM
-/dev/block/zram0                             none               swap    defaults                                            zramsize=1073741824,max_comp_streams=4
+/dev/block/zram0                             none               swap    defaults                                            zramsize=805306368,max_comp_streams=4
