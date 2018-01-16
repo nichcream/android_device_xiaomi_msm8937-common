@@ -1844,6 +1844,7 @@ int32_t mm_stream_map_buf(mm_stream_t * my_obj,
                           size_t size)
 {
     int32_t rc = 0;
+    int8_t i;
     if (NULL == my_obj || NULL == my_obj->ch_obj || NULL == my_obj->ch_obj->cam_obj) {
         LOGE("NULL obj of stream/channel/camera");
         return -1;
@@ -2206,9 +2207,11 @@ int32_t mm_stream_unreg_buf(mm_stream_t * my_obj)
 
     /* reset buf reference count */
     pthread_mutex_lock(&my_obj->buf_lock);
-    for(i = 0; i < my_obj->buf_num; i++){
-        my_obj->buf_status[i].buf_refcnt = 0;
-        my_obj->buf_status[i].in_kernel = 0;
+    if (NULL != my_obj->buf_status) {
+        for(i = 0; i < my_obj->buf_num; i++){
+            my_obj->buf_status[i].buf_refcnt = 0;
+            my_obj->buf_status[i].in_kernel = 0;
+        }
     }
     pthread_mutex_unlock(&my_obj->buf_lock);
 

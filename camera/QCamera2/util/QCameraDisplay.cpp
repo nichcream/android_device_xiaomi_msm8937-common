@@ -59,8 +59,7 @@ namespace qcamera {
  *
  * RETURN     : always returns 1
  *==========================================================================*/
-int QCameraDisplay::vsyncEventReceiverCamera(__unused int fd,
-                                             __unused int events, void* data) {
+int QCameraDisplay::vsyncEventReceiverCamera(int fd, int events, void* data) {
     android::DisplayEventReceiver::Event buffer[DISPLAY_EVENT_RECEIVER_ARRAY_SIZE];
     QCameraDisplay* pQCameraDisplay = (QCameraDisplay *) data;
     ssize_t n;

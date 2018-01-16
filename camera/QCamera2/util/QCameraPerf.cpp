@@ -102,6 +102,7 @@ void QCameraPerfLock::lock_init()
 {
     const char *rc;
     char value[PROPERTY_VALUE_MAX];
+    int len;
 
     LOGD("E");
     Mutex::Autolock lock(mLock);

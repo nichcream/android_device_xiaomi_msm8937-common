@@ -1388,6 +1388,7 @@ int32_t QCameraReprocessChannel::doReprocessOffline(mm_camera_super_buf_t *frame
         mm_camera_buf_def_t *meta_buf, QCameraParametersIntf &mParameter)
 {
     int32_t rc = 0;
+    OfflineBuffer mappedBuffer;
     QCameraStream *pStream = NULL;
 
     if (mStreams.size() < 1) {
