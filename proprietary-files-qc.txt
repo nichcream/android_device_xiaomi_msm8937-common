@@ -409,9 +409,6 @@ vendor/lib64/libsdm-diag.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libtinyxml2_1.so
 
-# Graphics - UI blur - from unknown
-vendor/lib64/libuiblur.so
-
 # Graphics firmware - from TA-1003 (Nokia 5)
 vendor/firmware/a530_gpmu.fw2
 vendor/firmware/a530_pfp.fw

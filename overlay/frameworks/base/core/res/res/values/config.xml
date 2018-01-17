@@ -457,10 +457,6 @@
     <!-- Flag specifying whether WFC over IMS is available on device -->
     <bool name="config_device_wfc_ims_available">true</bool>
 
-    <!-- Support in Surfaceflinger for blur layers.
-         NOTE: This requires additional hardware-specific code. -->
-    <!-- bool name="config_uiBlurEnabled">true</bool -->
-
     <!-- Whether notify fingerprint client of successful cancelled authentication -->
 <!--    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool> -->
 
