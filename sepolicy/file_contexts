@@ -1,3 +1,5 @@
+# Camera
+/system/bin/mm-qcamera-daemon                   u:object_r:mm-qcamerad_exec:s0
 
 # Fpc Fingerprint
 /dev/socket/fpce                                         u:object_r:fpc_socket:s0
