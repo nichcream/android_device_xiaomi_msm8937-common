@@ -59,7 +59,7 @@ LOCAL_SRC_FILES := \
     bionic/pthread_cond.cpp
 
 LOCAL_SHARED_LIBRARIES := libc
-LOCAL_MODULE := libshims_camera
+LOCAL_MODULE := libshims_qcamera-daemon
 LOCAL_CLANG := false
 LOCAL_CXX_STL := none
 LOCAL_SANITIZE := never
