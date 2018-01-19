@@ -14,3 +14,4 @@ allow untrusted_app sys_usb_tethering_prop:file r_file_perms;
 allow untrusted_app uicc_prop:file r_file_perms;
 allow untrusted_app vendor_rild_libpath_prop:file r_file_perms;
 allow untrusted_app wififtmd_prop:file r_file_perms;
+allow untrusted_app unlabeled:file { getattr read open };
