@@ -726,6 +726,7 @@ vendor/lib64/libril-qc-qmi-1.so
 # Radio - IMS - from TA-1025 (Nokia 6)
 -app/ims/ims.apk
 -app/imssettings/imssettings.apk
+-app/uceShimService/uceShimService.apk
 etc/permissions/qti-vzw-ims-internal.xml
 lib/com.qualcomm.qti.imscmservice@1.0.so
 lib/lib-imscamera.so
