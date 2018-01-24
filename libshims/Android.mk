@@ -15,15 +15,6 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := MediaBuffer.cpp
-LOCAL_SHARED_LIBRARIES          += libui libgui libstagefright_foundation
-LOCAL_C_INCLUDES                += framework/native/include frameworks/av/include
-LOCAL_CFLAGS                    += -Wno-unused-private-field
-LOCAL_MODULE := libshims_ims
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
     atomic.cpp \
     android/sensor.cpp \
@@ -37,24 +28,6 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
-    GraphicBuffer.cpp \
-    gui/SensorManager.cpp
-
-LOCAL_C_INCLUDES := gui
-LOCAL_SHARED_LIBRARIES := libgui libutils liblog libbinder libandroid
-LOCAL_MODULE := libshim_sensors
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := parcel.cpp
-LOCAL_SHARED_LIBRARIES := libbinder
-LOCAL_MODULE := libshim_parcel
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := \
     bionic/bionic_time_conversions.cpp \
     bionic/pthread_cond.cpp
 
@@ -63,13 +36,4 @@ LOCAL_MODULE := libshims_qcamera-daemon
 LOCAL_CLANG := false
 LOCAL_MODULE_TAGS := optional
 LOCAL_32_BIT_ONLY := true
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := rild_socket.c
-
-LOCAL_MODULE := rild_socket
-LOCAL_MODULE_TAGS := optional
-
 include $(BUILD_SHARED_LIBRARY)
