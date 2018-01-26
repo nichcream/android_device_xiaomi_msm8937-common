@@ -140,10 +140,9 @@ etc/init/dpmd.rc
 etc/permissions/com.qti.dpmframework.xml
 etc/permissions/dpmapi.xml
 framework/com.qti.dpmframework.jar
-framework/dpm.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
-#-priv-app/dpmserviceapp/dpmserviceapp.apk
+-priv-app/dpmserviceapp/dpmserviceapp.apk
 lib/com.qualcomm.qti.dpm.api@1.0.so
 lib/libdpmctmgr.so
 lib/libdpmfdmgr.so
@@ -655,12 +654,21 @@ vendor/bin/rmt_storage
 vendor/bin/tftp_server
 vendor/etc/data/dsi_config.xml
 vendor/etc/data/netmgr_config.xml
+vendor/lib/libconfigdb.so
+vendor/lib/liblqe.so
 vendor/lib/libmdmdetect.so
+vendor/lib/libnetmgr.so
 vendor/lib/libqcmaputils.so
+vendor/lib/libril-qc-ltedirectdisc.so
+vendor/lib/libril-qc-qmi-1.so
+vendor/lib/libril-qc-radioconfig.so
+vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/libril.so
+vendor/lib/librilqmiservices.so
+vendor/lib/libsettings.so
+vendor/lib/libsystem_health_mon.so
 vendor/lib/vendor.qti.hardware.radio.am@1.0_vendor.so
 vendor/lib/vendor.qti.hardware.radio.atcmdfwd@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.radio.ims@1.0_vendor.so
 vendor/lib/vendor.qti.hardware.radio.lpa@1.0_vendor.so
 vendor/lib/vendor.qti.hardware.radio.qcrilhook@1.0_vendor.so
 vendor/lib/vendor.qti.hardware.radio.qtiradio@1.0_vendor.so
@@ -682,7 +690,6 @@ vendor/lib64/libsettings.so
 vendor/lib64/libsystem_health_mon.so
 vendor/lib64/vendor.qti.hardware.radio.am@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.radio.atcmdfwd@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.radio.ims@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.radio.lpa@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.radio.qcrilhook@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.radio.qtiradio@1.0_vendor.so
@@ -728,7 +735,7 @@ vendor/bin/ims_rtp_daemon
 vendor/bin/imsdatadaemon
 vendor/bin/imsqmidaemon
 vendor/bin/imsrcsd
-vendor/framework/qti-vzw-ims-internal.jar
+-vendor/framework/qti-vzw-ims-internal.jar
 vendor/lib/com.qualcomm.qti.imscmservice@1.0_vendor.so
 vendor/lib/lib-dplmedia.so
 vendor/lib/lib-imsSDP.so
@@ -741,6 +748,7 @@ vendor/lib/lib-rtpcore.so
 vendor/lib/lib-rtpdaemoninterface.so
 vendor/lib/lib-rtpsl.so
 vendor/lib/lib-uceservice.so
+vendor/lib/vendor.qti.hardware.radio.ims@1.0_vendor.so
 vendor/lib/vendor.qti.imsrtpservice@1.0-service-Impl.so
 vendor/lib/vendor.qti.imsrtpservice@1.0_vendor.so
 vendor/lib64/com.qualcomm.qti.imscmservice@1.0_vendor.so
@@ -755,6 +763,7 @@ vendor/lib64/lib-rtpcore.so
 vendor/lib64/lib-rtpdaemoninterface.so
 vendor/lib64/lib-rtpsl.so
 vendor/lib64/lib-uceservice.so
+vendor/lib64/vendor.qti.hardware.radio.ims@1.0_vendor.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so
 
@@ -766,7 +775,7 @@ lib64/libsensor1.so
 lib64/libsensor_reg.so
 lib64/libsensor_test.so
 vendor/bin/sensors.qcom
-vendor/framework/vendor.qti.hardware.sensorscalibrate-V1.0-java.jar
+-vendor/framework/vendor.qti.hardware.sensorscalibrate-V1.0-java.jar
 vendor/lib/hw/activity_recognition.msm8937.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
