@@ -77,7 +77,7 @@ vendor/lib/libbtnv.so
 vendor/lib64/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
 vendor/lib64/libbtnv.so
 
-# CNE - from tissot (Mi A1)
+# CNE - from TA-1003 (Nokia 6)
 etc/cne/andsfCne.xml
 etc/cne/SwimConfig.xml
 etc/permissions/cneapiclient.xml
@@ -132,7 +132,7 @@ vendor/lib64/libxml.so
 # Charger - from TA-1003 (Nokia 6)
 vendor/bin/hvdcp_opti
 
-# DPM - from tissot (Mi A1)
+# DPM - from TA-1003 (Nokia 6)
 bin/dpmd
 etc/dpm/dpm.conf
 etc/dpm/nsrm/NsrmConfiguration.xml
@@ -523,7 +523,7 @@ vendor/media/PFFprec_600.emd
 # Media - from santoni (Redmi 4X)
 etc/firmware/DE.o.msm8937
 
-# Modem - from tissot (Mi A1)
+# Modem - from TA-1003 (Nokia 6)
 vendor/lib/libwms.so
 vendor/lib64/libwms.so
 
