@@ -2,3 +2,5 @@
 allow zygote self:capability sys_nice;
 allow zygote debugfs_tracing:file { getattr open write };
 
+# /system/vendor/lib64/egl/libESXEGL_adreno.so
+allow zygote unlabeled:file { read open getattr execute };
