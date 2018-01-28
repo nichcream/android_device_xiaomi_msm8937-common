@@ -55,6 +55,15 @@ included.
         </interface>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.camera.provider</name>
+        <transport arch="32+64">passthrough</transport>
+        <version>2.4</version>
+        <interface>
+            <name>ICameraProvider</name>
+            <instance>legacy/0</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
       <name>android.hardware.cas</name>
       <transport>hwbinder</transport>
       <version>1.0</version>
@@ -139,6 +148,15 @@ included.
         <version>1.0</version>
         <interface>
             <name>IConsumerIr</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.health</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IHealth</name>
             <instance>default</instance>
         </interface>
     </hal>
@@ -285,6 +303,15 @@ included.
         </interface>
     </hal>
     <hal format="hidl">
+        <name>com.qualcomm.qti.dpm.api</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IdpmQmi</name>
+            <instance>dpmQmiService</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>com.qualcomm.qti.imscmservice</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -339,6 +366,15 @@ included.
         </interface>
     </hal>
     <hal format="hidl">
+        <name>vendor.display.postproc</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IDisplayPostproc</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>vendor.qti.esepowermanager</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -354,15 +390,6 @@ included.
         <interface>
             <name>ILocHidlGnss</name>
             <instance>gnss_vendor</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.qti.hardware.iop</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IIop</name>
-            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl">
@@ -404,6 +431,15 @@ included.
             <name>IQcRilAudio</name>
             <instance>slot1</instance>
             <instance>slot2</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.hardware.radio.atcmdfwd</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IAtCmdFwd</name>
+            <instance>AtCmdFwdService</instance>
         </interface>
     </hal>
     <hal format="hidl">
