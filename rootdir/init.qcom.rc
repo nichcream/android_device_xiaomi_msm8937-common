@@ -560,25 +560,6 @@ service start_hci_filter /system/vendor/bin/wcnss_filter
     seclabel u:r:bluetooth:s0
     disabled
 
-service config_bt_addr /system/vendor/bin/btnvtool -O
-    class core
-    user bluetooth
-    group bluetooth radio
-    oneshot
-
-service hciattach /system/vendor/bin/hci_qcomm_init -e
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-
-on property:bluetooth.hciattach=true
-    start hciattach
-    setprop bluetooth.status on
-
-on property:bluetooth.hciattach=false
-    setprop bluetooth.status off
-
 #FM
 on property:hw.fm.init=0
      write /sys/module/radio_iris_transport/parameters/fmsmd_set 0
