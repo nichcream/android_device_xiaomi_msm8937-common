@@ -13,14 +13,8 @@ allow hal_fingerprint_default fingerprint_service:service_manager find;
 allow hal_fingerprint_default gx_fpd_service:service_manager find;
 allow hal_fingerprint_default init:unix_stream_socket connectto;
 
-allow hal_fingerprint_default fuse:dir search;
-allow hal_fingerprint_default fuse:file getattr;
-allow hal_fingerprint_default mnt_user_file:dir search;
-allow hal_fingerprint_default mnt_user_file:lnk_file read;
-allow hal_fingerprint_default storage_file:dir search;
-allow hal_fingerprint_default storage_file:lnk_file read;
-allow hal_fingerprint_default sdcardfs:dir { search };
-allow hal_fingerprint_default sdcardfs:file { getattr };
+# Ignore all logging requests
+dontaudit hal_fingerprint_default storage_file:dir search;
 
 allow hal_fingerprint_default servicemanager:binder { call transfer };
 allow hal_fingerprint_default hwservicemanager:binder { call transfer };
