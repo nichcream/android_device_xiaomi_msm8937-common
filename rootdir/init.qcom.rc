@@ -740,6 +740,7 @@ on property:persist.sys.fp.vendor=goodix
 
 on property:persist.sys.fp.onstart=0
    start gx_fpd
+   start fps_hal
 
 on property:persist.sys.fp.onstart=1
    start fps_hal
