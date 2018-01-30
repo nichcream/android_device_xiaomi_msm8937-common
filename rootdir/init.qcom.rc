@@ -40,7 +40,7 @@ on early-init
     chmod 0620 /dev/kmsg
 
 on init
-    export LD_SHIM_LIBS /system/bin/mm-qcamera-daemon|libshims_qcamera-daemon.so:/system/bin/mm-qcamera-daemon|libshim_camera.so
+    export LD_SHIM_LIBS /system/bin/mm-qcamera-daemon|libshims_qcamera-daemon.so
 
     # Set permissions for persist partition
     mkdir /persist 0771 root system

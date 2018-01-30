@@ -271,9 +271,7 @@ PRODUCT_PACKAGES += \
 
 # Libshims
 PRODUCT_PACKAGES += \
-    libshims_ims \
-    libshims_qcamera-daemon \
-    libshim_camera
+    libshims_qcamera-daemon
 
 # Lights
 PRODUCT_PACKAGES += \
