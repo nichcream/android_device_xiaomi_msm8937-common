@@ -25,7 +25,7 @@ vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
 vendor/lib/rfsa/adsp/libscveBlobDescriptor_skel.so
 vendor/lib/rfsa/adsp/libscveT2T_skel.so
 
-# Alarm - from TA-1003 (Nokia 6)
+# Alarm - from TA-1003 (Nokia 5)
 vendor/framework/vendor.qti.hardware.alarm-V1.0-java.jar
 vendor/lib/vendor.qti.hardware.alarm@1.0.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
@@ -66,7 +66,7 @@ vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
 vendor/lib64/soundfx/libshoebox.so
 
-# Bluetooth - from TA-1003 (Nokia 6)
+# Bluetooth - from TA-1003 (Nokia 5)
 lib/com.qualcomm.qti.bluetooth_audio@1.0.so
 lib64/com.qualcomm.qti.bluetooth_audio@1.0.so
 vendor/bin/btnvtool
@@ -77,7 +77,7 @@ vendor/lib/libbtnv.so
 vendor/lib64/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
 vendor/lib64/libbtnv.so
 
-# CNE - from TA-1003 (Nokia 6)
+# CNE - from TA-1003 (Nokia 5)
 etc/cne/andsfCne.xml
 etc/cne/SwimConfig.xml
 etc/permissions/cneapiclient.xml
@@ -129,10 +129,10 @@ vendor/lib64/libcneqmiutils.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
-# Charger - from TA-1003 (Nokia 6)
+# Charger - from TA-1003 (Nokia 5)
 vendor/bin/hvdcp_opti
 
-# DPM - from TA-1003 (Nokia 6)
+# DPM - from TA-1003 (Nokia 5)
 bin/dpmd
 etc/dpm/dpm.conf
 etc/dpm/nsrm/NsrmConfiguration.xml
@@ -161,7 +161,7 @@ vendor/lib/libdpmqmihal.so
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0_vendor.so
 vendor/lib64/libdpmqmihal.so
 
-# DRM - from TA-1003 (Nokia 6)
+# DRM - from TA-1003 (Nokia 5)
 lib/libGPTEE_system.so
 lib/libQTEEConnector_system.so
 lib/vendor.qti.hardware.qteeconnector@1.0.so
@@ -207,7 +207,7 @@ vendor/lib64/libQTEEConnector_vendor.so
 vendor/lib64/vendor.qti.hardware.qteeconnector@1.0_vendor.so
 vendor/lib64/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
 
-# ESE-Powermanager - from TA-1003 (Nokia 6)
+# ESE-Powermanager - from TA-1003 (Nokia 5)
 vendor/bin/hw/vendor.qti.esepowermanager@1.0-service
 vendor/etc/init/vendor.qti.esepowermanager@1.0-service.rc
 lib/vendor.qti.esepowermanager@1.0.so
@@ -217,7 +217,7 @@ vendor/lib/hw/vendor.qti.esepowermanager@1.0-impl.so
 vendor/lib64/vendor.qti.esepowermanager@1.0_vendor.so
 vendor/lib64/hw/vendor.qti.esepowermanager@1.0-impl.so
 
-# FM - from TA-1003 (Nokia 6)
+# FM - from TA-1003 (Nokia 5)
 -lib/vendor.qti.hardware.fm@1.0.so
 -lib64/vendor.qti.hardware.fm@1.0.so
 vendor/lib/hw/vendor.qti.hardware.fm@1.0-impl.so
@@ -225,11 +225,11 @@ vendor/lib/vendor.qti.hardware.fm@1.0_vendor.so
 vendor/lib64/hw/vendor.qti.hardware.fm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so
 
-# Gatekeeper - from TA-1003 (Nokia 6)
+# Gatekeeper - from TA-1003 (Nokia 5)
 vendor/lib/hw/gatekeeper.msm8937.so
 vendor/lib64/hw/gatekeeper.msm8937.so
 
-# GPS - from TA-1003 (Nokia 6)
+# GPS - from TA-1003 (Nokia 5)
 lib/vendor.qti.gnss@1.0.so
 lib/libxt_native.so
 lib/liblocationservice_jni.so
@@ -305,11 +305,9 @@ vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
 vendor/lib64/vendor.qti.gnss@1.0_vendor.so
 
-# Graphics - from TA-1003 (Nokia 6)
+# Graphics - from TA-1003 (Nokia 5)
 lib/egl/libGLES_android.so
-lib/libOpenCL.so
 lib64/egl/libGLES_android.so
-lib64/libOpenCL.so
 vendor/lib/egl/eglSubDriverAndroid.so
 vendor/lib/egl/eglsubAndroid.so
 vendor/lib/egl/libEGL_adreno.so
@@ -383,7 +381,7 @@ vendor/lib64/librs_adreno.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/libscalar.so
 
-# Graphics - SDM - from TA-1003 (Nokia 6)
+# Graphics - SDM - from TA-1003 (Nokia 5)
 lib/libsd_sdk_display.so
 lib/libsdm-disp-apis.so
 lib64/libsd_sdk_display.so
@@ -402,7 +400,7 @@ vendor/lib64/libtinyxml2_1.so
 # Graphics - UI blur - from unknown
 vendor/lib64/libuiblur.so
 
-# Graphics firmware - from TA-1003 (Nokia 6)
+# Graphics firmware - from TA-1003 (Nokia 5)
 vendor/firmware/a530_gpmu.fw2
 vendor/firmware/a530_pfp.fw
 vendor/firmware/a530_pm4.fw
@@ -413,7 +411,7 @@ vendor/firmware/a530v3_gpmu.fw2
 vendor/firmware/a530v3_seq.fw2
 vendor/firmware/a540_gpmu.fw2
 
-# Improvetouch - from TA-1003 (Nokia 6)
+# Improvetouch - from TA-1003 (Nokia 5)
 vendor/bin/hbtp_daemon
 lib/libhbtpjni.so
 lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0.so
@@ -447,11 +445,11 @@ vendor/lib64/vendor.qti.hardware.improvetouch.gesturemanager@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so
 vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0_vendor.so
 
-# Keystore - from TA-1003 (Nokia 6)
+# Keystore - from TA-1003 (Nokia 5)
 vendor/lib/hw/keystore.msm8937.so
 vendor/lib64/hw/keystore.msm8937.so
 
-# Keymaster - from TA-1003 (Nokia 6)
+# Keymaster - from TA-1003 (Nokia 5)
 vendor/lib/libkeymasterutils.so
 vendor/lib/libkeymasterprovision.so
 vendor/lib/libkeymasterdeviceutils.so
@@ -459,13 +457,13 @@ vendor/lib64/libkeymasterutils.so
 vendor/lib64/libkeymasterprovision.so
 vendor/lib64/libkeymasterdeviceutils.so
 
-# Listen - from TA-1003 (Nokia 6)
+# Listen - from TA-1003 (Nokia 5)
 vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 vendor/lib64/hw/sound_trigger.primary.msm8937.so
 
-# Media - from TA-1003 (Nokia 6)
+# Media - from TA-1003 (Nokia 5)
 lib/libmmosal.so
 lib/libOmxMux.so
 lib/libstagefright_soft_flacdec.so
@@ -523,11 +521,11 @@ vendor/media/PFFprec_600.emd
 # Media - from santoni (Redmi 4X)
 etc/firmware/DE.o.msm8937
 
-# Modem - from TA-1003 (Nokia 6)
+# Modem - from TA-1003 (Nokia 5)
 vendor/lib/libwms.so
 vendor/lib64/libwms.so
 
-# Perf - from TA-1003 (Nokia 6)
+# Perf - from TA-1003 (Nokia 5)
 lib/vendor.qti.hardware.iop@1.0.so
 lib/vendor.qti.hardware.perf@1.0.so
 lib64/vendor.qti.hardware.iop@1.0.so
@@ -560,13 +558,13 @@ vendor/lib64/libqti-util.so
 vendor/lib64/vendor.qti.hardware.iop@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.perf@1.0_vendor.so
 
-# Peripheral manager - from TA-1003 (Nokia 6)
+# Peripheral manager - from TA-1003 (Nokia 5)
 vendor/bin/pm-proxy
 vendor/bin/pm-service
 vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
-# Postprocessing - from TA-1003 (Nokia 6)
+# Postprocessing - from TA-1003 (Nokia 5)
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 framework/com.qti.snapdragon.sdk.display.jar
 lib/vendor.display.color@1.0.so
@@ -584,7 +582,7 @@ vendor/lib64/libdisp-aba.so
 vendor/lib64/vendor.display.color@1.0_vendor.so
 vendor/lib64/vendor.display.postproc@1.0_vendor.so
 
-# QDutils - from TA-1003 (Nokia 6)
+# QDutils - from TA-1003 (Nokia 5)
 lib/vendor.qti.hardware.qdutils_disp@1.0.so
 lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti
@@ -695,7 +693,7 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0_vendor.so
 vendor/radio/qcril_database/qcril.db
 
-# Radio - IMS - from TA-1003 (Nokia 6)
+# Radio - IMS - from TA-1003 (Nokia 5)
 -app/ims/ims.apk
 -app/imssettings/imssettings.apk
 etc/permissions/qti-vzw-ims-internal.xml
@@ -760,7 +758,7 @@ vendor/lib64/vendor.qti.hardware.radio.ims@1.0_vendor.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so
 
-# Sensors - from TA-1003 (Nokia 6)
+# Sensors - from TA-1003 (Nokia 5)
 lib/libsensor1.so
 lib/libsensor_reg.so
 lib/libsensor_test.so
@@ -786,7 +784,7 @@ vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.ssc.so
 vendor/lib64/vendor.qti.hardware.sensorscalibrate@1.0.so
 
-# Thermal - from TA-1003 (Nokia 6)
+# Thermal - from TA-1003 (Nokia 5)
 vendor/etc/thermal-engine.conf
 vendor/bin/thermal-engine
 -vendor/lib/libthermalclient.so
@@ -799,7 +797,7 @@ vendor/bin/time_daemon
 -vendor/lib/libtime_genoff.so
 -vendor/lib64/libtime_genoff.so
 
-# TUI - from TA-1003 (Nokia 6)
+# TUI - from TA-1003 (Nokia 5)
 lib/vendor.qti.hardware.tui_comm@1.0.so
 lib64/vendor.qti.hardware.tui_comm@1.0.so
 vendor/bin/hw/vendor.qti.hardware.tui_comm@1.0-service-qti
@@ -807,17 +805,17 @@ vendor/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc
 vendor/lib/vendor.qti.hardware.tui_comm@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.tui_comm@1.0_vendor.so
 
-# Widevine - from TA-1003 (Nokia 6)
+# Widevine - from TA-1003 (Nokia 5)
 vendor/bin/hw/android.hardware.drm@1.0-service.widevine
 vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc
 vendor/lib/mediadrm/libwvdrmengine.so
 vendor/lib/libwvhidl.so
 
-# Wi-Fi - from TA-1003 (Nokia 6)
+# Wi-Fi - from TA-1003 (Nokia 5)
 vendor/bin/wcnss_service
 vendor/lib64/vendor.qti.hardware.wifi.supplicant@1.0_vendor.so
 
-# Wi-Fi Display - from TA-1003 (Nokia 6)
+# Wi-Fi Display - from TA-1003 (Nokia 5)
 vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc
 lib/com.qualcomm.qti.wifidisplayhal@1.0.so
 lib64/com.qualcomm.qti.wifidisplayhal@1.0.so
