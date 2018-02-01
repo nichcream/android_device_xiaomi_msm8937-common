@@ -54,7 +54,7 @@ TARGET_KERNEL_SOURCE 		:= kernel/xiaomi/msm8937
 TARGET_KERNEL_HAVE_EXFAT	:= true
 
 # ANT
-#BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
+BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Audio
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
