@@ -240,6 +240,9 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0-java \
     android.hidl.base@1.0
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/qti_libpermissions.xml:system/etc/permissions/qti_libpermissions.xml
+
 # IMS
 PRODUCT_PACKAGES += \
     com.android.ims.rcsmanager

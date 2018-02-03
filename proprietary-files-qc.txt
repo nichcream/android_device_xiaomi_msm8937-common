@@ -608,7 +608,6 @@ lib/libqmi_cci_system.so
 lib64/libdiag_system.so
 lib64/libqmi_cci_system.so
 etc/permissions/qti_permissions.xml
-etc/permissions/qti_libpermissions.xml
 vendor/bin/irsc_util
 vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
