@@ -679,9 +679,9 @@ service hcidump /system/bin/sh /system/etc/hcidump.sh
     disabled
     oneshot
 
-service charger /charger
+service charger /sbin/charger
     class charger
-    group graphics system
+    group system graphics
     seclabel u:r:charger:s0
 
 #+first boot,jiangtao.wt,add 20150810
