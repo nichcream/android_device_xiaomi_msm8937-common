@@ -108,7 +108,7 @@ ro.gps.agps_provider=1
 ro.build.shutdown_timeout=0
 
 # SdcardFs
-ro.sys.sdcardfs=false
+ro.sys.sdcardfs=true
 
 # Media
 media.msm8956hw=0
