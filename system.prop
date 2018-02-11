@@ -161,9 +161,6 @@ persist.service.adb.enable=1
 persist.service.debuggable=1
 persist.sys.usb.config=mtp,adb
 
-# Enable QC2.0 functionality, set true to enable
-#persist.usb.hvdcp.detect=true
-
 # IMS
 service.qti.ims.enabled=1
 persist.radio.ims.cmcc=true
