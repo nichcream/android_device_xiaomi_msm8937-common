@@ -89,6 +89,12 @@ vendor/lib64/libbtnv.so
 vendor/lib64/libbt-hidlclient.so
 vendor/lib64/libbthost_if.so
 
+# Bluetooth (aptX) - from marlin - OPM1.171019.011
+lib/libaptX_encoder.so
+lib/libaptXHD_encoder.so
+lib64/libaptX_encoder.so
+lib64/libaptXHD_encoder.so
+
 # CNE - from TA-1003 (Nokia 5)
 etc/cne/andsfCne.xml
 etc/cne/SwimConfig.xml
@@ -128,6 +134,7 @@ vendor/etc/cne/wqeclient/VZW/VZW_profile6.xml
 vendor/lib/libcne.so
 vendor/lib/libcneapiclient.so
 vendor/lib/libcneqmiutils.so
+vendor/lib/libwms.so
 vendor/lib/libwqe.so
 vendor/lib/libxml.so
 -vendor/lib64/com.quicinc.cne.api@1.0.so
@@ -138,6 +145,7 @@ vendor/lib/libxml.so
 vendor/lib64/libcne.so
 vendor/lib64/libcneapiclient.so
 vendor/lib64/libcneqmiutils.so
+vendor/lib64/libwms.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
@@ -527,13 +535,6 @@ vendor/lib64/libvpplibrary.so
 vendor/media/LMspeed_508.emd
 vendor/media/PFFprec_600.emd
 
-# Media - from santoni (Redmi 4X)
-etc/firmware/DE.o.msm8937
-
-# Modem - from TA-1003 (Nokia 5)
-vendor/lib/libwms.so
-vendor/lib64/libwms.so
-
 # Perf - from TA-1003 (Nokia 5)
 lib/vendor.qti.hardware.iop@1.0.so
 lib/vendor.qti.hardware.perf@1.0.so
@@ -804,7 +805,7 @@ vendor/bin/thermal-engine
 -vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
 
-# Time services - from tissot (Mi A1)
+# Time services - from TA-1003 (Nokia 5)
 -vendor/app/TimeService/TimeService.apk
 vendor/bin/time_daemon
 -vendor/lib/libtime_genoff.so

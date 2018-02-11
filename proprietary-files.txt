@@ -1,8 +1,3 @@
-#APTX HD
-vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so
-vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so
-vendor/lib/libaptXScheduler.so
-
 # Audio
 etc/mixer_paths_skuk.xml:vendor/etc/mixer_paths_skuk.xml
 etc/mixer_paths_wcd9306.xml:vendor/etc/mixer_paths_wcd9306.xml
@@ -991,6 +986,9 @@ usr/keylayout/gpio-keys.kl
 usr/keylayout/qpnp_pon.kl
 usr/keylayout/synaptics_dsx.kl
 usr/keylayout/synaptics_rmi4_i2c.kl
+
+# Media - from santoni (Redmi 4X)
+etc/firmware/DE.o.msm8937
 
 # Radio - MBN
 etc/firmware/modem_config/S88537AA1/cmcc_mcfg_sw.mbn
