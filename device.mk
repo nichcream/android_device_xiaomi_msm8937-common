@@ -291,6 +291,7 @@ PRODUCT_COPY_FILES += \
 # Media
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
+    libmm-omxcore \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
