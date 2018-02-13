@@ -39,3 +39,4 @@ allow init debugfs_tracing:file { open read write };
 allow init sensors_device:chr_file { ioctl write };
 allow init vndbinder_device:chr_file { open read write ioctl };
 allow init adsprpcd_file:filesystem { mount relabelfrom relabelto };
+allow init mm-qcamerad:unix_dgram_socket rw_socket_perms;
