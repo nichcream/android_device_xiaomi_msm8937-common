@@ -29,3 +29,5 @@
 # Data files
 /data/misc/netmgr/log\.txt			u:object_r:netmgrd_data_file:s0
 
+# rmt_storage debugfs
+/sys/kernel/debug/rmt_storage(/.*)?                  u:object_r:qti_debugfs:s0

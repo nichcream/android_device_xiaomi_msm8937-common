@@ -1,1 +1,1 @@
-allow time_daemon system_data_file:file r_file_perms;
+allow time_daemon system_data_file:file rw_file_perms;
