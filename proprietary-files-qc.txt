@@ -536,8 +536,12 @@ vendor/media/LMspeed_508.emd
 vendor/media/PFFprec_600.emd
 
 # Perf - from TA-1003 (Nokia 5)
+lib/libqti-at.so
+lib/libqti-perfd-client_system.so
 lib/vendor.qti.hardware.iop@1.0.so
 lib/vendor.qti.hardware.perf@1.0.so
+lib64/libqti-at.so
+lib64/libqti-perfd-client_system.so
 lib64/vendor.qti.hardware.iop@1.0.so
 lib64/vendor.qti.hardware.perf@1.0.so
 vendor/bin/msm_irqbalance
