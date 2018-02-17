@@ -511,6 +511,7 @@ vendor/lib/libOmxSwVencMpeg4.so
 vendor/lib/libMpeg4SwEncoder.so
 vendor/lib/libmmosal_proprietary.so
 vendor/lib/libmm-color-convertor.so
+vendor/lib/libswvdec.so
 vendor/lib/libvpplibrary.so
 vendor/lib/libvqzip.so
 vendor/lib/libomx-dts.so
@@ -535,6 +536,7 @@ vendor/lib64/libOmxSwVencMpeg4.so
 vendor/lib64/libMpeg4SwEncoder.so
 vendor/lib64/libmmosal_proprietary.so
 vendor/lib64/libmm-color-convertor.so
+vendor/lib64/libswvdec.so
 vendor/lib64/libvpplibrary.so
 vendor/lib64/vendor.qti.hardware.vpp@1.1_vendor.so
 vendor/media/LMspeed_508.emd
