@@ -1,1 +1,3 @@
 allow rild vendor_file:file { r_file_perms execute_no_trans ioctl };
+
+get_prop(rild, diag_prop)

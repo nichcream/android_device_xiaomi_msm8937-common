@@ -4,3 +4,5 @@ allow wcnss_service self:capability {
 };
 allow wcnss_service shell_exec:file { execute execute_no_trans r_file_perms };
 allow wcnss_service toolbox_exec:file getattr;
+
+set_prop(wcnss_service, wifi_prop)
