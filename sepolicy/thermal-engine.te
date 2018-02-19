@@ -1,0 +1,4 @@
+allow thermal-engine socket_device:sock_file { create relabelfrom relabelto setattr };
+allow thermal-engine thermal_socket:sock_file { relabelfrom relabelto };
+allow thermal-engine file_contexts_file:file { getattr read open };
+allow thermal-engine self:process { setfscreate };

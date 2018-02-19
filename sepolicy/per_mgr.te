@@ -1,0 +1,5 @@
+allow per_mgr default_android_service:service_manager find;
+allow per_mgr self:capability net_raw;
+allow per_mgr vfat:file r_file_perms;
+
+binder_use(per_mgr)
