@@ -26,6 +26,7 @@ $(call inherit-product, vendor/validus/config/common_full_phone.mk)
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 PRODUCT_BRAND := Xiaomi
+PRODUCT_MODEL := Redmi 3S
 PRODUCT_DEVICE := land
 PRODUCT_MANUFACTURER := Wingtech
 PRODUCT_NAME := validus_land
@@ -37,6 +38,3 @@ TARGET_VENDOR_PRODUCT_NAME := land
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BUILD_FINGERPRINT=Xiaomi/land/land:6.0.1/MMB29M/V9.2.2.0.MALMIEK:user/release-keys \
     PRIVATE_BUILD_DESC="land-user 6.0.1 MMB29M V9.2.2.0.MALMIEK release-keys"
-
-PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
-    ro.product.model
