@@ -173,7 +173,7 @@ PRODUCT_PACKAGES += \
 
 # Display calibration
 PRODUCT_PACKAGES += \
-    libjni_livedisplay
+    vendor.lineage.livedisplay@1.0-service-sdm
 
 # Doze mode
 PRODUCT_PACKAGES += \
