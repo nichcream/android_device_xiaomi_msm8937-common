@@ -232,11 +232,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.health@1.0-impl \
     android.hardware.health@1.0-convert \
-    android.hardware.health@1.0-service
-
-# MIUI charging animation
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/sbin/chargeonlymode:root/sbin/charger
+    android.hardware.health@1.0-service \
+    chargeonlymode
 
 # HIDL
 PRODUCT_PACKAGES += \

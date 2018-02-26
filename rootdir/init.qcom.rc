@@ -679,7 +679,7 @@ service hcidump /system/bin/sh /system/etc/hcidump.sh
     disabled
     oneshot
 
-service charger /sbin/charger
+service charger /sbin/chargeonlymode
     class charger
     group system graphics
     seclabel u:r:charger:s0
@@ -823,8 +823,6 @@ on property:init.svc.zygote=restarting
     stop ppd
 
 on charger
-    wait /dev/block/bootdevice/by-name/system
-    mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
     load_system_props
     setprop persist.sys.usb.config mass_storage
     setprop persist.sys.usb.config mass_storage
