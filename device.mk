@@ -136,6 +136,9 @@ PRODUCT_PACKAGES += \
     libmmcamera_interface \
     libmmjpeg_interface \
     libqomx_core \
+    Snap
+
+PRODUCT_PACKAGES += \
     SnapdragonCamera
 
 PRODUCT_PACKAGES += \
