@@ -43,6 +43,6 @@ allow gx_fpd storage_file:dir search;
 allow gx_fpd storage_file:lnk_file read;
 allow gx_fpd vfat:dir search;
 allow gx_fpd vfat:file  { read write getattr open };
-allow gx_fpd self:netlink_socket create_socket_perms;
+allow gx_fpd self:netlink_socket create_socket_perms_no_ioctl;
 
 r_dir_file(gx_fpd, firmware_file)
