@@ -252,7 +252,6 @@ PRODUCT_PACKAGES += \
 
 # Init scripts ramdisk
 PRODUCT_PACKAGES += \
-    init.qcom.bt.sh \
     init.qcom.power.rc \
     init.qcom.usb.rc \
     init.qcom.usb.sh

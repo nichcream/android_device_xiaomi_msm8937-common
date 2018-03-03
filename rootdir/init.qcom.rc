@@ -487,13 +487,6 @@ on boot
     setprop persist.sys.fp.vendor none
     start gx_fpd
 
-on class_start:late_start
-    write /proc/sys/net/ipv6/conf/default/accept_ra_defrtr 1
-
-    copy /system/vendor/qcril.db /data/misc/radio/qcril.db
-    chown radio radio /data/misc/radio/qcril.db
-    write /data/misc/radio/db_check_done 1
-
 service iop /vendor/bin/iop
     class main
     user root
