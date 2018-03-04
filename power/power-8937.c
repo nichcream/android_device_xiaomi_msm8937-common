@@ -55,54 +55,59 @@ static int video_encode_hint_sent;
 static int current_power_profile = PROFILE_BALANCED;
 
 static int profile_high_performance[] = {
+    SCHED_BOOST_ON_V3, 0x1,
+    ALL_CPUS_PWR_CLPS_DIS_V3, 0x1,
     CPUS_ONLINE_MIN_BIG, 0x4,
-    CPUS_ONLINE_MIN_LITTLE, 0x4,
-    CPU0_MIN_FREQ_TURBO_MAX,
-    CPU4_MIN_FREQ_TURBO_MAX,
+    MIN_FREQ_BIG_CORE_0, 0xFFF,
+    MIN_FREQ_LITTLE_CORE_0, 0xFFF,
+    GPU_MIN_PWRLVL_BOOST, 0x1,
+    SCHED_PREFER_IDLE_DIS_V3, 0x1,
+    SCHED_SMALL_TASK_DIS, 0x1,
+    SCHED_IDLE_NR_RUN_DIS, 0x1,
+    SCHED_IDLE_LOAD_DIS, 0x1,
 };
 
 static int profile_power_save[] = {
-    CPUS_ONLINE_MAX_LIMIT_BIG, 0x0,
-    CPU0_MAX_FREQ_NONTURBO_MAX,
-    CPU4_MAX_FREQ_NONTURBO_MAX,
+    CPUS_ONLINE_MAX_LIMIT_BIG, 0x1,
+    MAX_FREQ_BIG_CORE_0, 0x3bf,
+    MAX_FREQ_LITTLE_CORE_0, 0x300,
 };
 
 static int profile_bias_power[] = {
-    CPU0_MAX_FREQ_NONTURBO_MAX,
-    CPU4_MAX_FREQ_NONTURBO_MAX,
+    MAX_FREQ_BIG_CORE_0, 0x4B0,
+    MAX_FREQ_LITTLE_CORE_0, 0x300,
 };
 
 static int profile_bias_performance[] = {
-    CPU0_MIN_FREQ_NONTURBO_MAX + 1,
-    CPU4_MIN_FREQ_NONTURBO_MAX + 1,
+    CPUS_ONLINE_MAX_LIMIT_BIG, 0x4,
+    MIN_FREQ_BIG_CORE_0, 0x540,
 };
 
-int get_number_of_profiles()
-{
+int get_number_of_profiles() {
     return 5;
 }
 
-static void set_power_profile(int profile)
-{
+static void set_power_profile(int profile) {
+
     if (profile == current_power_profile)
         return;
 
-    ALOGV("%s: Profile=%d", __func__, profile);
+    ALOGV("%s: profile=%d", __func__, profile);
 
     if (current_power_profile != PROFILE_BALANCED) {
         undo_hint_action(DEFAULT_PROFILE_HINT_ID);
-        ALOGV("%s: Hint undone", __func__);
+        ALOGV("%s: hint undone", __func__);
     }
 
-    if (profile == PROFILE_POWER_SAVE) {
-        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_power_save,
-                ARRAY_SIZE(profile_power_save));
-        ALOGD("%s: Set powersave mode", __func__);
-
-    } else if (profile == PROFILE_HIGH_PERFORMANCE) {
+    if (profile == PROFILE_HIGH_PERFORMANCE) {
         perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_high_performance,
                 ARRAY_SIZE(profile_high_performance));
-        ALOGD("%s: Set performance mode", __func__);
+        ALOGD("%s: set performance mode", __func__);
+
+    } else if (profile == PROFILE_POWER_SAVE) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_power_save,
+                ARRAY_SIZE(profile_power_save));
+        ALOGD("%s: set powersave", __func__);
 
     } else if (profile == PROFILE_BIAS_POWER) {
         perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_power,
@@ -187,9 +192,8 @@ int power_hint_override(power_hint_t hint, void *data)
         return HINT_HANDLED;
     }
 
-    // Skip other hints in high/low power modes
-    if (current_power_profile == PROFILE_POWER_SAVE ||
-            current_power_profile == PROFILE_HIGH_PERFORMANCE) {
+    // Skip other hints in low power mode
+    if (current_power_profile == PROFILE_POWER_SAVE) {
         return HINT_HANDLED;
     }
 
