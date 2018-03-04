@@ -335,14 +335,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint.xml:system/etc/powerhint.xml
 
-# Power HAL
-PRODUCT_PACKAGES += \
-    power.msm8937
-
 # Power HIDL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service
+    android.hardware.power@1.0-service.land
 
 # RCS
 PRODUCT_PACKAGES += \
