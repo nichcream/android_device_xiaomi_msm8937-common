@@ -722,6 +722,7 @@ service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     user camera
     group camera system inet input graphics
     seclabel u:r:mm-qcamerad:s0
+    setenv LD_PRELOAD "/vendor/lib/libshim_c.so"
 #    writepid /dev/cpuset/system-background/tasks
 
 # Allow usb charging to be disabled peristently

@@ -28,10 +28,6 @@ TARGET_SCREEN_WIDTH := 720
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-# Copy prebuilt libc - REMOVE ASAP
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilts/libc.so:system/lib/libc.so
-
 # Permissions
 PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.dsi.ant.antradio_library.xml \
@@ -275,6 +271,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
+
+# Libshims
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilts/libshim_c.so:$(TARGET_COPY_OUT_VENDOR)/lib/libshim_c.so
 
 # Lights
 PRODUCT_PACKAGES += \
