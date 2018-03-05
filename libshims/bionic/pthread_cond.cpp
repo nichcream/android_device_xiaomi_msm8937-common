@@ -83,10 +83,6 @@ struct pthread_cond_internal_t {
   int get_clock() {
     return COND_GET_CLOCK(atomic_load_explicit(&state, memory_order_relaxed));
   }
-
-#if defined(__LP64__)
-  char __reserved[44];
-#endif
 };
 
 static_assert(sizeof(pthread_cond_t) == sizeof(pthread_cond_internal_t),
@@ -188,7 +184,6 @@ int pthread_cond_timedwait(pthread_cond_t *cond_interface, pthread_mutex_t * mut
   return __pthread_cond_timedwait(cond, mutex, abstime, cond->get_clock());
 }
 
-#if !defined(__LP64__)
 // TODO: this exists only for backward binary compatibility on 32 bit platforms.
 extern "C" int pthread_cond_timedwait_monotonic(pthread_cond_t* cond_interface,
                                                 pthread_mutex_t* mutex,
@@ -217,4 +212,3 @@ extern "C" int pthread_cond_timeout_np(pthread_cond_t* cond_interface,
   timespec_from_ms(ts, ms);
   return pthread_cond_timedwait_relative_np(cond_interface, mutex, &ts);
 }
-#endif // !defined(__LP64__)
