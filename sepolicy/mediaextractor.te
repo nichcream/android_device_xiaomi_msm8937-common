@@ -1,3 +1,2 @@
-#============= mediaextractor ==============
 allow mediaextractor fuse:file { getattr read};
-
+allow mediaextractor sdcardfs:file { read getattr };
