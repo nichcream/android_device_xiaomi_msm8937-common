@@ -213,6 +213,10 @@ int is_interactive_governor(char* governor) {
    return 0;
 }
 
+#ifndef INTERACTION_BOOST
+void interaction(int UNUSED(duration), int UNUSED(num_args), int UNUSED(opt_list[]))
+{
+#else
 void interaction(int duration, int num_args, int opt_list[])
 {
     static int lock_handle = 0;
@@ -227,6 +231,7 @@ void interaction(int duration, int num_args, int opt_list[])
                 ALOGE("Failed to acquire lock.");
         }
     }
+#endif
 }
 
 int interaction_with_handle(int lock_handle, int duration, int num_args, int opt_list[])
