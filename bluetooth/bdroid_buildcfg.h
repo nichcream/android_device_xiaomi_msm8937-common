@@ -46,4 +46,12 @@ inline const char* BtmGetDefaultName()
 
 /* Enable HFP WBS feature */
 #define BTIF_HF_CLIENT_WBS_INCLUDED TRUE
+
+/*
+  * Default to SCO mode 0 
+  * mode 0 - SCO
+  * mode 2 - eSCO
+*/
+#define BTM_DEFAULT_SCO_MODE 0
+
 #endif
