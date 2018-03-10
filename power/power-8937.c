@@ -195,18 +195,6 @@ int power_hint_override(power_hint_t hint, void *data)
     static struct timespec s_previous_boost_timespec;
     struct timespec cur_boost_timespec;
     long long elapsed_time;
-    int resources_launch[] = {
-        SCHED_BOOST_ON_V3, 0x1,
-        MIN_FREQ_BIG_CORE_0, 0x5DC,
-        ALL_CPUS_PWR_CLPS_DIS_V3, 0x1,
-        CPUS_ONLINE_MIN_BIG, 0x4,
-        GPU_MIN_PWRLVL_BOOST, 0x1,
-        SCHED_PREFER_IDLE_DIS_V3, 0x1,
-        SCHED_SMALL_TASK_DIS, 0x1,
-        SCHED_IDLE_NR_RUN_DIS, 0x1,
-        SCHED_IDLE_LOAD_DIS, 0x1,
-    };
-
     int resources_cpu_boost[] = {
         SCHED_BOOST_ON_V3, 0x1,
         MIN_FREQ_BIG_CORE_0, 0x44C,
@@ -254,11 +242,6 @@ int power_hint_override(power_hint_t hint, void *data)
                 interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost),
                         resources_interaction_fling_boost);
             }
-            return HINT_HANDLED;
-        case POWER_HINT_LAUNCH:
-            duration = 2000;
-            interaction(duration, ARRAY_SIZE(resources_launch),
-                    resources_launch);
             return HINT_HANDLED;
         case POWER_HINT_CPU_BOOST:
             duration = *(int32_t *)data / 1000;
