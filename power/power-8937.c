@@ -52,6 +52,8 @@ static int saved_interactive_mode = -1;
 static int display_hint_sent;
 static int video_encode_hint_sent;
 
+extern void interaction(int duration, int num_args, int opt_list[]);
+
 static int current_power_profile = PROFILE_BALANCED;
 
 static int profile_high_performance[] = {
@@ -189,6 +191,32 @@ static void process_video_encode_hint(void *metadata)
 
 int power_hint_override(power_hint_t hint, void *data)
 {
+    int duration, duration_hint;
+    static struct timespec s_previous_boost_timespec;
+    struct timespec cur_boost_timespec;
+    long long elapsed_time;
+    int resources_launch[] = {
+        SCHED_BOOST_ON_V3, 0x1,
+        MIN_FREQ_BIG_CORE_0, 0x5DC,
+        ALL_CPUS_PWR_CLPS_DIS_V3, 0x1,
+        CPUS_ONLINE_MIN_BIG, 0x4,
+        GPU_MIN_PWRLVL_BOOST, 0x1,
+        SCHED_PREFER_IDLE_DIS_V3, 0x1,
+        SCHED_SMALL_TASK_DIS, 0x1,
+        SCHED_IDLE_NR_RUN_DIS, 0x1,
+        SCHED_IDLE_LOAD_DIS, 0x1,
+    };
+
+    int resources_cpu_boost[] = {
+        SCHED_BOOST_ON_V3, 0x1,
+        MIN_FREQ_BIG_CORE_0, 0x44C,
+    };
+
+    int resources_interaction_fling_boost[] = {
+        MIN_FREQ_BIG_CORE_0, 0x514,
+        SCHED_BOOST_ON_V3, 0x1,
+    };
+
     if (hint == POWER_HINT_SET_PROFILE) {
         set_power_profile(*(int32_t *)data);
         return HINT_HANDLED;
@@ -200,6 +228,45 @@ int power_hint_override(power_hint_t hint, void *data)
     }
 
     switch (hint) {
+    	case POWER_HINT_INTERACTION:
+            duration = 500;
+            duration_hint = 0;
+
+            if (data) {
+                duration_hint = *((int *)data);
+            }
+
+            duration = duration_hint > 0 ? duration_hint : 500;
+
+            clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
+            elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
+            if (elapsed_time > 750000)
+                elapsed_time = 750000;
+            // don't hint if it's been less than 250ms since last boost
+            // also detect if we're doing anything resembling a fling
+            // support additional boosting in case of flings
+            else if (elapsed_time < 250000 && duration <= 750)
+                return HINT_HANDLED;
+
+            s_previous_boost_timespec = cur_boost_timespec;
+
+            if (duration >= 1500) {
+                interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost),
+                        resources_interaction_fling_boost);
+            }
+            return HINT_HANDLED;
+        case POWER_HINT_LAUNCH:
+            duration = 2000;
+            interaction(duration, ARRAY_SIZE(resources_launch),
+                    resources_launch);
+            return HINT_HANDLED;
+        case POWER_HINT_CPU_BOOST:
+            duration = *(int32_t *)data / 1000;
+            if (duration > 0) {
+                interaction(duration, ARRAY_SIZE(resources_cpu_boost),
+                        resources_cpu_boost);
+            }
+            return HINT_HANDLED;
         case POWER_HINT_VIDEO_ENCODE:
             process_video_encode_hint(data);
             return HINT_HANDLED;
