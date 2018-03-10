@@ -1,1 +1,0 @@
-allow mediaserver unlabeled:file { getattr read open };

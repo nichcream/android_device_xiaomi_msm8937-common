@@ -1,5 +1,0 @@
-#============= mediacodec ==============
-allow mediacodec sysfs:file { getattr open read };
-
-# /system/vendor/lib/libOmxSwVdec.so
-allow mediacodec unlabeled:file { read open getattr };
