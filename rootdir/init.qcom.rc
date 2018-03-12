@@ -675,19 +675,6 @@ service charger /sbin/chargeonlymode
     group system graphics
     seclabel u:r:charger:s0
 
-#+first boot,jiangtao.wt,add 20150810
-on property:sys.installed.running=1
-    write /sys/power/wake_lock InstalldWakeLock
-
-on property:sys.installed.running=0
-    write /sys/power/wake_unlock InstalldWakeLock
-#-first boot,jiangtao.wt,add 20150810
-
-on property:persist.radio.otaconfig=0
-    setprop persist.radio.start_ota_daemon 0
-on property:persist.radio.otaconfig=1
-    setprop persist.radio.start_ota_daemon 1
-
 service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     class core
     user root
