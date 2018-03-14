@@ -1,13 +1,15 @@
-#============= hal_fingerprint_default ==============
-allow hal_fingerprint_default firmware_file:file { read open getattr };
-allow hal_fingerprint_default firmware_file:dir search;
+type fpc_socket, file_type;
+type gx_fpd_device, dev_type;
+
+r_dir_file(hal_fingerprint_default, firmware_file)
+add_service(hal_fingerprint_default, fingerprintd_custom_service);
+
 allow hal_fingerprint_default sysfs:file rw_file_perms;
 allow hal_fingerprint_default uhid_device:chr_file { ioctl open read write };
 allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
 allow hal_fingerprint_default fpc_sysfs:file { ioctl open read write };
 allow hal_fingerprint_default fpc_data_file:dir { open read write remove_name add_name };
 allow hal_fingerprint_default fpc_data_file:sock_file { open read write create unlink };
-allow hal_fingerprint_default system_prop:property_service { set };
 allow hal_fingerprint_default property_socket:sock_file { open read write create unlink };
 allow hal_fingerprint_default fingerprint_service:service_manager find;
 allow hal_fingerprint_default gx_fpd_service:service_manager find;
@@ -23,5 +25,6 @@ allow hal_fingerprint_default keystore_service:service_manager { find };
 allow hal_fingerprint_default keystore:binder { call };
 allow hal_fingerprint_default keystore:keystore_key { add_auth };
 
-add_service(hal_fingerprint_default, fingerprintd_custom_service);
-r_dir_file(hal_fingerprint_default, firmware_file)
+set_prop(hal_fingerprint_default, system_prop)
+binder_call(hal_fingerprint_default, gx_fpd)
+binder_use(hal_fingerprint_default)
