@@ -18,6 +18,8 @@
 
 DEVICE_PATH := device/xiaomi/land
 
+TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
+
 # Architecture
 TARGET_ARCH 	    	:= arm64
 TARGET_ARCH_VARIANT 	:= armv8-a
@@ -174,9 +176,6 @@ TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
 # Lockscreen real time charging current values
 BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
-
-# Lights
-TARGET_PROVIDES_LIBLIGHT := true
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 67108864
