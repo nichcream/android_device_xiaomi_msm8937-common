@@ -836,10 +836,10 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-#service hvdcp_opti /system/vendor/bin/hvdcp_opti
-#    class main
-#    user root
-#    group root
+service hvdcp_opti /system/vendor/bin/hvdcp_opti
+    class main
+    user root
+    group system wakelock
 
 service mdtpd /system/vendor/bin/mdtpd
     class late_start

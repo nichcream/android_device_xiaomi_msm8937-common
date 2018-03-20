@@ -149,7 +149,7 @@ vendor/lib64/libwms.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
-# Charger - from TA-1003 (Nokia 5)
+# Charger - from gemini (Mi 5)
 vendor/bin/hvdcp_opti
 
 # DPM - from TA-1003 (Nokia 5)
