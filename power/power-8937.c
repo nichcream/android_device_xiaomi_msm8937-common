@@ -195,11 +195,6 @@ int power_hint_override(power_hint_t hint, void *data)
     static struct timespec s_previous_boost_timespec;
     struct timespec cur_boost_timespec;
     long long elapsed_time;
-    int resources_cpu_boost[] = {
-        SCHED_BOOST_ON_V3, 0x1,
-        MIN_FREQ_BIG_CORE_0, 0x44C,
-    };
-
     int resources_interaction_fling_boost[] = {
         MIN_FREQ_BIG_CORE_0, 0x514,
         SCHED_BOOST_ON_V3, 0x1,
@@ -241,13 +236,6 @@ int power_hint_override(power_hint_t hint, void *data)
             if (duration >= 1500) {
                 interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost),
                         resources_interaction_fling_boost);
-            }
-            return HINT_HANDLED;
-        case POWER_HINT_CPU_BOOST:
-            duration = *(int32_t *)data / 1000;
-            if (duration > 0) {
-                interaction(duration, ARRAY_SIZE(resources_cpu_boost),
-                        resources_cpu_boost);
             }
             return HINT_HANDLED;
         case POWER_HINT_VIDEO_ENCODE:
