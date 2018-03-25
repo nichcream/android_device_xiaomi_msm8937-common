@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "biometrics.fingerprint@2.0-service-custom"
+#define LOG_TAG "android.biometrics.fingerprint@2.0-service.custom"
 
-#include <binder/IPCThreadState.h>
 #include <binder/IServiceManager.h>
 #include <binder/PermissionCache.h>
-#include <binder/ProcessState.h>
 #include <utils/String16.h>
 #include <keystore/keystore.h> // for error codes
 
@@ -40,8 +38,14 @@ using android::hardware::joinRpcThreadpool;
 using android::sp;
 
 int main() {
-    char vend [PROPERTY_VALUE_MAX];
-    property_get("ro.hardware.fingerprint", vend, NULL);
+    char vend[PROPERTY_VALUE_MAX];
+    property_get("ro.hardware.fingerprint", vend, "none");
+    
+    if (!strcmp(vend, "none")) {
+    	ALOGE("ro.hardware.fingerprint not set! Killing " LOG_TAG " binder service!");
+        return -1;
+    }
+
     if (!strcmp(vend, "goodix")) {
         ALOGI("Start fingerprintd");
         android::sp<android::IServiceManager> serviceManager = android::defaultServiceManager();
@@ -51,17 +55,20 @@ int main() {
                 android::FingerprintDaemonProxy::descriptor, proxy);
         if (ret != android::OK) {
             ALOGE("Couldn't register fingerprintd binder service!");
-            return -1;
         }
     }
 
     ALOGI("Start biometrics");
     android::sp<IBiometricsFingerprint> bio = BiometricsFingerprint::getInstance();
+
     if (!strcmp(vend, "goodix")) {
-        configureRpcThreadpool(1, false /*callerWillJoin*/);
+        /* process Binder transaction as a double-threaded program. */
+        configureRpcThreadpool(2, true /* callerWillJoin */);
     } else {
-        configureRpcThreadpool(1, true /*callerWillJoin*/);
+        /* process Binder transaction as a single-threaded program. */
+        configureRpcThreadpool(1, true /* callerWillJoin */);
     }
+
     if (bio != nullptr) {
         android::status_t ret = bio->registerAsService();
         if (ret != android::OK) {
@@ -71,11 +78,7 @@ int main() {
         ALOGE("Can't create instance of BiometricsFingerprint, nullptr");
     }
 
-    if (!strcmp(vend, "goodix")) {
-        android::IPCThreadState::self()->joinThreadPool();   // run binder service fingerprintd part
-    } else {
-        joinRpcThreadpool();
-    }
+    joinRpcThreadpool();
 
     return 0; // should never get here
 }

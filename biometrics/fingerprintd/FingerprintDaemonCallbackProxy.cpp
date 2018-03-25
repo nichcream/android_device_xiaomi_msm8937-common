@@ -36,7 +36,7 @@ FingerprintDaemonCallbackProxy::FingerprintDaemonCallbackProxy() {
 FingerprintDaemonCallbackProxy::~FingerprintDaemonCallbackProxy() {
 }
 
-status_t FingerprintDaemonCallbackProxy::onEnrollResult(int64_t devId, int32_t fpId, int32_t  gpId,
+status_t FingerprintDaemonCallbackProxy::onEnrollResult(int64_t __unused devId, int32_t fpId, int32_t  gpId,
         int32_t rem) {
     fingerprint_msg_t message;
     message.type = FINGERPRINT_TEMPLATE_ENROLLING;
@@ -53,7 +53,7 @@ status_t FingerprintDaemonCallbackProxy::onEnrollResult(int64_t devId, int32_t f
     return 0;
 }
 
-status_t FingerprintDaemonCallbackProxy::onAcquired(int64_t devId, int32_t acquiredInfo) {
+status_t FingerprintDaemonCallbackProxy::onAcquired(int64_t __unused devId, int32_t acquiredInfo) {
     fingerprint_msg_t message;
     message.type = FINGERPRINT_ACQUIRED;
     message.data.acquired.acquired_info = (fingerprint_acquired_info_t)acquiredInfo;
@@ -67,7 +67,7 @@ status_t FingerprintDaemonCallbackProxy::onAcquired(int64_t devId, int32_t acqui
     return 0;
 }
 
-status_t FingerprintDaemonCallbackProxy::onAuthenticated(int64_t devId, int32_t fingerId,
+status_t FingerprintDaemonCallbackProxy::onAuthenticated(int64_t __unused devId, int32_t fingerId,
         int32_t groupId) {
     fingerprint_msg_t message;
     message.type = FINGERPRINT_AUTHENTICATED;
@@ -83,7 +83,7 @@ status_t FingerprintDaemonCallbackProxy::onAuthenticated(int64_t devId, int32_t 
     return 0;
 }
 
-status_t FingerprintDaemonCallbackProxy::onError(int64_t devId, int32_t error) {
+status_t FingerprintDaemonCallbackProxy::onError(int64_t __unused devId, int32_t error) {
     fingerprint_msg_t message;
     message.type = FINGERPRINT_ERROR;
     message.data.error = (fingerprint_error_t)error;
@@ -97,7 +97,7 @@ status_t FingerprintDaemonCallbackProxy::onError(int64_t devId, int32_t error) {
     return 0;
 }
 
-status_t FingerprintDaemonCallbackProxy::onRemoved(int64_t devId,
+status_t FingerprintDaemonCallbackProxy::onRemoved(int64_t __unused devId,
         int32_t fingerId, int32_t groupId) {
     fingerprint_msg_t message;
     message.type = FINGERPRINT_TEMPLATE_REMOVED;
@@ -113,7 +113,7 @@ status_t FingerprintDaemonCallbackProxy::onRemoved(int64_t devId,
     return 0;
 }
 
-status_t FingerprintDaemonCallbackProxy::onEnumerate(int64_t devId,
+status_t FingerprintDaemonCallbackProxy::onEnumerate(int64_t __unused devId,
         const int32_t fingerId, const int32_t groupId, int32_t remaining) {
 
     fingerprint_msg_t message;
