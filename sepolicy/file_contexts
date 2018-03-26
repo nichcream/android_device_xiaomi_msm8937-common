@@ -2,28 +2,19 @@
 /dev/socket/fpce                                         u:object_r:fpc_socket:s0
 /data/fpc(/.*)?                                          u:object_r:fpc_data_file:s0
 /data/fpcd(/.*)?                                         u:object_r:fpc_data_file:s0
-/sys/devices/soc0/fpc_fpc1020.*/hw_reset                 u:object_r:fpc_sysfs:s0
-/sys/devices/soc0/fpc_fpc1020.*/irq                      u:object_r:fpc_sysfs:s0
-/sys/devices/soc0/fpc_fpc1020.*/wakeup_enable            u:object_r:fpc_sysfs:s0
-/sys/devices/soc/soc:fpc1020/hw_reset                    u:object_r:fpc_sysfs:s0
-/sys/devices/soc/soc:fpc1020/irq                         u:object_r:fpc_sysfs:s0
-/sys/devices/soc/soc:fpc1020/wakeup_enable               u:object_r:fpc_sysfs:s0
-/sys/devices/soc/soc:fpc1020/spi_prepare                 u:object_r:fpc_sysfs:s0
+/sys/devices/soc/soc:fpc1020(/.*)?                       u:object_r:fpc_sysfs:s0
 
 # Goodix Fingerprint
+/system/bin/gx_fpd                          u:object_r:gx_fpd_exec:s0
 /dev/gf66xx-spi                             u:object_r:gx_fpd_device:s0
 /dev/ttyACM[0-9]*                           u:object_r:gx_fpd_device:s0
-/dev/goodix_fp*                             u:object_r:gx_fpd_device:s0
-/data/goodix/*                              u:object_r:gx_fpd_data_file:s0
-/system/bin/gx_fpd                          u:object_r:gx_fpd_exec:s0
+/dev/goodix_fp                              u:object_r:gx_fpd_device:s0
+/data/goodix(/.*)?                          u:object_r:gx_fpd_data_file:s0
 /data/system/fingerprint(/.*)?              u:object_r:gx_fpd_data_file:s0
 /persist/data/gxfp(/.*)?                    u:object_r:gx_fpd_data_file:s0
-/persist/data/gxfp                          u:object_r:gx_fpd_data_file:s0 
 
-# Fingerprint HAL
+# HIDL
 /(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.0-service.custom                 u:object_r:hal_fingerprint_default_exec:s0
-
-# Power
 /(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.0-service.land      u:object_r:hal_power_default_exec:s0
 
 # Block devices
