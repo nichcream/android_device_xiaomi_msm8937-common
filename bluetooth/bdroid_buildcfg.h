@@ -51,3 +51,7 @@ inline const char* BtmGetDefaultName()
 /* Enable HFP WBS feature */
 #define BTIF_HF_CLIENT_WBS_INCLUDED TRUE
 #endif
+
+/* Disable enhanced sco commands */
+#define BTM_SCO_ENHANCED_SYNC_ENABLED FALSE
+#define BTM_SCO_ENHANCED_SYNC_DISABLED TRUE
