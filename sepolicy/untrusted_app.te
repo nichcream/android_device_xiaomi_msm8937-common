@@ -1,23 +1,4 @@
-allow untrusted_app alarm_instance_prop:file r_file_perms;
-allow untrusted_app alarm_handled_prop:file r_file_perms;
-allow untrusted_app bg_daemon_prop:file r_file_perms;
-allow untrusted_app coresight_prop:file r_file_perms;
-allow untrusted_app nfc_nq_prop:file r_file_perms;
-allow untrusted_app per_mgr_state_prop:file r_file_perms;
-allow untrusted_app qcom_ims_prop:file r_file_perms;
-allow untrusted_app scr_enabled_prop:file r_file_perms;
-allow untrusted_app sdm_idle_time_prop:file r_file_perms;
-allow untrusted_app spcomlib_prop:file r_file_perms;
-allow untrusted_app sys_usb_configfs_prop:file r_file_perms;
-allow untrusted_app sys_usb_controller_prop:file r_file_perms;
-allow untrusted_app sys_usb_tethering_prop:file r_file_perms;
-allow untrusted_app uicc_prop:file r_file_perms;
-allow untrusted_app vendor_rild_libpath_prop:file r_file_perms;
-allow untrusted_app wififtmd_prop:file r_file_perms;
 allow untrusted_app proc_stat:file r_file_perms;
-
-# libESXEGL_adreno.so
-allow untrusted_app unlabeled:file { getattr read open };
 
 # subs overlay
 allow untrusted_app overlay_service:service_manager find;
