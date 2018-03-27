@@ -180,10 +180,8 @@ void read_ramconfig()
 
 void variant_properties()
 {
-    std::string device;
-
-    device = GetProperty("ro.validus.device", "");
-    if (device != "land")
+    std::string product = GetProperty("ro.product.name", "");
+    if (product.find("land") == std::string::npos)
         return;
 
     import_kernel_cmdline1(0, import_cmdline);
