@@ -1012,8 +1012,8 @@
 
     <path name="handset-mic">
         <path name="adc1" />
-	<ctl name="DEC1 Volume" value="92" />
-	<ctl name="DEC2 Volume" value="92" />
+        <ctl name="DEC1 Volume" value="92" />
+        <ctl name="DEC2 Volume" value="92" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
     </path>
 
@@ -1068,9 +1068,9 @@
 
     <!-- bug 212709,zhangjianming2.wt,modify,20160920,fixed is to voice voulme smaller-->
     <path name="handfree-mic">
-	<path name="adc3" />
-	<ctl name="DEC1 MUX" value="ADC2" />
-	<ctl name="ADC2 MUX" value="INP3" />
+        <path name="adc3" />
+        <ctl name="DEC1 MUX" value="ADC2" />
+        <ctl name="ADC2 MUX" value="INP3" />
     </path>
 
     <path name="voice-speaker-mic">
