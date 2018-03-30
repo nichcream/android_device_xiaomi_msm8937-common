@@ -35,14 +35,19 @@ allow gx_fpd sysfs_fp:file rw_file_perms;
 #allow read/write property
 set_prop(gx_fpd, system_prop)
 
-allow gx_fpd fingerprintd:binder { transfer call };
+# Create netlink socket
+allow gx_fpd self:netlink_socket create_socket_perms_no_ioctl;
+
+# TODO: really necessary? are these only for logs?
 allow gx_fpd fuse:dir search;
 allow gx_fpd fuse:file { getattr open append };
 allow gx_fpd self:capability dac_override;
 allow gx_fpd storage_file:dir search;
 allow gx_fpd storage_file:lnk_file read;
 allow gx_fpd vfat:dir search;
-allow gx_fpd vfat:file  { read write getattr open };
-allow gx_fpd self:netlink_socket create_socket_perms_no_ioctl;
+allow gx_fpd vfat:file { read write getattr open };
 
 r_dir_file(gx_fpd, firmware_file)
+
+binder_call(gx_fpd, hal_fingerprint_default)
+binder_use(gx_fpd)
