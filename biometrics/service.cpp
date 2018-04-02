@@ -16,9 +16,9 @@
 
 #define LOG_TAG "android.biometrics.fingerprint@2.0-service.custom"
 
+#include <binder/IPCThreadState.h>
 #include <binder/IServiceManager.h>
 #include <binder/PermissionCache.h>
-#include <binder/ProcessState.h>
 #include <utils/String16.h>
 #include <keystore/keystore.h> // for error codes
 
@@ -48,12 +48,7 @@ int main() {
     }
 
     if (!strcmp(vend, "goodix")) {
-        /* Goodix transfers IPC via /dev/binder */
-        android::ProcessState::initWithDriver("/dev/binder");
-    }
-
-    if (!strcmp(vend, "goodix")) {
-        ALOGD("Start fingerprintd");
+        ALOGI("Start fingerprintd");
         android::sp<android::IServiceManager> serviceManager = android::defaultServiceManager();
         android::sp<android::FingerprintDaemonProxy> proxy =
                 android::FingerprintDaemonProxy::getInstance();
@@ -67,8 +62,13 @@ int main() {
     ALOGI("Start biometrics");
     android::sp<IBiometricsFingerprint> bio = BiometricsFingerprint::getInstance();
 
-    /* process Binder transaction as a single-threaded program. */
-    configureRpcThreadpool(1, true /* callerWillJoin */);
+    if (!strcmp(vend, "goodix")) {
+        /* process Binder transaction as a double-threaded program. */
+        configureRpcThreadpool(1, false /* callerWillJoin */);
+    } else {
+        /* process Binder transaction as a single-threaded program. */
+        configureRpcThreadpool(1, true /* callerWillJoin */);
+    }
 
     if (bio != nullptr) {
         android::status_t ret = bio->registerAsService();
@@ -79,7 +79,11 @@ int main() {
         ALOGE("Can't create instance of BiometricsFingerprint, nullptr");
     }
 
-    joinRpcThreadpool();
+    if (!strcmp(vend, "goodix")) {
+        android::IPCThreadState::self()->joinThreadPool();   // run binder service fingerprintd part
+    } else {
+        joinRpcThreadpool();
+    }
 
     return 0; // should never get here
 }
