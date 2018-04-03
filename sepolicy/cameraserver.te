@@ -5,5 +5,7 @@ allow cameraserver sensorservice_service:service_manager { find };
 allow cameraserver cameraserver:process { execmem };
 allow cameraserver surfaceflinger:unix_stream_socket { read write };
 
+allow cameraserver sysfs:file rw_file_perms;
+
 binder_call(cameraserver, hal_perf_default);
 binder_use(cameraserver);
