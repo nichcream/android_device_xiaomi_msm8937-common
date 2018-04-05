@@ -120,8 +120,6 @@ on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
-    mkdir /data/misc/ipa 0700 net_admin net_admin
-
     mkdir /data/vendor/ramdump 0771 root system
     mkdir /data/vendor/bluetooth 0770 bluetooth bluetooth
     mkdir /data/vendor/ramdump/bluetooth 0770 bluetooth bluetooth
@@ -581,16 +579,16 @@ on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
     stop netmgrd
 
-#service ipacm-diag /system/vendor/bin/ipacm-diag
-#    class main
-#    user radio
-#    socket ipacm_log_file dgram 660 radio radio
-#    group radio diag
+service ipacm-diag /system/vendor/bin/ipacm-diag
+    class main
+    user radio
+    socket ipacm_log_file dgram 660 radio radio
+    group radio diag oem_2901
 
-#service ipacm /system/vendor/bin/ipacm
-#    class main
-#    user radio
-#    group radio inet
+service ipacm /system/vendor/bin/ipacm
+    class main
+    user radio
+    group radio inet
 
 service qti /system/vendor/bin/qti
     class main

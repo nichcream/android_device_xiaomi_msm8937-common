@@ -319,6 +319,11 @@ PRODUCT_PACKAGES += \
     libandroid_net \
     libandroid_net_32
 
+# IPACM
+PRODUCT_PACKAGES += \
+    ipacm \
+    IPACM_cfg.xml
+
 # IPv6
 PRODUCT_PACKAGES += \
     ebtables \
