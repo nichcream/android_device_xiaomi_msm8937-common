@@ -7316,13 +7316,11 @@ int32_t QCameraParameters::configureFlash(cam_capture_frame_config_t &frame_conf
             return rc;
         }
 
-#ifdef TNR_CDS_SUPPORT
         rc = setCDSMode(CAM_CDS_MODE_OFF, false);
         if (rc != NO_ERROR) {
             LOGE("Failed to configure csd mode");
             return rc;
         }
-#endif
 
         LOGH("Enable Chroma Flash capture");
         cam_flash_mode_t flash_mode = CAM_FLASH_MODE_OFF;
@@ -7639,13 +7637,11 @@ int32_t QCameraParameters::resetFrameCapture(bool commitSettings, bool lowLightE
             LOGH("Failed to enable tone map during chroma flash");
         }
 
-#ifdef TNR_CDS_SUPPORT
         rc = setCDSMode(mCds_mode, false);
         if (rc != NO_ERROR) {
             LOGE("Failed to configure csd mode");
             return rc;
         }
-#endif
     }
 
     rc = ADD_SET_PARAM_ENTRY_TO_BATCH(m_pParamBuf, CAM_INTF_PARM_CAPTURE_FRAME_CONFIG,
