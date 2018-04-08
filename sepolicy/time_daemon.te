@@ -1,1 +1,0 @@
-allow time_daemon system_data_file:file r_file_perms;

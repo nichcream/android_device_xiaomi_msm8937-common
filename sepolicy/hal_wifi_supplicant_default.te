@@ -1,1 +1,0 @@
-allow hal_wifi_supplicant_default debugfs_tracing:file { open write };

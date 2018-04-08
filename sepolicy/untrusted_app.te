@@ -1,4 +1,0 @@
-allow untrusted_app proc_stat:file r_file_perms;
-
-# subs overlay
-allow untrusted_app overlay_service:service_manager find;

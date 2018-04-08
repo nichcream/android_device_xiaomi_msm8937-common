@@ -1,8 +1,0 @@
-allow ueventd fpc_sysfs:file rw_file_perms;
-allow ueventd unlabeled:dir search;
-allow ueventd unlabeled:file { getattr open read };
-allow ueventd vfat:dir search;
-allow ueventd vfat:file { getattr open read };
-allow ueventd wifi_data_file:dir search;
-allow ueventd wifi_data_file:file { getattr open read };
-

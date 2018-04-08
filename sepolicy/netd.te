@@ -1,3 +1,0 @@
-#============= netd ==============
-allow netd self:capability sys_module;
-

@@ -1,2 +1,0 @@
-allow kernel self:socket create;
-allow kernel vfat:file open;
