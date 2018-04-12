@@ -42,8 +42,6 @@ vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
 lib/libqct_resampler.so
 vendor/etc/drc/drc_cfg_5.1.txt
 vendor/etc/drc/drc_cfg_AZ.txt
-vendor/etc/surround_sound_3mic/surround_sound_rec_5.1.cfg
-vendor/etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbmapper.so
@@ -53,7 +51,6 @@ vendor/lib/libadm.so
 vendor/lib/libaudcal.so
 vendor/lib/libaudioalsa.so
 vendor/lib/libdrc.so
-vendor/lib/libsurround_3mic_proc.so
 vendor/lib/soundfx/libasphere.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcomvisualizer.so
@@ -231,16 +228,6 @@ vendor/lib64/libQTEEConnector_vendor.so
 vendor/lib64/vendor.qti.hardware.qteeconnector@1.0_vendor.so
 vendor/lib64/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
 
-# ESE-Powermanager - from TA-1025 (Nokia 6)
-vendor/bin/hw/vendor.qti.esepowermanager@1.0-service
-vendor/etc/init/vendor.qti.esepowermanager@1.0-service.rc
-lib/vendor.qti.esepowermanager@1.0.so
-lib64/vendor.qti.esepowermanager@1.0.so
-vendor/lib/vendor.qti.esepowermanager@1.0_vendor.so
-vendor/lib/hw/vendor.qti.esepowermanager@1.0-impl.so
-vendor/lib64/vendor.qti.esepowermanager@1.0_vendor.so
-vendor/lib64/hw/vendor.qti.esepowermanager@1.0-impl.so
-
 # FM - from TA-1025 (Nokia 6)
 -lib/vendor.qti.hardware.fm@1.0.so
 -lib64/vendor.qti.hardware.fm@1.0.so
@@ -286,7 +273,6 @@ vendor/lib/libevent_observer.so
 vendor/lib/libflp.so
 vendor/lib/libgdtap.so
 vendor/lib/libgeofence.so
-vendor/lib/libgnsspps.so
 vendor/lib/libizat_client_api.so
 vendor/lib/libizat_core.so
 vendor/lib/liblbs_core.so
@@ -313,7 +299,6 @@ vendor/lib64/libevent_observer.so
 vendor/lib64/libflp.so
 vendor/lib64/libgdtap.so
 vendor/lib64/libgeofence.so
-vendor/lib64/libgnsspps.so
 vendor/lib64/libizat_client_api.so
 vendor/lib64/libizat_core.so
 vendor/lib64/liblbs_core.so
@@ -431,40 +416,6 @@ vendor/firmware/a530v2_seq.fw2
 vendor/firmware/a530v3_gpmu.fw2
 vendor/firmware/a530v3_seq.fw2
 vendor/firmware/a540_gpmu.fw2
-
-# Improvetouch - from TA-1025 (Nokia 6)
-vendor/bin/hbtp_daemon
-lib/libhbtpjni.so
-lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0.so
-lib/vendor.qti.hardware.improvetouch.blobmanager@1.0.so
-lib/vendor.qti.hardware.improvetouch.gesturemanager@1.0.so
-lib64/libhbtpjni.so
-lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0.so
-lib64/vendor.qti.hardware.improvetouch.blobmanager@1.0.so
-lib64/vendor.qti.hardware.improvetouch.gesturemanager@1.0.so
-vendor/etc/hbtp/hbtpcfg_msm8937_800s_fhd.dat
-vendor/etc/hbtp/hbtpcfg.dat
-vendor/etc/hbtp/hbtpcfg2.dat
-vendor/etc/hbtp/qtc800h.bin
-vendor/etc/hbtp/qtc800s_dsp.bin
-vendor/lib/libhbtpclient.so
-vendor/lib/libhbtpfrmwk.so
-vendor/lib/libhbtpdsp.so
-vendor/lib/vendor.qti.hardware.improvetouch.blobmanager@1.0-service.so
-vendor/lib/vendor.qti.hardware.improvetouch.blobmanager@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.improvetouch.gesturemanager@1.0-service.so
-vendor/lib/vendor.qti.hardware.improvetouch.gesturemanager@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so
-vendor/lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0_vendor.so
-vendor/lib64/libhbtpclient.so
-vendor/lib64/libhbtpfrmwk.so
-vendor/lib64/libhbtpdsp.so
-vendor/lib64/vendor.qti.hardware.improvetouch.blobmanager@1.0-service.so
-vendor/lib64/vendor.qti.hardware.improvetouch.blobmanager@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.improvetouch.gesturemanager@1.0-service.so
-vendor/lib64/vendor.qti.hardware.improvetouch.gesturemanager@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so
-vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0_vendor.so
 
 # Keystore - from TA-1025 (Nokia 6)
 vendor/lib/hw/keystore.msm8937.so
