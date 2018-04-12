@@ -487,15 +487,12 @@ vendor/lib64/hw/sound_trigger.primary.msm8937.so
 # Media - from TA-1025 (Nokia 6)
 lib/libmmosal.so
 lib/libOmxMux.so
-lib/libstagefright_soft_qtiflacdec.so
 lib/vendor.qti.hardware.vpp@1.1.so
 lib64/libmmosal.so
 lib64/libOmxMux.so
-lib64/libstagefright_soft_qtiflacdec.so
 lib64/vendor.qti.hardware.vpp@1.1.so
 vendor/lib/libAlacSwDec.so
 vendor/lib/libApeSwDec.so
-vendor/lib/libFlacSwDec.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAlacDec.so
@@ -522,7 +519,6 @@ vendor/lib/libomx-dts.so
 vendor/lib/vendor.qti.hardware.vpp@1.1_vendor.so
 vendor/lib64/libAlacSwDec.so
 vendor/lib64/libApeSwDec.so
-vendor/lib64/libFlacSwDec.so
 vendor/lib64/libI420colorconvert.so
 vendor/lib64/libOmxAacDec.so
 vendor/lib64/libOmxAlacDec.so
