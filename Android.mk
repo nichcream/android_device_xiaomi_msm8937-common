@@ -90,19 +90,6 @@ $(ADSP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(ADSP_SYMLINKS)
 
-CPPF_IMAGES := \
-   cppf.b00 cppf.b01 cppf.b02 cppf.b03 \
-   cppf.b04 cppf.b05 cppf.b06 cppf.mdt
-
-CPPF_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(CPPF_IMAGES)))
-$(CPPF_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "cppf firmware link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /firmware/image/$(notdir $@) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(CPPF_SYMLINKS)
-
 GOODIX_IMAGES := \
     goodixfp.b00 goodixfp.b01 goodixfp.b02 goodixfp.b03 \
     goodixfp.b04 goodixfp.b05 goodixfp.b06 goodixfp.mdt
