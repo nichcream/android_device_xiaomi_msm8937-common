@@ -344,6 +344,7 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
+    power.msm8937 \
     android.hardware.power@1.0-service.land
 
 # RCS
