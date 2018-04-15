@@ -1165,7 +1165,12 @@
     </path>
 
     <path name="handset-stereo-dmic-ef">
-        <path name="speaker-dmic-endfire" />
+        <path name="adc3" />
+<!-- +bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
+        <ctl name="ADC1 Volume" value="6" />
+<!-- -bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
+        <ctl name="DEC2 MUX" value="ADC1" />
+        <ctl name="MI2S_TX Channels" value="Two" />
         <ctl name="DEC1 Volume" value="96" />
         <ctl name="DEC2 Volume" value="96" />
     </path>
