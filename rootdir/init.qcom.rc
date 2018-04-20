@@ -851,7 +851,7 @@ service mdtpd /system/vendor/bin/mdtpd
     user root
     group system radio drmrpc
 
-service gx_fpd /system/bin/gx_fpd
+service gx_fpd /vendor/bin/gx_fpd
     class core
     user root
     group system system

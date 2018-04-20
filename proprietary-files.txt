@@ -13,8 +13,8 @@ etc/mixer_paths_qrd_skuhf.xml:vendor/etc/mixer_paths_qrd_skuhf.xml
 etc/sound_trigger_mixer_paths_wcd9306.xml:vendor/etc/sound_trigger_mixer_paths_wcd9306.xml
 etc/sound_trigger_mixer_paths_wcd9330.xml:vendor/etc/sound_trigger_mixer_paths_wcd9330.xml
 etc/sound_trigger_mixer_paths_wcd9335.xml:vendor/etc/sound_trigger_mixer_paths_wcd9335.xml
-lib/soundfx/libdirac.so
-lib/libDiracAPI_SHARED.so
+lib/soundfx/libdirac.so:vendor/lib/soundfx/libdirac.so
+lib/libDiracAPI_SHARED.so:vendor/lib/libDiracAPI_SHARED.so
 vendor/etc/diracmobile.config
 vendor/lib/libhwdaphal.so
 vendor/lib64/libhwdaphal.so
@@ -62,9 +62,9 @@ etc/camera/s5k3l8_mono_chromatix.xml
 etc/camera/s5k3m2xm_chromatix.xml
 etc/camera/s5k3m2xm_chromatix_bear.xml
 etc/camera/s5k3m2xx_chromatix.xml
-lib/libRecoFace.so
-lib/libmorpho_memory_allocator.so
-lib/libmorpho_panorama.so
+lib/libRecoFace.so:vendor/lib/libRecoFace.so
+lib/libmorpho_memory_allocator.so:vendor/lib/libmorpho_memory_allocator.so
+lib/libmorpho_panorama.so:vendor/lib/libmorpho_panorama.so
 vendor/lib/libFaceGrade.so
 vendor/lib/libFaceProc.so
 vendor/lib/libarcsoft_beauty_shot.so
@@ -895,15 +895,15 @@ vendor/lib/libchromatix_s5k3m2xx_zsl_preview_ad5816g.so
 vendor/lib/libchromatix_s5k3m2xx_zsl_video_ad5816g.so
 
 # Camera firmware
-etc/firmware/cpp_firmware_v1_1_1.fw
-etc/firmware/cpp_firmware_v1_1_6.fw
-etc/firmware/cpp_firmware_v1_10_0.fw
-etc/firmware/cpp_firmware_v1_2_0.fw
-etc/firmware/cpp_firmware_v1_4_0.fw
-etc/firmware/cpp_firmware_v1_5_0.fw
-etc/firmware/cpp_firmware_v1_5_2.fw
-etc/firmware/cpp_firmware_v1_6_0.fw
-etc/firmware/cpp_firmware_v1_8_0.fw
+etc/firmware/cpp_firmware_v1_1_1.fw:vendor/firmware/cpp_firmware_v1_1_1.fw
+etc/firmware/cpp_firmware_v1_1_6.fw:vendor/firmware/cpp_firmware_v1_1_6.fw
+etc/firmware/cpp_firmware_v1_10_0.fw:vendor/firmware/cpp_firmware_v1_10_0.fw
+etc/firmware/cpp_firmware_v1_2_0.fw:vendor/firmware/cpp_firmware_v1_2_0.fw
+etc/firmware/cpp_firmware_v1_4_0.fw:vendor/firmware/cpp_firmware_v1_4_0.fw
+etc/firmware/cpp_firmware_v1_5_0.fw:vendor/firmware/cpp_firmware_v1_5_0.fw
+etc/firmware/cpp_firmware_v1_5_2.fw:vendor/firmware/cpp_firmware_v1_5_2.fw
+etc/firmware/cpp_firmware_v1_6_0.fw:vendor/firmware/cpp_firmware_v1_6_0.fw
+etc/firmware/cpp_firmware_v1_8_0.fw:vendor/firmware/cpp_firmware_v1_8_0.fw
 
 # Camera sensors
 vendor/lib/libmmcamera_isp_wb40.so
@@ -947,54 +947,49 @@ vendor/lib/libmmcamera_isp_color_xform_viewfinder40.so
 -etc/qdcm_calib_data_nt35521s_HD720p_video_EBBG.xml
 
 # Fingerprint
-bin/gx_fpcmd
-bin/gx_fpd
-lib/hw/fingerprint.default.so:lib/hw/fingerprint.msm8937.so
-lib/libcom_fingerprints_service.so
-lib64/hw/fingerprint.default.so:lib64/hw/fingerprint.msm8937.so
-lib64/hw/fingerprint.goodix.so
-lib64/hw/gxfingerprint.default.so
-lib64/libcom_fingerprints_service.so
-lib64/libfp_client.so
-lib64/libfpnav.so
-lib64/libfpservice.so
+bin/gx_fpcmd:vendor/bin/gx_fpcmd
+bin/gx_fpd:vendor/bin/gx_fpd
+lib/hw/fingerprint.default.so:vendor/lib/hw/fingerprint.msm8937.so
+lib/libcom_fingerprints_service.so:vendor/lib/libcom_fingerprints_service.so
+lib64/hw/fingerprint.default.so:vendor/lib64/hw/fingerprint.msm8937.so
+lib64/hw/fingerprint.goodix.so:vendor/lib64/hw/fingerprint.goodix.so
+lib64/hw/gxfingerprint.default.so:vendor/lib64/hw/gxfingerprint.default.so
+lib64/libcom_fingerprints_service.so:vendor/lib64/libcom_fingerprints_service.so
+lib64/libfp_client.so:vendor/lib64/libfp_client.so
+lib64/libfpnav.so:vendor/lib64/libfpnav.so
+lib64/libfpservice.so:vendor/lib64/libfpservice.so
 
 # Keylayout
-usr/keylayout/gpio-keys.kl
-usr/keylayout/qpnp_pon.kl
-usr/keylayout/synaptics_dsx.kl
-usr/keylayout/synaptics_rmi4_i2c.kl
+usr/keylayout/gpio-keys.kl:vendor/usr/keylayout/gpio-keys.kl
+usr/keylayout/qpnp_pon.kl:vendor/usr/keylayout/qpnp_pon.kl
 
 # Media - from santoni (Redmi 4X)
-etc/firmware/DE.o.msm8937
+etc/firmware/DE.o.msm8937:vendor/firmware/DE.o.msm8937
 
 # Radio - MBN
-etc/firmware/modem_config/S88537AA1/cmcc_mcfg_sw.mbn
-etc/firmware/modem_config/S88537AA1/ct_mcfg_sw.mbn
-etc/firmware/modem_config/S88537AA1/cu_mcfg_sw.mbn
-etc/firmware/modem_config/S88537AA1/row_mcfg_sw.mbn
-etc/firmware/modem_config/S88537AB1/cmcc_mcfg_sw.mbn
-etc/firmware/modem_config/S88537AB1/ct_mcfg_sw.mbn
-etc/firmware/modem_config/S88537AB1/cu_mcfg_sw.mbn
-etc/firmware/modem_config/S88537AB1/row_mcfg_sw.mbn
-etc/firmware/modem_config/S88537BA1/row_mcfg_sw.mbn
-etc/firmware/modem_config/S88537BA1/ytl_mcfg_sw.mbn
-etc/firmware/modem_config/S88537CA1/reliance_mcfg_sw.mbn
-etc/firmware/modem_config/S88537CA1/row_mcfg_sw.mbn
-etc/firmware/modem_config/S88537EC1/reliance_mcfg_sw.mbn
-etc/firmware/modem_config/S88537EC1/row_mcfg_sw.mbn
+etc/firmware/modem_config/S88537AA1/cmcc_mcfg_sw.mbn:vendor/firmware/modem_config/S88537AA1/cmcc_mcfg_sw.mbn
+etc/firmware/modem_config/S88537AA1/ct_mcfg_sw.mbn:vendor/firmware/modem_config/S88537AA1/ct_mcfg_sw.mbn
+etc/firmware/modem_config/S88537AA1/cu_mcfg_sw.mbn:vendor/firmware/modem_config/S88537AA1/cu_mcfg_sw.mbn
+etc/firmware/modem_config/S88537AA1/row_mcfg_sw.mbn:vendor/firmware/modem_config/S88537AA1/row_mcfg_sw.mbn
+etc/firmware/modem_config/S88537AB1/cmcc_mcfg_sw.mbn:vendor/firmware/modem_config/S88537AB1/cmcc_mcfg_sw.mbn
+etc/firmware/modem_config/S88537AB1/ct_mcfg_sw.mbn:vendor/firmware/modem_config/S88537AB1/ct_mcfg_sw.mbn
+etc/firmware/modem_config/S88537AB1/cu_mcfg_sw.mbn:vendor/firmware/modem_config/S88537AB1/cu_mcfg_sw.mbn
+etc/firmware/modem_config/S88537AB1/row_mcfg_sw.mbn:vendor/firmware/modem_config/S88537AB1/row_mcfg_sw.mbn
+etc/firmware/modem_config/S88537BA1/row_mcfg_sw.mbn:vendor/firmware/modem_config/S88537BA1/row_mcfg_sw.mbn
+etc/firmware/modem_config/S88537BA1/ytl_mcfg_sw.mbn:vendor/firmware/modem_config/S88537BA1/ytl_mcfg_sw.mbn
+etc/firmware/modem_config/S88537CA1/reliance_mcfg_sw.mbn:vendor/firmware/modem_config/S88537CA1/reliance_mcfg_sw.mbn
+etc/firmware/modem_config/S88537CA1/row_mcfg_sw.mbn:vendor/firmware/modem_config/S88537CA1/row_mcfg_sw.mbn
+etc/firmware/modem_config/S88537EC1/reliance_mcfg_sw.mbn:vendor/firmware/modem_config/S88537EC1/reliance_mcfg_sw.mbn
+etc/firmware/modem_config/S88537EC1/row_mcfg_sw.mbn:vendor/firmware/modem_config/S88537EC1/row_mcfg_sw.mbn
 
-#IR
-lib/hw/consumerir.default.so
-lib64/hw/consumerir.default.so
-
-# Subsystem restart
-bin/ssr_diag
+# IR
+lib/hw/consumerir.default.so:vendor/lib/hw/consumerir.default.so
+lib64/hw/consumerir.default.so:vendor/lib64/hw/consumerir.default.so
 
 # Touchscreen
-etc/ft5336_biel_720p.ini
-etc/ft5336_lens_720p.ini
-etc/ft5336_oufei_720p.ini
+etc/ft5336_biel_720p.ini:vendor/etc/ft5336_biel_720p.ini
+etc/ft5336_lens_720p.ini:vendor/etc/ft5336_lens_720p.ini
+etc/ft5336_oufei_720p.ini:vendor/etc/ft5336_oufei_720p.ini
 
 # USB
-etc/firmware/ice40.bin
+etc/firmware/ice40.bin:vendor/firmware/ice40.bin

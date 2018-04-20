@@ -5,7 +5,7 @@
 /sys/devices/soc/soc:fpc1020(/.*)?                       u:object_r:fpc_sysfs:s0
 
 # Goodix Fingerprint
-/system/bin/gx_fpd                          u:object_r:gx_fpd_exec:s0
+/(vendor|system/vendor)/bin/gx_fpd          u:object_r:gx_fpd_exec:s0
 /dev/gf66xx-spi                             u:object_r:gx_fpd_device:s0
 /dev/ttyACM[0-9]*                           u:object_r:gx_fpd_device:s0
 /dev/goodix_fp                              u:object_r:gx_fpd_device:s0
