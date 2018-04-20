@@ -13,11 +13,14 @@ etc/mixer_paths_qrd_skuhf.xml:vendor/etc/mixer_paths_qrd_skuhf.xml
 etc/sound_trigger_mixer_paths_wcd9306.xml:vendor/etc/sound_trigger_mixer_paths_wcd9306.xml
 etc/sound_trigger_mixer_paths_wcd9330.xml:vendor/etc/sound_trigger_mixer_paths_wcd9330.xml
 etc/sound_trigger_mixer_paths_wcd9335.xml:vendor/etc/sound_trigger_mixer_paths_wcd9335.xml
-lib/soundfx/libdirac.so:vendor/lib/soundfx/libdirac.so
-lib/libDiracAPI_SHARED.so:vendor/lib/libDiracAPI_SHARED.so
 vendor/etc/diracmobile.config
 vendor/lib/libhwdaphal.so
 vendor/lib64/libhwdaphal.so
+
+# Audio (Dirac) - from gemini (Mi 5)
+vendor/lib/rfsa/adsp/libdirac-appi.so
+vendor/lib/soundfx/libdirac.so
+vendor/lib64/soundfx/libdirac.so
 
 # Audio ACDB - from Nokia 6 (TA-1025)
 vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
