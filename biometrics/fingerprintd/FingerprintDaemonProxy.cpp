@@ -31,9 +31,6 @@ namespace android {
 
 FingerprintDaemonProxy* FingerprintDaemonProxy::sInstance = NULL;
 
-// Supported fingerprint HAL version
-static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 0);
-
 FingerprintDaemonProxy::FingerprintDaemonProxy() : mModule(NULL), mDevice(NULL), mCallback(NULL) {
 
 }
@@ -199,11 +196,6 @@ int64_t FingerprintDaemonProxy::openHal() {
     if (0 != (err = mModule->common.methods->open(hw_module, NULL, &device))) {
         ALOGE("Can't open fingerprint methods, error: %d", err);
         return 0;
-    }
-
-    if (kVersion != device->version) {
-        ALOGE("Wrong fp version. Expected %d, got %d", kVersion, device->version);
-        // return 0;
     }
 
     mDevice = reinterpret_cast<fingerprint_device_t*>(device);
