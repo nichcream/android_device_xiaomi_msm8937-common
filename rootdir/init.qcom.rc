@@ -67,6 +67,11 @@ on post-fs
     write /proc/sys/vm/swappiness 100
     chmod 0755 /sys/kernel/debug/tracing
 
+on post-fs
+    start qseecomd
+    exec - system system -- /vendor/bin/init.qti.qseecomd.sh
+    write /dev/ipa 1
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/tombstones 0771 system system

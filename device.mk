@@ -249,6 +249,9 @@ PRODUCT_PACKAGES += \
     init.qcom.sh \
     fstab.qcom
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/init.qti.qseecomd.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qti.qseecomd.sh
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/ft5x06_720p.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/ft5x06_720p.kl \
