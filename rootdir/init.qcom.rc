@@ -120,6 +120,9 @@ on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
+    #Create directory for tftp
+    mkdir /data/vendor/tombstones 0771 system system
+
     mkdir /data/vendor/ramdump 0771 root system
     mkdir /data/vendor/bluetooth 0770 bluetooth bluetooth
     mkdir /data/vendor/ramdump/bluetooth 0770 bluetooth bluetooth
@@ -171,9 +174,6 @@ on post-fs-data
 
     # Create directory for radio
     mkdir /data/vendor/radio 0770 system radio
-
-    # Create directory used by display clients
-    mkdir /data/misc/display 0770 system graphics
 
     # Create dir for fpc
     mkdir /data/fpc 0770 system system
@@ -232,14 +232,6 @@ on post-fs-data
     mkdir /data/misc/fm 0770 system system
     chmod 0770 /data/misc/fm
 
-    # RIDL data
-    #mkdir /data/misc/SelfHost/ 0710 system shell
-    #mkdir /data/misc/SelfHost/QCLogs/ 2750 system shell
-    #mkdir /data/misc/SelfHost/QCLogs/temp/ 0700 system shell
-    #mkdir /data/misc/SelfHost/storage/ 0700 system shell
-    #mkdir /data/misc/SelfHost/Running/ 2750 system shell
-    #mkdir /data/misc/SelfHost/socket/ 2770 system system
-
     #Create PERFD deamon related dirs
     mkdir /data/vendor/perfd 0770 root system
     chmod 2770 /data/vendor/perfd
@@ -278,9 +270,6 @@ on post-fs-data
     mkdir /persist/sensors/registry/registry
     chmod 0664 /persist/sensors/sensors_settings
     chown system root /persist/sensors/sensors_settings
-
-    mkdir /data/misc/sensors
-    chmod 0775 /data/misc/sensors
 
     #Create SWAP related dirs
     mkdir /data/system/swap 0770 root system
@@ -360,13 +349,6 @@ on boot
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
-    # Prevents permission denied error for telephony
-    chmod 0644 /proc/cmdline
-
-    #NULL lixiuzhen 2016\04\03 add ota prop for mbn update
-    setprop persist.radio.start_ota_daemon 1
-    setprop persist.radio.sw_mbn_openmkt 1
-
     #enable camera read sensors data
     setprop persist.camera.gyro.disable 0
     setprop persist.camera.stats.test 5
@@ -383,28 +365,6 @@ on boot
 #   Increased technology maximums should be reflected here.
     write /proc/sys/net/core/rmem_max  8388608
     write /proc/sys/net/core/wmem_max  8388608
-
-    #To allow interfaces to get v6 address when tethering is enabled
-    write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet3/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet4/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet5/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet6/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet7/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio3/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio4/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio5/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio6/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio7/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
 
     # To prevent out of order acknowledgements from making
     # connection tracking to treat them as not belonging to
@@ -498,12 +458,6 @@ on property:sys.boot_completed=1
     chown media audio /sys/kernel/wdsp0/boot
     chown media audio /sys/kernel/wcd_cpe0/fw_na
 
-#bug156417 zhaoqf_sh add Allow usb charging to be disabled peristently
-on property:persist.sys.chgdisabled=1
-    write /sys/class/power_supply/battery/charging_enabled 0
-on property:persist.sys.chgdisabled=0
-    write /sys/class/power_supply/battery/charging_enabled 1
-
 on property:vold.decrypt=trigger_restart_framework
     start config_bt_addr
     start config_bluetooth
@@ -516,7 +470,6 @@ service cnd /system/vendor/bin/cnd
     class main
     user system
     group system wifi inet radio wakelock net_admin
-    #writepid /dev/cpuset/system-background/tasks
 
 service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     class main
@@ -573,7 +526,6 @@ on property:persist.data.mode=concurrent
 
 service netmgrd /system/vendor/bin/netmgrd
     class main
-#    writepid /dev/cpuset/system-background/tasks
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -594,13 +546,11 @@ service qti /system/vendor/bin/qti
     class main
     user radio
     group radio net_raw diag usb net_admin
-#    writepid /dev/cpuset/system-background/tasks
 
 service sensors /vendor/bin/sensors.qcom
     class core
     user root
     group root
-#    writepid /dev/cpuset/system-background/tasks
 
 service qvop-daemon /vendor/bin/qvop-daemon
     class late_start
