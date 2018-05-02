@@ -232,26 +232,7 @@ vendor/lib64/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
 vendor/bin/hw/android.hardware.drm@1.0-service.widevine
 vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc
 vendor/lib/mediadrm/libwvdrmengine.so
-vendor/lib/liboemcrypto.so
 vendor/lib/libwvhidl.so
-
-# DRM (Widevine) - Firmware - from TA-1025 (Nokia 6)
-etc/firmware/cppf.b00:vendor/firmware/cppf.b00
-etc/firmware/cppf.b01:vendor/firmware/cppf.b01
-etc/firmware/cppf.b02:vendor/firmware/cppf.b02
-etc/firmware/cppf.b03:vendor/firmware/cppf.b03
-etc/firmware/cppf.b04:vendor/firmware/cppf.b04
-etc/firmware/cppf.b05:vendor/firmware/cppf.b05
-etc/firmware/cppf.b06:vendor/firmware/cppf.b06
-etc/firmware/cppf.mdt:vendor/firmware/cppf.mdt
-etc/firmware/widevine.b00:vendor/firmware/widevine.b00
-etc/firmware/widevine.b01:vendor/firmware/widevine.b01
-etc/firmware/widevine.b02:vendor/firmware/widevine.b02
-etc/firmware/widevine.b03:vendor/firmware/widevine.b03
-etc/firmware/widevine.b04:vendor/firmware/widevine.b04
-etc/firmware/widevine.b05:vendor/firmware/widevine.b05
-etc/firmware/widevine.b06:vendor/firmware/widevine.b06
-etc/firmware/widevine.mdt:vendor/firmware/widevine.mdt
 
 # FM - from vince (Redmi 5 Plus)
 -lib/vendor.qti.hardware.fm@1.0.so
