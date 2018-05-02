@@ -557,6 +557,11 @@ service qvop-daemon /vendor/bin/qvop-daemon
     user system
     group system drmrpc
 
+service atfwd /vendor/bin/ATFWD-daemon
+    class late_start
+    user system
+    group system radio
+
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
 # but only if ro.data.large_tcp_window_size property is set.
 on property:ro.data.large_tcp_window_size=true

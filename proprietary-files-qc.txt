@@ -626,6 +626,7 @@ etc/permissions/qcrilhook.xml
 -framework/uimlpalibrary.jar
 -framework/uimremotesimlocklibrary.jar
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+vendor/bin/ATFWD-daemon
 vendor/bin/ipacm-diag
 vendor/bin/netmgrd
 vendor/bin/port-bridge
