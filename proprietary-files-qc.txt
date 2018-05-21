@@ -810,14 +810,3 @@ vendor/lib64/vendor.qti.hardware.tui_comm@1.0_vendor.so
 # Wi-Fi - from vince (Redmi 5 Plus)
 vendor/bin/wcnss_service
 vendor/lib64/vendor.qti.hardware.wifi.supplicant@1.0_vendor.so
-
-# Wi-Fi Display - from vince (Redmi 5 Plus)
-vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc
-lib/com.qualcomm.qti.wifidisplayhal@1.0.so
-lib64/com.qualcomm.qti.wifidisplayhal@1.0.so
-vendor/lib/com.qualcomm.qti.wifidisplayhal@1.0_vendor.so
-vendor/lib/com.qualcomm.qti.wifidisplayhal@1.0-impl.so
-vendor/lib/com.qualcomm.qti.wifidisplayhal@1.0-halimpl.so
-vendor/lib64/com.qualcomm.qti.wifidisplayhal@1.0_vendor.so
-vendor/lib64/com.qualcomm.qti.wifidisplayhal@1.0-impl.so
-vendor/lib64/com.qualcomm.qti.wifidisplayhal@1.0-halimpl.so
