@@ -1,18 +1,4 @@
 # Audio
-etc/mixer_paths_skuk.xml:vendor/etc/mixer_paths_skuk.xml
-etc/mixer_paths_wcd9306.xml:vendor/etc/mixer_paths_wcd9306.xml
-etc/mixer_paths_wcd9326.xml:vendor/etc/mixer_paths_wcd9326.xml
-etc/mixer_paths_wcd9330.xml:vendor/etc/mixer_paths_wcd9330.xml
-etc/mixer_paths_wcd9335.xml:vendor/etc/mixer_paths_wcd9335.xml
-etc/mixer_paths_qrd_sku2.xml:vendor/etc/mixer_paths_qrd_sku2.xml
-etc/mixer_paths_qrd_skuh.xml:vendor/etc/mixer_paths_qrd_skuh.xml
-etc/mixer_paths_qrd_skui.xml:vendor/etc/mixer_paths_qrd_skui.xml
-etc/mixer_paths_qrd_skum.xml:vendor/etc/mixer_paths_qrd_skum.xml
-etc/mixer_paths_qrd_skun.xml:vendor/etc/mixer_paths_qrd_skun.xml
-etc/mixer_paths_qrd_skuhf.xml:vendor/etc/mixer_paths_qrd_skuhf.xml
-etc/sound_trigger_mixer_paths_wcd9306.xml:vendor/etc/sound_trigger_mixer_paths_wcd9306.xml
-etc/sound_trigger_mixer_paths_wcd9330.xml:vendor/etc/sound_trigger_mixer_paths_wcd9330.xml
-etc/sound_trigger_mixer_paths_wcd9335.xml:vendor/etc/sound_trigger_mixer_paths_wcd9335.xml
 vendor/etc/diracmobile.config
 vendor/lib/libhwdaphal.so
 vendor/lib64/libhwdaphal.so
