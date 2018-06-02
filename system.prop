@@ -187,9 +187,8 @@ persist.vendor.qti.telephony.vt_cam_interface=1
 
 # RIL
 DEVICE_PROVISIONED=1
-ro.ct.device.model=XMP-2016030
 ro.telephony.call_ring.multiple=false
-ro.telephony.default_network=22,20
+ro.telephony.default_network=20,20
 rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
 rild.libargs=-d /dev/smd0
 persist.rild.nitz_plmn=
@@ -202,10 +201,7 @@ persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 persist.radio.apm_sim_not_pwdn=1
-persist.radio.sw_mbn_update=0
-persist.radio.hw_mbn_update=0
 persist.radio.trigger.silence=true
-persist.activate_mbn.enabled=false
 persist.radio.multisim.config=dsds
 persist.vendor.radio.apm_sim_not_pwdn=1
 persist.vendor.radio.custom_ecc=1
@@ -217,11 +213,3 @@ persist.vendor.radio.sib16_support=1
 ril.ecclist=000,08,100,101,102,110,112,118,119,120,122,911,999
 ril.subscription.types=NV,RUIM
 telephony.lteOnCdmaDevice=1
-
-# Hardware Info
-ro.device.chipset=Qualcomm MSM8937 Snapdragon 430
-ro.device.cpu=Octa-core 1.4 GHz Cortex-A53
-ro.device.gpu=Adreno 505
-ro.device.rear_cam=13MP
-ro.device.front_cam=5MP
-ro.device.screen_res=720 x 1280
