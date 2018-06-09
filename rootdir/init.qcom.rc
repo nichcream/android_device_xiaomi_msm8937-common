@@ -656,21 +656,11 @@ service poweroffhandler /system/bin/poweroffhandler
     disabled
     oneshot
 
-# redefine cameraserver to load shim
-service cameraserver /system/bin/cameraserver
-    class main
-    user cameraserver
-    group audio camera input drmrpc
-    ioprio rt 4
-    setenv LD_PRELOAD "libshim_cameraservice.so"
-    writepid /dev/cpuset/camera-daemon/tasks /dev/stune/top-app/tasks
-
 # Start camera server as daemon
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
-    setenv LD_PRELOAD "libshim_c.so"
 
 # Allow usb charging to be disabled peristently
 on property:persist.usb.chgdisabled=1
