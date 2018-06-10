@@ -48,7 +48,6 @@
 #include "vendor_init.h"
 
 using android::base::GetProperty;
-using android::base::Trim;
 using android::init::property_set;
 
 static std::string board_id;
@@ -160,8 +159,8 @@ static void init_alarm_boot_properties() {
          * 7 -> CBLPWR_N pin toggled (for external power supply)
          * 8 -> KPDPWR_N pin toggled (power key pressed)
          */
-         if ((Trim(boot_reason) == "3" || reboot_reason == "true")
-                 && Trim(power_off_alarm) == "1") {
+         if ((android::base::Trim(boot_reason) == "3" || reboot_reason == "true")
+                 && android::base::Trim(power_off_alarm) == "1") {
              property_set("ro.alarm_boot", "true");
          } else {
              property_set("ro.alarm_boot", "false");
