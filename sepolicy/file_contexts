@@ -1,7 +1,6 @@
-# Fpc Fingerprint
-/dev/socket/fpce                                         u:object_r:fpc_socket:s0
+# FPC Fingerprint
 /data/fpc(/.*)?                                          u:object_r:fpc_data_file:s0
-/data/fpcd(/.*)?                                         u:object_r:fpc_data_file:s0
+/dev/socket/fpce                                         u:object_r:fpc_socket:s0
 /sys/devices/soc/soc:fpc1020(/.*)?                       u:object_r:fpc_sysfs:s0
 
 # Goodix Fingerprint
@@ -25,9 +24,3 @@
 
 # Block devices
 /dev/block/bootdevice/by-name/persist		u:object_r:persist_block_device:s0
-
-# Data files
-/data/misc/netmgr/log\.txt			u:object_r:netmgrd_data_file:s0
-
-# rmt_storage debugfs
-/sys/kernel/debug/rmt_storage(/.*)?                  u:object_r:qti_debugfs:s0
