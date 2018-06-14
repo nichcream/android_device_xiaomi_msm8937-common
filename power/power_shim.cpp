@@ -13,32 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-#include <log/log.h>
 
-// legacy hal
+#include <android/hardware/power/1.0/IPower.h>
 #include <hardware/hardware.h>
 #include <hardware/power.h>
+#include <log/log.h>
 
-// binderized hal
-#include <android/hardware/power/1.0/IPower.h>
-using namespace android;
 using android::hardware::power::V1_0::IPower;
 using android::hardware::power::V1_0::PowerHint;
 using android::hardware::power::V1_0::Feature;
-using ::android::hardware::Return;
-using ::android::hardware::Void;
 
-static bool isShimInited = false;
-sp<IPower> mPowerHal;
+static android::sp<IPower> mPowerHal;
 
 static void power_init(__attribute__((unused)) struct power_module *module)
 {
-    if (!isShimInited) {
-        ALOGI("QCOM power SHIM initializing.");
-        mPowerHal = IPower::getService();
-        isShimInited = true;
-    }
+    ALOGI("QCOM power SHIM initializing.");
+    mPowerHal = IPower::getService();
     if (mPowerHal == nullptr) {
         ALOGE("Couldn't load PowerHAL module");
     }
@@ -47,31 +37,17 @@ static void power_init(__attribute__((unused)) struct power_module *module)
 static void power_hint(__attribute__((unused)) struct power_module *module, power_hint_t hint,
         void *data)
 {
-    int32_t data_int = *(int32_t *)data;
-
-    if (!isShimInited) {
-        ALOGI("QCOM power SHIM initializing.");
-        mPowerHal = IPower::getService();
-        isShimInited = true;
-    }
-    if (mPowerHal == nullptr) {
-        ALOGE("Couldn't load PowerHAL module");
-    }
+    if (mPowerHal == nullptr)
+        power_init(module);
 
     // power_hint_t -> PowerHint
-    mPowerHal->powerHint(static_cast<PowerHint>(hint), data_int);
+    mPowerHal->powerHint(static_cast<PowerHint>(hint), *(int32_t *)data);
 }
 
-static void set_interactive(__attribute__((unused))struct power_module *module, int on)
+static void set_interactive(__attribute__((unused)) struct power_module *module, int on)
 {
-    if (!isShimInited) {
-        ALOGI("QCOM power SHIM initializing.");
-        mPowerHal = IPower::getService();
-        isShimInited = true;
-    }
-    if (mPowerHal == nullptr) {
-        ALOGE("Couldn't load PowerHAL module");
-    }
+    if (mPowerHal == nullptr)
+        power_init(module);
 
     // int -> bool
     mPowerHal->setInteractive(on ? true : false);
@@ -79,14 +55,8 @@ static void set_interactive(__attribute__((unused))struct power_module *module, 
 
 static void set_feature(__attribute__((unused))struct power_module *module, feature_t feature, int state)
 {
-    if (!isShimInited) {
-        ALOGI("QCOM power SHIM initializing.");
-        mPowerHal = IPower::getService();
-        isShimInited = true;
-    }
-    if (mPowerHal == nullptr) {
-        ALOGE("Couldn't load PowerHAL module");
-    }
+    if (mPowerHal == nullptr)
+        power_init(module);
 
     // feature_t -> Feature
     // int -> bool
