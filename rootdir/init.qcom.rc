@@ -351,6 +351,9 @@ on boot
     # Create directory used for display
     mkdir /persist/display 0770 system graphics
 
+    # Create hvdcp_opti directory
+    mkdir /persist/hvdcp_opti 0770 root system
+
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
