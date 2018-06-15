@@ -1,2 +1,0 @@
-#============= radio ==============
-allow radio qmuxd_socket:sock_file write;

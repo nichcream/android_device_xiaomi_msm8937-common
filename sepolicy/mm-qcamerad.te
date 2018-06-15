@@ -11,4 +11,3 @@ allow mm-qcamerad sysfs_graphics:file r_file_perms;
 
 binder_call(mm-qcamerad, servicemanager)
 binder_use(mm-qcamerad)
-set_prop(mm-qcamerad, diag_prop)

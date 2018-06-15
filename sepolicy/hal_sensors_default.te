@@ -1,3 +1,0 @@
-allow hal_sensors_default init:unix_stream_socket connectto;
-
-set_prop(hal_sensors_default, diag_prop)

@@ -1,6 +1,4 @@
-allow rild vendor_file:file { r_file_perms execute_no_trans ioctl };
-
+allow rild vendor_file:file r_file_perms;
 r_dir_file(rild, tombstone_data_file)
-get_prop(rild, diag_prop)
 get_prop(rild, radio_prop)
 set_prop(rild, radio_prop)
