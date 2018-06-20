@@ -103,20 +103,6 @@ static int write_int(char *path, int value)
     }
 }
 
-static bool file_exists(const char *file)
-{
-    int fd;
-
-    fd = open(file, O_RDWR);
-    if (fd < 0) {
-        ALOGE("failed to open %s, errno=%d\n", file, errno);
-        return false;
-    }
-
-    close(fd);
-    return true;
-}
-
 static int
 is_lit(struct light_state_t const* state)
 {
@@ -201,34 +187,30 @@ static int set_rgb_led_brightness(enum rgb_led led, int brightness)
     return write_int(file, brightness);
 }
 
+static int set_rgb_led_hw_blink(enum rgb_led led, int blink);
+
 static int set_rgb_led_timer_trigger(enum rgb_led led, int onMS, int offMS)
 {
-    char file[48];
-    int rc;
+    /* Check if we're doing a timed blink, and use the legacy method. */
+    if (onMS > 0 && offMS > 0) {
+        /*
+         * if ON time == OFF time
+         *   use blink mode 2
+         * else
+         *   use blink mode 1
+         */
+        return set_rgb_led_hw_blink(led, onMS == offMS ? 2 : 1);
+    }
 
-    snprintf(file, sizeof(file), "/sys/class/leds/%s/delay_off", led_names[led]);
-    rc = write_int(file, offMS);
-    if (rc < 0)
-        goto out;
-
-    snprintf(file, sizeof(file), "/sys/class/leds/%s/delay_on", led_names[led]);
-    rc = write_int(file, onMS);
-    if (rc < 0)
-        goto out;
-
-    return 0;
-out:
-    ALOGD("%s doesn't support timer trigger\n", led_names[led]);
-    return rc;
+    /* Fallback to constant */
+    return -errno;
 }
 
 static int set_rgb_led_hw_blink(enum rgb_led led, int blink)
 {
     char file[48];
 
-    snprintf(file, sizeof(file), "/sys/class/leds/%s/breath", led_names[led]);
-    if (!file_exists(file))
-        snprintf(file, sizeof(file), "/sys/class/leds/%s/blink", led_names[led]);
+    snprintf(file, sizeof(file), "/sys/class/leds/%s/blink", led_names[led]);
 
     return write_int(file, blink);
 }
