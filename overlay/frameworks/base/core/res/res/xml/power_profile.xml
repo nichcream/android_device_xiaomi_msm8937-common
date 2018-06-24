@@ -2,7 +2,11 @@
 <device name="Android">
     <item name="screen.on">63</item>
     <item name="screen.full">261</item>
-    <array name="cpu.speeds">
+    <array name="cpu.clusters.cores">
+        <value>4</value>
+        <value>4</value>
+    </array>
+    <array name="cpu.speeds.cluster0">
         <value>200000</value>
         <value>499200</value>
         <value>533333</value>
@@ -11,7 +15,25 @@
         <value>1094400</value>
         <value>1209600</value>
     </array>
-    <array name="cpu.active">
+    <array name="cpu.active.cluster0">
+        <value>151</value>
+        <value>169</value>
+        <value>177</value>
+        <value>195</value>
+        <value>259</value>
+        <value>307</value>
+        <value>353</value>
+    </array>
+    <array name="cpu.speeds.cluster1">
+        <value>200000</value>
+        <value>499200</value>
+        <value>533333</value>
+        <value>800000</value>
+        <value>998400</value>
+        <value>1094400</value>
+        <value>1209600</value>
+    </array>
+    <array name="cpu.active.cluster1">
         <value>151</value>
         <value>169</value>
         <value>177</value>
