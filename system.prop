@@ -108,7 +108,7 @@ media.aac_51_output_enabled=true
 mm.enable.qcom_parser=1048575
 vendor.vidc.enc.narrow.searchrange=1
 vendor.vidc.disable.split.mode=1
-video.disable.ubwc=1
+vendor.video.disable.ubwc=1
 
 #netmgrd
 ro.vendor.use_data_netmgrd=true
