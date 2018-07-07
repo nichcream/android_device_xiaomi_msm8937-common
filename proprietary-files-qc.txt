@@ -1,4 +1,4 @@
-# ADSP - from tissot (Mi A1)
+# ADSP - from marmite (Wileyfox Swift 2)
 vendor/bin/adsprpcd
 vendor/lib/libadsp_default_listener.so
 vendor/lib/libadsprpc.so
@@ -16,21 +16,19 @@ vendor/lib64/libfastcvadsp_stub.so
 vendor/lib64/libqtigef.so
 vendor/lib64/libsdsprpc.so
 
-# ADSP modules - from tissot (Mi A1)
-vendor/lib/rfsa/adsp/libFastRPC_AUE_Forward_skel.so
-vendor/lib/rfsa/adsp/libFastRPC_UTF_Forward_Qtc2_skel.so
+# ADSP modules - from marmite (Wileyfox Swift 2)
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
 vendor/lib/rfsa/adsp/libdspCV_skel.so
 vendor/lib/rfsa/adsp/libexternal_dog_skel.so
 vendor/lib/rfsa/adsp/libfastcvadsp.so
 vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
 
-# Alarm - from tissot (Mi A1)
+# Alarm - from marmite (Wileyfox Swift 2)
 -vendor/framework/vendor.qti.hardware.alarm-V1.0-java.jar
 vendor/lib/vendor.qti.hardware.alarm@1.0.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
 
-# ANT+ - from tissot (Mi A1)
+# ANT+ - from marmite (Wileyfox Swift 2)
 lib/com.qualcomm.qti.ant@1.0.so
 -lib/libantradio.so
 lib64/com.qualcomm.qti.ant@1.0.so
@@ -40,7 +38,7 @@ vendor/lib/hw/com.qualcomm.qti.ant@1.0-impl.so
 vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
 vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
 
-# Audio - from tissot (Mi A1)
+# Audio - from marmite (Wileyfox Swift 2)
 lib/libqct_resampler.so
 vendor/etc/drc/drc_cfg_5.1.txt
 vendor/etc/drc/drc_cfg_AZ.txt
@@ -73,7 +71,7 @@ vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
 vendor/lib64/soundfx/libshoebox.so
 
-# Bluetooth - from tissot (Mi A1)
+# Bluetooth - from marmite (Wileyfox Swift 2)
 lib/com.qualcomm.qti.bluetooth_audio@1.0.so
 lib64/com.qualcomm.qti.bluetooth_audio@1.0.so
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
@@ -148,7 +146,7 @@ vendor/lib64/libwms.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
-# Charger - from tissot (Mi A1)
+# Charger - from marmite (Wileyfox Swift 2)
 vendor/bin/hvdcp_opti
 
 # DPM - from tissot (Mi A1) - OPR1.170623.026
@@ -180,7 +178,7 @@ vendor/lib/libdpmqmihal.so
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0_vendor.so
 vendor/lib64/libdpmqmihal.so
 
-# DRM - from tissot (Mi A1)
+# DRM - from marmite (Wileyfox Swift 2)
 lib/libGPTEE_system.so
 lib/libQTEEConnector_system.so
 lib/vendor.qti.hardware.qteeconnector@1.0.so
@@ -226,13 +224,13 @@ vendor/lib64/libQTEEConnector_vendor.so
 vendor/lib64/vendor.qti.hardware.qteeconnector@1.0_vendor.so
 vendor/lib64/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
 
-# DRM (Widevine) - from tissot (Mi A1)
+# DRM (Widevine) - from marmite (Wileyfox Swift 2)
 vendor/bin/hw/android.hardware.drm@1.0-service.widevine
 vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc
 vendor/lib/mediadrm/libwvdrmengine.so
 vendor/lib/libwvhidl.so
 
-# FM - from tissot (Mi A1)
+# FM - from marmite (Wileyfox Swift 2)
 -lib/vendor.qti.hardware.fm@1.0.so
 -lib64/vendor.qti.hardware.fm@1.0.so
 vendor/lib/hw/vendor.qti.hardware.fm@1.0-impl.so
@@ -240,11 +238,11 @@ vendor/lib/vendor.qti.hardware.fm@1.0_vendor.so
 vendor/lib64/hw/vendor.qti.hardware.fm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so
 
-# Gatekeeper - from tissot (Mi A1)
-vendor/lib/hw/gatekeeper.msm8953.so:vendor/lib/hw/gatekeeper.msm8937.so
-vendor/lib64/hw/gatekeeper.msm8953.so:vendor/lib64/hw/gatekeeper.msm8937.so
+# Gatekeeper - from marmite (Wileyfox Swift 2)
+vendor/lib/hw/gatekeeper.msm8937.so
+vendor/lib64/hw/gatekeeper.msm8937.so
 
-# GPS - from tissot (Mi A1)
+# GPS - from marmite (Wileyfox Swift 2)
 lib/vendor.qti.gnss@1.0.so
 lib/libxt_native.so
 lib/liblocationservice_jni.so
@@ -318,7 +316,7 @@ vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
 vendor/lib64/vendor.qti.gnss@1.0_vendor.so
 
-# Graphics - from TA-1025 (Nokia 6)
+# Graphics - from marmite (Wileyfox Swift 2)
 lib/egl/libGLES_android.so
 lib64/egl/libGLES_android.so
 vendor/lib/egl/eglSubDriverAndroid.so
@@ -394,7 +392,7 @@ vendor/lib64/librs_adreno.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/libscalar.so
 
-# Graphics - SDM - from TA-1025 (Nokia 6)
+# Graphics - SDM - from marmite (Wileyfox Swift 2)
 lib/libsd_sdk_display.so
 lib/libsdm-disp-apis.so
 lib64/libsd_sdk_display.so
@@ -410,7 +408,7 @@ vendor/lib64/libsdm-diag.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libtinyxml2_1.so
 
-# Graphics firmware - from TA-1025 (Nokia 6)
+# Graphics firmware - from marmite (Wileyfox Swift 2)
 vendor/firmware/a530_gpmu.fw2
 vendor/firmware/a530_pfp.fw
 vendor/firmware/a530_pm4.fw
@@ -421,11 +419,11 @@ vendor/firmware/a530v3_gpmu.fw2
 vendor/firmware/a530v3_seq.fw2
 vendor/firmware/a540_gpmu.fw2
 
-# Keystore - from tissot (Mi A1)
-vendor/lib/hw/keystore.msm8953.so:vendor/lib/hw/keystore.msm8937.so
-vendor/lib64/hw/keystore.msm8953.so:vendor/lib64/hw/keystore.msm8937.so
+# Keystore - from marmite (Wileyfox Swift 2)
+vendor/lib/hw/keystore.msm8937.so
+vendor/lib64/hw/keystore.msm8937.so
 
-# Keymaster - from tissot (Mi A1)
+# Keymaster - from marmite (Wileyfox Swift 2)
 vendor/lib/libkeymasterutils.so
 vendor/lib/libkeymasterprovision.so
 vendor/lib/libkeymasterdeviceutils.so
@@ -433,13 +431,13 @@ vendor/lib64/libkeymasterutils.so
 vendor/lib64/libkeymasterprovision.so
 vendor/lib64/libkeymasterdeviceutils.so
 
-# Listen - from tissot (Mi A1)
-vendor/lib/hw/sound_trigger.primary.msm8953.so:vendor/lib/hw/sound_trigger.primary.msm8937.so
+# Listen - from marmite (Wileyfox Swift 2)
+vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
-vendor/lib64/hw/sound_trigger.primary.msm8953.so:vendor/lib64/hw/sound_trigger.primary.msm8937.so
+vendor/lib64/hw/sound_trigger.primary.msm8937.so
 
-# Media - from tissot (Mi A1)
+# Media - from marmite (Wileyfox Swift 2)
 lib/libmmosal.so
 lib/libOmxMux.so
 lib/vendor.qti.hardware.vpp@1.1.so
@@ -488,8 +486,7 @@ vendor/lib64/vendor.qti.hardware.vpp@1.1_vendor.so
 vendor/media/LMspeed_508.emd
 vendor/media/PFFprec_600.emd
 
-# Media - from TA-1025 (Nokia 6)
-vendor/lib/libomx-dts.so
+# Media - from marmite (Wileyfox Swift 2)
 vendor/lib/libOmxSwVdec.so
 vendor/lib/libOmxSwVencMpeg4.so
 vendor/lib/libMpeg4SwEncoder.so
@@ -499,7 +496,7 @@ vendor/lib64/libOmxSwVencMpeg4.so
 vendor/lib64/libMpeg4SwEncoder.so
 vendor/lib64/libswvdec.so
 
-# Perf - from tissot (Mi A1)
+# Perf - from marmite (Wileyfox Swift 2)
 lib/libqti-at.so
 lib/libqti-perfd-client_system.so
 lib/vendor.qti.hardware.iop@1.0.so
@@ -516,6 +513,7 @@ vendor/etc/init/vendor.qti.hardware.perf@1.0-service.rc
 vendor/lib/hw/vendor.qti.hardware.iop@1.0-impl.so
 vendor/lib/libfeedbackhandler.so
 vendor/lib/libperfgluelayer.so
+vendor/lib/libqti-iopd.so
 vendor/lib/libqti-iopd-client.so
 vendor/lib/libqti-perfd.so
 vendor/lib/libqti-perfd-client.so
@@ -526,6 +524,7 @@ vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so
 vendor/lib64/hw/vendor.qti.hardware.iop@1.0-impl.so
 vendor/lib64/libfeedbackhandler.so
 vendor/lib64/libperfgluelayer.so
+vendor/lib64/libqti-iopd.so
 vendor/lib64/libqti-iopd-client.so
 vendor/lib64/libqti-perfd.so
 vendor/lib64/libqti-perfd-client.so
@@ -534,17 +533,13 @@ vendor/lib64/vendor.qti.hardware.iop@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.iop@2.0_vendor.so
 vendor/lib64/vendor.qti.hardware.perf@1.0_vendor.so
 
-# Perf  - from bardock-pro (BQ Aquarius X Pro)
-vendor/lib/libqti-iopd.so
-vendor/lib64/libqti-iopd.so
-
 # Peripheral manager - from tissot (Mi A1) - OPR1.170623.026
 vendor/bin/pm-proxy
 vendor/bin/pm-service
 vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
-# Postprocessing - from tissot (Mi A1)
+# Postprocessing - from marmite (Wileyfox Swift 2)
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 -framework/com.qti.snapdragon.sdk.display.jar
 lib/vendor.display.color@1.0.so
@@ -562,7 +557,7 @@ vendor/lib64/libdisp-aba.so
 vendor/lib64/vendor.display.color@1.0_vendor.so
 vendor/lib64/vendor.display.postproc@1.0_vendor.so
 
-# QDutils - from tissot (Mi A1)
+# QDutils - from marmite (Wileyfox Swift 2)
 lib/vendor.qti.hardware.qdutils_disp@1.0.so
 lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti
@@ -746,43 +741,39 @@ vendor/lib64/vendor.qti.hardware.radio.ims@1.0_vendor.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so
 
-# Sensors - from tissot (Mi A1)
+# Sensors - from marmite (Wileyfox Swift 2)
 lib/libsensor1.so
 lib/libsensor_reg.so
-lib/libsensor_test.so
 lib64/libsensor1.so
 lib64/libsensor_reg.so
-lib64/libsensor_test.so
 vendor/bin/sensors.qcom
 -vendor/framework/vendor.qti.hardware.sensorscalibrate-V1.0-java.jar
-vendor/lib/hw/activity_recognition.msm8953.so:vendor/lib/hw/activity_recognition.msm8937.so
+vendor/lib/hw/activity_recognition.msm8937.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
-vendor/lib/libsensor_user_cal.so
 vendor/lib/sensor_calibrate.so
 vendor/lib/sensors.ssc.so
 vendor/lib/vendor.qti.hardware.sensorscalibrate@1.0.so
-vendor/lib64/hw/activity_recognition.msm8953.so:vendor/lib64/hw/activity_recognition.msm8937.so
+vendor/lib64/hw/activity_recognition.msm8937.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/libsensor_user_cal.so
 vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.ssc.so
 vendor/lib64/vendor.qti.hardware.sensorscalibrate@1.0.so
 
-# Thermal - from tissot (Mi A1)
+# Thermal - from marmite (Wileyfox Swift 2)
 vendor/bin/thermal-engine
 -vendor/lib/libthermalclient.so
 -vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
 
-# Time services - from tissot (Mi A1)
+# Time services - from marmite (Wileyfox Swift 2)
 -vendor/app/TimeService/TimeService.apk
 vendor/bin/time_daemon
 -vendor/lib/libtime_genoff.so
 -vendor/lib64/libtime_genoff.so
 
-# TUI - from tissot (Mi A1)
+# TUI - from marmite (Wileyfox Swift 2)
 lib/vendor.qti.hardware.tui_comm@1.0.so
 lib64/vendor.qti.hardware.tui_comm@1.0.so
 vendor/bin/hw/vendor.qti.hardware.tui_comm@1.0-service-qti
@@ -790,6 +781,6 @@ vendor/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc
 vendor/lib/vendor.qti.hardware.tui_comm@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.tui_comm@1.0_vendor.so
 
-# Wi-Fi - from tissot (Mi A1)
+# Wi-Fi - from marmite (Wileyfox Swift 2)
 vendor/bin/wcnss_service
 vendor/lib64/vendor.qti.hardware.wifi.supplicant@1.0_vendor.so
