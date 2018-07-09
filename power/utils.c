@@ -47,13 +47,6 @@
 #define USINSEC 1000000L
 #define NSINUS 1000L
 
-char scaling_gov_path[4][80] ={
-    "sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
-    "sys/devices/system/cpu/cpu1/cpufreq/scaling_governor",
-    "sys/devices/system/cpu/cpu2/cpufreq/scaling_governor",
-    "sys/devices/system/cpu/cpu3/cpufreq/scaling_governor"
-};
-
 #define PERF_HAL_PATH "libqti-perfd-client.so"
 static void *qcopt_handle;
 static int (*perf_lock_acq)(unsigned long handle, int duration,
@@ -191,8 +184,10 @@ int get_scaling_governor(char governor[], int size)
 
 int get_scaling_governor_check_cores(char governor[], int size,int core_num)
 {
-
-    if (sysfs_read(scaling_gov_path[core_num], governor,
+    char scaling_gov_path[80];
+    snprintf(scaling_gov_path, sizeof(scaling_gov_path),
+             "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_governor", core_num);
+    if (sysfs_read(scaling_gov_path, governor,
                 size) == -1) {
         // Can't obtain the scaling governor. Return.
         return -1;
