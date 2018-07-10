@@ -2331,10 +2331,6 @@ int QCamera2HardwareInterface::initCapabilities(uint32_t cameraId,
     gCamCapability[cameraId]->analysis_padding_info.offset_info.offset_x = 0;
     gCamCapability[cameraId]->analysis_padding_info.offset_info.offset_y = 0;
 
-    /* We don't actually support these */
-    gCamCapability[cameraId]->qcom_supported_feature_mask &= ~CAM_QCOM_FEATURE_CDS;
-    gCamCapability[cameraId]->qcom_supported_feature_mask &= ~CAM_QTI_FEATURE_SW_TNR;
-
     rc = NO_ERROR;
 
 query_failed:
@@ -7491,6 +7487,14 @@ int32_t QCamera2HardwareInterface::getPPConfig(cam_pp_feature_config_t &pp_confi
 
             if (mParameters.isOEMFeatEnabled()) {
                 pp_config.feature_mask |= CAM_OEM_FEATURE_1;
+            }
+
+            if (mParameters.getCDSMode() != CAM_CDS_MODE_OFF) {
+                if (feature_mask & CAM_QCOM_FEATURE_DSDN) {
+                    pp_config.feature_mask |= CAM_QCOM_FEATURE_DSDN;
+                } else {
+                    pp_config.feature_mask |= CAM_QCOM_FEATURE_CDS;
+                }
             }
 
             if ((multipass) &&

@@ -4388,10 +4388,10 @@ int32_t QCameraParameters::setWaveletDenoise(const QCameraParameters& params)
  *==========================================================================*/
 int32_t QCameraParameters::setTemporalDenoise(const QCameraParameters& params)
 {
-    if ((m_pCapability->qcom_supported_feature_mask & CAM_QCOM_FEATURE_CPP_TNR) == 0) {
-        LOGH("TNR is not supported");
-        return NO_ERROR;
-    }
+#if 1
+    LOGD("TNR is not supported.");
+    return NO_ERROR;
+#endif
 
     const char *str = params.get(KEY_QC_TNR_MODE);
     const char *prev_str = get(KEY_QC_TNR_MODE);
@@ -7857,11 +7857,10 @@ int32_t QCameraParameters::setCDSMode(const QCameraParameters& params)
     const char *video_prev_str = get(KEY_QC_VIDEO_CDS_MODE);
     int32_t rc = NO_ERROR;
 
-    if ((m_pCapability->qcom_supported_feature_mask &
-            CAM_QCOM_FEATURE_CDS) == 0) {
-        LOGD("CDS is not supported. Not applying user params for this.");
-        return NO_ERROR;
-    }
+#if 1
+    LOGD("CDS is not supported. Not applying user params for this.");
+    return rc;
+#endif
 
     if (m_bRecordingHint_new == true) {
         if (video_str) {
@@ -13157,6 +13156,12 @@ int32_t QCameraParameters::updatePpFeatureMask(cam_stream_type_t stream_type) {
        feature_mask |= CAM_QCOM_FEATURE_LLVD;
     }
 
+    if (isHighQualityNoiseReductionMode() &&
+            ((stream_type == CAM_STREAM_TYPE_VIDEO) ||
+            (stream_type == CAM_STREAM_TYPE_PREVIEW && getRecordingHintValue()))) {
+        feature_mask |= CAM_QTI_FEATURE_SW_TNR;
+    }
+
     // Do not enable feature mask for ZSL/non-ZSL/liveshot snapshot except for 4K2k case
     if ((getRecordingHintValue() &&
             (stream_type == CAM_STREAM_TYPE_SNAPSHOT) && is4k2kVideoResolution()) ||
@@ -13188,6 +13193,19 @@ int32_t QCameraParameters::updatePpFeatureMask(cam_stream_type_t stream_type) {
             ((CAM_STREAM_TYPE_PREVIEW == stream_type) ||
             (CAM_STREAM_TYPE_SNAPSHOT == stream_type))) {
         feature_mask |= CAM_QCOM_FEATURE_EZTUNE;
+    }
+
+    if ((getCDSMode() != CAM_CDS_MODE_OFF) &&
+            ((CAM_STREAM_TYPE_PREVIEW == stream_type) ||
+            (CAM_STREAM_TYPE_VIDEO == stream_type) ||
+            (CAM_STREAM_TYPE_CALLBACK == stream_type) ||
+            ((CAM_STREAM_TYPE_SNAPSHOT == stream_type) &&
+            getRecordingHintValue() && is4k2kVideoResolution()))) {
+         if (m_nMinRequiredPpMask & CAM_QCOM_FEATURE_DSDN) {
+             feature_mask |= CAM_QCOM_FEATURE_DSDN;
+         } else {
+             feature_mask |= CAM_QCOM_FEATURE_CDS;
+         }
     }
 
     if (isTNRSnapshotEnabled() && (CAM_STREAM_TYPE_SNAPSHOT == stream_type)
@@ -13819,11 +13837,6 @@ uint8_t QCameraParameters::getLongshotStages()
  *==========================================================================*/
 int32_t QCameraParameters::setCDSMode(int32_t cds_mode, bool initCommit)
 {
-    if ((m_pCapability->qcom_supported_feature_mask &
-            CAM_QCOM_FEATURE_CDS) == 0) {
-        LOGD("CDS is not supported");
-        return NO_ERROR;
-    }
     if (initCommit) {
         if (initBatchUpdate(m_pParamBuf) < 0) {
             LOGE("Failed to initialize group update table");
@@ -13832,6 +13845,12 @@ int32_t QCameraParameters::setCDSMode(int32_t cds_mode, bool initCommit)
     }
 
     int32_t rc = NO_ERROR;
+
+#if 1
+    LOGD("CDS is not supported.");
+    return rc;
+#endif
+
     if (ADD_SET_PARAM_ENTRY_TO_BATCH(m_pParamBuf, CAM_INTF_PARM_CDS_MODE, cds_mode)) {
         LOGE("Failed to update cds mode");
         return BAD_VALUE;
