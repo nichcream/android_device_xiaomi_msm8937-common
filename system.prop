@@ -64,7 +64,6 @@ qcom.bluetooth.soc=smd
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk
 persist.vendor.camera.display.umax=2560x1440
 persist.vendor.camera.display.lmax=1280x720
-camera2.portability.force_api=1
 persist.camera.is_type=2
 persist.camera.HAL3.enabled=1
 persist.ts.postmakeup=true
