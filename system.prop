@@ -39,6 +39,7 @@ af.fast_track_multiplier=2
 persist.vendor.audio.speaker.prot.enable=false
 vendor.audio.offload.multiaac.enable=true
 vendor.audio.dolby.ds2.hardbypass=true
+vendor.audio.hw.aac.encoder=true
 vendor.audio.flac.sw.decoder.24bit=true
 ro.config.vc_call_vol_steps=8
 ro.config.media_vol_steps=20
@@ -65,11 +66,7 @@ persist.vendor.camera.display.umax=1920x1080
 persist.vendor.camera.display.lmax=1280x720
 camera2.portability.force_api=1
 persist.camera.is_type=2
-persist.camera.time.monotonic=1
-media.camera.ts.monotonic=1
 vidc.enc.dcvs.extra-buff-count=2
-persist.camera.preview.ubwc=0
-persist.camera.video.ubwc=0
 persist.camera.HAL3.enabled=1
 persist.ts.postmakeup=true
 persist.ts.rtmakeup=true
@@ -121,23 +118,12 @@ ro.sys.sdcardfs=true
 
 # Media
 media.msm8956hw=0
-media.stagefright.enable-player=true
-media.stagefright.enable-http=true
-media.stagefright.enable-aac=true
-media.stagefright.enable-qcp=true
-media.stagefright.enable-fma2dp=true
-media.stagefright.enable-scan=true
 mm.enable.smoothstreaming=true
 mmp.enable.3g2=true
 media.aac_51_output_enabled=true
-media.stagefright.audio.sink=280
-av.debug.disable.pers.cache=1
-vendor.audio.hw.aac.encoder=true
 mm.enable.qcom_parser=1048575
-vendor.vidc.enc.disable_bframes=1
 vendor.vidc.enc.narrow.searchrange=1
 vendor.vidc.disable.split.mode=1
-vendor.vidc.enc.disable.pq=true
 video.disable.ubwc=1
 
 #netmgrd
