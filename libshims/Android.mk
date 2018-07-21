@@ -22,6 +22,8 @@ LOCAL_SRC_FILES := \
 LOCAL_SHARED_LIBRARIES := libc
 LOCAL_MODULE := libshim_pthreadts
 LOCAL_VENDOR_MODULE := true
+# TODO: remove as soon as we find out why Clang breaks camera preflash
+LOCAL_CLANG := false
 LOCAL_CXX_STL := none
 LOCAL_SANITIZE := never
 LOCAL_MODULE_TAGS := optional
