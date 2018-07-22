@@ -187,25 +187,6 @@ static int set_rgb_led_brightness(enum rgb_led led, int brightness)
     return write_int(file, brightness);
 }
 
-static int set_rgb_led_hw_blink(enum rgb_led led, int blink);
-
-static int set_rgb_led_timer_trigger(enum rgb_led led, int onMS, int offMS)
-{
-    /* Check if we're doing a timed blink, and use the legacy method. */
-    if (onMS > 0 && offMS > 0) {
-        /*
-         * if ON time == OFF time
-         *   use blink mode 2
-         * else
-         *   use blink mode 1
-         */
-        return set_rgb_led_hw_blink(led, onMS == offMS ? 2 : 1);
-    }
-
-    /* Fallback to constant */
-    return -errno;
-}
-
 static int set_rgb_led_hw_blink(enum rgb_led led, int blink)
 {
     char file[48];
@@ -237,28 +218,27 @@ set_speaker_light_locked(struct light_device_t* dev,
     onMS = state->flashOnMS;
     offMS = state->flashOffMS;
 
-    if (onMS != 0 && offMS != 0)
-        blink = 1;
+    if (onMS > 0 && offMS > 0) {
+        /*
+         * if ON time == OFF time
+         *   use blink mode 2
+         * else
+         *   use blink mode 1
+         */
+        blink = onMS == offMS ? 2 : 1;
+    }
 
     switch (state->flashMode) {
         case LIGHT_FLASH_HARDWARE:
+            blink = 2;
+        case LIGHT_FLASH_TIMED:
             if (!!red)
                 rc = set_rgb_led_hw_blink(LED_RED, blink);
             if (!!green)
                 rc |= set_rgb_led_hw_blink(LED_GREEN, blink);
             if (!!blue)
                 rc |= set_rgb_led_hw_blink(LED_BLUE, blink);
-            /* fallback to timed blinking if breath is not supported */
-            if (rc == 0)
-                break;
-        case LIGHT_FLASH_TIMED:
-            if (!!red)
-                rc = set_rgb_led_timer_trigger(LED_RED, onMS, offMS);
-            if (!!green)
-                rc |= set_rgb_led_timer_trigger(LED_GREEN, onMS, offMS);
-            if (!!blue)
-                rc |= set_rgb_led_timer_trigger(LED_BLUE, onMS, offMS);
-            /* fallback to constant on if timed blinking is not supported */
+            /* fallback to constant if blink is not supported */
             if (rc == 0)
                 break;
         case LIGHT_FLASH_NONE:
