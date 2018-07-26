@@ -343,5 +343,5 @@ on boot
     chown system system /sys/class/leds/blue/delay_off
 
 # FM radio
-on property:hw.fm.init=*
-    write /sys/module/radio_iris_transport/parameters/fmsmd_set ${hw.fm.init}
+on property:vendor.hw.fm.init=*
+    write /sys/module/radio_iris_transport/parameters/fmsmd_set ${vendor.hw.fm.init}
