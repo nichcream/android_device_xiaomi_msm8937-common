@@ -939,7 +939,6 @@ vendor/lib/libmmcamera_isp_ihist_stats44.so
 vendor/lib/libmmcamera_isp_chroma_enhan40.so
 vendor/lib/libmmcamera_isp_mesh_rolloff40.so
 vendor/lib/libmmcamera_isp_clamp_encoder40.so
-vendor/lib/libmmcamera_isp_color_correct40.so
 vendor/lib/libmmcamera_isp_linearization40.so
 vendor/lib/libmmcamera_isp_scaler_encoder44.so
 vendor/lib/libmmcamera_isp_chroma_suppress40.so
@@ -950,6 +949,9 @@ vendor/lib/libmmcamera_isp_scaler_viewfinder44.so
 vendor/lib/libmmcamera_isp_fovcrop_viewfinder40.so
 vendor/lib/libmmcamera_isp_color_xform_encoder40.so
 vendor/lib/libmmcamera_isp_color_xform_viewfinder40.so
+
+# Camera sensors - color_correct40 - from prada (Redmi 4)
+vendor/lib/libmmcamera_isp_color_correct40.so
 
 # Display calibration
 -etc/qdcm_calib_data_hx8394F_HD720p_video_BOE.xml
