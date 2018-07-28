@@ -50,11 +50,7 @@ BiometricsFingerprint *BiometricsFingerprint::sInstance = nullptr;
 
 BiometricsFingerprint::BiometricsFingerprint() : mClientCallback(nullptr), mDevice(nullptr) {
     sInstance = this; // keep track of the most recent instance
-    if (is_goodix) {
-        mDevice = getWrapperService(BiometricsFingerprint::notify);
-    } else {
-        mDevice = openHal();
-    }
+    mDevice = openHal();
 
     if (!mDevice) {
         ALOGE("Can't open HAL module");
@@ -303,7 +299,7 @@ fingerprint_device_t* BiometricsFingerprint::openHal() {
         return nullptr;
     }
 
-    if (kVersion != device->version) {
+    if (kVersion != device->version && !is_goodix) {
         // enforce version on new devices because of HIDL@2.1 translation layer
         ALOGE("Wrong fp version. Expected %d, got %d", kVersion, device->version);
         //return nullptr;
