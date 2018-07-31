@@ -10160,10 +10160,12 @@ bool QCameraParameters::getTsMakeupInfo(int &whiteLevel, int &cleanLevel) const
     } else {
         pch_makeup_enable = get(QCameraParameters::KEY_XM_MAKEUP);
         if (pch_makeup_enable != NULL) {
-            enableMakeup =
-                    (strstr(pch_makeup_enable, "1") != NULL)
-                    || (strstr(pch_makeup_enable, "2") != NULL)
-                    || (strstr(pch_makeup_enable, "3") != NULL);
+            const char* xm_makeup_enable = strrchr(pch_makeup_enable, ':');
+            if (xm_makeup_enable == NULL) {
+                return false;
+            }
+            xm_makeup_enable++;
+            enableMakeup = atoi(xm_makeup_enable) > 0;
             LOGD("Xiaomi makeup enable %d", (int)enableMakeup);
             if (enableMakeup) {
                 whiteLevel = getInt(QCameraParameters::KEY_XM_MAKEUP_WHITEN) * 10;
