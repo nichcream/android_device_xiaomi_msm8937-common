@@ -88,15 +88,6 @@ LOCAL_VENDOR_MODULE := true
 LOCAL_HEADER_LIBRARIES := libhardware_headers
 include $(BUILD_EXECUTABLE)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_PROPRIETARY_MODULE := true
-LOCAL_SHARED_LIBRARIES := libhardware libhidlbase libhwbinder liblog libutils android.hardware.power@1.0
-LOCAL_SRC_FILES := power_shim.cpp
-LOCAL_MODULE := power.$(TARGET_BOARD_PLATFORM)
-LOCAL_MODULE_TAGS := optional
-include $(BUILD_SHARED_LIBRARY)
-
 endif
 
 endif
