@@ -4005,7 +4005,18 @@ int32_t QCameraParameters::setXmMakeup(const QCameraParameters& params)
 
     if (str != NULL) {
         if (prev_str == NULL || strcmp(str, prev_str) != 0) {
-            m_bNeedRestart = true;
+            if (prev_str == NULL) {
+                m_bNeedRestart = true;
+            } else {
+                const char* prev_enabled = strrchr(prev_str, ':');
+                const char* curr_enabled = strrchr(str, ':');
+                if (prev_enabled && curr_enabled) {
+                    prev_enabled++;
+                    curr_enabled++;
+                    m_bNeedRestart = (atoi(prev_enabled) > 0 != atoi(curr_enabled) > 0) ?
+                            true : m_bNeedRestart;
+                }
+            }
             set(KEY_XM_MAKEUP, str);
         }
 
