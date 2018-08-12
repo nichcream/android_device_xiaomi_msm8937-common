@@ -18,22 +18,7 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#include <cutils/properties.h>
 #include <string.h>
- 
-inline const char* BtmGetDefaultName()
-{
-	char board_id[PROPERTY_VALUE_MAX];
-	property_get("ro.product.wt.boardid", board_id, "");
-
-	if (!strcmp("S88537AB1", board_id)) {
-		return "Xiaomi Redmi 3X";
-	}
-
-	return "Xiaomi Redmi 3S";
-}
-
-#define BTM_DEF_LOCAL_NAME BtmGetDefaultName()
 
 #define MAX_ACL_CONNECTIONS    16
 #define MAX_L2CAP_CHANNELS    16
@@ -50,8 +35,9 @@ inline const char* BtmGetDefaultName()
 
 /* Enable HFP WBS feature */
 #define BTIF_HF_CLIENT_WBS_INCLUDED TRUE
-#endif
 
 /* Disable enhanced sco commands */
 #define BTM_SCO_ENHANCED_SYNC_ENABLED FALSE
 #define BTM_SCO_ENHANCED_SYNC_DISABLED TRUE
+
+#endif /* _BDROID_BUILDCFG_H */
