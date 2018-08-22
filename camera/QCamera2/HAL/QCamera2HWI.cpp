@@ -3428,7 +3428,10 @@ int QCamera2HardwareInterface::startPreview()
     m_perfLock.lock_acq();
 
 #ifdef USE_DISPLAY_SERVICE
-    if(!mCameraDisplay->startVsync(TRUE)) {
+     /* Only start vsync for presentation timestamp during video */
+    if(mParameters.getRecordingHintValue() == true
+            && !mCameraDisplay->isSyncing()
+            && !mCameraDisplay->startVsync(TRUE)) {
         LOGE("Error: Cannot start vsync (still continue)");
     }
 #endif //USE_DISPLAY_SERVICE
@@ -3530,7 +3533,9 @@ int QCamera2HardwareInterface::stopPreview()
     // delete all channels from preparePreview
     unpreparePreview();
 #ifdef USE_DISPLAY_SERVICE
-    mCameraDisplay->startVsync(FALSE);
+    if (mCameraDisplay->isSyncing()) {
+        mCameraDisplay->startVsync(FALSE);
+    }
 #endif //Use_DISPLAY_SERVICE
 
     m_perfLock.lock_rel();

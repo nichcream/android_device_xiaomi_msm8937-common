@@ -738,7 +738,7 @@ void QCamera2HardwareInterface::synchronous_stream_cb_routine(
     // Otherwise, mBootToMonoTimestampOffset value will be 0.
     frameTime = frameTime - pme->mBootToMonoTimestampOffset;
     // Calculate the future presentation time stamp for displaying frames at regular interval
-    if (pme->getRecordingHintValue() == true) {
+    if (pme->getRecordingHintValue() == true && pme->mCameraDisplay->isSyncing()) {
         mPreviewTimestamp = pme->mCameraDisplay->computePresentationTimeStamp(frameTime);
     }
     stream->mStreamTimestamp = frameTime;
