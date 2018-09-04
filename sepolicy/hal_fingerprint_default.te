@@ -22,6 +22,10 @@ allow hal_fingerprint_default sysfs:file rw_file_perms;
 # Ignore all logging requests
 dontaudit hal_fingerprint_default storage_file:dir search;
 
+# Use system data for pre-P first SDK API level
+allow hal_fingerprint_default fingerprintd_data_file:file create_file_perms;
+allow hal_fingerprint_default fingerprintd_data_file:dir rw_dir_perms;
+
 allow hal_fingerprint_default servicemanager:binder { call transfer };
 allow hal_fingerprint_default hwservicemanager:binder { call transfer };
 
