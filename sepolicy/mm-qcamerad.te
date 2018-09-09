@@ -1,5 +1,3 @@
-allow mm-qcamerad { untrusted_app priv_app }:fd use;
-
 allow mm-qcamerad camera_data_file:sock_file { create unlink write };
 allow mm-qcamerad system_server:unix_stream_socket rw_socket_perms;
 
