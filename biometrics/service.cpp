@@ -20,7 +20,6 @@
 #include <binder/IServiceManager.h>
 #include <binder/PermissionCache.h>
 #include <utils/String16.h>
-#include <keystore/keystore.h> // for error codes
 
 #include <android/log.h>
 #include <hidl/HidlSupport.h>
