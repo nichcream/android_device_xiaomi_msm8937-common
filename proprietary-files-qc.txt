@@ -450,10 +450,12 @@ vendor/lib64/libkeymasterprovision.so
 vendor/lib64/libkeymasterdeviceutils.so
 
 # Listen - from bardockpro (BQ Aquarius X Pro)
-vendor/lib/hw/sound_trigger.primary.msm8953.so:vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
-vendor/lib64/hw/sound_trigger.primary.msm8953.so:vendor/lib64/hw/sound_trigger.primary.msm8937.so
+
+# Listen - from marmite (Wileyfox Swift 2)
+vendor/lib/hw/sound_trigger.primary.msm8937.so
+vendor/lib64/hw/sound_trigger.primary.msm8937.so
 
 # Media - from bardockpro (BQ Aquarius X Pro)
 lib/libmmosal.so
