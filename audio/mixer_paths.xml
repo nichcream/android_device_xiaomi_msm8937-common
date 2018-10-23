@@ -1012,7 +1012,7 @@
 
     <path name="handset-mic">
         <path name="adc1" />
-        <ctl name="DEC1 Volume" value="96" />
+        <ctl name="ADC1 Volume" value="8" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
     </path>
 
@@ -1169,12 +1169,11 @@
     <path name="handset-stereo-dmic-ef">
         <path name="adc3" />
 <!-- +bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
-        <ctl name="ADC1 Volume" value="6" />
+        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="ADC3 Volume" value="8" />
 <!-- -bug 196716,zhangjianming.wt,ADD,20160111,other can not reciving sound  -->
         <ctl name="DEC2 MUX" value="ADC1" />
         <ctl name="MI2S_TX Channels" value="Two" />
-        <ctl name="DEC1 Volume" value="96" />
-        <ctl name="DEC2 Volume" value="96" />
     </path>
 
     <path name="speaker-stereo-dmic-ef">
