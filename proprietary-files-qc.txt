@@ -763,7 +763,7 @@ vendor/lib64/vendor.qti.hardware.radio.ims@1.0_vendor.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so
 
-# Sensors - from bardockpro (BQ Aquarius X Pro)
+# Sensors - from tissot (Mi A1)
 lib/libsensor1.so
 lib/libsensor_reg.so
 lib64/libsensor1.so
