@@ -195,6 +195,21 @@ int power_hint_override(power_hint_t hint, void *data)
     static struct timespec s_previous_boost_timespec;
     struct timespec cur_boost_timespec;
     long long elapsed_time;
+    int resources_launch_main[] = {
+        SCHED_BOOST_ON_V3, 0x1,
+        MIN_FREQ_BIG_CORE_0, 0x5DC,
+        ALL_CPUS_PWR_CLPS_DIS_V3, 0x1,
+        CPUS_ONLINE_MIN_BIG, 0x4,
+        GPU_MIN_PWRLVL_BOOST, 0x1,
+    };
+
+    int resources_launch_packing[] = {
+        SCHED_PREFER_IDLE_DIS_V3, 0x1,
+        SCHED_SMALL_TASK_DIS, 0x1,
+        SCHED_IDLE_NR_RUN_DIS, 0x1,
+        SCHED_IDLE_LOAD_DIS, 0x1,
+    };
+
     int resources_interaction_fling_boost[] = {
         MIN_FREQ_BIG_CORE_0, 0x514,
         SCHED_BOOST_ON_V3, 0x1,
@@ -238,6 +253,14 @@ int power_hint_override(power_hint_t hint, void *data)
                 interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost),
                         resources_interaction_fling_boost);
             }
+            return HINT_HANDLED;
+        case POWER_HINT_LAUNCH:
+            duration = 2000;
+            interaction(duration, ARRAY_SIZE(resources_launch_main),
+                    resources_launch_main);
+            duration = 5000;
+            interaction(duration, ARRAY_SIZE(resources_launch_packing),
+                    resources_launch_packing);
             return HINT_HANDLED;
         case POWER_HINT_VIDEO_ENCODE:
             process_video_encode_hint(data);
