@@ -958,11 +958,6 @@ vendor/lib/libmmcamera_isp_color_xform_viewfinder40.so
 # Camera sensors - color_correct40 - from prada (Redmi 4)
 vendor/lib/libmmcamera_isp_color_correct40.so
 
-# Display calibration
--etc/qdcm_calib_data_hx8394F_HD720p_video_BOE.xml
--etc/qdcm_calib_data_ili9881c_HD720p_video_Tianma.xml
--etc/qdcm_calib_data_nt35521s_HD720p_video_EBBG.xml
-
 # Fingerprint
 bin/gx_fpcmd:vendor/bin/gx_fpcmd
 bin/gx_fpd:vendor/bin/gx_fpd
