@@ -1,4 +1,4 @@
-# Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012-2015, 2017-2018, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -25,10 +25,16 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+# Firmware directory Path
+# Below macro will be read by uevent and path will
+# be added to search path for firmware loading
+firmware_directories /vendor/firmware_mnt/image/
+
 # the DIAG device node is not world writable/readable.
 /dev/diag                 0660   system     oem_2901
 
 /dev/genlock              0666   system     system
+/dev/wlan                 0660   wifi       wifi
 /dev/kgsl                 0666   system     system
 /dev/kgsl-3d0             0666   system     system
 /dev/kgsl-2d0             0666   root       root
@@ -42,14 +48,24 @@
 /dev/smd6                 0660   system     system
 /dev/smd7                 0660   bluetooth  bluetooth
 /dev/ccid_bridge          0660   system     system
-/dev/ipa                  0660   system     net_admin
-/dev/wwan_ioctl           0660   system     net_admin
-/dev/ipaNatTable          0660   net_admin  net_admin
+/dev/ipa                  0660   radio      radio
+/dev/wwan_ioctl           0660   radio      radio
+/dev/ipaNatTable          0660   radio      radio
 /dev/rmnet_ctrl           0660   usb        usb
 /dev/dpl_ctrl             0660   usb        usb
+/dev/ipa_odl_ctl          0660   radio      radio
+/dev/ipa_adpl             0660   system     oem_2905
 
 #permissions for CSVT
 /dev/smd11                0660   radio      radio
+
+#permsissions for BT/FM
+/dev/smd2                 0660   bluetooth  bluetooth
+/dev/smd3                 0660   bluetooth  bluetooth
+/dev/btpower              0660   bluetooth  system
+
+#permissions for pta
+/dev/pta                  0660   system     system
 
 /dev/radio0               0640   system     system
 /dev/rfcomm0              0660   bluetooth  bluetooth
@@ -100,39 +116,58 @@
 /dev/hsicctl14            0640   radio      radio
 /dev/hsicctl15            0640   radio      radio
 /dev/hsicctl16            0640   radio      radio
-/dev/mhi_pipe_14          0640   radio      radio
-/dev/mhi_pipe_16          0640   radio      radio
-/dev/mhi_pipe_32          0640   radio      radio
+/dev/mhi_*_pipe_14        0640   radio      radio
+/dev/mhi_*_pipe_16        0640   radio      radio
+/dev/mhi_*_pipe_32        0640   radio      radio
+/dev/at_usb0              0640   radio      radio
+/dev/at_mdm0              0640   radio      radio
 /dev/video*               0660   system     camera
 /dev/media*               0660   system     camera
 /dev/v4l-subdev*          0660   system     camera
 /dev/qseecom              0660   system     drmrpc
+/dev/qce                  0660   system     drmrpc
+/dev/smcinvoke            0660   system     system
+/dev/qsee_ipc_irq_spss    0660   system     drmrpc
 /dev/seemplog             0660   system     system
 /dev/pft                  0660   system     drmrpc
+/dev/spcom                0660   system     system
+/dev/sp_kernel            0660   system     system
+/dev/sp_ssr               0660   system     system
+/dev/sp_keymaster         0660   system     system
+/dev/sec_nvm_*            0660   system     system
+/dev/cryptoapp            0660   system     system
+/dev/spdaemon_ssr         0660   system     system
 /dev/gemini0              0660   system     camera
 /dev/jpeg0                0660   system     camera
 /dev/jpeg1                0660   system     camera
 /dev/jpeg2                0660   system     camera
 /dev/jpeg3                0660   system     camera
 /dev/adsprpc-smd          0664   system     system
+/dev/adsprpc-smd-secure   0644   system     system
 /dev/system_health_monitor 0644  radio      system
 /dev/mdss_rotator         0664   system     system
+
+#QDSS
+/dev/byte-cntr            0660   system    oem_2902
+
 # wlan
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
+/dev/spidev0.0            0660   system     audio
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
-/dev/msm_vidc_reg         0660   system     camera
-/dev/msm_vidc_dec         0660   system     camera
-/dev/msm_vidc_dec_sec     0660   system     camera
-/dev/msm_vidc_enc         0660   system     camera
+/dev/msm_vidc_reg         0660   system     audio
+/dev/msm_vidc_dec         0660   system     audio
+/dev/msm_vidc_dec_sec     0660   system     audio
+/dev/msm_vidc_enc         0660   system     audio
 /dev/msm_rotator          0660   system     system
-/dev/adsprpc-smd          0664   system     system
+/dev/sdsprpc-smd          0660   system     system
 
 #permissions for audio
+/dev/wcd_dsp0_control     0660   system     audio
 /dev/wcd-dsp-glink        0660   system     audio
 /dev/audio_slimslave      0660   system     audio
 /dev/msm_qcelp            0660   system     audio
@@ -149,7 +184,8 @@
 /dev/msm_aac_in           0660   system     audio
 /dev/msm_qcelp_in         0660   system     audio
 /dev/msm_evrc_in          0660   system     audio
-/dev/msm_amrnb_in         0640   system     audio
+/dev/msm_amrnb_in         0660   system     audio
+/dev/msm_amrwb_in         0660   system     audio
 /dev/msm_a2dp_in          0660   system     audio
 /dev/msm_ac3              0660   system     audio
 /dev/msm_audio_cal        0660   system     audio
@@ -161,8 +197,6 @@
 /dev/msm_preproc_ctl      0660   system     audio
 /dev/msm_rtac             0660   system     audio
 /dev/msm_voicememo        0660   system     audio
-/dev/smd3                 0660   bluetooth  bluetooth
-/dev/smd2                 0660   bluetooth  bluetooth
 /dev/ttyHSL1              0660   system     system
 /dev/ttyHS1               0660   system     system
 /dev/mdm                  0660   system     radio
@@ -171,7 +205,6 @@
 /dev/tty_sdio_00          0660   system     system
 /dev/ttyGS0               0660   system     system
 /dev/i2c-5                0660   media       media
-/dev/voice_svc            0660   system     audio
 /dev/avtimer              0660   system     audio
 
 # DVB devices
@@ -184,6 +217,7 @@
 /dev/tsc_ci0              0660   media       media
 
 # sensors
+/dev/sensors              0660   system     system
 /sys/devices/i2c-12/12-*  pollrate_ms 0664 system system
 /sys/devices/f9925000.i2c/i2c-0/0-*                 enable         0660    input    system
 /sys/devices/f9925000.i2c/i2c-0/0-*                 poll_delay     0660    input    system
@@ -213,6 +247,15 @@
 /sys/devices/soc/78b7000.i2c/i2c-3/3-004b/input/input*    secure_touch_enable  0660   system  drmrpc
 /sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input*    secure_touch         0440   system  drmrpc
 /sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input*    secure_touch_enable  0660   system  drmrpc
+/sys/devices/platform/soc/a98000.i2c/i2c-2/2-0020/input/input*  secure_touch          0440 system drmrpc
+/sys/devices/platform/soc/a98000.i2c/i2c-2/2-0020/input/input*  secure_touch_enable   0660 system drmrpc
+/sys/devices/platform/soc/a84000.i2c/i2c-2/2-0020/input/input*  secure_touch          0440 system drmrpc
+/sys/devices/platform/soc/a84000.i2c/i2c-2/2-0020/input/input*  secure_touch_enable   0660 system drmrpc
+
+# laser sensor access
+/sys/devices/virtual/input/input*                   enable_ps_sensor 0660  system   input
+/sys/devices/virtual/input/input*                   set_delay_ms     0660  system   input
+/sys/devices/virtual/input/input*                   do_flush         0660  system   input
 
 # vm_bms
 /dev/vm_bms               0660   system     system
@@ -223,6 +266,14 @@
 /dev/wcnss_ctrl           0660   system     system
 /sys/devices/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan0/queues/rx-* rps_cpus 0660 system system
 /sys/devices/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/p2p0/queues/rx-* rps_cpus 0660 system system
+
+# wigig
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/fst_link_loss 0660 wifi wifi
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/thermal_throttling 0660 system system
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/snr_thresh 0660 wifi wifi
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/queues/rx-0/rps_cpus 0660 system system
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/gro_flush_timeout 0660 system system
+/sys/devices/virtual/net/bond0 queues/rx-0/rps_cpus 0660 system system
 
 #nfc permissions
 /dev/nfc-nci              0660    nfc         nfc
@@ -255,6 +306,37 @@
 /dev/block/platform/soc/7464900.sdhci/by-name/frp       0600   system     system
 /dev/block/platform/soc/624000.ufshc/by-name/frp        0600   system     system
 /dev/block/platform/soc/1da4000.ufshc/by-name/frp       0600   system     system
+/dev/block/platform/soc/c0c4000.sdhci/by-name/frp       0600   system     system
+/dev/block/platform/soc/1d84000.ufshc/by-name/frp       0600   system     system
+/dev/block/platform/soc/7c4000.sdhci/by-name/frp        0600   system     system
+
+# This is temporary while using SD card for initial bring-up
+/dev/block/platform/soc/8804000.sdhci/by-name/frp       0600   system     system
+
+# Kmsg device
+/dev/kmsg                                               0620   root       system
+
+# LED class devices
+/sys/class/leds/red      delay_on     0640    system    system
+/sys/class/leds/red      delay_off    0640    system    system
+/sys/class/leds/red      breath       0640    system    system
+/sys/class/leds/green    delay_on     0640    system    system
+/sys/class/leds/green    delay_off    0640    system    system
+/sys/class/leds/green    breath       0640    system    system
+/sys/class/leds/blue     delay_on     0640    system    system
+/sys/class/leds/blue     delay_off    0640    system    system
+/sys/class/leds/blue     breath       0640    system    system
+
+# NPU device
+/dev/msm_npu             0644   system     system
+
+# USB role switch
+/sys/class/dual_role_usb/*	data_role	0660	system	system
+/sys/class/dual_role_usb/*	power_role	0660	system	system
+/sys/class/dual_role_usb/*	mode		0660	system	system
+
+#Memory Offline
+/sys/devices/system/memory/memory* state    0660 system system
 
 # fpc Fingerprint
 /sys/devices/soc/soc:fpc1020        hw_reset            0660   system     system
@@ -263,6 +345,3 @@
 /sys/devices/soc/soc:fpc1020        spi_prepare         0660   system     system
 /sys/devices/soc/soc:fpc1020        compatible_all      0660   system     system
 /sys/devices/soc/soc:fpc1020        fingerdown_wait     0660   system     system
-
-# Kmsg device
-/dev/kmsg                 0620   root       system

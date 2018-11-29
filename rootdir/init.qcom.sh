@@ -1,5 +1,6 @@
 #! /vendor/bin/sh
-# Copyright (c) 2009-2015, The Linux Foundation. All rights reserved.
+
+# Copyright (c) 2009-2016, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -27,6 +28,7 @@
 #
 
 target=`getprop ro.board.platform`
+low_ram=`getprop ro.config.low_ram`
 if [ -f /sys/devices/soc0/soc_id ]; then
     platformid=`cat /sys/devices/soc0/soc_id`
 else
@@ -80,18 +82,32 @@ start_vm_bms()
 
 start_msm_irqbalance_8939()
 {
-	if [ -f /system/vendor/bin/msm_irqbalance ]; then
+	if [ -f /vendor/bin/msm_irqbalance ]; then
 		case "$platformid" in
-		    "239" | "293" | "294" | "295" | "304")
+		    "239" | "293" | "294" | "295" | "304" | "313" |"353")
 			start vendor.msm_irqbalance;;
+		    "349" | "350" )
+			start vendor.msm_irqbal_lb;;
 		esac
 	fi
+}
+
+start_msm_irqbalance_msmnile()
+{
+         if [ -f /vendor/bin/msm_irqbalance ]; then
+                start vendor.msm_irqbalance
+         fi
 }
 
 start_msm_irqbalance()
 {
 	if [ -f /vendor/bin/msm_irqbalance ]; then
-		start vendor.msm_irqbalance
+		case "$platformid" in
+		    "317" | "324" | "325" | "326" | "345" | "346")
+			start vendor.msm_irqbalance;;
+		    "318" | "327" | "385")
+			start vendor.msm_irqbl_sdm630;;
+		esac
 	fi
 }
 
@@ -160,6 +176,39 @@ case "$target" in
         esac
         start_charger_monitor
         ;;
+    "sdm660")
+        if [ -f /sys/devices/soc0/soc_id ]; then
+             soc_id=`cat /sys/devices/soc0/soc_id`
+        else
+             soc_id=`cat /sys/devices/system/soc/soc0/id`
+        fi
+
+        if [ -f /sys/devices/soc0/hw_platform ]; then
+             hw_platform=`cat /sys/devices/soc0/hw_platform`
+        else
+             hw_platform=`cat /sys/devices/system/soc/soc0/hw_platform`
+        fi
+
+        case "$soc_id" in
+             "317" | "324" | "325" | "326" | "318" | "327" )
+                  case "$hw_platform" in
+                       "Surf")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "MTP")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "RCM")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "QRD")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                  esac
+                  ;;
+       esac
+        start_msm_irqbalance
+        ;;
     "apq8084")
         platformvalue=`cat /sys/devices/soc0/hw_platform`
         case "$platformvalue" in
@@ -211,7 +260,7 @@ case "$target" in
                   ;;
         esac
         ;;
-    "msm8994" | "msm8992")
+    "msm8994" | "msm8992" | "msm8998" | "apq8098_latv" | "sdm845" | "sdm710" | "qcs605" | "talos")
         start_msm_irqbalance
         ;;
     "msm8996")
@@ -238,6 +287,9 @@ case "$target" in
     "msm8909")
         start_vm_bms
         ;;
+    "msmnile")
+        start_msm_irqbalance_msmnile
+        ;;
     "msm8937")
         start_msm_irqbalance_8939
         if [ -f /sys/devices/soc0/soc_id ]; then
@@ -251,21 +303,28 @@ case "$target" in
         else
              hw_platform=`cat /sys/devices/system/soc/soc0/hw_platform`
         fi
-        case "$soc_id" in
-             "294" | "295" | "303" | "307" | "308" | "309")
-                  case "$hw_platform" in
-                       "Surf")
-     #                               setprop qemu.hw.mainkeys 0
+        # ignored for land.
+        #if [ "$low_ram" != "true" ]; then
+        if false; then
+             case "$soc_id" in
+                  "294" | "295" | "303" | "307" | "308" | "309" | "313" | "320" | "353" | "354" | "363" | "364")
+                       case "$hw_platform" in
+                            "Surf")
+                                    setprop qemu.hw.mainkeys 0
                                     ;;
-                       "MTP")
-     #                               setprop qemu.hw.mainkeys 0
+                            "MTP")
+                                    setprop qemu.hw.mainkeys 0
                                     ;;
-                       "RCM")
-     #                               setprop qemu.hw.mainkeys 0
+                            "RCM")
+                                    setprop qemu.hw.mainkeys 0
                                     ;;
-                  esac
-                  ;;
-       esac
+                            "QRD")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       esac
+                       ;;
+             esac
+        fi
         ;;
     "msm8953")
 	start_msm_irqbalance_8939
@@ -281,7 +340,7 @@ case "$target" in
              hw_platform=`cat /sys/devices/system/soc/soc0/hw_platform`
         fi
         case "$soc_id" in
-             "293" | "304" )
+             "293" | "304" | "338" | "351" | "349" | "350" )
                   case "$hw_platform" in
                        "Surf")
                                     setprop qemu.hw.mainkeys 0
@@ -292,54 +351,80 @@ case "$target" in
                        "RCM")
                                     setprop qemu.hw.mainkeys 0
                                     ;;
+                       "QRD")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                  esac
+                  ;;
+       esac
+        ;;
+    "sdm710")
+        if [ -f /sys/devices/soc0/soc_id ]; then
+            soc_id=`cat /sys/devices/soc0/soc_id`
+        else
+            soc_id=`cat /sys/devices/system/soc/soc0/id`
+        fi
+
+        if [ -f /sys/devices/soc0/hw_platform ]; then
+             hw_platform=`cat /sys/devices/soc0/hw_platform`
+        else
+             hw_platform=`cat /sys/devices/system/soc/soc0/hw_platform`
+        fi
+        case "$soc_id" in
+             "336" | "337" | "347" | "360" )
+                  case "$hw_platform" in
+                       "Surf")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "MTP")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "RCM")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "QRD")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
                   esac
                   ;;
        esac
         ;;
 esac
 
-bootmode=`getprop ro.bootmode`
-emmc_boot=`getprop ro.boot.emmc`
-case "$emmc_boot"
-    in "true")
-        if [ "$bootmode" != "charger" ]; then # start rmt_storage and rfs_access
-            start rmt_storage
-            start rfs_access
-        fi
-    ;;
-esac
-
 #
 # Make modem config folder and copy firmware config to that folder for RIL
 #
-if [ -f /data/vendor/radio/ver_info.txt ]; then
-    prev_version_info=`cat /data/vendor/radio/ver_info.txt`
+if [ -f /data/vendor/modem_config/ver_info.txt ]; then
+    prev_version_info=`cat /data/vendor/modem_config/ver_info.txt`
 else
     prev_version_info=""
 fi
 
-cur_version_info=`cat /firmware/verinfo/ver_info.txt`
-if [ ! -f /firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
-    rm -rf /data/vendor/radio/modem_config
-    mkdir /data/vendor/radio/modem_config
-    chmod 770 /data/vendor/radio/modem_config
-    cp -r /firmware/image/modem_pr/mcfg/configs/* /data/vendor/radio/modem_config
-    chown -hR radio.radio /data/vendor/radio/modem_config
-    cp /firmware/verinfo/ver_info.txt /data/vendor/radio/ver_info.txt
-    chown radio.radio /data/vendor/radio/ver_info.txt
+cur_version_info=`cat /vendor/firmware_mnt/verinfo/ver_info.txt`
+if [ ! -f /vendor/firmware_mnt/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
+    # add W for group recursively before delete
+    chmod g+w -R /data/vendor/modem_config/*
+    rm -rf /data/vendor/modem_config/*
+    # preserve the read only mode for all subdir and files
+    cp --preserve=m -dr /vendor/firmware_mnt/image/modem_pr/mcfg/configs/* /data/vendor/modem_config
+    cp --preserve=m -d /vendor/firmware_mnt/verinfo/ver_info.txt /data/vendor/modem_config/
+    cp --preserve=m -d /vendor/firmware_mnt/image/modem_pr/mbn_ota.txt /data/vendor/modem_config/
+    # the group must be root, otherwise this script could not add "W" for group recursively
+    chown -hR radio.root /data/vendor/modem_config/*
 fi
-cp /firmware/image/modem_pr/mbn_ota.txt /data/vendor/radio/modem_config
-chown radio.radio /data/vendor/radio/modem_config/mbn_ota.txt
-cp /firmware/image/modem_pr/mbn_oin.txt /data/vendor/radio/modem_config
-chown radio.radio /data/vendor/radio/modem_config/mbn_oin.txt
-cp /firmware/image/modem_pr/mbn_ogl.txt /data/vendor/radio/modem_config
-chown radio.radio /data/vendor/radio/modem_config/mbn_ogl.txt
-echo 1 > /data/vendor/radio/copy_complete
+chmod g-w /data/vendor/modem_config
+setprop ro.vendor.ril.mbn_copy_completed 1
 
-
-# Create /persist/alarm if necessary
-if [ ! -d /persist/alarm ]; then
-    mkdir /persist/alarm
-    chown system:system /persist/alarm
-    restorecon /persist/alarm
-fi
+#check build variant for printk logging
+#current default minimum boot-time-default
+buildvariant=`getprop ro.build.type`
+case "$buildvariant" in
+    "userdebug" | "eng")
+        #set default loglevel to KERN_INFO
+        echo "6 6 1 7" > /proc/sys/kernel/printk
+        ;;
+    *)
+        #set default loglevel to KERN_WARNING
+        echo "4 4 1 4" > /proc/sys/kernel/printk
+        ;;
+esac
