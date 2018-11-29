@@ -296,10 +296,18 @@
          <path name="deep-buffer-playback" />
     </path>
 
-   <path name="deep-buffer-playback speaker-and-bt-sco-wb">
+    <path name="deep-buffer-playback speaker-and-bt-sco-wb">
         <path name="deep-buffer-playback bt-sco-wb" />
         <path name="deep-buffer-playback" />
-   </path>
+    </path>
+
+    <path name="deep-buffer-playback wsa-speaker-and-bt-sco">
+        <path name="deep-buffer-playback speaker-and-bt-sco" />
+    </path>
+
+    <path name="deep-buffer-playback wsa-speaker-and-bt-sco-wb">
+        <path name="deep-buffer-playback speaker-and-bt-sco-wb" />
+    </path>
 
     <path name="deep-buffer-playback afe-proxy">
         <ctl name="AFE_PCM_RX Audio Mixer MultiMedia1" value="1" />
@@ -346,6 +354,14 @@
          <path name="low-latency-playback" />
     </path>
 
+    <path name="low-latency-playback wsa-speaker-and-bt-sco">
+        <path name="low-latency-playback speaker-and-bt-sco" />
+    </path>
+
+    <path name="low-latency-playback wsa-speaker-and-bt-sco-wb">
+        <path name="low-latency-playback speaker-and-bt-sco-wb" />
+    </path>
+
     <path name="low-latency-playback afe-proxy">
         <ctl name="AFE_PCM_RX Audio Mixer MultiMedia5" value="1" />
     </path>
@@ -390,6 +406,14 @@
         <path name="compress-offload-playback" />
     </path>
 
+    <path name="compress-offload-playback wsa-speaker-and-bt-sco">
+        <path name="compress-offload-playback speaker-and-bt-sco" />
+    </path>
+
+    <path name="compress-offload-playback wsa-speaker-and-bt-sco-wb">
+        <path name="compress-offload-playback speaker-and-bt-sco-wb" />
+    </path>
+
     <path name="compress-offload-playback afe-proxy">
         <ctl name="AFE_PCM_RX Audio Mixer MultiMedia4" value="1" />
     </path>
@@ -427,6 +451,14 @@
         <path name="compress-offload-playback2" />
     </path>
 
+    <path name="compress-offload-playback2 wsa-speaker-and-bt-sco">
+        <path name="compress-offload-playback2 speaker-and-bt-sco" />
+    </path>
+
+    <path name="compress-offload-playback2 wsa-speaker-and-bt-sco-wb">
+        <path name="compress-offload-playback2 speaker-and-bt-sco-wb" />
+    </path>
+
     <path name="compress-offload-playback2 afe-proxy">
         <ctl name="AFE_PCM_RX Audio Mixer MultiMedia7" value="1" />
     </path>
@@ -459,6 +491,14 @@
         <path name="compress-offload-playback3" />
     </path>
 
+    <path name="compress-offload-playback3 wsa-speaker-and-bt-sco">
+        <path name="compress-offload-playback3 speaker-and-bt-sco" />
+    </path>
+
+    <path name="compress-offload-playback3 wsa-speaker-and-bt-sco-wb">
+        <path name="compress-offload-playback3 speaker-and-bt-sco-wb" />
+    </path>
+
     <path name="compress-offload-playback4">
         <ctl name="PRI_MI2S_RX Audio Mixer MultiMedia11" value="1" />
     </path>
@@ -481,6 +521,14 @@
     <path name="compress-offload-playback4 speaker-and-bt-sco-wb">
         <path name="compress-offload-playback4 bt-sco-wb" />
         <path name="compress-offload-playback4" />
+    </path>
+
+    <path name="compress-offload-playback4 wsa-speaker-and-bt-sco">
+        <path name="compress-offload-playback4 speaker-and-bt-sco" />
+    </path>
+
+    <path name="compress-offload-playback4 wsa-speaker-and-bt-sco-wb">
+        <path name="compress-offload-playback4 speaker-and-bt-sco-wb" />
     </path>
 
     <path name="compress-offload-playback5">
@@ -507,6 +555,14 @@
         <path name="compress-offload-playback5" />
     </path>
 
+    <path name="compress-offload-playback5 wsa-speaker-and-bt-sco">
+        <path name="compress-offload-playback5 speaker-and-bt-sco" />
+    </path>
+
+    <path name="compress-offload-playback5 wsa-speaker-and-bt-sco-wb">
+        <path name="compress-offload-playback5 speaker-and-bt-sco-wb" />
+    </path>
+
     <path name="compress-offload-playback6">
         <ctl name="PRI_MI2S_RX Audio Mixer MultiMedia13" value="1" />
     </path>
@@ -531,6 +587,14 @@
         <path name="compress-offload-playback6" />
     </path>
 
+    <path name="compress-offload-playback6 wsa-speaker-and-bt-sco">
+        <path name="compress-offload-playback6 speaker-and-bt-sco" />
+    </path>
+
+    <path name="compress-offload-playback6 wsa-speaker-and-bt-sco-wb">
+        <path name="compress-offload-playback6 speaker-and-bt-sco-wb" />
+    </path>
+
     <path name="compress-offload-playback7">
         <ctl name="PRI_MI2S_RX Audio Mixer MultiMedia14" value="1" />
     </path>
@@ -553,6 +617,14 @@
     <path name="compress-offload-playback7 speaker-and-bt-sco-wb">
         <path name="compress-offload-playback7 bt-sco-wb" />
         <path name="compress-offload-playback7" />
+    </path>
+
+    <path name="compress-offload-playback7 wsa-speaker-and-bt-sco">
+        <path name="compress-offload-playback7 speaker-and-bt-sco" />
+    </path>
+
+    <path name="compress-offload-playback7 wsa-speaker-and-bt-sco-wb">
+        <path name="compress-offload-playback7 speaker-and-bt-sco-wb" />
     </path>
 
     <path name="audio-record">
