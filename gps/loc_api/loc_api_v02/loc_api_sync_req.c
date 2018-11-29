@@ -36,7 +36,7 @@
 #include <loc_cfg.h>
 #include "loc_api_v02_client.h"
 #include "loc_api_sync_req.h"
-#include "platform_lib_macros.h"
+#include <loc_pla.h>
 
 /* Logging */
 // Uncomment to log verbose logs
@@ -121,7 +121,11 @@ void loc_sync_req_init()
       loc_sync_req_data_s_type *slot = &loc_sync_array.slots[i];
 
       pthread_mutex_init(&slot->sync_req_lock, NULL);
-      pthread_cond_init(&slot->ind_arrived_cond, NULL);
+      pthread_condattr_t condAttr;
+      pthread_condattr_init(&condAttr);
+      pthread_condattr_setclock(&condAttr, CLOCK_MONOTONIC);
+      pthread_cond_init(&slot->ind_arrived_cond, &condAttr);
+      pthread_condattr_destroy(&condAttr);
 
       slot->client_handle = LOC_CLIENT_INVALID_HANDLE_VALUE;
       slot->ind_is_selected = false;       /* is ind selected? */
@@ -416,7 +420,6 @@ static int loc_sync_wait_for_ind(
    int ret_val = 0;  /* the return value of this function: 0 = no error */
    int rc;          /* return code from pthread calls */
 
-   struct timeval present_time;
    struct timespec expire_time;
 
    pthread_mutex_lock(&slot->sync_req_lock);
@@ -438,9 +441,7 @@ static int loc_sync_wait_for_ind(
       }
 
       /* Calculate absolute expire time */
-      gettimeofday(&present_time, NULL);
-      expire_time.tv_sec  = present_time.tv_sec;
-      expire_time.tv_nsec = present_time.tv_usec * 1000;
+      clock_gettime(CLOCK_MONOTONIC, &expire_time);
       expire_time.tv_sec += timeout_seconds;
 
       /* Take new wait request */

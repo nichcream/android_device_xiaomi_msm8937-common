@@ -1,11 +1,11 @@
-# configure.ac -- Autoconf script for gps loc-stub
+# configure.ac -- Autoconf script for gps loc-api-v02
 #
 # Process this file with autoconf to produce a configure script
 
 # Requires autoconf tool later than 2.61
 AC_PREREQ(2.61)
-# Initialize the gps loc-stub package version 1.0.0
-AC_INIT([loc-stub],1.0.0)
+# Initialize the gps loc-api-v02 package version 1.0.0
+AC_INIT([loc-api-v02],1.0.0)
 # Does not strictly follow GNU Coding standards
 AM_INIT_AUTOMAKE([foreign])
 # Disables auto rebuilding of configure, Makefile.ins
@@ -29,15 +29,43 @@ AC_PROG_MAKE_SET
 PKG_PROG_PKG_CONFIG
 
 # Checks for libraries.
-AC_ARG_WITH([hardware_include],
-                  AC_HELP_STRING([--with-hardware-include=@<:@dir@:>@],
-                                 [Specify the location of the hardware headers]),
-                                 [hardware_incdir=$withval],
-                                 with_hardware_include=no)
+PKG_CHECK_MODULES([GPSUTILS], [gps-utils])
+AC_SUBST([GPSUTILS_CFLAGS])
+AC_SUBST([GPSUTILS_LIBS])
 
-if test "x$with_hardware_include" != "xno"; then
-       CPPFLAGS="${CPPFLAGS} -I${hardware_incdir}"
+PKG_CHECK_MODULES([LOC_CORE], [loc-core])
+AC_SUBST([LOC_CORE_CFLAGS])
+AC_SUBST([LOC_CORE_LIBS])
+
+PKG_CHECK_MODULES([LOCDS], [loc-ds])
+AC_SUBST([LOCDS_CFLAGS])
+AC_SUBST([LOCDS_LIBS])
+
+PKG_CHECK_MODULES([QMIFW], [qmi-framework])
+AC_SUBST([QMIFW_CFLAGS])
+AC_SUBST([QMIFW_LIBS])
+
+AC_ARG_WITH([core_includes],
+      AC_HELP_STRING([--with-core-includes=@<:@dir@:>@],
+        [Specify the location of the core headers]),
+      [core_incdir=$withval],
+      with_core_includes=no)
+
+if test "x${with_core_includes}" != "xno"; then
+    CPPFLAGS="${CPPFLAGS} -I${core_incdir}"
 fi
+
+AC_ARG_WITH([locpla_includes],
+      AC_HELP_STRING([--with-locpla-includes=@<:@dir@:>@],
+        [Specify the path to locpla-includes in loc-pla_git.bb]),
+      [locpla_incdir=$withval],
+      with_locpla_includes=no)
+
+if test "x${with_locpla_includes}" != "xno"; then
+   AC_SUBST(LOCPLA_CFLAGS, "-I${locpla_incdir}")
+fi
+
+AC_SUBST([CPPFLAGS])
 
 AC_ARG_WITH([glib],
       AC_HELP_STRING([--with-glib],
@@ -60,8 +88,7 @@ AM_CONDITIONAL(USE_GLIB, test "x${with_glib}" = "xyes")
 
 AC_CONFIG_FILES([ \
         Makefile \
-        src/Makefile \
-        loc-stub.pc
+        loc-api-v02.pc
         ])
 
 AC_OUTPUT

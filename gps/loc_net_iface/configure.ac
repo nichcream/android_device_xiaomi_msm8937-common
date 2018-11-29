@@ -29,13 +29,13 @@ AC_PROG_MAKE_SET
 PKG_PROG_PKG_CONFIG
 
 # Checks for libraries.
-PKG_CHECK_MODULES([LOCPLA], [loc-pla])
-AC_SUBST([LOCPLA_CFLAGS])
-AC_SUBST([LOCPLA_LIBS])
-
 PKG_CHECK_MODULES([GPSUTILS], [gps-utils])
 AC_SUBST([GPSUTILS_CFLAGS])
 AC_SUBST([GPSUTILS_LIBS])
+
+PKG_CHECK_MODULES([LOCCORE], [loc-core])
+AC_SUBST([LOCCORE_CFLAGS])
+AC_SUBST([LOCCORE_LIBS])
 
 PKG_CHECK_MODULES([LOCHAL], [loc-hal])
 AC_SUBST([LOCHAL_CFLAGS])
@@ -56,6 +56,30 @@ AC_SUBST([QMI_LIBS])
 PKG_CHECK_MODULES([DSUTILS], [dsutils])
 AC_SUBST([DSUTILS_CFLAGS])
 AC_SUBST([DSUTILS_LIBS])
+
+PKG_CHECK_MODULES([DATAITEMS], [data-items])
+AC_SUBST([DATAITEMS_CFLAGS])
+AC_SUBST([DATAITEMS_LIBS])
+
+AC_ARG_WITH([core_includes],
+      AC_HELP_STRING([--with-core-includes=@<:@dir@:>@],
+         [Specify the location of the core headers]),
+      [core_incdir=$withval],
+      with_core_includes=no)
+
+if test "x$with_core_includes" != "xno"; then
+   CPPFLAGS="${CPPFLAGS} -I${core_incdir}"
+fi
+
+AC_ARG_WITH([locpla_includes],
+      AC_HELP_STRING([--with-locpla-includes=@<:@dir@:>@],
+         [specify the path to locpla-includes in loc-pla_git.bb]),
+      [locpla_incdir=$withval],
+      with_locpla_includes=no)
+
+if test "x$with_locpla_includes" != "xno"; then
+   AC_SUBST(LOCPLA_CFLAGS, "-I${locpla_incdir}")
+fi
 
 AC_ARG_WITH([glib],
       AC_HELP_STRING([--with-glib],
