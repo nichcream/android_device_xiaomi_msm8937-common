@@ -112,11 +112,14 @@ private:
 
 	int resetTetherStats(const char *upstream_name);
 
+#ifdef FEATURE_IPACM_RESTART
+	int push_iface_up(const char *if_name, bool upstream);
+#endif
+
 	static const char *DEVICE_NAME;
 
 	/* cache the add_downstream events if netdev is not ready */
 	framework_event_cache event_cache[MAX_EVENT_CACHE];
-	bool is_cache;
 
 	/* latest update cache entry */
 	int latest_cache_index;

@@ -135,6 +135,7 @@ IPACM_Wlan::~IPACM_Wlan()
 {
 	IPACM_EvtDispatcher::deregistr(this);
 	IPACM_IfaceManager::deregistr(this);
+	IPACM_Wlan::num_wlan_ap_iface--;
 	return;
 }
 
@@ -201,11 +202,24 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 		ipacm_event_data_fid *data = (ipacm_event_data_fid *)param;
 		if(data->if_index == ipa_if_num)
 		{
-			IPACM_Wlan::num_wlan_ap_iface--;
 			IPACMDBG_H("Now the number of wlan AP iface is %d\n", IPACM_Wlan::num_wlan_ap_iface);
 
 			IPACMDBG_H("Received IPA_LAN_DELETE_SELF event.\n");
 			IPACMDBG_H("ipa_WLAN (%s):ipa_index (%d) instance close \n", IPACM_Iface::ipacmcfg->iface_table[ipa_if_num].iface_name, ipa_if_num);
+#ifdef FEATURE_ETH_BRIDGE_LE
+			if(rx_prop != NULL)
+			{
+				free(rx_prop);
+			}
+			if(tx_prop != NULL)
+			{
+				free(tx_prop);
+			}
+			if(iface_query != NULL)
+			{
+				free(iface_query);
+			}
+#endif
 			delete this;
 		}
 		break;
@@ -258,6 +272,10 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 						IPACMDBG_H("IPv4 address:0x%x, IPv4 address mask:0x%x\n",
 										 info->ipv4_addr, info->addr_mask);
 						IPACM_EvtDispatcher::PostEvt(&evt_data);
+#ifdef FEATURE_IPACM_RESTART
+						/* Query wlan-clients */
+						ipa_query_wlan_client();
+#endif
 					}
 
 					if(handle_addr_evt(data) == IPACM_FAILURE)
@@ -549,7 +567,7 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 				memcpy(&prefix[data->prefix.iptype], &data->prefix,
 					sizeof(prefix[data->prefix.iptype]));
 
-				if(is_upstream_set[data->prefix.iptype] == true)
+				if (is_upstream_set[data->prefix.iptype] == true)
 				{
 					IPACMDBG_H("Upstream was set before, adding modem UL rules.\n");
 					if(ip_type == IPA_IP_MAX || ip_type == data->prefix.iptype)
@@ -1478,9 +1496,12 @@ int IPACM_Wlan::handle_wlan_client_route_rule(uint8_t *mac_addr, ipa_ip_type ipt
 				rt_rule_entry->rule.hdr_hdl = get_client_memptr(wlan_client, wlan_index)->hdr_hdl_v4;
 				rt_rule_entry->rule.attrib.u.v4.dst_addr = get_client_memptr(wlan_client, wlan_index)->v4_addr;
 				rt_rule_entry->rule.attrib.u.v4.dst_addr_mask = 0xFFFFFFFF;
-#ifdef FEATURE_IPA_V3
-				rt_rule_entry->rule.hashable = false;
-#endif
+
+				if(IPACM_Iface::ipacmcfg->GetIPAVer() >= IPA_HW_v4_0)
+				{
+					rt_rule_entry->rule.hashable = true;
+				}
+
 				if (false == m_routing.AddRoutingRule(rt_rule))
 				{
 					IPACMERR("Routing rule addition failed!\n");
@@ -1830,6 +1851,15 @@ int IPACM_Wlan::handle_down_evt()
 		IPACM_Iface::ipacmcfg->decreaseFltRuleCount(rx_prop->rx[0].src_pipe, IPA_IP_v4, num_private_subnet_fl_rule);
 #endif
 		IPACMDBG_H("Deleted private subnet v4 filter rules successfully.\n");
+
+#ifdef FEATURE_L2TP
+		if(m_filtering.DeleteFilteringHdls(&tcp_syn_flt_rule_hdl[IPA_IP_v4], IPA_IP_v4, 1) == false)
+		{
+			IPACMERR("Error deleting tcp syn flt rule, aborting...\n");
+			res = IPACM_FAILURE;
+			goto fail;
+		}
+#endif
 	}
 
 	/* Delete v6 filtering rules */
@@ -1855,6 +1885,14 @@ int IPACM_Wlan::handle_down_evt()
 			IPACM_Iface::ipacmcfg->decreaseFltRuleCount(rx_prop->rx[0].src_pipe, IPA_IP_v6, IPV6_DEFAULT_FILTERTING_RULES);
 			IPACMDBG_H("Deleted default v6 filter rules successfully.\n");
 		}
+#ifdef FEATURE_L2TP
+		if(m_filtering.DeleteFilteringHdls(&tcp_syn_flt_rule_hdl[IPA_IP_v6], IPA_IP_v6, 1) == false)
+		{
+			IPACMERR("Error deleting tcp syn flt rule, aborting...\n");
+			res = IPACM_FAILURE;
+			goto fail;
+		}
+#endif
 	}
 	IPACMDBG_H("finished delete filtering rules\n ");
 
@@ -1967,13 +2005,18 @@ fail:
 	}
 	IPACMDBG_H("finished delete software-routing filtering rules\n ");
 
-	/* Delete corresponding ipa_rm_resource_name of RX-endpoint after delete all IPV4V6 FT-rule */
 	if (rx_prop != NULL)
 	{
-		IPACMDBG_H("dev %s add producer dependency\n", dev_name);
-		IPACMDBG_H("depend Got pipe %d rm index : %d \n", rx_prop->rx[0].src_pipe, IPACM_Iface::ipacmcfg->ipa_client_rm_map_tbl[rx_prop->rx[0].src_pipe]);
-		IPACM_Iface::ipacmcfg->DelRmDepend(IPACM_Iface::ipacmcfg->ipa_client_rm_map_tbl[rx_prop->rx[0].src_pipe]);
+		if(IPACM_Iface::ipacmcfg->GetIPAVer() >= IPA_HW_None && IPACM_Iface::ipacmcfg->GetIPAVer() < IPA_HW_v4_0)
+		{
+			/* Delete corresponding ipa_rm_resource_name of RX-endpoint after delete all IPV4V6 FT-rule */
+			IPACMDBG_H("dev %s add producer dependency\n", dev_name);
+			IPACMDBG_H("depend Got pipe %d rm index : %d \n", rx_prop->rx[0].src_pipe, IPACM_Iface::ipacmcfg->ipa_client_rm_map_tbl[rx_prop->rx[0].src_pipe]);
+			IPACM_Iface::ipacmcfg->DelRmDepend(IPACM_Iface::ipacmcfg->ipa_client_rm_map_tbl[rx_prop->rx[0].src_pipe]);
+		}
+#ifndef FEATURE_ETH_BRIDGE_LE
 		free(rx_prop);
+#endif
 	}
 
 	for (i = 0; i < num_wifi_client; i++)
@@ -1987,6 +2030,7 @@ fail:
 	{
 		free(wlan_client);
 	}
+#ifndef FEATURE_ETH_BRIDGE_LE
 	if (tx_prop != NULL)
 	{
 		free(tx_prop);
@@ -1996,6 +2040,7 @@ fail:
 	{
 		free(iface_query);
 	}
+#endif
 
 	is_active = false;
 	post_del_self_evt();
@@ -2241,6 +2286,28 @@ void IPACM_Wlan::handle_SCC_MCC_switch(ipa_ip_type iptype)
 	}
 	return;
 }
+
+#ifdef FEATURE_IPACM_RESTART
+int IPACM_Wlan::ipa_query_wlan_client()
+{
+	int fd = -1;
+
+	if ((fd = open(IPA_DEVICE_NAME, O_RDWR)) < 0) {
+		IPACMERR("Failed opening %s.\n", IPA_DEVICE_NAME);
+		return IPACM_FAILURE;
+	}
+
+	if (ioctl(fd, IPA_IOC_QUERY_WLAN_CLIENT) < 0) {
+		IPACMERR("IOCTL IPA_IOC_QUERY_WLAN_CLIENT call failed: %s \n", strerror(errno));
+		close(fd);
+		return IPACM_FAILURE;
+	}
+
+	IPACMDBG_H("send IPA_IOC_QUERY_WLAN_CLIENT \n");
+	close(fd);
+	return IPACM_SUCCESS;
+}
+#endif
 
 void IPACM_Wlan::eth_bridge_handle_wlan_mode_switch()
 {

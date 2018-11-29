@@ -646,26 +646,29 @@ int IPACM_Iface::init_fl_rule(ipa_ip_type iptype)
 	}
 	else
 	{
-		if(rx_prop != NULL)
+		if(IPACM_Iface::ipacmcfg->GetIPAVer() >= IPA_HW_None && IPACM_Iface::ipacmcfg->GetIPAVer() < IPA_HW_v4_0)
 		{
-			IPACMDBG_H("dev %s add producer dependency\n", dev_name);
-			IPACMDBG_H("depend Got pipe %d rm index : %d \n", rx_prop->rx[0].src_pipe, IPACM_Iface::ipacmcfg->ipa_client_rm_map_tbl[rx_prop->rx[0].src_pipe]);
-			IPACM_Iface::ipacmcfg->AddRmDepend(IPACM_Iface::ipacmcfg->ipa_client_rm_map_tbl[rx_prop->rx[0].src_pipe],false);
-		}
-		else
-		{
-			/* only wlan may take software-path, not register Rx-property*/
-			if(strcmp(dev_name,dev_wlan0) == 0 || strcmp(dev_name,dev_wlan1) == 0)
+			if(rx_prop != NULL)
 			{
 				IPACMDBG_H("dev %s add producer dependency\n", dev_name);
-				IPACMDBG_H("depend Got piperm index : %d \n", IPA_RM_RESOURCE_HSIC_PROD);
-				IPACM_Iface::ipacmcfg->AddRmDepend(IPA_RM_RESOURCE_HSIC_PROD,true);
+				IPACMDBG_H("depend Got pipe %d rm index : %d \n", rx_prop->rx[0].src_pipe, IPACM_Iface::ipacmcfg->ipa_client_rm_map_tbl[rx_prop->rx[0].src_pipe]);
+				IPACM_Iface::ipacmcfg->AddRmDepend(IPACM_Iface::ipacmcfg->ipa_client_rm_map_tbl[rx_prop->rx[0].src_pipe],false);
 			}
-			if(strcmp(dev_name,dev_ecm0) == 0)
+			else
 			{
-				IPACMDBG_H("dev %s add producer dependency\n", dev_name);
-				IPACMDBG_H("depend Got piperm index : %d \n", IPA_RM_RESOURCE_USB_PROD);
-				IPACM_Iface::ipacmcfg->AddRmDepend(IPA_RM_RESOURCE_USB_PROD,true);
+				/* only wlan may take software-path, not register Rx-property*/
+				if(strcmp(dev_name,dev_wlan0) == 0 || strcmp(dev_name,dev_wlan1) == 0)
+				{
+					IPACMDBG_H("dev %s add producer dependency\n", dev_name);
+					IPACMDBG_H("depend Got piperm index : %d \n", IPA_RM_RESOURCE_HSIC_PROD);
+					IPACM_Iface::ipacmcfg->AddRmDepend(IPA_RM_RESOURCE_HSIC_PROD,true);
+				}
+				if(strcmp(dev_name,dev_ecm0) == 0)
+				{
+					IPACMDBG_H("dev %s add producer dependency\n", dev_name);
+					IPACMDBG_H("depend Got piperm index : %d \n", IPA_RM_RESOURCE_USB_PROD);
+					IPACM_Iface::ipacmcfg->AddRmDepend(IPA_RM_RESOURCE_USB_PROD,true);
+				}
 			}
 		}
 	}
@@ -851,29 +854,13 @@ int IPACM_Iface::init_fl_rule(ipa_ip_type iptype)
 
 #ifdef FEATURE_IPA_ANDROID
 		/* Add the ipv6 tcp fragment filtering rule. */
-		memset(&flt_rule_entry, 0, sizeof(struct ipa_flt_rule_add));
-		flt_rule_entry.at_rear = true;
-		flt_rule_entry.flt_rule_hdl = -1;
-		flt_rule_entry.status = -1;
-		flt_rule_entry.rule.retain_hdr = 1;
-		flt_rule_entry.rule.to_uc = 0;
-		flt_rule_entry.rule.eq_attrib_type = 1;
-		flt_rule_entry.rule.action = IPA_PASS_TO_EXCEPTION;
-#ifdef FEATURE_IPA_V3
-		flt_rule_entry.rule.hashable = true;
-#endif
-		flt_rule_entry.rule.eq_attrib.rule_eq_bitmap |= (1<<1);
-		flt_rule_entry.rule.eq_attrib.protocol_eq_present = 1;
-		flt_rule_entry.rule.eq_attrib.protocol_eq = IPACM_FIREWALL_IPPROTO_TCP;
-		flt_rule_entry.rule.attrib.u.v6.next_hdr = (uint8_t)IPACM_FIREWALL_IPPROTO_TCP;
 
-		/* Configuring Fragment Filtering Rule */
-		memcpy(&flt_rule_entry.rule.attrib,
-				&rx_prop->rx[0].attrib,
-				sizeof(flt_rule_entry.rule.attrib));
-		/* remove meta data mask since we only install default flt rules once for all modem
-			PDN*/
-		flt_rule_entry.rule.attrib.attrib_mask &= ~((uint32_t)IPA_FLT_META_DATA);
+		IPACMDBG_H("Adding IPv6 TCP fragment filter rule\n");
+
+		flt_rule_entry.rule.attrib.attrib_mask &= ~((uint32_t)IPA_FLT_DST_ADDR);
+
+		flt_rule_entry.rule.attrib.attrib_mask |= IPA_FLT_NEXT_HDR;
+		flt_rule_entry.rule.attrib.u.v6.next_hdr = IPACM_FIREWALL_IPPROTO_TCP;
 
 		flt_rule_entry.rule.attrib.attrib_mask |= IPA_FLT_FRAGMENT;
 
@@ -1056,4 +1043,11 @@ void IPACM_Iface::config_ip_type(ipa_ip_type iptype)
 	}
 
 	return;
+}
+
+void IPACM_Iface::delete_iface(void)
+{
+	IPACMDBG_H("netdev (%s):ipa_index (%d) instance close \n",
+			IPACM_Iface::ipacmcfg->iface_table[ipa_if_num].iface_name, ipa_if_num);
+	delete this;
 }
