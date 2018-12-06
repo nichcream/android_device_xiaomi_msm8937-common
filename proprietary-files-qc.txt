@@ -64,7 +64,7 @@ vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcomvisualizer.so
 vendor/lib64/soundfx/libqcvirt.so
 
-# Bluetooth - from daisy
+# Bluetooth - from bardockpro (BQ Aquarius X Pro) - 8.1
 lib/com.qualcomm.qti.bluetooth_audio@1.0.so
 lib64/com.qualcomm.qti.bluetooth_audio@1.0.so
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
@@ -73,12 +73,12 @@ vendor/bin/hci_qcomm_init
 vendor/bin/wcnss_filter
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so
-vendor/lib/com.qualcomm.qti.bluetooth_audio@1.0.so
+vendor/lib/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
 vendor/lib/libbtnv.so
 vendor/lib/libbt-hidlclient.so
 vendor/lib/libbthost_if.so
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
-vendor/lib64/com.qualcomm.qti.bluetooth_audio@1.0.so
+vendor/lib64/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
 vendor/lib64/libbtnv.so
 vendor/lib64/libbt-hidlclient.so
 vendor/lib64/libbthost_if.so
@@ -356,7 +356,7 @@ vendor/lib64/vendor.qti.gnss@1.2.so
 vendor/lib64/vendor.qti.gnss@2.0.so
 vendor/lib64/vendor.qti.gnss@2.1.so
 
-# Graphics - from marmite (Wileyfox Swift 2)
+# Graphics - from marmite (Wileyfox Swift 2) - 8.1
 lib/egl/libGLES_android.so
 lib64/egl/libGLES_android.so
 vendor/lib/egl/eglSubDriverAndroid.so
@@ -373,7 +373,7 @@ vendor/lib/egl/libRBGLESv2_adreno.so
 vendor/lib/egl/libq3dtools_adreno.so
 vendor/lib/egl/libq3dtools_esx.so
 vendor/lib/egl/libQTapGLES.so
-#vendor/lib/hw/vulkan.msm8937.so
+vendor/lib/hw/vulkan.msm8937.so
 vendor/lib/libadreno_utils.so
 vendor/lib/libbccQTI.so
 vendor/lib/libC2D2.so
@@ -409,7 +409,7 @@ vendor/lib64/egl/libRBGLESv2_adreno.so
 vendor/lib64/egl/libq3dtools_adreno.so
 vendor/lib64/egl/libq3dtools_esx.so
 vendor/lib64/egl/libQTapGLES.so
-#vendor/lib64/hw/vulkan.msm8937.so
+vendor/lib64/hw/vulkan.msm8937.so
 vendor/lib64/libadreno_utils.so
 vendor/lib64/libbccQTI.so
 vendor/lib64/libC2D2.so
@@ -432,11 +432,7 @@ vendor/lib64/librs_adreno.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/libscalar.so
 
-# Graphics - Vulkan - from daisy
-vendor/lib/hw/vulkan.msm8953.so:vendor/lib/hw/vulkan.msm8937.so
-vendor/lib64/hw/vulkan.msm8953.so:vendor/lib64/hw/vulkan.msm8937.so
-
-# Graphics - SDM - from marmite (Wileyfox Swift 2)
+# Graphics - SDM - from marmite (Wileyfox Swift 2) - 8.1
 lib/libsd_sdk_display.so
 lib/libsdm-disp-apis.so
 lib64/libsd_sdk_display.so
@@ -452,7 +448,7 @@ vendor/lib64/libsdm-diag.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libtinyxml2_1.so
 
-# Graphics firmware - from marmite (Wileyfox Swift 2)
+# Graphics firmware - from marmite (Wileyfox Swift 2) - 8.1
 vendor/firmware/a530_gpmu.fw2
 vendor/firmware/a530_pfp.fw
 vendor/firmware/a530_pm4.fw
@@ -479,7 +475,7 @@ vendor/lib64/libkeymasterdeviceutils.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
-# Listen - from marmite (Wileyfox Swift 2)
+# Listen - from marmite (Wileyfox Swift 2) - 8.1
 vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib64/hw/sound_trigger.primary.msm8937.so
 
@@ -530,7 +526,7 @@ vendor/lib64/libmm-color-convertor.so
 vendor/lib64/libvpplibrary.so
 vendor/lib64/vendor.qti.hardware.vpp@1.1.so
 
-# Media - from marmite (Wileyfox Swift 2)
+# Media - from marmite (Wileyfox Swift 2) - 8.1
 vendor/lib/libOmxSwVdec.so
 vendor/lib/libOmxSwVencMpeg4.so
 vendor/lib/libMpeg4SwEncoder.so
@@ -540,7 +536,7 @@ vendor/lib64/libOmxSwVencMpeg4.so
 vendor/lib64/libMpeg4SwEncoder.so
 vendor/lib64/libswvdec.so
 
-# Perf - from daisy
+# Perf - from bardockpro (BQ Aquarius X Pro) - 8.1
 lib/libqti-at.so
 lib/libqti-perfd-client_system.so
 lib/vendor.qti.hardware.iop@1.0.so
@@ -554,26 +550,30 @@ lib64/vendor.qti.hardware.perf@1.0.so
 vendor/bin/msm_irqbalance
 vendor/bin/hw/vendor.qti.hardware.perf@1.0-service
 vendor/etc/init/vendor.qti.hardware.perf@1.0-service.rc
-vendor/lib/hw/vendor.qti.hardware.iop@2.0-impl.so
+vendor/lib/hw/vendor.qti.hardware.iop@1.0-impl.so
+vendor/lib/libfeedbackhandler.so
 vendor/lib/libperfgluelayer.so
+vendor/lib/libqti-iopd.so
 vendor/lib/libqti-iopd-client.so
 vendor/lib/libqti-perfd.so
 vendor/lib/libqti-perfd-client.so
 vendor/lib/libqti-util.so
-vendor/lib/vendor.qti.hardware.iop@1.0.so
-vendor/lib/vendor.qti.hardware.iop@2.0.so
-vendor/lib/vendor.qti.hardware.perf@1.0.so
-vendor/lib64/hw/vendor.qti.hardware.iop@2.0-impl.so
+vendor/lib/vendor.qti.hardware.iop@1.0_vendor.so
+vendor/lib/vendor.qti.hardware.iop@2.0_vendor.so
+vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so
+vendor/lib64/hw/vendor.qti.hardware.iop@1.0-impl.so
+vendor/lib64/libfeedbackhandler.so
 vendor/lib64/libperfgluelayer.so
+vendor/lib64/libqti-iopd.so
 vendor/lib64/libqti-iopd-client.so
 vendor/lib64/libqti-perfd.so
 vendor/lib64/libqti-perfd-client.so
 vendor/lib64/libqti-util.so
-vendor/lib64/vendor.qti.hardware.iop@1.0.so
-vendor/lib64/vendor.qti.hardware.iop@2.0.so
-vendor/lib64/vendor.qti.hardware.perf@1.0.so
+vendor/lib64/vendor.qti.hardware.iop@1.0_vendor.so
+vendor/lib64/vendor.qti.hardware.iop@2.0_vendor.so
+vendor/lib64/vendor.qti.hardware.perf@1.0_vendor.so
 
-# Peripheral manager - from marmite (Wileyfox Swift 2)
+# Peripheral manager - from marmite (Wileyfox Swift 2) - 8.1
 vendor/bin/pm-proxy
 vendor/bin/pm-service
 vendor/lib/libperipheral_client.so
@@ -608,7 +608,7 @@ vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc
 vendor/lib/vendor.qti.hardware.qdutils_disp@1.0.so
 vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 
-# QMI - from marmite (Wileyfox Swift 2)
+# QMI - from marmite (Wileyfox Swift 2) - 8.1
 lib/libdiag_system.so
 lib/libqmi_cci_system.so
 lib64/libdiag_system.so
@@ -648,7 +648,7 @@ vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
 vendor/lib64/libsmemlog.so
 
-# Radio - from marmite (Wileyfox Swift 2)
+# Radio - from marmite (Wileyfox Swift 2) - 8.1
 -app/QtiTelephonyService/QtiTelephonyService.apk
 etc/permissions/lpa.xml
 etc/permissions/telephonyservice.xml
@@ -767,7 +767,7 @@ lib64/vendor.qti.imsrtpservice@1.0.so
 lib64/vendor.qti.ims.callinfo@1.0.so
 lib64/vendor.qti.ims.rcsconfig@1.0.so
 vendor/bin/ims_rtp_daemon
-vendor/bin/imsdatadaemon
+#vendor/bin/imsdatadaemon
 vendor/bin/imsqmidaemon
 vendor/bin/imsrcsd
 vendor/lib/com.qualcomm.qti.imscmservice@1.0.so
@@ -825,6 +825,9 @@ vendor/lib64/vendor.qti.imsrtpservice@1.0.so
 vendor/lib64/vendor.qti.ims.callinfo@1.0.so
 vendor/lib64/vendor.qti.ims.rcsconfig@1.0.so
 
+# Radio - IMS - from TA-1025 (Nokia 6) - 8.1
+vendor/bin/imsdatadaemon
+
 # Sensors - from daisy
 -framework/vendor.qti.hardware.sensorscalibrate-V1.0-java.jar
 lib/libsensor1.so
@@ -865,5 +868,5 @@ vendor/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc
 vendor/lib/vendor.qti.hardware.tui_comm@1.0.so
 vendor/lib64/vendor.qti.hardware.tui_comm@1.0.so
 
-# Wi-Fi - from daisy
+# Wi-Fi - from bardockpro (BQ Aquarius X Pro) - 8.1
 vendor/bin/wcnss_service

@@ -201,6 +201,7 @@ on enable-low-power
 
     # Tell perfd that we're ready to go
     setprop vendor.post_boot.parsed 1
+    setprop sys.post_boot.parsed 1
 
 on charger
     # Offline all cores other than CPU0
