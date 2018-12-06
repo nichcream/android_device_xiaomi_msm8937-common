@@ -1,16 +1,3 @@
-<!--
-    This is a skeleton device manifest. Notes:
-    1. android.hidl.*, android.frameworks.*, android.system.* are not included.
-    2. If a HAL is supported in both hwbinder and passthrough transport,
-       only hwbinder is shown.
-    3. It is likely that HALs in passthrough transport does not have
-       <interface> declared; users will have to write them by hand.
-    4. A HAL with lower minor version can be overridden by a HAL with
-       higher minor version if they have the same name and major version.
-    5. sepolicy version is set to 0.0. It is recommended that the entry
-       is removed from the manifest file and written by assemble_vintf
-       at build time.
--->
 <manifest version="1.0" type="device" target-level="2">
     <hal format="hidl">
         <name>android.hardware.audio</name>
@@ -241,6 +228,10 @@
             <instance>slot1</instance>
             <instance>slot2</instance>
         </interface>
+        <fqname>@1.1::IRadio/slot1</fqname>
+        <fqname>@1.1::IRadio/slot2</fqname>
+        <fqname>@1.1::ISap/slot1</fqname>
+        <fqname>@1.1::ISap/slot2</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.radio.deprecated</name>
@@ -251,16 +242,8 @@
             <instance>slot1</instance>
             <instance>slot2</instance>
         </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.radio.config</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IRadioConfig</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IRadioConfig/default</fqname>
+        <fqname>@1.0::IOemHook/slot1</fqname>
+        <fqname>@1.0::IOemHook/slot2</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.renderscript</name>
@@ -450,6 +433,7 @@
             <name>IColor</name>
             <instance>default</instance>
         </interface>
+        <fqname>@1.0::IColor/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.lineage.power</name>
@@ -459,6 +443,7 @@
             <name>ILineagePower</name>
             <instance>default</instance>
         </interface>
+        <fqname>@1.0::ILineagePower/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.data.factory</name>
@@ -556,6 +541,16 @@
         </interface>
         <fqname>@1.0::IQcRilAudio/slot1</fqname>
         <fqname>@1.0::IQcRilAudio/slot2</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.hardware.radio.config</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IConfig</name>
+            <instance>radioconfig0</instance>
+            <instance>radioconfig1</instance>
+        </interface>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.ims</name>
