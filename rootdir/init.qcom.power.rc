@@ -197,7 +197,7 @@ on enable-low-power
     rm /data/system/perfd/default_values
 
     # Tell perfd that we're ready to go
-    setprop sys.post_boot.parsed 1
+    setprop vendor.post_boot.parsed 1
 
 on charger
     # Offline all cores other than CPU0
