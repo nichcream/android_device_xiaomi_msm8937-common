@@ -27,29 +27,6 @@
 #
 
 function configure_memory_parameters() {
-    # Set Memory paremeters.
-    #
-    # Set per_process_reclaim tuning parameters
-    # 2GB 64-bit will have aggressive settings when compared to 1GB 32-bit
-    # 1GB and less will use vmpressure range 50-70, 2GB will use 10-70
-    # 1GB and less will use 512 pages swap size, 2GB will use 1024
-    #
-    # Set Low memory killer minfree parameters
-    # 32 bit all memory configurations will use 15K series
-    # 64 bit up to 2GB with use 14K, and above 2GB will use 18K
-    #
-    # Set ALMK parameters (usually above the highest minfree values)
-    # 32 bit will have 53K & 64 bit will have 81K
-    #
-    # vmpressure_file_min threshold is always set slightly higher
-    # than LMK minfree's last bin value for 32-bit arch. It is calculated as
-    # vmpressure_file_min = (last bin - second last bin ) + last bin
-    # For 64-bit arch, vmpressure_file_min = LMK minfree's last bin value
-
-    arch_type=`uname -m`
-    MemTotalStr=`cat /proc/meminfo | grep MemTotal`
-    MemTotal=${MemTotalStr:16:8}
-
     # Read adj series and set adj threshold for PPR and ALMK.
     # This is required since adj values change from framework to framework.
     adj_series=`cat /sys/module/lowmemorykiller/parameters/adj`
@@ -63,34 +40,38 @@ function configure_memory_parameters() {
     # For uLMK + Memcg, this will be set as 6 since adj is zero.
     set_almk_ppr_adj=$(((set_almk_ppr_adj * 6) + 6))
     echo $set_almk_ppr_adj > /sys/module/lowmemorykiller/parameters/adj_max_shift
-    echo $set_almk_ppr_adj > /sys/module/process_reclaim/parameters/min_score_adj
 
-    echo 1 > /sys/module/process_reclaim/parameters/enable_process_reclaim
-    echo 70 > /sys/module/process_reclaim/parameters/pressure_max
-    echo 30 > /sys/module/process_reclaim/parameters/swap_opt_eff
+    # Calculate vmpressure_file_min as below & set for 64 bit:
+    # vmpressure_file_min = last_lmk_bin + (last_lmk_bin - last_but_one_lmk_bin)
+    minfree_series=`cat /sys/module/lowmemorykiller/parameters/minfree`
+    minfree_1="${minfree_series#*,}" ; rem_minfree_1="${minfree_1%%,*}"
+    minfree_2="${minfree_1#*,}" ; rem_minfree_2="${minfree_2%%,*}"
+    minfree_3="${minfree_2#*,}" ; rem_minfree_3="${minfree_3%%,*}"
+    minfree_4="${minfree_3#*,}" ; rem_minfree_4="${minfree_4%%,*}"
+    minfree_5="${minfree_4#*,}"
+
+    vmpres_file_min=$((minfree_5 + (minfree_5 - rem_minfree_4)))
+    echo $vmpres_file_min > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
+
+    # Enable adaptive LMK for all targets &
+    # use Google default LMK series for all 64-bit targets >=2GB.
     echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 
-    if [ "$arch_type" == "aarch64" ] && [ $MemTotal -gt 2097152 ]; then
-        echo 10 > /sys/module/process_reclaim/parameters/pressure_min
-        echo 1024 > /sys/module/process_reclaim/parameters/per_swap_size
-        echo "18432,23040,27648,32256,55296,80640" > /sys/module/lowmemorykiller/parameters/minfree
-        echo 80640 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
-    elif [ "$arch_type" == "aarch64" ] && [ $MemTotal -gt 1048576 ]; then
-        echo 10 > /sys/module/process_reclaim/parameters/pressure_min
-        echo 1024 > /sys/module/process_reclaim/parameters/per_swap_size
-        echo "14746,18432,22118,25805,40000,55000" > /sys/module/lowmemorykiller/parameters/minfree
-        echo 55000 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
-    elif [ "$arch_type" == "aarch64" ]; then
-        echo 50 > /sys/module/process_reclaim/parameters/pressure_min
-        echo 512 > /sys/module/process_reclaim/parameters/per_swap_size
-        echo "14746,18432,22118,25805,40000,55000" > /sys/module/lowmemorykiller/parameters/minfree
-        echo 55000 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
-    fi
+    #Set PPR parameters for all other targets.
+    echo $set_almk_ppr_adj > /sys/module/process_reclaim/parameters/min_score_adj
+    echo 1 > /sys/module/process_reclaim/parameters/enable_process_reclaim
+    echo 50 > /sys/module/process_reclaim/parameters/pressure_min
+    echo 70 > /sys/module/process_reclaim/parameters/pressure_max
+    echo 30 > /sys/module/process_reclaim/parameters/swap_opt_eff
+    echo 512 > /sys/module/process_reclaim/parameters/per_swap_size
 
     #Enable oom_reaper
     if [ -f /sys/module/lowmemorykiller/parameters/oom_reaper ]; then
         echo 1 > /sys/module/lowmemorykiller/parameters/oom_reaper
     fi
+
+    # Set allocstall_threshold to 0 for all targets.
+    echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 }
 
 configure_memory_parameters
