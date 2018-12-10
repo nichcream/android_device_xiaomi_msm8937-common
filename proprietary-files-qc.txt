@@ -432,10 +432,8 @@ vendor/lib64/librs_adreno.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/libscalar.so
 
-# Graphics - SDM - from marmite (Wileyfox Swift 2) - 8.1
-lib/libsd_sdk_display.so
+# Graphics - SDM - from daisy
 lib/libsdm-disp-apis.so
-lib64/libsd_sdk_display.so
 lib64/libsdm-disp-apis.so
 vendor/lib/libsdm-color.so
 vendor/lib/libsdm-diag.so
