@@ -36,11 +36,6 @@ on boot
     chown system system /dev/goodix_fp
     chmod 0644 /dev/goodix_fp
 
-    # Reset persistent properties
-    rm /data/property/persist.sys.fp.vendor
-    rm /data/property/persist.sys.fp.goodix
-    rm /data/property/persist.sys.fp.onstart
-
     setprop persist.sys.fp.vendor none
     start vendor.gx_fpd
 
