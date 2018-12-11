@@ -16,7 +16,17 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/xiaomi/land
+VENDOR_PATH := device/xiaomi/msm8937-common
+
+# Kernel
+BOARD_KERNEL_BASE		:= 0x80000000
+BOARD_KERNEL_CMDLINE 		:= androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78B0000
+BOARD_KERNEL_CMDLINE 		+= firmware_class.path=/vendor/firmware_mnt/image
+BOARD_KERNEL_IMAGE_NAME 	:= Image.gz-dtb
+BOARD_KERNEL_PAGESIZE 		:=  2048
+BOARD_MKBOOTIMG_ARGS 		:= --ramdisk_offset 0x01000000 --second_offset 0x00f00000 --tags_offset 0x00000100
+TARGET_KERNEL_SOURCE 		:= kernel/xiaomi/msm8937
+TARGET_EXFAT_DRIVER		:= sdfat
 
 # Architecture
 TARGET_ARCH 	    	:= arm64
@@ -42,17 +52,6 @@ TARGET_USES_64_BIT_BINDER := true
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME 	:= msm8937
 TARGET_NO_BOOTLOADER 		:= true
-
-# kernel
-BOARD_KERNEL_BASE		:= 0x80000000
-BOARD_KERNEL_CMDLINE 		:= androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78B0000
-BOARD_KERNEL_CMDLINE 		+= firmware_class.path=/vendor/firmware_mnt/image
-BOARD_KERNEL_IMAGE_NAME 	:= Image.gz-dtb
-BOARD_KERNEL_PAGESIZE 		:=  2048
-BOARD_MKBOOTIMG_ARGS 		:= --ramdisk_offset 0x01000000 --second_offset 0x00f00000 --tags_offset 0x00000100
-TARGET_KERNEL_CONFIG 		:= land_defconfig
-TARGET_KERNEL_SOURCE 		:= kernel/xiaomi/msm8937
-TARGET_EXFAT_DRIVER		:= sdfat
 
 # Audio
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
@@ -104,25 +103,15 @@ USE_CUSTOM_AUDIO_POLICY := 1
 USE_XML_AUDIO_POLICY_CONF := 1
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(VENDOR_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM                   := true
 BLUETOOTH_HCI_USE_MCT                       := true
 QCOM_BT_USE_SMD_TTY                         := true
 QCOM_BT_USE_BTNV := true
 
-# Camera
-USE_DEVICE_SPECIFIC_CAMERA   := true
-BOARD_QTI_CAMERA_32BIT_ONLY  := true
-TARGET_USES_MEDIA_EXTENSIONS := true
-TARGET_USES_QTI_CAMERA_DEVICE := true
-TARGET_TS_MAKEUP             := true
-
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
-
-# Clang
-INTERNAL_LOCAL_CLANG_EXCEPTION_PROJECTS += $(DEVICE_PATH)
 
 # CNE / DPM
 BOARD_USES_QCNE := true
@@ -159,22 +148,17 @@ BOARD_HAVE_QCOM_FM                 := true
 TARGET_QCOM_NO_FM_FIRMWARE         := true
 
 # Filesystem
-TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
+TARGET_FS_CONFIG_GEN := $(VENDOR_PATH)/config.fs
 
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := true
 USE_DEVICE_SPECIFIC_GPS := true
 
 # HIDL
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/vendor_framework_compatibility_matrix.xml
-DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
-DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
-DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
-
-# Init
-TARGET_INIT_VENDOR_LIB         := libinit_land
-TARGET_PLATFORM_DEVICE_BASE    := /devices/soc/
-TARGET_RECOVERY_DEVICE_MODULES := libinit_land
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(VENDOR_PATH)/vendor_framework_compatibility_matrix.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE := $(VENDOR_PATH)/framework_manifest.xml
+DEVICE_MANIFEST_FILE := $(VENDOR_PATH)/manifest.xml
+DEVICE_MATRIX_FILE   := $(VENDOR_PATH)/compatibility_matrix.xml
 
 # Keystore
 TARGET_PROVIDES_KEYMASTER := true
@@ -216,11 +200,11 @@ TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 TARGET_RIL_VARIANT := caf
 
 # Recovery
-TARGET_RECOVERY_FSTAB 		 := $(DEVICE_PATH)/rootdir/fstab.qcom
+TARGET_RECOVERY_FSTAB 		 := $(VENDOR_PATH)/rootdir/fstab.qcom
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy
 
 # Wi-Fi
 BOARD_HAS_QCOM_WLAN := true
@@ -234,5 +218,5 @@ WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
-# Inherit the proprietary files
--include vendor/xiaomi/land/BoardConfigVendor.mk
+# Inherit the common proprietary files
+-include vendor/xiaomi/msm8937-common/BoardConfigVendor.mk

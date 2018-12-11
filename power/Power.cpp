@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.power@1.0-service.land"
+#define LOG_TAG "android.hardware.power@1.0-service.custom"
 
 // #define LOG_NDEBUG 0
 

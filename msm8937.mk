@@ -102,10 +102,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt \
     $(LOCAL_PATH)/audio/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-    $(LOCAL_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio/audio_platform_info_extcodec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info_extcodec.xml \
     $(LOCAL_PATH)/audio/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf \
-    $(LOCAL_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_qrd_sku1.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml \
     $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info.xml
 
@@ -126,12 +124,6 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service \
     vendor.qti.hardware.camera.device@1.0 \
     vendor.qti.hardware.camera.device@1.0_vendor \
-    mm-qcamera-app \
-    camera.msm8937 \
-    libmm-qcamera \
-    libmmcamera_interface \
-    libmmjpeg_interface \
-    libqomx_core \
     Snap
 
 # Configstore
@@ -164,11 +156,6 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
     android.hardware.renderscript@1.0-impl
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/qdcm_calib_data_hx8394F_HD720p_video_BOE.xml:$(TARGET_COPY_OUT_VENDOR)/etc/qdcm_calib_data_hx8394F_HD720p_video_BOE.xml \
-    $(LOCAL_PATH)/configs/qdcm_calib_data_ili9881c_HD720p_video_Tianma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/qdcm_calib_data_ili9881c_HD720p_video_Tianma.xml \
-    $(LOCAL_PATH)/configs/qdcm_calib_data_nt35521s_HD720p_video_EBBG.xml:$(TARGET_COPY_OUT_VENDOR)/etc/qdcm_calib_data_nt35521s_HD720p_video_EBBG.xml
 
 # Display calibration
 PRODUCT_PACKAGES += \
@@ -251,23 +238,10 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     fstab.qcom
 
-# Keylayout
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/ft5x06_720p.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/ft5x06_720p.kl \
-    $(LOCAL_PATH)/keylayout/gf3208.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gf3208.kl \
-    $(LOCAL_PATH)/keylayout/ist30xx_ts_input.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/ist30xx_ts_input.kl \
-    $(LOCAL_PATH)/keylayout/msm8952-sku1-snd-card_Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/msm8952-sku1-snd-card_Button_Jack.kl \
-    $(LOCAL_PATH)/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-fpc.kl
-
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
-
-# Libshims
-PRODUCT_PACKAGES += \
-    libshim_mutexdestroy \
-    libshim_pthreadts
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -333,7 +307,7 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service.land \
+    android.hardware.power@1.0-service.custom \
     power.msm8937
 
 # RCS
@@ -424,5 +398,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
-# Inherit proprietary files
-$(call inherit-product-if-exists, vendor/xiaomi/land/land-vendor.mk)
+# Inherit common proprietary files
+$(call inherit-product-if-exists, vendor/xiaomi/msm8937-common/msm8937-common-vendor.mk)
