@@ -43,6 +43,8 @@ setup_vendor "$DEVICE_COMMON" "$VENDOR" "$LINEAGE_ROOT" true
 write_headers "land santoni"
 
 # The standard common blobs
+write_makefiles "$MY_DIR"/proprietary-files.txt true
+echo "" >> "$PRODUCTMK"
 write_makefiles "$MY_DIR"/proprietary-files-qc.txt true
 
 # We are done!

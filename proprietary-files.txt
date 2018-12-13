@@ -1,0 +1,13 @@
+# Keylayout - from santoni (Redmi 4X)
+usr/keylayout/gpio-keys.kl:vendor/usr/keylayout/gpio-keys.kl
+usr/keylayout/qpnp_pon.kl:vendor/usr/keylayout/qpnp_pon.kl
+
+# Media - from santoni (Redmi 4X)
+etc/firmware/DE.o.msm8937:vendor/firmware/DE.o.msm8937
+
+# IR - from santoni (Redmi 4X)
+lib/hw/consumerir.default.so:vendor/lib/hw/consumerir.default.so
+lib64/hw/consumerir.default.so:vendor/lib64/hw/consumerir.default.so
+
+# USB - from santoni (Redmi 4X)
+etc/firmware/ice40.bin:vendor/firmware/ice40.bin
