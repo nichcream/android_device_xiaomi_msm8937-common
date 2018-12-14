@@ -1,6 +1,5 @@
 oem.device.imeicache               u:object_r:radio_prop:s0
 persist.camera.                    u:object_r:camera_prop:s0
-persist.vendor.camera.             u:object_r:camera_prop:s0
 
 # TEMPORARY - for pre-P vendor blobs
 sys.post_boot.parsed               u:object_r:vendor_mpctl_prop:s0
