@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
+#ifdef USE_FINGERPRINT_2_0
 #define LOG_TAG "android.biometrics.fingerprint@2.0-service.custom"
+#else
+#define LOG_TAG "android.biometrics.fingerprint@2.1-service.custom"
+#endif
 
 #include <binder/IPCThreadState.h>
 #include <binder/IServiceManager.h>

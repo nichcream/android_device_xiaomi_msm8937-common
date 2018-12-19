@@ -172,10 +172,6 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.1-service.clearkey \
     libprotobuf-cpp-lite
 
-# Fingerprint
-PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.0-service.custom
-
 # FM
 PRODUCT_PACKAGES += \
     FMRadio \
