@@ -1,4 +1,4 @@
-# ADSP - from daisy
+# ADSP - from tissot
 vendor/bin/adsprpcd
 vendor/lib/libadsp_default_listener.so
 vendor/lib/libadsprpc.so
@@ -16,13 +16,13 @@ vendor/lib64/libfastcvadsp_stub.so
 vendor/lib64/libqtigef.so
 vendor/lib64/libsdsprpc.so
 
-# ADSP modules - from daisy
+# ADSP modules - from tissot
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
 vendor/lib/rfsa/adsp/libdspCV_skel.so
 vendor/lib/rfsa/adsp/libfastcvadsp.so
 vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
 
-# Alarm - from daisy
+# Alarm - from tissot
 -framework/vendor.qti.hardware.alarm-V1.0-java.jar
 -vendor/app/PowerOffAlarm/PowerOffAlarm.apk
 vendor/bin/hw/vendor.qti.hardware.alarm@1.0-service
@@ -32,13 +32,13 @@ vendor/lib/vendor.qti.hardware.alarm@1.0.so
 vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
 
-# ANT+ - from daisy
+# ANT+ - from tissot
 lib/com.qualcomm.qti.ant@1.0.so
 lib64/com.qualcomm.qti.ant@1.0.so
 vendor/lib/com.qualcomm.qti.ant@1.0.so
 vendor/lib64/com.qualcomm.qti.ant@1.0.so
 
-# Audio - from daisy
+# Audio - from tissot
 lib/libqct_resampler.so
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
@@ -83,7 +83,7 @@ vendor/lib64/libbtnv.so
 vendor/lib64/libbt-hidlclient.so
 vendor/lib64/libbthost_if.so
 
-# CNE - from daisy
+# CNE - from tissot
 etc/permissions/cneapiclient.xml
 etc/permissions/com.quicinc.cne.xml
 -framework/cneapiclient.jar
@@ -172,10 +172,10 @@ vendor/lib64/vendor.qti.hardware.data.latency@1.0.so
 vendor/lib64/vendor.qti.hardware.data.qmi@1.0.so
 vendor/lib64/vendor.qti.latency@2.0.so
 
-# Charger - from daisy
+# Charger - from tissot
 vendor/bin/hvdcp_opti
 
-# DPM - from daisy
+# DPM - from tissot
 bin/dpmd
 etc/dpm/dpm.conf
 etc/init/dpmd.rc
@@ -201,7 +201,7 @@ vendor/lib/libdpmqmihal.so
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0.so
 vendor/lib64/libdpmqmihal.so
 
-# DRM - from daisy
+# DRM - from tissot
 lib/libGPTEE_system.so
 lib/libQTEEConnector_system.so
 lib/vendor.qti.hardware.qteeconnector@1.0.so
@@ -254,7 +254,7 @@ vendor/lib/mediadrm/libwvdrmengine.so
 vendor/lib64/mediadrm/libwvdrmengine.so
 vendor/lib64/libwvhidl.so
 
-# FM - from daisy
+# FM - from tissot
 -lib/vendor.qti.hardware.fm@1.0.so
 -lib64/vendor.qti.hardware.fm@1.0.so
 vendor/lib/hw/vendor.qti.hardware.fm@1.0-impl.so
@@ -262,11 +262,11 @@ vendor/lib/vendor.qti.hardware.fm@1.0.so
 vendor/lib64/hw/vendor.qti.hardware.fm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.fm@1.0.so
 
-# Gatekeeper - from daisy
+# Gatekeeper - from tissot
 vendor/lib/hw/gatekeeper.msm8953.so:vendor/lib/hw/gatekeeper.msm8937.so
 vendor/lib64/hw/gatekeeper.msm8953.so:vendor/lib64/hw/gatekeeper.msm8937.so
 
-# GPS - from daisy
+# GPS - from tissot
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
@@ -432,7 +432,7 @@ vendor/lib64/librs_adreno.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/libscalar.so
 
-# Graphics - SDM - from daisy
+# Graphics - SDM - from tissot
 lib/libsdm-disp-apis.so
 lib64/libsdm-disp-apis.so
 vendor/lib/libsdm-color.so
@@ -457,11 +457,11 @@ vendor/firmware/a530v3_gpmu.fw2
 vendor/firmware/a530v3_seq.fw2
 vendor/firmware/a540_gpmu.fw2
 
-# Keystore - from daisy
+# Keystore - from tissot
 vendor/lib/hw/keystore.msm8953.so:vendor/lib/hw/keystore.msm8937.so
 vendor/lib64/hw/keystore.msm8953.so:vendor/lib64/hw/keystore.msm8937.so
 
-# Keymaster - from daisy
+# Keymaster - from tissot
 vendor/lib/libkeymasterutils.so
 vendor/lib/libkeymasterprovision.so
 vendor/lib/libkeymasterdeviceutils.so
@@ -469,7 +469,7 @@ vendor/lib64/libkeymasterutils.so
 vendor/lib64/libkeymasterprovision.so
 vendor/lib64/libkeymasterdeviceutils.so
 
-# Listen - from daisy
+# Listen - from tissot
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
@@ -477,7 +477,7 @@ vendor/lib/libsmwrapper.so
 vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib64/hw/sound_trigger.primary.msm8937.so
 
-# Media - from daisy
+# Media - from tissot
 lib/libmmosal.so
 lib/libOmxMux.so
 lib/vendor.qti.hardware.vpp@1.1.so
@@ -577,7 +577,7 @@ vendor/bin/pm-service
 vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
-# Postprocessing - from daisy
+# Postprocessing - from tissot
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 -framework/com.qti.snapdragon.sdk.display.jar
 lib/vendor.display.color@1.0.so
@@ -598,7 +598,7 @@ vendor/lib64/vendor.display.color@1.1.so
 vendor/lib64/vendor.display.color@1.2.so
 vendor/lib64/vendor.display.postproc@1.0.so
 
-# QDutils - from daisy
+# QDutils - from tissot
 lib/vendor.qti.hardware.qdutils_disp@1.0.so
 lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti
@@ -845,7 +845,7 @@ vendor/lib64/vendor.qti.imsrtpservice@1.0.so
 vendor/lib64/vendor.qti.ims.callinfo@1.0.so
 vendor/lib64/vendor.qti.ims.rcsconfig@1.0.so
 
-# Sensors - from daisy
+# Sensors - from tissot
 -framework/vendor.qti.hardware.sensorscalibrate-V1.0-java.jar
 lib/libsensor1.so
 lib/libsensor_reg.so
@@ -865,19 +865,19 @@ vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.ssc.so
 vendor/lib64/vendor.qti.hardware.sensorscalibrate@1.0.so
 
-# Thermal - from daisy
+# Thermal - from tissot
 vendor/bin/thermal-engine
 -vendor/lib/libthermalclient.so
 -vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
 
-# Time services - from daisy
+# Time services - from tissot
 -vendor/app/TimeService/TimeService.apk
 vendor/bin/time_daemon
 -vendor/lib/libtime_genoff.so
 -vendor/lib64/libtime_genoff.so
 
-# TUI - from daisy
+# TUI - from tissot
 lib/vendor.qti.hardware.tui_comm@1.0.so
 lib64/vendor.qti.hardware.tui_comm@1.0.so
 vendor/bin/hw/vendor.qti.hardware.tui_comm@1.0-service-qti
