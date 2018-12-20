@@ -571,7 +571,7 @@ vendor/lib64/vendor.qti.hardware.iop@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.iop@2.0_vendor.so
 vendor/lib64/vendor.qti.hardware.perf@1.0_vendor.so
 
-# Peripheral manager - from marmite (Wileyfox Swift 2) - 8.1
+# Peripheral manager - from tissot
 vendor/bin/pm-proxy
 vendor/bin/pm-service
 vendor/lib/libperipheral_client.so
@@ -606,7 +606,7 @@ vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc
 vendor/lib/vendor.qti.hardware.qdutils_disp@1.0.so
 vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 
-# QMI - from marmite (Wileyfox Swift 2) - 8.1
+# QMI - from tissot
 lib/libdiag_system.so
 lib/libqmi_cci_system.so
 lib64/libdiag_system.so
@@ -628,7 +628,6 @@ vendor/lib/libqmi_common_so.so
 vendor/lib/libqmi_csi.so
 vendor/lib/libqmi_encdec.so
 vendor/lib/libqmiservices.so
-vendor/lib/libsmemlog.so
 vendor/lib64/libdiag.so
 vendor/lib64/libdsi_netctrl.so
 vendor/lib64/libdsutils.so
@@ -644,9 +643,8 @@ vendor/lib64/libqmi_common_so.so
 vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
-vendor/lib64/libsmemlog.so
 
-# Radio - from marmite (Wileyfox Swift 2) - 8.1
+# Radio - from tissot
 -app/QtiTelephonyService/QtiTelephonyService.apk
 etc/permissions/lpa.xml
 etc/permissions/telephonyservice.xml
@@ -657,6 +655,7 @@ etc/permissions/qcrilhook.xml
 -framework/uimlpalibrary.jar
 -framework/uimremotesimlocklibrary.jar
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+vendor/bin/hw/qcrild
 vendor/bin/ATFWD-daemon
 vendor/bin/ipacm-diag
 vendor/bin/netmgrd
@@ -666,14 +665,23 @@ vendor/bin/rmt_storage
 vendor/bin/tftp_server
 vendor/etc/data/dsi_config.xml
 vendor/etc/data/netmgr_config.xml
+vendor/etc/init/qcrild.rc
 vendor/lib/libconfigdb.so
 vendor/lib/liblqe.so
 vendor/lib/libmdmdetect.so
 vendor/lib/libnetmgr.so
+vendor/lib/libnetmgr_common.so
+vendor/lib/libnetmgr_nr_fusion.so
+vendor/lib/libnetmgr_rmnet_ext.so
+vendor/lib/libnlnetmgr.so
 vendor/lib/liboemaids_vendor.so
 vendor/lib/libpdmapper.so
 vendor/lib/libpdnotifier.so
 vendor/lib/libqcmaputils.so
+vendor/lib/libqcrilFramework.so
+vendor/lib/libqrtr.so
+vendor/lib/libqsocket.so
+vendor/lib/libril-qc-hal-qmi.so
 vendor/lib/libril-qc-ltedirectdisc.so
 vendor/lib/libril-qc-qmi-1.so
 vendor/lib/libril-qc-radioconfig.so
@@ -681,22 +689,33 @@ vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/librilqmiservices.so
 vendor/lib/libsettings.so
 vendor/lib/libsystem_health_mon.so
-vendor/lib/vendor.qti.hardware.radio.am@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.radio.atcmdfwd@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.radio.lpa@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.radio.qcrilhook@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.radio.qtiradio@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.radio.uim@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.radio.uim_remote_client@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.radio.uim_remote_server@1.0_vendor.so
+vendor/lib/qcrild_librilutils.so
+vendor/lib/vendor.qti.hardware.radio.am@1.0.so
+vendor/lib/vendor.qti.hardware.radio.atcmdfwd@1.0.so
+vendor/lib/vendor.qti.hardware.radio.lpa@1.0.so
+vendor/lib/vendor.qti.hardware.radio.qcrilhook@1.0.so
+vendor/lib/vendor.qti.hardware.radio.qtiradio@1.0.so
+vendor/lib/vendor.qti.hardware.radio.qtiradio@2.0.so
+vendor/lib/vendor.qti.hardware.radio.uim@1.0.so
+vendor/lib/vendor.qti.hardware.radio.uim@1.1.so
+vendor/lib/vendor.qti.hardware.radio.uim_remote_client@1.0.so
+vendor/lib/vendor.qti.hardware.radio.uim_remote_server@1.0.so
 vendor/lib64/libconfigdb.so
 vendor/lib64/liblqe.so
 vendor/lib64/libmdmdetect.so
 vendor/lib64/libnetmgr.so
+vendor/lib64/libnetmgr_common.so
+vendor/lib64/libnetmgr_nr_fusion.so
+vendor/lib64/libnetmgr_rmnet_ext.so
+vendor/lib64/libnlnetmgr.so
 vendor/lib64/liboemaids_vendor.so
 vendor/lib64/libpdmapper.so
 vendor/lib64/libpdnotifier.so
 vendor/lib64/libqcmaputils.so
+vendor/lib64/libqcrilFramework.so
+vendor/lib64/libqrtr.so
+vendor/lib64/libqsocket.so
+vendor/lib64/libril-qc-hal-qmi.so
 vendor/lib64/libril-qc-ltedirectdisc.so
 vendor/lib64/libril-qc-qmi-1.so
 vendor/lib64/libril-qc-radioconfig.so
@@ -704,20 +723,23 @@ vendor/lib64/libril-qcril-hook-oem.so
 vendor/lib64/librilqmiservices.so
 vendor/lib64/libsettings.so
 vendor/lib64/libsystem_health_mon.so
-vendor/lib64/vendor.qti.hardware.radio.am@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.radio.atcmdfwd@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.radio.lpa@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.radio.qcrilhook@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.radio.qtiradio@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.radio.uim@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0_vendor.so
+vendor/lib64/qcrild_librilutils.so
+vendor/lib64/vendor.qti.hardware.radio.am@1.0.so
+vendor/lib64/vendor.qti.hardware.radio.atcmdfwd@1.0.so
+vendor/lib64/vendor.qti.hardware.radio.lpa@1.0.so
+vendor/lib64/vendor.qti.hardware.radio.qcrilhook@1.0.so
+vendor/lib64/vendor.qti.hardware.radio.qtiradio@1.0.so
+vendor/lib64/vendor.qti.hardware.radio.qtiradio@2.0.so
+vendor/lib64/vendor.qti.hardware.radio.uim@1.0.so
+vendor/lib64/vendor.qti.hardware.radio.uim@1.1.so
+vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0.so
+vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0.so
 vendor/radio/qcril_database/qcril.db
 
-# Radio - QTI Extension - from daisy
+# Radio - QTI Extension - from tissot
 -framework/qti-telephony-common.jar
 
-# Radio - IMS - from daisy
+# Radio - IMS - from tissot
 -app/imssettings/imssettings.apk
 -app/uceShimService/uceShimService.apk
 etc/permissions/com.qualcomm.qti.imscmservice.xml
@@ -765,7 +787,7 @@ lib64/vendor.qti.imsrtpservice@1.0.so
 lib64/vendor.qti.ims.callinfo@1.0.so
 lib64/vendor.qti.ims.rcsconfig@1.0.so
 vendor/bin/ims_rtp_daemon
-#vendor/bin/imsdatadaemon
+vendor/bin/imsdatadaemon
 vendor/bin/imsqmidaemon
 vendor/bin/imsrcsd
 vendor/lib/com.qualcomm.qti.imscmservice@1.0.so
@@ -822,9 +844,6 @@ vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0.so
 vendor/lib64/vendor.qti.ims.callinfo@1.0.so
 vendor/lib64/vendor.qti.ims.rcsconfig@1.0.so
-
-# Radio - IMS - from TA-1025 (Nokia 6) - 8.1
-vendor/bin/imsdatadaemon
 
 # Sensors - from daisy
 -framework/vendor.qti.hardware.sensorscalibrate-V1.0-java.jar

@@ -217,7 +217,7 @@
     <hal format="hidl">
         <name>android.hardware.radio</name>
         <transport>hwbinder</transport>
-        <version>1.1</version>
+        <version>1.2</version>
         <interface>
             <name>IRadio</name>
             <instance>slot1</instance>
@@ -228,22 +228,20 @@
             <instance>slot1</instance>
             <instance>slot2</instance>
         </interface>
-        <fqname>@1.1::IRadio/slot1</fqname>
-        <fqname>@1.1::IRadio/slot2</fqname>
-        <fqname>@1.1::ISap/slot1</fqname>
-        <fqname>@1.1::ISap/slot2</fqname>
+        <fqname>@1.2::IRadio/slot1</fqname>
+        <fqname>@1.2::IRadio/slot2</fqname>
+        <fqname>@1.2::ISap/slot1</fqname>
+        <fqname>@1.2::ISap/slot2</fqname>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.radio.deprecated</name>
+        <name>android.hardware.radio.config</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
-            <name>IOemHook</name>
-            <instance>slot1</instance>
-            <instance>slot2</instance>
+            <name>IRadioConfig</name>
+            <instance>default</instance>
         </interface>
-        <fqname>@1.0::IOemHook/slot1</fqname>
-        <fqname>@1.0::IOemHook/slot2</fqname>
+        <fqname>@1.0::IRadioConfig/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.renderscript</name>
@@ -313,6 +311,7 @@
             <name>IUsb</name>
             <instance>default</instance>
         </interface>
+        <fqname>@1.0::IUsb/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.vibrator</name>
@@ -552,16 +551,6 @@
         <fqname>@1.0::IQcRilAudio/slot2</fqname>
     </hal>
     <hal format="hidl">
-        <name>vendor.qti.hardware.radio.config</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IConfig</name>
-            <instance>radioconfig0</instance>
-            <instance>radioconfig1</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>vendor.qti.hardware.radio.ims</name>
         <transport>hwbinder</transport>
         <version>1.4</version>
@@ -608,6 +597,18 @@
         </interface>
         <fqname>@1.0::IQtiRadio/slot1</fqname>
         <fqname>@1.0::IQtiRadio/slot2</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.hardware.radio.qtiradio</name>
+        <transport>hwbinder</transport>
+        <version>2.0</version>
+        <interface>
+            <name>IQtiRadio</name>
+            <instance>slot1</instance>
+            <instance>slot2</instance>
+        </interface>
+        <fqname>@2.0::IQtiRadio/slot1</fqname>
+        <fqname>@2.0::IQtiRadio/slot2</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.radio.uim</name>

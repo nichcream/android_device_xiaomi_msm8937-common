@@ -111,9 +111,9 @@ vendor.vidc.disable.split.mode=1
 video.disable.ubwc=1
 
 #netmgrd
+ro.vendor.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
-ro.use_data_netmgrd=true
-persist.data.mode=concurrent
+persist.vendor.data.mode=concurrent
 
 # Perf
 ro.vendor.qti.am.reschedule_service=true
