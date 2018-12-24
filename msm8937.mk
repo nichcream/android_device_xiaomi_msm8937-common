@@ -399,6 +399,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
 
+# WiFi Display
+PRODUCT_PACKAGES += \
+    libaacwrapper \
+    libnl
+
+ PRODUCT_BOOT_JARS += \
+    WfdCommon
+
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 # Inherit common proprietary files
