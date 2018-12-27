@@ -516,7 +516,7 @@ vendor/lib64/libOmxSwVencMpeg4.so
 vendor/lib64/libMpeg4SwEncoder.so
 vendor/lib64/libswvdec.so
 
-# Perf - from bardockpro (BQ Aquarius X Pro) - 8.1
+# Perf - from TA-1024
 lib/libqti-at.so
 lib/libqti-perfd-client_system.so
 lib/vendor.qti.hardware.iop@1.0.so
@@ -530,28 +530,25 @@ lib64/vendor.qti.hardware.perf@1.0.so
 vendor/bin/msm_irqbalance
 vendor/bin/hw/vendor.qti.hardware.perf@1.0-service
 vendor/etc/init/vendor.qti.hardware.perf@1.0-service.rc
-vendor/lib/hw/vendor.qti.hardware.iop@1.0-impl.so
-vendor/lib/libfeedbackhandler.so
+vendor/etc/perf/commonresourceconfigs.xml
+vendor/lib/hw/vendor.qti.hardware.iop@2.0-impl.so
 vendor/lib/libperfgluelayer.so
-vendor/lib/libqti-iopd.so
 vendor/lib/libqti-iopd-client.so
 vendor/lib/libqti-perfd.so
 vendor/lib/libqti-perfd-client.so
 vendor/lib/libqti-util.so
-vendor/lib/vendor.qti.hardware.iop@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.iop@2.0_vendor.so
-vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so
-vendor/lib64/hw/vendor.qti.hardware.iop@1.0-impl.so
-vendor/lib64/libfeedbackhandler.so
+vendor/lib/vendor.qti.hardware.iop@1.0.so
+vendor/lib/vendor.qti.hardware.iop@2.0.so
+vendor/lib/vendor.qti.hardware.perf@1.0.so
+vendor/lib64/hw/vendor.qti.hardware.iop@2.0-impl.so
 vendor/lib64/libperfgluelayer.so
-vendor/lib64/libqti-iopd.so
 vendor/lib64/libqti-iopd-client.so
 vendor/lib64/libqti-perfd.so
 vendor/lib64/libqti-perfd-client.so
 vendor/lib64/libqti-util.so
-vendor/lib64/vendor.qti.hardware.iop@1.0_vendor.so
-vendor/lib64/vendor.qti.hardware.iop@2.0_vendor.so
-vendor/lib64/vendor.qti.hardware.perf@1.0_vendor.so
+vendor/lib64/vendor.qti.hardware.iop@1.0.so
+vendor/lib64/vendor.qti.hardware.iop@2.0.so
+vendor/lib64/vendor.qti.hardware.perf@1.0.so
 
 # Peripheral manager - from tissot
 vendor/bin/pm-proxy
