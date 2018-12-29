@@ -1,75 +1,51 @@
-on boot
-
-    # Set RPS mask
-    write /sys/class/net/rmnet0/queues/rx-0/rps_cpus ${sys.usb.rps_mask}
-
-    # Update foreground and background cpusets
-    # Reserve CPU 7 for the top app
-    write /dev/cpuset/foreground/cpus 0-7
-    write /dev/cpuset/background/cpus 4-5
-    write /dev/cpuset/system-background/cpus 4-6
-    write /dev/cpuset/top-app/cpus 0-7
-
-    # Add a cpuset for the camera daemon
-    # We want all cores for camera
-    mkdir /dev/cpuset/camera-daemon
-    write /dev/cpuset/camera-daemon/cpus 0-3
-    write /dev/cpuset/camera-daemon/mems 0
-    chown cameraserver cameraserver /dev/cpuset/camera-daemon
-    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
-    chmod 0660 /dev/cpuset/camera-daemon/tasks
-
-    # Switch one core to interactive to set permissions, for power hal and system server.
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "interactive"
-    chown system system /dev/cpuctl/cpu.notify_on_migrate
-    chmod 0660 /dev/cpuctl/cpu.notify_on_migrate
-    chown root system /sys/devices/system/cpu/cpu1/online
-    chown root system /sys/devices/system/cpu/cpu2/online
-    chown root system /sys/devices/system/cpu/cpu3/online
-    chown root system /sys/devices/system/cpu/cpu4/online
-    chown root system /sys/devices/system/cpu/cpu5/online
-    chown root system /sys/devices/system/cpu/cpu6/online
-    chown root system /sys/devices/system/cpu/cpu7/online
-    chmod 664 /sys/devices/system/cpu/cpu1/online
-    chmod 664 /sys/devices/system/cpu/cpu2/online
-    chmod 664 /sys/devices/system/cpu/cpu3/online
-    chmod 664 /sys/devices/system/cpu/cpu4/online
-    chmod 664 /sys/devices/system/cpu/cpu5/online
-    chmod 664 /sys/devices/system/cpu/cpu6/online
-    chmod 664 /sys/devices/system/cpu/cpu7/online
-
-    # Bring CPUs online
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/devices/system/cpu/cpu4/online 1
-    write /sys/devices/system/cpu/cpu5/online 1
-    write /sys/devices/system/cpu/cpu6/online 1
-    write /sys/devices/system/cpu/cpu7/online 1
-    restorecon -R /sys/devices/system/cpu
-
 on enable-low-power
     # HMP scheduler (big.Little cluster related) settings
     write /proc/sys/kernel/sched_window_stats_policy 3
     write /proc/sys/kernel/sched_ravg_hist_size 3
     write /proc/sys/kernel/sched_ravg_window 20000000
 
+    # Disable sched_boost
+    write /proc/sys/kernel/sched_boost 0
+
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
     write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/io_percent 20
     write /sys/class/devfreq/soc:qcom,cpubw/bw_hwmon/guard_band_mbps 30
+    write /sys/class/devfreq/soc:qcom,gpubw/bw_hwmon/io_percent 40
 
     # Disable thermal core_control to update interactive gov settings
     write /sys/module/msm_thermal/core_control/enabled 0
 
-    # disable thermal bcl hotplug to switch governor
-    write /sys/devices/soc/soc:qcom,bcl/mode "disable"
-    write /sys/devices/soc/soc:qcom,bcl/hotplug_mask 0
-    write /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask 0
-    write /sys/devices/soc/soc:qcom,bcl/mode "enable"
+    # HMP Task packing settings
+    write /proc/sys/kernel/sched_small_task 20
+    write /sys/devices/system/cpu/cpu0/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu1/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu2/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu3/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu4/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu5/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu6/sched_mostly_idle_load 30
+    write /sys/devices/system/cpu/cpu7/sched_mostly_idle_load 30
 
-    #  configure governor settings for little cluster
+    write /sys/devices/system/cpu/cpu0/sched_mostly_idle_nr_run 3
+    write /sys/devices/system/cpu/cpu1/sched_mostly_idle_nr_run 3
+    write /sys/devices/system/cpu/cpu2/sched_mostly_idle_nr_run 3
+    write /sys/devices/system/cpu/cpu3/sched_mostly_idle_nr_run 3
+    write /sys/devices/system/cpu/cpu4/sched_mostly_idle_nr_run 3
+    write /sys/devices/system/cpu/cpu5/sched_mostly_idle_nr_run 3
+    write /sys/devices/system/cpu/cpu6/sched_mostly_idle_nr_run 3
+    write /sys/devices/system/cpu/cpu7/sched_mostly_idle_nr_run 3
+
+    write /sys/devices/system/cpu/cpu0/sched_prefer_idle 0
+    write /sys/devices/system/cpu/cpu1/sched_prefer_idle 0
+    write /sys/devices/system/cpu/cpu2/sched_prefer_idle 0
+    write /sys/devices/system/cpu/cpu3/sched_prefer_idle 0
+    write /sys/devices/system/cpu/cpu4/sched_prefer_idle 0
+    write /sys/devices/system/cpu/cpu5/sched_prefer_idle 0
+    write /sys/devices/system/cpu/cpu6/sched_prefer_idle 0
+    write /sys/devices/system/cpu/cpu7/sched_prefer_idle 0
+
+    #  configure governor settings for perf cluster
     write /sys/devices/system/cpu/cpu0/online 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay "19000 1094400:39000"
@@ -82,7 +58,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/sampling_down_factor 40000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 960000
 
-    # configure governor settings for big cluster
+    # configure governor settings for power cluster
     write /sys/devices/system/cpu/cpu4/online 1
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay 39000
@@ -95,43 +71,13 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor 40000
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 768000
 
-    # HMP Task packing settings
-    write /sys/devices/system/cpu/cpu0/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu1/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu2/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu3/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu4/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu5/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu6/sched_prefer_idle 0
-    write /sys/devices/system/cpu/cpu7/sched_prefer_idle 0
-
-    write /proc/sys/kernel/sched_small_task 20
-    write /sys/devices/system/cpu/cpu0/sched_mostly_idle_load 30
-    write /sys/devices/system/cpu/cpu1/sched_mostly_idle_load 30
-    write /sys/devices/system/cpu/cpu2/sched_mostly_idle_load 30
-    write /sys/devices/system/cpu/cpu3/sched_mostly_idle_load 30
-    write /sys/devices/system/cpu/cpu4/sched_mostly_idle_load 30
-    write /sys/devices/system/cpu/cpu5/sched_mostly_idle_load 30
-    write /sys/devices/system/cpu/cpu6/sched_mostly_idle_load 30
-    write /sys/devices/system/cpu/cpu7/sched_mostly_idle_load 30
-
-    write /sys/devices/system/cpu/cpu0/sched_static_cpu_pwr_cost 0
-    write /sys/devices/system/cpu/cpu1/sched_static_cpu_pwr_cost 0
-    write /sys/devices/system/cpu/cpu2/sched_static_cpu_pwr_cost 0
-    write /sys/devices/system/cpu/cpu3/sched_static_cpu_pwr_cost 0
-    write /sys/devices/system/cpu/cpu4/sched_static_cpu_pwr_cost 0
-    write /sys/devices/system/cpu/cpu5/sched_static_cpu_pwr_cost 0
-    write /sys/devices/system/cpu/cpu6/sched_static_cpu_pwr_cost 0
-    write /sys/devices/system/cpu/cpu7/sched_static_cpu_pwr_cost 0
-
-    write /sys/devices/system/cpu/cpu0/sched_mostly_idle_nr_run 3
-    write /sys/devices/system/cpu/cpu1/sched_mostly_idle_nr_run 3
-    write /sys/devices/system/cpu/cpu2/sched_mostly_idle_nr_run 3
-    write /sys/devices/system/cpu/cpu3/sched_mostly_idle_nr_run 3
-    write /sys/devices/system/cpu/cpu4/sched_mostly_idle_nr_run 3
-    write /sys/devices/system/cpu/cpu5/sched_mostly_idle_nr_run 3
-    write /sys/devices/system/cpu/cpu6/sched_mostly_idle_nr_run 3
-    write /sys/devices/system/cpu/cpu7/sched_mostly_idle_nr_run 3
+    # Enable sched guided freq control
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load 1
+    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif 1
+    write /proc/sys/kernel/sched_freq_inc_notify 50000
+    write /proc/sys/kernel/sched_freq_dec_notify 50000
 
     # Disable L2-GDHS low power modes
     write /sys/module/lpm_levels/system/pwr/pwr-l2-gdhs/idle_enabled N
@@ -148,56 +94,24 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu6/online 1
     write /sys/devices/system/cpu/cpu7/online 1
 
-    # Re-enable thermal core_control
-    write /sys/module/msm_thermal/core_control/enabled 1
-
-    # re-enable BCL hotplug
-    write /sys/devices/soc/soc:qcom,bcl/mode "disable"
-    write /sys/devices/soc/soc:qcom,bcl/hotplug_mask 48
-    write /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask 48
-    write /sys/devices/soc/soc:qcom,bcl/mode "enable"
-
-    # Enable power_efficient workqueue
-    write /sys/module/workqueue/parameters/power_efficient 1
-
     # Enable low power modes
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
     # HMP scheduler (big.Little cluster related) settings
     write /proc/sys/kernel/sched_upmigrate 93
     write /proc/sys/kernel/sched_downmigrate 83
-    write /proc/sys/kernel/sched_boost 0
 
-    # Enable sched guided freq control
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif 1
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load 1
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif 1
-    write /proc/sys/kernel/sched_freq_inc_notify 50000
-    write /proc/sys/kernel/sched_freq_dec_notify 50000
+    # Re-enable thermal core_control
+    write /sys/module/msm_thermal/core_control/enabled 1
 
     # Enable dynamic clock gating
     write /sys/module/lpm_levels/lpm_workarounds/dynamic_clock_gating 1
 
-    # Set per_process_reclaim tuning parameters
-    write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
-    write /sys/module/process_reclaim/parameters/pressure_max 70
-    write /sys/module/process_reclaim/parameters/swap_opt_eff 30
-    write /sys/module/process_reclaim/parameters/pressure_min 10
-    write /sys/module/process_reclaim/parameters/per_swap_size 1024
-
-    # Set ZCache parameters
-    write /sys/module/zcache/parameters/clear_percent 3
-    write /sys/module/zcache/parameters/max_pool_percent 30
-
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 128
-    write /sys/block/mmcblk0/queue/read_ahead_kb 128
-    write /sys/block/dm-0/queue/read_ahead_kb 128
+    # Configure memory parameters
+    start qcom-post-boot
 
     write /proc/sys/vm/swappiness 100
     swapon_all /vendor/etc/fstab.qcom
-
-    rm /data/system/perfd/default_values
 
     # Tell perfd that we're ready to go
     setprop vendor.post_boot.parsed 1
@@ -223,10 +137,8 @@ service qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
     oneshot
 
 on property:init.svc.recovery=running
-    start qcom-post-boot
     trigger enable-low-power
 
 on property:sys.boot_completed=1
-    start qcom-post-boot
     trigger enable-low-power
     setprop sys.io.scheduler cfq
