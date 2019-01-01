@@ -95,9 +95,6 @@ function configure_memory_parameters() {
         echo 1 > /sys/module/lowmemorykiller/parameters/oom_reaper
     fi
 
-    # Set allocstall_threshold to 0 for all targets.
-    echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
-
     configure_read_ahead_kb_values
 }
 
