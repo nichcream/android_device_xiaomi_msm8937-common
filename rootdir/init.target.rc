@@ -184,11 +184,6 @@ on boot
     # Prevents permission denied error for telephony
     chmod 0644 /proc/cmdline
 
-    # init.qcom.sensors.sh
-    chmod 0664 /persist/sensors/sensors_settings
-    chown system system /persist/sensors
-    start vendor.sensors.qti
-
     # LEDs
     chown root system /sys/class/leds/red/blink
     chown root system /sys/class/leds/green/blink
