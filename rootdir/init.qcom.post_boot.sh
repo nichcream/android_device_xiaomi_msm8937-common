@@ -95,6 +95,14 @@ function configure_memory_parameters() {
         echo 1 > /sys/module/lowmemorykiller/parameters/oom_reaper
     fi
 
+    MemTotalStr=`cat /proc/meminfo | grep MemTotal`
+    MemTotal=${MemTotalStr:16:8}
+
+    # Don't account allocstalls for <= 2GB RAM targets
+    if [ $MemTotal -le 2097152 ]; then
+        echo 100 > /sys/module/vmpressure/parameters/allocstall_threshold
+    fi
+
     configure_read_ahead_kb_values
 }
 
