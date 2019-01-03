@@ -327,11 +327,6 @@ service vendor.tlocd /vendor/bin/tloc_daemon
     user system
     group drmrpc gps net_raw
 
-service charger /sbin/chargeonlymode
-    class charger
-    group system graphics
-    seclabel u:r:charger:s0
-
 # FM radio
 on property:hw.fm.init=*
     write /sys/module/radio_iris_transport/parameters/fmsmd_set ${hw.fm.init}
