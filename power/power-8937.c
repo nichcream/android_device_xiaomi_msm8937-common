@@ -204,13 +204,6 @@ int power_hint_override(power_hint_t hint, void *data)
         GPU_MIN_PWRLVL_BOOST, 0x1,
     };
 
-    int resources_launch_packing[] = {
-        SCHED_PREFER_IDLE_DIS_V3, 0x1,
-        SCHED_SMALL_TASK_DIS, 0x1,
-        SCHED_IDLE_NR_RUN_DIS, 0x1,
-        SCHED_IDLE_LOAD_DIS, 0x1,
-    };
-
     int resources_interaction_fling_boost[] = {
         MIN_FREQ_BIG_CORE_0, 0x514,
         SCHED_BOOST_ON_V3, 0x1,
@@ -243,9 +236,6 @@ int power_hint_override(power_hint_t hint, void *data)
             duration = 2000;
             interaction(duration, ARRAY_SIZE(resources_launch_main),
                     resources_launch_main);
-            duration = 5000;
-            interaction(duration, ARRAY_SIZE(resources_launch_packing),
-                    resources_launch_packing);
             return HINT_HANDLED;
         case POWER_HINT_VIDEO_ENCODE:
             process_video_encode_hint(data);
