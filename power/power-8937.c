@@ -48,6 +48,10 @@
 #include "performance.h"
 #include "power-common.h"
 
+#define MAX_INTERACTIVE_DURATION 5000
+#define MIN_INTERACTIVE_DURATION 500
+#define MIN_FLING_DURATION 1100
+
 static int saved_interactive_mode = -1;
 static int display_hint_sent;
 static int video_encode_hint_sent;
@@ -191,10 +195,7 @@ static void process_video_encode_hint(void *metadata)
 
 int power_hint_override(power_hint_t hint, void *data)
 {
-    int duration, duration_hint;
-    static struct timespec s_previous_boost_timespec;
-    struct timespec cur_boost_timespec;
-    long long elapsed_time;
+    int duration;
     int resources_launch_main[] = {
         SCHED_BOOST_ON_V3, 0x1,
         MIN_FREQ_BIG_CORE_0, 0x5DC,
@@ -228,30 +229,14 @@ int power_hint_override(power_hint_t hint, void *data)
 
     switch (hint) {
     	case POWER_HINT_INTERACTION:
-            duration = 500;
-            duration_hint = 0;
-
             if (data) {
-                duration_hint = *((int *)data);
-            }
-
-            duration = duration_hint > 0 ? duration_hint : 500;
-
-            clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
-            elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
-            if (elapsed_time > 750000)
-                elapsed_time = 750000;
-            // don't hint if it's been less than 250ms since last boost
-            // also detect if we're doing anything resembling a fling
-            // support additional boosting in case of flings
-            else if (elapsed_time < 250000 && duration <= 750)
-                return HINT_HANDLED;
-
-            s_previous_boost_timespec = cur_boost_timespec;
-
-            if (duration >= 1500) {
-                interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost),
-                        resources_interaction_fling_boost);
+                duration = *((int*)data);
+                if (duration > MAX_INTERACTIVE_DURATION)
+                    duration = MAX_INTERACTIVE_DURATION;
+                if (duration >= MIN_FLING_DURATION) {
+                    interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost),
+                            resources_interaction_fling_boost);
+                }
             }
             return HINT_HANDLED;
         case POWER_HINT_LAUNCH:
