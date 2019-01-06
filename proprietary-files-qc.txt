@@ -360,20 +360,11 @@ vendor/lib64/vendor.qti.gnss@1.2.so
 vendor/lib64/vendor.qti.gnss@2.0.so
 vendor/lib64/vendor.qti.gnss@2.1.so
 
-# Graphics - from marmite (Wileyfox Swift 2) - 8.1
-lib/egl/libGLES_android.so
-lib64/egl/libGLES_android.so
+# Graphics - from TA-1024
 vendor/lib/egl/eglSubDriverAndroid.so
-vendor/lib/egl/eglsubAndroid.so
 vendor/lib/egl/libEGL_adreno.so
-vendor/lib/egl/libESXEGL_adreno.so
-vendor/lib/egl/libESXGLESv1_CM_adreno.so
-vendor/lib/egl/libESXGLESv2_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
 vendor/lib/egl/libGLESv2_adreno.so
-vendor/lib/egl/libRBEGL_adreno.so
-vendor/lib/egl/libRBGLESv1_CM_adreno.so
-vendor/lib/egl/libRBGLESv2_adreno.so
 vendor/lib/egl/libq3dtools_adreno.so
 vendor/lib/egl/libq3dtools_esx.so
 vendor/lib/egl/libQTapGLES.so
@@ -383,33 +374,21 @@ vendor/lib/libbccQTI.so
 vendor/lib/libC2D2.so
 vendor/lib/libc2d30_bltlib.so
 vendor/lib/libc2d30-a3xx.so
-vendor/lib/libc2d30-a4xx.so
-vendor/lib/libc2d30-a5xx.so
 vendor/lib/libCB.so
 vendor/lib/libgsl.so
 vendor/lib/libhdr_tm.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libllvm-qcom.so
-vendor/lib/libllvm-qgl.so
-vendor/lib/libmm-disp-apis.so
 vendor/lib/libmm-hdcpmgr.so
-vendor/lib/libmm-qdcm.so
 vendor/lib/libOpenCL.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/librs_adreno.so
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/libscalar.so
 vendor/lib64/egl/eglSubDriverAndroid.so
-vendor/lib64/egl/eglsubAndroid.so
 vendor/lib64/egl/libEGL_adreno.so
-vendor/lib64/egl/libESXEGL_adreno.so
-vendor/lib64/egl/libESXGLESv1_CM_adreno.so
-vendor/lib64/egl/libESXGLESv2_adreno.so
 vendor/lib64/egl/libGLESv1_CM_adreno.so
 vendor/lib64/egl/libGLESv2_adreno.so
-vendor/lib64/egl/libRBEGL_adreno.so
-vendor/lib64/egl/libRBGLESv1_CM_adreno.so
-vendor/lib64/egl/libRBGLESv2_adreno.so
 vendor/lib64/egl/libq3dtools_adreno.so
 vendor/lib64/egl/libq3dtools_esx.so
 vendor/lib64/egl/libQTapGLES.so
@@ -419,17 +398,12 @@ vendor/lib64/libbccQTI.so
 vendor/lib64/libC2D2.so
 vendor/lib64/libc2d30_bltlib.so
 vendor/lib64/libc2d30-a3xx.so
-vendor/lib64/libc2d30-a4xx.so
-vendor/lib64/libc2d30-a5xx.so
 vendor/lib64/libCB.so
 vendor/lib64/libgsl.so
 vendor/lib64/libhdr_tm.so
 vendor/lib64/libllvm-glnext.so
 vendor/lib64/libllvm-qcom.so
-vendor/lib64/libllvm-qgl.so
-vendor/lib64/libmm-disp-apis.so
 vendor/lib64/libmm-hdcpmgr.so
-vendor/lib64/libmm-qdcm.so
 vendor/lib64/libOpenCL.so
 vendor/lib64/librs_adreno_sha1.so
 vendor/lib64/librs_adreno.so
@@ -450,7 +424,7 @@ vendor/lib64/libsdm-diag.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libtinyxml2_1.so
 
-# Graphics firmware - from marmite (Wileyfox Swift 2) - 8.1
+# Graphics firmware - from TA-1024
 vendor/firmware/a530_gpmu.fw2
 vendor/firmware/a530_pfp.fw
 vendor/firmware/a530_pm4.fw
@@ -473,12 +447,10 @@ vendor/lib64/libkeymasterutils.so
 vendor/lib64/libkeymasterprovision.so
 vendor/lib64/libkeymasterdeviceutils.so
 
-# Listen - from tissot
+# Listen - from TA-1024
+vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
-
-# Listen - from marmite (Wileyfox Swift 2) - 8.1
-vendor/lib/hw/sound_trigger.primary.msm8937.so
 vendor/lib64/hw/sound_trigger.primary.msm8937.so
 
 # Media - from tissot
@@ -534,7 +506,7 @@ vendor/lib64/libmm-color-convertor.so
 vendor/lib64/libvpplibrary.so
 vendor/lib64/vendor.qti.hardware.vpp@1.1.so
 
-# Media - from marmite (Wileyfox Swift 2) - 8.1
+# Media - from TA-1024
 vendor/lib/libOmxSwVdec.so
 vendor/lib/libOmxSwVencMpeg4.so
 vendor/lib/libMpeg4SwEncoder.so
@@ -855,20 +827,20 @@ vendor/lib64/vendor.qti.imsrtpservice@1.0.so
 vendor/lib64/vendor.qti.ims.callinfo@1.0.so
 vendor/lib64/vendor.qti.ims.rcsconfig@1.0.so
 
-# Sensors - from tissot
+# Sensors - from TA-1024
 -framework/vendor.qti.hardware.sensorscalibrate-V1.0-java.jar
 lib/libsensor1.so
 lib/libsensor_reg.so
 lib64/libsensor1.so
 lib64/libsensor_reg.so
 vendor/bin/sensors.qti
-vendor/lib/hw/activity_recognition.msm8953.so:vendor/lib/hw/activity_recognition.msm8937.so
+vendor/lib/hw/activity_recognition.msm8937.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
 vendor/lib/sensor_calibrate.so
 vendor/lib/sensors.ssc.so
 vendor/lib/vendor.qti.hardware.sensorscalibrate@1.0.so
-vendor/lib64/hw/activity_recognition.msm8953.so:vendor/lib64/hw/activity_recognition.msm8937.so
+vendor/lib64/hw/activity_recognition.msm8937.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
 vendor/lib64/sensor_calibrate.so
@@ -898,7 +870,7 @@ vendor/lib64/vendor.qti.hardware.tui_comm@1.0.so
 # Wi-Fi - from bardockpro (BQ Aquarius X Pro) - 8.1
 vendor/bin/wcnss_service
 
-# WiFi Display - from daisy
+# WiFi Display - from TA-1024
 bin/wfdservice
 etc/init/wfdservice.rc
 etc/wfdconfig.xml
@@ -929,7 +901,6 @@ lib64/libwfdclient.so
 lib64/libwfdnative.so
 vendor/bin/wifidisplayhalservice
 vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc
-vendor/lib/com.qualcomm.qti.wifidisplayhal@1.0.so
 vendor/lib/com.qualcomm.qti.wifidisplayhal@1.0-halimpl.so
 vendor/lib/libwfdcommonutils_proprietary.so
 vendor/lib/libwfdhaldsmanager.so
