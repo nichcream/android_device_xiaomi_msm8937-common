@@ -56,6 +56,9 @@ TARGET_NO_BOOTLOADER 		:= true
 # Properties
 TARGET_SYSTEM_PROP := $(VENDOR_PATH)/system.prop
 
+# ANT
+BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
+
 # Audio
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
 AUDIO_FEATURE_ENABLED_HIFI_AUDIO := true
