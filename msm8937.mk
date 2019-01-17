@@ -210,6 +210,10 @@ PRODUCT_PACKAGES += \
     android.hardware.health@2.0-impl \
     android.hardware.health@2.0-service
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/charger/animation.txt:root/res/values/charger/animation.txt \
+    $(LOCAL_PATH)/rootdir/charger/battery_font.png:root/res/images/charger/battery_font.png
+
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
