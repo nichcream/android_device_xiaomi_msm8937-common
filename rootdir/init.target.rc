@@ -184,11 +184,6 @@ on boot
     # Prevents permission denied error for telephony
     chmod 0644 /proc/cmdline
 
-    # LEDs
-    chown root system /sys/class/leds/red/blink
-    chown root system /sys/class/leds/green/blink
-    chown root system /sys/class/leds/blue/blink
-
     # IR blaster
     chown root system /sys/class/leds/infrared/transmit
     chown root system /sys/class/leds/infrared/brightness
@@ -264,6 +259,7 @@ on charger
     start qcom-post-boot
     setprop persist.sys.usb.config mass_storage
     start vendor.hvdcp_opti
+    start vendor.vm_bms
 
 service hbtp /system/vendor/bin/hbtp_daemon
     class main
@@ -313,6 +309,11 @@ service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
     user root
     group system wakelock
 
+service vendor.vm_bms /vendor/bin/vm_bms
+    class main
+    user root
+    group system wakelock
+
 service mdtpd /system/vendor/bin/mdtpd
     class late_start
     user root
@@ -326,6 +327,20 @@ service vendor.tlocd /vendor/bin/tloc_daemon
     class late_start
     user system
     group drmrpc gps net_raw
+
+on boot
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/red/breath
+    chown system system /sys/class/leds/red/delay_on
+    chown system system /sys/class/leds/red/delay_off
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/green/breath
+    chown system system /sys/class/leds/green/delay_on
+    chown system system /sys/class/leds/green/delay_off
+    chown system system /sys/class/leds/blue/blink
+    chown system system /sys/class/leds/blue/breath
+    chown system system /sys/class/leds/blue/delay_on
+    chown system system /sys/class/leds/blue/delay_off
 
 # FM radio
 on property:hw.fm.init=*
