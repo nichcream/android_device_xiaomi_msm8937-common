@@ -37,6 +37,7 @@ ro.config.vc_call_vol_steps=8
 ro.config.media_vol_steps=20
 
 # Bluetooth
+persist.vendor.bluetooth.modem_nv_support=true
 persist.vendor.bt.enable.splita2dp=false
 vendor.qcom.bluetooth.soc=smd
 
