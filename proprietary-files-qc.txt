@@ -68,24 +68,26 @@ vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcomvisualizer.so
 vendor/lib64/soundfx/libqcvirt.so
 
-# Bluetooth - from bardockpro (BQ Aquarius X Pro) - 8.1
+# Bluetooth - from tissot
 lib/com.qualcomm.qti.bluetooth_audio@1.0.so
 lib64/com.qualcomm.qti.bluetooth_audio@1.0.so
-vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti|7ada90450e6af7dceb113eb312327074d3d61225
 vendor/bin/btnvtool
 vendor/bin/hci_qcomm_init
 vendor/bin/wcnss_filter
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so
-vendor/lib/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
+vendor/lib/com.qualcomm.qti.bluetooth_audio@1.0.so
 vendor/lib/libbtnv.so
 vendor/lib/libbt-hidlclient.so
 vendor/lib/libbthost_if.so
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
-vendor/lib64/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
+vendor/lib64/com.qualcomm.qti.bluetooth_audio@1.0.so
 vendor/lib64/libbtnv.so
 vendor/lib64/libbt-hidlclient.so
 vendor/lib64/libbthost_if.so
+
+# Bluetooth - HIDL service - from TA-1024
+vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 
 # CNE - from tissot
 etc/permissions/cneapiclient.xml

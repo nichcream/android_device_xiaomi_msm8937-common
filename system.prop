@@ -37,11 +37,8 @@ ro.config.vc_call_vol_steps=8
 ro.config.media_vol_steps=20
 
 # Bluetooth
-bluetooth.hfp.client=1
-ro.bluetooth.hfp.ver=1.7 
-ro.qualcomm.bt.hci_transport=smd
 persist.vendor.bt.enable.splita2dp=false
-qcom.bluetooth.soc=smd
+vendor.qcom.bluetooth.soc=smd
 
 # Camera
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk
