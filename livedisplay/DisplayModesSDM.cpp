@@ -41,12 +41,6 @@ namespace implementation {
 
 DisplayModesSDM::DisplayModesSDM(const std::shared_ptr<SDMController>& controller, uint64_t cookie)
     : mController(controller), mCookie(cookie) {
-    if (isSupported()) {
-        DisplayMode mode = getDefaultDisplayModeInternal();
-        if (mode.id >= 0) {
-            setDisplayMode(mode.id, false);
-        }
-    }
 }
 
 bool DisplayModesSDM::isSupported() {
