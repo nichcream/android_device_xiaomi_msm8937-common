@@ -47,50 +47,37 @@ IpaEventRelay::IpaEventRelay(
 
 void IpaEventRelay::onOffloadStarted() {
     ALOGI("onOffloadStarted()");
-    auto ret = mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_STARTED);
-    if (!ret.isOk()) {
-        ALOGE("Triggering OffloadStarted Callback failed.");
-    }
+    mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_STARTED);
 } /* onOffloadStarted */
 
 void IpaEventRelay::onOffloadStopped(StoppedReason reason) {
     ALOGI("onOffloadStopped(%d)", reason);
-    if( reason == StoppedReason::REQUESTED ) {
-        /*
-         * No way to communicate this to Framework right now, they make an
-         * assumption that offload is stopped when they remove the
-         * configuration.
-         */
-    }
-    else if ( reason == StoppedReason::ERROR ) {
-        auto ret = mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_STOPPED_ERROR);
-        if (!ret.isOk()) {
-            ALOGE("Triggering OffloadStopped Callback failed.");
-        }
-    }
-    else if ( reason == StoppedReason::UNSUPPORTED ) {
-        auto ret = mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_STOPPED_UNSUPPORTED);
-        if (!ret.isOk()) {
-            ALOGE("Triggering OffloadStopped Callback failed.");
-        }
-    }
-    else {
-        ALOGE("Unknown stopped reason(%d)", reason);
+    switch (reason) {
+        case REQUESTED:
+            /*
+             * No way to communicate this to Framework right now, they make an
+             * assumption that offload is stopped when they remove the
+             * configuration.
+             */
+             break;
+        case ERROR:
+            mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_STOPPED_ERROR);
+            break;
+        case UNSUPPORTED:
+            mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_STOPPED_UNSUPPORTED);
+            break;
+        default:
+            ALOGE("Unknown stopped reason(%d)", reason);
+            break;
     }
 } /* onOffloadStopped */
 
 void IpaEventRelay::onOffloadSupportAvailable() {
     ALOGI("onOffloadSupportAvailable()");
-    auto ret = mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_SUPPORT_AVAILABLE);
-    if (!ret.isOk()) {
-        ALOGE("Triggering OffloadSupportAvailable Callback failed.");
-    }
+    mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_SUPPORT_AVAILABLE);
 } /* onOffloadSupportAvailable */
 
 void IpaEventRelay::onLimitReached() {
     ALOGI("onLimitReached()");
-    auto ret = mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_STOPPED_LIMIT_REACHED);
-    if (!ret.isOk()) {
-        ALOGE("Triggering LimitReached Callback failed.");
-    }
+    mFramework->onEvent(OffloadCallbackEvent::OFFLOAD_STOPPED_LIMIT_REACHED);
 } /* onLimitReached */
