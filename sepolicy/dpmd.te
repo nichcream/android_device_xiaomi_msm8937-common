@@ -1,1 +1,1 @@
-allow dpmd self:capability { dac_override };
+allow dpmd self:capability dac_override;

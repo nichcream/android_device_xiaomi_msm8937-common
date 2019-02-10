@@ -1,5 +1,5 @@
 type gx_fpd, domain;
-type gx_fpd_exec, exec_type, file_type;
+type gx_fpd_exec, exec_type, vendor_file_type, file_type;
 
 # gx_fpd
 init_daemon_domain(gx_fpd)
