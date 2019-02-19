@@ -11,8 +11,8 @@ service vendor.fps_hal /vendor/bin/hw/android.hardware.biometrics.fingerprint@2.
 
 service vendor.gx_fpd /vendor/bin/gx_fpd
     class core
-    user root
-    group system system
+    user system
+    group system
     disabled
 
 on post-fs-data
