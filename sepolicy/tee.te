@@ -1,9 +1,10 @@
 # /data/goodix labeling
 type_transition tee system_data_file:{ dir file } gx_fpd_data_file;
 
-allow tee { mnt_vendor_file persist_drm_file }:dir search;
-allow tee gx_fpd_data_file:dir create_dir_perms;
-allow tee gx_fpd_data_file:file create_file_perms;
+# allow storing goodix data
+allow tee mnt_vendor_file:dir search;
+allow tee { persist_drm_file gx_fpd_data_file }:dir create_dir_perms;
+allow tee { persist_drm_file gx_fpd_data_file }:file create_file_perms;
 allow tee system_data_file:dir create_dir_perms;
 
 # Use system data for pre-P first SDK API level
