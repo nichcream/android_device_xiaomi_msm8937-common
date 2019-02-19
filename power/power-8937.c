@@ -221,7 +221,7 @@ int power_hint_override(power_hint_t hint, void *data)
     }
 
     switch (hint) {
-    	case POWER_HINT_INTERACTION:
+        case POWER_HINT_INTERACTION:
             if (data) {
                 duration = *((int*)data);
                 if (duration > MAX_INTERACTIVE_DURATION)
