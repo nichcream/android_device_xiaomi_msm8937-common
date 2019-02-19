@@ -113,6 +113,9 @@ on enable-low-power
     write /proc/sys/vm/swappiness 100
     swapon_all /vendor/etc/fstab.qcom
 
+    # Work against lineage-governor.rc
+    chown root root /dev/cpuctl/cpu.notify_on_migrate
+
     # Tell perfd that we're ready to go
     setprop vendor.post_boot.parsed 1
 
