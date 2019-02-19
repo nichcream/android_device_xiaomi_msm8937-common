@@ -51,6 +51,7 @@
 #define MAX_INTERACTIVE_DURATION 5000
 #define MIN_INTERACTIVE_DURATION 500
 #define MIN_FLING_DURATION 1100
+#define MAX_LAUNCH_DURATION 5000
 
 static int saved_interactive_mode = -1;
 static int display_hint_sent;
@@ -131,6 +132,36 @@ static void set_power_profile(int profile) {
     current_power_profile = profile;
 }
 
+static void process_activity_launch_hint(void *data)
+{
+    static int lock_handle = -1;
+    int state;
+
+    if (data) {
+        state = *((int*)data);
+    } else {
+        return;
+    }
+
+    if (state) {
+        int resource_values[] = {
+            SCHED_BOOST_ON_V3, 0x1,
+            MIN_FREQ_BIG_CORE_0, 0x5DC,
+            ALL_CPUS_PWR_CLPS_DIS_V3, 0x1,
+            CPUS_ONLINE_MIN_BIG, 0x4,
+            GPU_MIN_PWRLVL_BOOST, 0x1,
+        };
+        lock_handle = interaction_with_handle(lock_handle, MAX_LAUNCH_DURATION,
+                ARRAY_SIZE(resource_values), resource_values);
+    } else {
+        // release lock early since launch has finished
+        if (CHECK_HANDLE(lock_handle)) {
+            release_request(lock_handle);
+            lock_handle = -1;
+        }
+    }
+}
+
 static void process_video_encode_hint(void *metadata)
 {
     char governor[80];
@@ -196,14 +227,6 @@ static void process_video_encode_hint(void *metadata)
 int power_hint_override(power_hint_t hint, void *data)
 {
     int duration;
-    int resources_launch_main[] = {
-        SCHED_BOOST_ON_V3, 0x1,
-        MIN_FREQ_BIG_CORE_0, 0x5DC,
-        ALL_CPUS_PWR_CLPS_DIS_V3, 0x1,
-        CPUS_ONLINE_MIN_BIG, 0x4,
-        GPU_MIN_PWRLVL_BOOST, 0x1,
-    };
-
     int resources_interaction_fling_boost[] = {
         MIN_FREQ_BIG_CORE_0, 0x514,
         SCHED_BOOST_ON_V3, 0x1,
@@ -233,9 +256,7 @@ int power_hint_override(power_hint_t hint, void *data)
             }
             return HINT_HANDLED;
         case POWER_HINT_LAUNCH:
-            duration = 2000;
-            interaction(duration, ARRAY_SIZE(resources_launch_main),
-                    resources_launch_main);
+            process_activity_launch_hint(data);
             return HINT_HANDLED;
         case POWER_HINT_VIDEO_ENCODE:
             process_video_encode_hint(data);
