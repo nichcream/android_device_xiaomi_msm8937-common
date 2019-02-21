@@ -209,15 +209,16 @@ Return<RequestStatus> BiometricsFingerprint::enumerate()  {
     fingerprint_finger_id_t results[MAX_FINGERPRINTS];
     uint32_t n = MAX_FINGERPRINTS;
 
-    if (is_goodix) {
-        ALOGD("Skipping enumerate()");
-        return RequestStatus::SYS_EINVAL;
-    }
-
     enumerate_2_0 enumerate = (enumerate_2_0) mDevice->enumerate;
     int total_templates = enumerate(mDevice, results, &n);
 
     ALOGD("Got %d enumerated templates, retval = %d", n, total_templates);
+
+    // TODO: Remove once enumeration is confirmed to work on Goodix
+    if (is_goodix && n == MAX_FINGERPRINTS) {
+        ALOGD("Skipping enumerate()");
+        return RequestStatus::SYS_EINVAL;
+    }
 
     fingerprint_msg_t msg;
     msg.type = FINGERPRINT_TEMPLATE_ENUMERATING;
@@ -231,10 +232,6 @@ Return<RequestStatus> BiometricsFingerprint::enumerate()  {
 }
 #else
 Return<RequestStatus> BiometricsFingerprint::enumerate()  {
-    if (is_goodix) {
-        ALOGD("Skipping enumerate()");
-        return RequestStatus::SYS_EINVAL;
-    }
     return ErrorFilter(mDevice->enumerate(mDevice));
 }
 #endif
