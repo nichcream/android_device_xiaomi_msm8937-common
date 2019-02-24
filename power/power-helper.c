@@ -132,10 +132,9 @@ void power_init(void)
     }
 }
 
-static void process_video_decode_hint(void *metadata)
+static void process_video_decode_hint(int state)
 {
     char governor[80];
-    int32_t state = *((int32_t*)metadata);
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
@@ -167,10 +166,9 @@ static void process_video_decode_hint(void *metadata)
     }
 }
 
-static void process_video_encode_hint(void *metadata)
+static void process_video_encode_hint(int state)
 {
     char governor[80];
-    int32_t state = *((int32_t*)metadata);
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
@@ -205,7 +203,7 @@ static void process_video_encode_hint(void *metadata)
 }
 
 int __attribute__ ((weak)) power_hint_override(power_hint_t UNUSED(hint),
-                                               void *UNUSED(data))
+                                               int UNUSED(data))
 {
     return HINT_NONE;
 }
@@ -213,7 +211,7 @@ int __attribute__ ((weak)) power_hint_override(power_hint_t UNUSED(hint),
 /* Declare function before use */
 void interaction(int duration, int num_args, int opt_list[]);
 
-void power_hint(power_hint_t hint, void *data)
+void power_hint(power_hint_t hint, int data)
 {
     /* Check if this hint has been overridden. */
     if (power_hint_override(hint, data) == HINT_HANDLED) {
