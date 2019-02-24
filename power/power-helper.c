@@ -46,7 +46,6 @@
 #include <hardware/power.h>
 
 #include "utils.h"
-#include "metadata-defs.h"
 #include "hint-data.h"
 #include "performance.h"
 #include "power-common.h"
@@ -136,7 +135,7 @@ void power_init(void)
 static void process_video_decode_hint(void *metadata)
 {
     char governor[80];
-    struct video_decode_metadata_t video_decode_metadata;
+    int32_t state = *((int32_t*)metadata);
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
@@ -144,45 +143,26 @@ static void process_video_decode_hint(void *metadata)
         return;
     }
 
-    if (metadata) {
-        ALOGI("Processing video decode hint. Metadata: %s", (char *)metadata);
-    }
-
-    /* Initialize encode metadata struct fields. */
-    memset(&video_decode_metadata, 0, sizeof(struct video_decode_metadata_t));
-    video_decode_metadata.state = -1;
-    video_decode_metadata.hint_id = DEFAULT_VIDEO_DECODE_HINT_ID;
-
-    if (metadata) {
-        if (parse_video_decode_metadata((char *)metadata, &video_decode_metadata) ==
-            -1) {
-            ALOGE("Error occurred while parsing metadata.");
-            return;
-        }
-    } else {
-        return;
-    }
-
-    if (video_decode_metadata.state == 1) {
+    if (state) {
         if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
             int resource_values[] = {THREAD_MIGRATION_SYNC_OFF};
 
-            perform_hint_action(video_decode_metadata.hint_id,
+            perform_hint_action(DEFAULT_VIDEO_DECODE_HINT_ID,
                     resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
         } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
             int resource_values[] = {TR_MS_30, HISPEED_LOAD_90, HS_FREQ_1026, THREAD_MIGRATION_SYNC_OFF};
 
-            perform_hint_action(video_decode_metadata.hint_id,
+            perform_hint_action(DEFAULT_VIDEO_DECODE_HINT_ID,
                     resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
         }
-    } else if (video_decode_metadata.state == 0) {
+    } else {
         if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
         } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
-            undo_hint_action(video_decode_metadata.hint_id);
+            undo_hint_action(DEFAULT_VIDEO_DECODE_HINT_ID);
         }
     }
 }
@@ -190,7 +170,7 @@ static void process_video_decode_hint(void *metadata)
 static void process_video_encode_hint(void *metadata)
 {
     char governor[80];
-    struct video_encode_metadata_t video_encode_metadata;
+    int32_t state = *((int32_t*)metadata);
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
@@ -198,43 +178,28 @@ static void process_video_encode_hint(void *metadata)
         return;
     }
 
-    /* Initialize encode metadata struct fields. */
-    memset(&video_encode_metadata, 0, sizeof(struct video_encode_metadata_t));
-    video_encode_metadata.state = -1;
-    video_encode_metadata.hint_id = DEFAULT_VIDEO_ENCODE_HINT_ID;
-
-    if (metadata) {
-        if (parse_video_encode_metadata((char *)metadata, &video_encode_metadata) ==
-            -1) {
-            ALOGE("Error occurred while parsing metadata.");
-            return;
-        }
-    } else {
-        return;
-    }
-
-    if (video_encode_metadata.state == 1) {
+    if (state) {
         if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
             int resource_values[] = {IO_BUSY_OFF, SAMPLING_DOWN_FACTOR_1, THREAD_MIGRATION_SYNC_OFF};
 
-            perform_hint_action(video_encode_metadata.hint_id,
+            perform_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID,
                 resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
         } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
             int resource_values[] = {TR_MS_30, HISPEED_LOAD_90, HS_FREQ_1026, THREAD_MIGRATION_SYNC_OFF,
                 INTERACTIVE_IO_BUSY_OFF};
 
-            perform_hint_action(video_encode_metadata.hint_id,
+            perform_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID,
                     resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
         }
-    } else if (video_encode_metadata.state == 0) {
+    } else {
         if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
-            undo_hint_action(video_encode_metadata.hint_id);
+            undo_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID);
         } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
-            undo_hint_action(video_encode_metadata.hint_id);
+            undo_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID);
         }
     }
 }
@@ -303,7 +268,6 @@ void power_set_interactive(int on)
 {
     char governor[80];
     char tmp_str[NODE_MAX];
-    struct video_encode_metadata_t video_encode_metadata;
     int rc = 0;
 
     if (!on) {

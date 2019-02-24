@@ -34,7 +34,6 @@ LOCAL_SRC_FILES := \
     service.cpp \
     Power.cpp \
     power-helper.c \
-    metadata-parser.c \
     utils.c \
     list.c \
     hint-data.c \

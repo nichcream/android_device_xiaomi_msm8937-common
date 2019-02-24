@@ -43,7 +43,6 @@
 #include <hardware/power.h>
 
 #include "utils.h"
-#include "metadata-defs.h"
 #include "hint-data.h"
 #include "performance.h"
 #include "power-common.h"
@@ -165,7 +164,7 @@ static void process_activity_launch_hint(void *data)
 static void process_video_encode_hint(void *metadata)
 {
     char governor[80];
-    struct video_encode_metadata_t video_encode_metadata;
+    int32_t state = *((int32_t*)metadata);
 
     ALOGI("Got process_video_encode_hint");
 
@@ -184,22 +183,7 @@ static void process_video_encode_hint(void *metadata)
         }
     }
 
-    if (!metadata) {
-        return;
-    }
-
-    /* Initialize encode metadata struct fields. */
-    memset(&video_encode_metadata, 0, sizeof(struct video_encode_metadata_t));
-    video_encode_metadata.state = -1;
-    video_encode_metadata.hint_id = DEFAULT_VIDEO_ENCODE_HINT_ID;
-
-    if (parse_video_encode_metadata((char *)metadata,
-                &video_encode_metadata) == -1) {
-        ALOGE("Error occurred while parsing metadata.");
-        return;
-    }
-
-    if (video_encode_metadata.state == 1) {
+    if (state) {
         if (is_interactive_governor(governor)) {
             /* Sched_load and migration_notif*/
             int resource_values[] = {
@@ -211,14 +195,14 @@ static void process_video_encode_hint(void *metadata)
                 INT_OP_CLUSTER1_TIMER_RATE, BIG_LITTLE_TR_MS_40
             };
             if (!video_encode_hint_sent) {
-                perform_hint_action(video_encode_metadata.hint_id,
+                perform_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID,
                         resource_values, ARRAY_SIZE(resource_values));
                 video_encode_hint_sent = 1;
             }
         }
-    } else if (video_encode_metadata.state == 0) {
+    } else {
         if (is_interactive_governor(governor)) {
-            undo_hint_action(video_encode_metadata.hint_id);
+            undo_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID);
             video_encode_hint_sent = 0;
         }
     }
@@ -271,7 +255,6 @@ int set_interactive_override(int on)
 {
     char governor[80];
     char tmp_str[NODE_MAX];
-    struct video_encode_metadata_t video_encode_metadata;
     int rc;
 
     ALOGI("Got set_interactive hint");
