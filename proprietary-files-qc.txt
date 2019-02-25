@@ -68,7 +68,7 @@ vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcomvisualizer.so
 vendor/lib64/soundfx/libqcvirt.so
 
-# Bluetooth - from tissot
+# Bluetooth - from sakura
 lib/com.qualcomm.qti.bluetooth_audio@1.0.so
 lib64/com.qualcomm.qti.bluetooth_audio@1.0.so
 vendor/bin/btnvtool
@@ -89,7 +89,7 @@ vendor/lib64/libbthost_if.so
 # Bluetooth - HIDL service - from TA-1024
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 
-# CNE - from tissot
+# CNE - from sakura
 etc/permissions/cneapiclient.xml
 etc/permissions/com.quicinc.cne.xml
 -framework/cneapiclient.jar
@@ -181,7 +181,7 @@ vendor/lib64/vendor.qti.latency@2.0.so
 # Charger - from TA-1024
 vendor/bin/hvdcp_opti
 
-# DPM - from tissot
+# DPM - from sakura
 bin/dpmd
 etc/dpm/dpm.conf
 etc/init/dpmd.rc
@@ -282,7 +282,7 @@ vendor/lib64/vendor.qti.hardware.fm@1.0.so
 vendor/lib/hw/gatekeeper.msm8937.so:vendor/lib/hw/gatekeeper.msm8937.so
 vendor/lib64/hw/gatekeeper.msm8937.so:vendor/lib64/hw/gatekeeper.msm8937.so
 
-# GPS - from tissot
+# GPS - from sakura
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
@@ -562,7 +562,7 @@ vendor/lib64/vendor.qti.hardware.iop@1.0.so
 vendor/lib64/vendor.qti.hardware.iop@2.0.so
 vendor/lib64/vendor.qti.hardware.perf@1.0.so
 
-# Peripheral manager - from tissot
+# Peripheral manager - from sakura
 vendor/bin/pm-proxy
 vendor/bin/pm-service
 vendor/lib/libperipheral_client.so
@@ -597,7 +597,7 @@ vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc
 vendor/lib/vendor.qti.hardware.qdutils_disp@1.0.so
 vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 
-# QMI - from tissot
+# QMI - from sakura
 lib/libdiag_system.so
 lib/libqmi_cci_system.so
 lib64/libdiag_system.so
@@ -635,7 +635,7 @@ vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
 
-# Radio - from tissot
+# Radio - from sakura
 -app/QtiTelephonyService/QtiTelephonyService.apk
 etc/permissions/lpa.xml
 etc/permissions/telephonyservice.xml
@@ -727,10 +727,10 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0.so
 vendor/radio/qcril_database/qcril.db
 
-# Radio - QTI Extension - from tissot
+# Radio - QTI Extension - from sakura
 -framework/qti-telephony-common.jar
 
-# Radio - IMS - from tissot
+# Radio - IMS - from sakura
 -app/imssettings/imssettings.apk
 -app/uceShimService/uceShimService.apk
 etc/permissions/com.qualcomm.qti.imscmservice.xml
@@ -875,7 +875,7 @@ vendor/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc
 vendor/lib/vendor.qti.hardware.tui_comm@1.0.so
 vendor/lib64/vendor.qti.hardware.tui_comm@1.0.so
 
-# Wi-Fi - from tissot
+# Wi-Fi - from sakura
 vendor/bin/wcnss_service
 
 # WiFi Display - from TA-1024
