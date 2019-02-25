@@ -111,7 +111,6 @@ vendor.video.disable.ubwc=1
 ro.vendor.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
 persist.vendor.data.mode=concurrent
-persist.vendor.data.profile_update=true
 
 # Perf
 ro.vendor.qti.am.reschedule_service=true
