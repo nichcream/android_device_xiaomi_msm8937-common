@@ -655,7 +655,7 @@ vendor/bin/qti
 vendor/bin/rmt_storage
 vendor/bin/tftp_server
 vendor/etc/data/dsi_config.xml
-vendor/etc/data/netmgr_config.xml
+vendor/etc/data/netmgr_config.xml|35c4f95225b7687258a1272142b6650c2977a2f0
 vendor/etc/init/qcrild.rc
 vendor/lib/libconfigdb.so
 vendor/lib/liblqe.so
