@@ -19,10 +19,12 @@ LOCAL_MODULE := vendor.lineage.livedisplay@2.0-service.xiaomi
 LOCAL_INIT_RC := vendor.lineage.livedisplay@2.0-service.xiaomi.rc
 LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_HEADER_LIBRARIES := generated_kernel_headers
 
 LOCAL_SRC_FILES := \
     AdaptiveBacklight.cpp \
     DisplayModes.cpp \
+    DisplayModesSDM.cpp \
     PictureAdjustment.cpp \
     SDMController.cpp \
     Utils.cpp \

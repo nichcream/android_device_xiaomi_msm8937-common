@@ -1,4 +1,4 @@
 service vendor.livedisplay-hal-2-0-xiaomi /vendor/bin/hw/vendor.lineage.livedisplay@2.0-service.xiaomi
     class late_start
     user system
-    group system
+    group system graphics

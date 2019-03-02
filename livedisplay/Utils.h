@@ -29,6 +29,10 @@ namespace implementation {
 
 class Utils {
    public:
+    static int readInt(const char* node, int32_t* value);
+    static int writeInt(const char* node, int32_t value);
+    static int writeSavedModeId(int32_t id);
+    static int readSavedModeId(int32_t* id);
     static int sendDPPSCommand(char* buf, size_t len);
     static bool checkFeatureVersion(SDMController* controller, uint64_t cookie,
                                     feature_ver_sw feature);

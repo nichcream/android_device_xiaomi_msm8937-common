@@ -14,22 +14,12 @@
  * limitations under the License.
  */
 
-#ifndef VENDOR_LINEAGE_LIVEDISPLAY_V2_0_DISPLAYMODES_H
-#define VENDOR_LINEAGE_LIVEDISPLAY_V2_0_DISPLAYMODES_H
+#ifndef VENDOR_LINEAGE_LIVEDISPLAY_V2_0_DISPLAYMODESSDM_H
+#define VENDOR_LINEAGE_LIVEDISPLAY_V2_0_DISPLAYMODESSDM_H
 
 #include <vendor/lineage/livedisplay/2.0/IDisplayModes.h>
 
 #include "SDMController.h"
-
-namespace {
-enum GAMMA_MODES {
-    MIN_GAMMA_MODE = 0,
-    WARM = 1,
-    NATURE = 2,
-    COOL = 3,
-    MAX_GAMMA_MODE = 4
-};
-}  // anonymous namespace
 
 namespace vendor {
 namespace lineage {
@@ -40,9 +30,9 @@ namespace implementation {
 using ::android::hardware::Return;
 using ::android::hardware::Void;
 
-class DisplayModes : public IDisplayModes {
+class DisplayModesSDM : public IDisplayModes {
    public:
-    DisplayModes();
+    DisplayModesSDM(const std::shared_ptr<SDMController>& controller, uint64_t cookie);
 
     bool isSupported();
 
@@ -53,17 +43,13 @@ class DisplayModes : public IDisplayModes {
     Return<bool> setDisplayMode(int32_t modeID, bool makeDefault) override;
 
    private:
-    int32_t mActiveModeId;
-    bool mInitStatus;
+    std::shared_ptr<SDMController> mController;
+    uint64_t mCookie;
 
     std::vector<DisplayMode> getDisplayModesInternal();
     DisplayMode getDisplayModeById(int32_t id);
     DisplayMode getCurrentDisplayModeInternal();
     DisplayMode getDefaultDisplayModeInternal();
-
-    static inline bool isValidDisplayModeId(int32_t id) {
-        return id > MIN_GAMMA_MODE && id < MAX_GAMMA_MODE;
-    }
 };
 
 }  // namespace implementation
@@ -72,4 +58,4 @@ class DisplayModes : public IDisplayModes {
 }  // namespace lineage
 }  // namespace vendor
 
-#endif  // VENDOR_LINEAGE_LIVEDISPLAY_V2_0_DISPLAYMODES_H
+#endif  // VENDOR_LINEAGE_LIVEDISPLAY_V2_0_DISPLAYMODESSDM_H

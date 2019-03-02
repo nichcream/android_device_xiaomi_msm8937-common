@@ -15,14 +15,23 @@
  * limitations under the License.
  */
 
+#include <fcntl.h>
 #include <poll.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
 #include <unistd.h>
+#include <fstream>
+#include <string>
 
 #include <cutils/sockets.h>
 
 #include "Utils.h"
 
 namespace {
+constexpr char LOCAL_STORAGE_PATH[] = "/data/vendor/display";
+constexpr char LOCAL_MODE_ID[] = "livedisplay_mode";
+
 struct sdm_feature_version {
     uint8_t x, y;
     uint16_t z;
@@ -34,6 +43,47 @@ namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
 namespace implementation {
+
+int Utils::readInt(const char* node, int32_t* value) {
+    std::string buf;
+    int ret = 0;
+    std::ifstream fin(node);
+    if (!fin.good()) {
+        return errno;
+    }
+    fin >> *value;
+    if (fin.fail()) {
+        ret = errno;
+    }
+    fin.close();
+    return ret;
+}
+
+int Utils::writeInt(const char* node, int32_t value) {
+    int ret = 0;
+    std::ofstream fout(node);
+    if (!fout.good()) {
+        return errno;
+    }
+    fout << value << std::endl;
+    if (fout.fail()) {
+        ret = errno;
+    }
+    fout.close();
+    return ret;
+}
+
+int Utils::readSavedModeId(int32_t* id) {
+    char buf[PATH_MAX];
+    sprintf(buf, "%s/%s", LOCAL_STORAGE_PATH, LOCAL_MODE_ID);
+    return readInt(buf, id);
+}
+
+int Utils::writeSavedModeId(int32_t id) {
+    char buf[PATH_MAX];
+    sprintf(buf, "%s/%s", LOCAL_STORAGE_PATH, LOCAL_MODE_ID);
+    return writeInt(buf, id);
+}
 
 int Utils::sendDPPSCommand(char* buf, size_t len) {
     int rc = 0;

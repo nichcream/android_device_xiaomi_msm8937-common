@@ -24,6 +24,7 @@
 
 #include "AdaptiveBacklight.h"
 #include "DisplayModes.h"
+#include "DisplayModesSDM.h"
 #include "PictureAdjustment.h"
 #include "SDMController.h"
 
@@ -38,6 +39,7 @@ using ::vendor::lineage::livedisplay::V2_0::IDisplayModes;
 using ::vendor::lineage::livedisplay::V2_0::IPictureAdjustment;
 using ::vendor::lineage::livedisplay::V2_0::implementation::AdaptiveBacklight;
 using ::vendor::lineage::livedisplay::V2_0::implementation::DisplayModes;
+using ::vendor::lineage::livedisplay::V2_0::implementation::DisplayModesSDM;
 using ::vendor::lineage::livedisplay::V2_0::implementation::PictureAdjustment;
 using ::vendor::lineage::livedisplay::V2_0::implementation::SDMController;
 
@@ -49,6 +51,7 @@ int main() {
     // HIDL frontend
     sp<AdaptiveBacklight> ab;
     sp<DisplayModes> dm;
+    sp<DisplayModesSDM> dms;
     sp<PictureAdjustment> pa;
 
     status_t status = OK;
@@ -76,9 +79,15 @@ int main() {
         goto shutdown;
     }
 
-    dm = new DisplayModes(controller, cookie);
+    dm = new DisplayModes();
     if (dm == nullptr) {
         LOG(ERROR) << "Can not create an instance of LiveDisplay HAL DisplayModes Iface, exiting.";
+        goto shutdown;
+    }
+
+    dms = new DisplayModesSDM(controller, cookie);
+    if (dms == nullptr) {
+        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL DisplayModesSDM Iface, exiting.";
         goto shutdown;
     }
 
@@ -89,8 +98,8 @@ int main() {
         goto shutdown;
     }
 
-    if (!dm->isSupported() && !pa->isSupported()) {
-        // Backend isn't ready yet, so restart and try again
+    if (!dms->isSupported() && !pa->isSupported()) {
+        // SDM backend isn't ready yet, so restart and try again
         goto shutdown;
     }
 
@@ -105,10 +114,18 @@ int main() {
         }
     }
 
+    // fallback to SDM impl if kernel display modes isn't supported
     if (dm->isSupported()) {
         status = dm->registerAsService();
         if (status != OK) {
             LOG(ERROR) << "Could not register service for LiveDisplay HAL DisplayModes Iface ("
+                       << status << ")";
+            goto shutdown;
+        }
+    } else if (dms->isSupported()) {
+        status = dms->registerAsService();
+        if (status != OK) {
+            LOG(ERROR) << "Could not register service for LiveDisplay HAL DisplayModesSDM Iface ("
                        << status << ")";
             goto shutdown;
         }
