@@ -23,7 +23,7 @@ namespace vendor {
 namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
-namespace sdm {
+namespace implementation {
 
 using ::android::hardware::Return;
 
@@ -39,7 +39,7 @@ class AdaptiveBacklight : public IAdaptiveBacklight {
     bool mEnabled = false;
 };
 
-}  // namespace sdm
+}  // namespace implementation
 }  // namespace V2_0
 }  // namespace livedisplay
 }  // namespace lineage

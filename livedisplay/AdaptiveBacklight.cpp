@@ -30,7 +30,7 @@ namespace vendor {
 namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
-namespace sdm {
+namespace implementation {
 
 using ::android::base::GetBoolProperty;
 
@@ -60,7 +60,7 @@ Return<bool> AdaptiveBacklight::setEnabled(bool enabled) {
     return false;
 }
 
-}  // namespace sdm
+}  // namespace implementation
 }  // namespace V2_0
 }  // namespace livedisplay
 }  // namespace lineage

@@ -21,7 +21,7 @@ namespace vendor {
 namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
-namespace sdm {
+namespace implementation {
 
 enum feature_ver_sw {
     FEATURE_VER_SW_API,
@@ -34,7 +34,7 @@ enum feature_ver_sw {
     FEATURE_VER_SW_DISP_INFO_API
 };
 
-}  // namespace sdm
+}  // namespace implementation
 }  // namespace V2_0
 }  // namespace livedisplay
 }  // namespace lineage

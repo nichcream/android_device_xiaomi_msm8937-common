@@ -68,7 +68,7 @@ namespace vendor {
 namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
-namespace sdm {
+namespace implementation {
 
 SDMController::SDMController() {
     std::shared_ptr<void> handle(dlopen(kFilename, RTLD_NOW), [this](void* p) {
@@ -162,7 +162,7 @@ int32_t SDMController::get_feature_version(uint64_t hctx, uint32_t feature_id, v
     CONTROLLER_CHECK(get_feature_version, hctx, feature_id, ver, flags);
 }
 
-}  // namespace sdm
+}  // namespace implementation
 }  // namespace V2_0
 }  // namespace livedisplay
 }  // namespace lineage

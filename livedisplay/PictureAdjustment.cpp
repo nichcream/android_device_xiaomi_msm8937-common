@@ -57,7 +57,7 @@ namespace vendor {
 namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
-namespace sdm {
+namespace implementation {
 
 using ::android::sp;
 
@@ -205,7 +205,7 @@ Return<bool> PictureAdjustment::setPictureAdjustment(
     return mController->set_global_pa_config(mCookie, 0, 1, &config) == 0;
 }
 
-}  // namespace sdm
+}  // namespace implementation
 }  // namespace V2_0
 }  // namespace livedisplay
 }  // namespace lineage

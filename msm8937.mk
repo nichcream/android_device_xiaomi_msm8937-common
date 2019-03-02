@@ -163,7 +163,7 @@ PRODUCT_PACKAGES += \
 
 # Display calibration
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service-sdm
+    vendor.lineage.livedisplay@2.0-service.xiaomi
 
 # Doze mode
 PRODUCT_PACKAGES += \

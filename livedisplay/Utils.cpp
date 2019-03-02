@@ -33,7 +33,7 @@ namespace vendor {
 namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
-namespace sdm {
+namespace implementation {
 
 int Utils::sendDPPSCommand(char* buf, size_t len) {
     int rc = 0;
@@ -83,7 +83,7 @@ bool Utils::checkFeatureVersion(SDMController* controller, uint64_t cookie,
     return true;
 }
 
-}  // namespace sdm
+}  // namespace implementation
 }  // namespace V2_0
 }  // namespace livedisplay
 }  // namespace lineage

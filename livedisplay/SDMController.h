@@ -25,7 +25,7 @@ namespace vendor {
 namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
-namespace sdm {
+namespace implementation {
 
 class SDMController {
    public:
@@ -93,7 +93,7 @@ class SDMController {
     disp_api_get_feature_version mFn_get_feature_version;
 };
 
-}  // namespace sdm
+}  // namespace implementation
 }  // namespace V2_0
 }  // namespace livedisplay
 }  // namespace lineage

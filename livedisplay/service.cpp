@@ -16,7 +16,7 @@
 
 #include <dlfcn.h>
 
-#define LOG_TAG "vendor.lineage.livedisplay@2.0-service-sdm"
+#define LOG_TAG "vendor.lineage.livedisplay@2.0-service.xiaomi"
 
 #include <android-base/logging.h>
 #include <binder/ProcessState.h>
@@ -36,10 +36,10 @@ using android::hardware::joinRpcThreadpool;
 using ::vendor::lineage::livedisplay::V2_0::IAdaptiveBacklight;
 using ::vendor::lineage::livedisplay::V2_0::IDisplayModes;
 using ::vendor::lineage::livedisplay::V2_0::IPictureAdjustment;
-using ::vendor::lineage::livedisplay::V2_0::sdm::AdaptiveBacklight;
-using ::vendor::lineage::livedisplay::V2_0::sdm::DisplayModes;
-using ::vendor::lineage::livedisplay::V2_0::sdm::PictureAdjustment;
-using ::vendor::lineage::livedisplay::V2_0::sdm::SDMController;
+using ::vendor::lineage::livedisplay::V2_0::implementation::AdaptiveBacklight;
+using ::vendor::lineage::livedisplay::V2_0::implementation::DisplayModes;
+using ::vendor::lineage::livedisplay::V2_0::implementation::PictureAdjustment;
+using ::vendor::lineage::livedisplay::V2_0::implementation::SDMController;
 
 int main() {
     // Vendor backend

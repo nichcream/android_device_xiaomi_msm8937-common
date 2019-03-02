@@ -37,7 +37,7 @@ namespace vendor {
 namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
-namespace sdm {
+namespace implementation {
 
 DisplayModes::DisplayModes(const std::shared_ptr<SDMController>& controller, uint64_t cookie)
     : mController(controller), mCookie(cookie) {
@@ -168,7 +168,7 @@ Return<bool> DisplayModes::setDisplayMode(int32_t modeID, bool makeDefault) {
     return true;
 }
 
-}  // namespace sdm
+}  // namespace implementation
 }  // namespace V2_0
 }  // namespace livedisplay
 }  // namespace lineage
