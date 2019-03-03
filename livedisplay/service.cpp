@@ -23,6 +23,7 @@
 #include <hidl/HidlTransportSupport.h>
 
 #include "AdaptiveBacklight.h"
+#include "ColorEnhancement.h"
 #include "DisplayModes.h"
 #include "DisplayModesSDM.h"
 #include "PictureAdjustment.h"
@@ -35,9 +36,11 @@ using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 
 using ::vendor::lineage::livedisplay::V2_0::IAdaptiveBacklight;
+using ::vendor::lineage::livedisplay::V2_0::IColorEnhancement;
 using ::vendor::lineage::livedisplay::V2_0::IDisplayModes;
 using ::vendor::lineage::livedisplay::V2_0::IPictureAdjustment;
 using ::vendor::lineage::livedisplay::V2_0::implementation::AdaptiveBacklight;
+using ::vendor::lineage::livedisplay::V2_0::implementation::ColorEnhancement;
 using ::vendor::lineage::livedisplay::V2_0::implementation::DisplayModes;
 using ::vendor::lineage::livedisplay::V2_0::implementation::DisplayModesSDM;
 using ::vendor::lineage::livedisplay::V2_0::implementation::PictureAdjustment;
@@ -50,6 +53,7 @@ int main() {
 
     // HIDL frontend
     sp<AdaptiveBacklight> ab;
+    sp<ColorEnhancement> ce;
     sp<DisplayModes> dm;
     sp<DisplayModesSDM> dms;
     sp<PictureAdjustment> pa;
@@ -76,6 +80,13 @@ int main() {
     if (ab == nullptr) {
         LOG(ERROR)
             << "Can not create an instance of LiveDisplay HAL AdaptiveBacklight Iface, exiting.";
+        goto shutdown;
+    }
+
+    ce = new ColorEnhancement();
+    if (ce == nullptr) {
+        LOG(ERROR)
+            << "Can not create an instance of LiveDisplay HAL ColorEnhancement Iface, exiting.";
         goto shutdown;
     }
 
@@ -109,6 +120,15 @@ int main() {
         status = ab->registerAsService();
         if (status != OK) {
             LOG(ERROR) << "Could not register service for LiveDisplay HAL AdaptiveBacklight Iface ("
+                       << status << ")";
+            goto shutdown;
+        }
+    }
+
+    if (ce->isSupported()) {
+        status = ce->registerAsService();
+        if (status != OK) {
+            LOG(ERROR) << "Could not register service for LiveDisplay HAL ColorEnhancement Iface ("
                        << status << ")";
             goto shutdown;
         }

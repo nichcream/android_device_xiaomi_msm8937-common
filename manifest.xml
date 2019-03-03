@@ -453,6 +453,10 @@
         <transport>hwbinder</transport>
         <version>2.0</version>
         <interface>
+            <name>IColorEnhancement</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
             <name>IDisplayModes</name>
             <instance>default</instance>
         </interface>
@@ -460,6 +464,7 @@
             <name>IPictureAdjustment</name>
             <instance>default</instance>
         </interface>
+        <fqname>@2.0::IColorEnhancement/default</fqname>
         <fqname>@2.0::IDisplayModes/default</fqname>
         <fqname>@2.0::IPictureAdjustment/default</fqname>
     </hal>

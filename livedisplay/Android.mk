@@ -23,6 +23,7 @@ LOCAL_HEADER_LIBRARIES := generated_kernel_headers
 
 LOCAL_SRC_FILES := \
     AdaptiveBacklight.cpp \
+    ColorEnhancement.cpp \
     DisplayModes.cpp \
     DisplayModesSDM.cpp \
     PictureAdjustment.cpp \
