@@ -74,9 +74,9 @@ ifneq ($(TARGET_RPM_SYSTEM_STAT),)
     LOCAL_CFLAGS += -DRPM_SYSTEM_STAT=\"$(TARGET_RPM_SYSTEM_STAT)\"
 endif
 
-LOCAL_MODULE := android.hardware.power@1.0-service.custom
-LOCAL_INIT_RC := android.hardware.power@1.0-service.custom.rc
-LOCAL_SHARED_LIBRARIES += android.hardware.power@1.0
+LOCAL_MODULE := android.hardware.power@1.1-service.custom
+LOCAL_INIT_RC := android.hardware.power@1.1-service.custom.rc
+LOCAL_SHARED_LIBRARIES += android.hardware.power@1.1
 
 LOCAL_SHARED_LIBRARIES += vendor.lineage.power@1.0
 LOCAL_MODULE_TAGS := optional

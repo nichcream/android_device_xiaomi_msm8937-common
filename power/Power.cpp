@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
- * Copyright (C) 2017-2018 The LineageOS Project
+ * Copyright (C) 2017-2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.power@1.0-service.custom"
+#define LOG_TAG "android.hardware.power@1.1-service.custom"
 
 // #define LOG_NDEBUG 0
 
@@ -28,17 +28,17 @@
 namespace android {
 namespace hardware {
 namespace power {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
 using ::android::hardware::power::V1_0::Feature;
 using ::android::hardware::power::V1_0::PowerHint;
 using ::android::hardware::power::V1_0::PowerStatePlatformSleepState;
 using ::android::hardware::power::V1_0::Status;
+using ::android::hardware::power::V1_1::PowerStateSubsystem;
 using ::android::hardware::hidl_vec;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
-using ::android::hardware::power::V1_0::Feature;
 
 Power::Power() {
     power_init();
@@ -55,6 +55,10 @@ Return<void> Power::powerHint(PowerHint hint, int32_t data) {
     return Void();
 }
 
+Return<void> Power::powerHintAsync(PowerHint hint, int32_t data) {
+    return powerHint(hint, data);
+}
+
 Return<void> Power::setFeature(Feature feature, bool activate)  {
     set_feature(static_cast<feature_t>(feature), activate ? 1 : 0);
     return Void();
@@ -63,7 +67,16 @@ Return<void> Power::setFeature(Feature feature, bool activate)  {
 Return<void> Power::getPlatformLowPowerStats(getPlatformLowPowerStats_cb _hidl_cb) {
     hidl_vec<PowerStatePlatformSleepState> states;
 
+    states.resize(0);
     _hidl_cb(states, Status::SUCCESS);
+    return Void();
+}
+
+Return<void> Power::getSubsystemLowPowerStats(getSubsystemLowPowerStats_cb _hidl_cb) {
+    hidl_vec<PowerStateSubsystem> subsystems;
+
+    subsystems.resize(0);
+    _hidl_cb(subsystems, Status::SUCCESS);
     return Void();
 }
 
@@ -98,7 +111,7 @@ fail:
 }
 
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_1
 }  // namespace power
 }  // namespace hardware
 }  // namespace android
