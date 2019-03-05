@@ -46,10 +46,7 @@
         return -1;                         \
     }                                      \
     int err = mFn_##function(__VA_ARGS__); \
-    if (err != 0) {                        \
-        return err;                        \
-    }                                      \
-    return 0;
+    return err;
 
 namespace {
 constexpr char kFilename[] = "libsdm-disp-vndapis.so";
