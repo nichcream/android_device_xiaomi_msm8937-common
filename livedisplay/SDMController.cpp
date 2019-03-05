@@ -41,12 +41,14 @@
     MACRO(set_global_pa_config)           \
     MACRO(get_feature_version)
 
-#define CONTROLLER_CHECK(function, ...)    \
-    if (mFn_##function == nullptr) {       \
-        return -1;                         \
-    }                                      \
-    int err = mFn_##function(__VA_ARGS__); \
-    return err;
+#define CONTROLLER_CHECK(function, ...)        \
+    do {                                       \
+        if (mFn_##function == nullptr) {       \
+            return -1;                         \
+        }                                      \
+        int err = mFn_##function(__VA_ARGS__); \
+        return err;                            \
+    } while (0)
 
 namespace {
 constexpr char kFilename[] = "libsdm-disp-vndapis.so";
