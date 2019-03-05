@@ -126,7 +126,7 @@ bool Utils::checkFeatureVersion(SDMController* controller, uint64_t cookie,
         return false;
     }
 
-    if (version.x <= 0 && version.y <= 0 && version.z <= 0) {
+    if (version.x == 0 && version.y == 0 && version.z == 0) {
         return false;
     }
 
