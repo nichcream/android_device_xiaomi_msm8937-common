@@ -43,8 +43,22 @@ using ::android::base::GetBoolProperty;
 #define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
 
 DisplayModes::DisplayModes() : mActiveModeId(-1), mInitStatus(false) {
+    mFbDevFd = open(kFbDevNode, O_RDWR | O_CLOEXEC);
+    if (mFbDevFd < 0) {
+        LOG(ERROR) << "failed to open" << kFbDevNode;
+        mInitStatus = false;
+        return;
+    }
+
     DisplayMode mode = getDefaultDisplayModeInternal();
     mInitStatus = setDisplayMode(mode.id, false);
+}
+
+DisplayModes::~DisplayModes() {
+    if (mFbDevFd >= 0) {
+        close(mFbDevFd);
+    }
+    mFbDevFd = -1;
 }
 
 bool DisplayModes::isSupported() {
@@ -112,13 +126,7 @@ Return<bool> DisplayModes::setDisplayMode(int32_t modeID, bool makeDefault) {
         return false;
     }
 
-    int fd = open(kFbDevNode, O_RDWR | O_NONBLOCK);
-    if (fd < 0) {
-        LOG(ERROR) << "failed to open" << kFbDevNode;
-        return false;
-    }
-
-    if (ioctl(fd, MSMFB_ENHANCE_SET_GAMMA, &modeID) != 0) {
+    if (ioctl(mFbDevFd, MSMFB_ENHANCE_SET_GAMMA, &modeID) != 0) {
         LOG(ERROR) << "failed to set enhanced gamma";
         return false;
     }

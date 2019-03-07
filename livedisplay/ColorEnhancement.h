@@ -31,6 +31,7 @@ using ::android::hardware::Void;
 class ColorEnhancement : public IColorEnhancement {
    public:
     ColorEnhancement();
+    ~ColorEnhancement();
 
     bool isSupported();
 
@@ -40,6 +41,7 @@ class ColorEnhancement : public IColorEnhancement {
 
    private:
     bool mEnabled;
+    int mFbDevFd;
     bool mInitStatus;
 };
 

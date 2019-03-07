@@ -43,6 +43,7 @@ using ::android::hardware::Void;
 class DisplayModes : public IDisplayModes {
    public:
     DisplayModes();
+    ~DisplayModes();
 
     bool isSupported();
 
@@ -54,6 +55,7 @@ class DisplayModes : public IDisplayModes {
 
    private:
     int32_t mActiveModeId;
+    int mFbDevFd;
     bool mInitStatus;
 
     std::vector<DisplayMode> getDisplayModesInternal();

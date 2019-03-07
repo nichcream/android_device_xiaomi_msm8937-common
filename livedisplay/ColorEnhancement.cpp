@@ -39,7 +39,21 @@ namespace V2_0 {
 namespace implementation {
 
 ColorEnhancement::ColorEnhancement() : mEnabled(false) {
+    mFbDevFd = open(kFbDevNode, O_RDWR | O_CLOEXEC);
+    if (mFbDevFd < 0) {
+        LOG(ERROR) << "failed to open" << kFbDevNode;
+        mInitStatus = false;
+        return;
+    }
+
     mInitStatus = setEnabled(false);
+}
+
+ColorEnhancement::~ColorEnhancement() {
+    if (mFbDevFd >= 0) {
+        close(mFbDevFd);
+    }
+    mFbDevFd = -1;
 }
 
 bool ColorEnhancement::isSupported() {
@@ -52,14 +66,9 @@ Return<bool> ColorEnhancement::isEnabled() {
 }
 
 Return<bool> ColorEnhancement::setEnabled(bool enabled) {
-    int fd = open(kFbDevNode, O_RDWR | O_NONBLOCK);
-    if (fd < 0) {
-        LOG(ERROR) << "failed to open" << kFbDevNode;
-        return false;
-    }
-
     unsigned int modeID = enabled ? VIVID : STANDARD;
-    if (ioctl(fd, MSMFB_ENHANCE_SET_CE, &modeID) != 0) {
+
+    if (ioctl(mFbDevFd, MSMFB_ENHANCE_SET_CE, &modeID) != 0) {
         LOG(ERROR) << "failed to set color enhance";
         return false;
     }
