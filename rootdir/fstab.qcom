@@ -20,7 +20,10 @@
 /dev/block/bootdevice/by-name/config         /frp                       emmc    defaults                                            defaults
 
 /devices/soc/7864900.sdhci/mmc_host*         auto                       auto    nosuid,nodev                                        wait,voldmanaged=sdcard1:auto,encryptable=footer
+/devices/platform/soc/7864900.sdhci/mmc_host*  auto                     auto    nosuid,nodev                                        wait,voldmanaged=sdcard1:auto,encryptable=footer
+
 /devices/soc/78db000.usb/msm_hsusb_host*     auto                       auto    defaults                                            voldmanaged=usb:auto
+/devices/platform/soc/78db000.usb/msm_hsusb_host*  auto                 auto    defaults                                            voldmanaged=usb:auto
 
 #ZRAM
 /dev/block/zram0                             none                       swap    defaults                                            zramsize=805306368,max_comp_streams=4
