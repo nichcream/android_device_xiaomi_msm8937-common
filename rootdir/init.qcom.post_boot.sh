@@ -222,36 +222,6 @@ function 8937_sched_dcvs_hmp()
 }
 target=`getprop ro.board.platform`
 
-function configure_zram_parameters() {
-    MemTotalStr=`cat /proc/meminfo | grep MemTotal`
-    MemTotal=${MemTotalStr:16:8}
-
-    low_ram=`getprop ro.config.low_ram`
-
-    # Zram disk - 75% for Go devices.
-    # For 512MB Go device, size = 384MB, set same for Non-Go.
-    # For 1GB Go device, size = 768MB, set same for Non-Go.
-    # For >=2GB Non-Go device, size = 1GB
-    # And enable lz4 zram compression for Go targets.
-
-    if [ "$low_ram" == "true" ]; then
-        echo lz4 > /sys/block/zram0/comp_algorithm
-    fi
-
-    if [ -f /sys/block/zram0/disksize ]; then
-        if [ $MemTotal -le 524288 ]; then
-            echo 402653184 > /sys/block/zram0/disksize
-        elif [ $MemTotal -le 1048576 ]; then
-            echo 805306368 > /sys/block/zram0/disksize
-        else
-            # Set Zram disk size=1GB for >=2GB Non-Go targets.
-            echo 1073741824 > /sys/block/zram0/disksize
-        fi
-        mkswap /dev/block/zram0
-        swapon /dev/block/zram0 -p 32758
-    fi
-}
-
 function configure_read_ahead_kb_values() {
     MemTotalStr=`cat /proc/meminfo | grep MemTotal`
     MemTotal=${MemTotalStr:16:8}
@@ -331,8 +301,6 @@ ProductName=`getprop ro.product.name`
 low_ram=`getprop ro.config.low_ram`
 
 if [ "$ProductName" == "msmnile" ]; then
-      # Enable ZRAM
-      configure_zram_parameters
       configure_read_ahead_kb_values
       echo 0 > /proc/sys/vm/page-cluster
       echo 100 > /proc/sys/vm/swappiness
@@ -422,12 +390,10 @@ else
         esac
     fi
 
-    # Set allocstall_threshold to 0 for all targets.
-    # Set swappiness to 100 for all targets
-    echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
-    echo 100 > /proc/sys/vm/swappiness
-
-    configure_zram_parameters
+    # Don't account allocstalls for <= 2GB RAM targets
+    if [ $MemTotal -le 2097152 ]; then
+        echo 100 > /sys/module/vmpressure/parameters/allocstall_threshold
+    fi
 
     configure_read_ahead_kb_values
 
@@ -2157,14 +2123,6 @@ case "$target" in
                 # HMP scheduler (big.Little cluster related) settings
                 echo 93 > /proc/sys/kernel/sched_upmigrate
                 echo 83 > /proc/sys/kernel/sched_downmigrate
-
-                # Enable core control
-                echo 2 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
-                echo 4 > /sys/devices/system/cpu/cpu0/core_ctl/max_cpus
-                echo 68 > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
-                echo 40 > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
-                echo 100 > /sys/devices/system/cpu/cpu0/core_ctl/offline_delay_ms
-                echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/is_big_cluster
 
                 # re-enable thermal core_control
                 echo 1 > /sys/module/msm_thermal/core_control/enabled
