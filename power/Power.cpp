@@ -25,11 +25,6 @@
 #include "power-common.h"
 #include "power-helper.h"
 
-/* RPM runs at 19.2Mhz. Divide by 19200 for msec */
-#define RPM_CLK 19200
-
-extern struct stat_pair rpm_stat_map[];
-
 namespace android {
 namespace hardware {
 namespace power {
@@ -67,63 +62,7 @@ Return<void> Power::setFeature(Feature feature, bool activate)  {
 
 Return<void> Power::getPlatformLowPowerStats(getPlatformLowPowerStats_cb _hidl_cb) {
     hidl_vec<PowerStatePlatformSleepState> states;
-    uint64_t stats[MAX_PLATFORM_STATS * MAX_RPM_PARAMS] = {0};
-    uint64_t *values;
-    struct PowerStatePlatformSleepState *state;
-    int ret;
 
-    ret = extract_platform_stats(stats);
-    if (ret != 0) {
-        states.resize(0);
-        goto done;
-    }
-
-    states.resize(RPM_MODE_MAX);
-
-    /* Update statistics for XO_shutdown */
-    state = &states[RPM_MODE_XO];
-    state->name = "XO_shutdown";
-
-    state->residencyInMsecSinceBoot = stats[ACCUMULATED_VLOW_TIME];
-    state->totalTransitions = stats[VLOW_COUNT];
-    state->supportedOnlyInSuspend = false;
-    state->voters.resize(XO_VOTERS);
-
-    /* Update statistics for APSS voter */
-    state->voters[0].name = "APSS";
-    state->voters[0].totalTimeInMsecVotedForSinceBoot =
-        stats[XO_ACCUMULATED_DURATION_APSS] / RPM_CLK;
-    state->voters[0].totalNumberOfTimesVotedSinceBoot = stats[XO_COUNT_APSS];
-
-    /* Update statistics for MPSS voter */
-    state->voters[1].name = "MPSS";
-    state->voters[1].totalTimeInMsecVotedForSinceBoot =
-        stats[XO_ACCUMULATED_DURATION_MPSS] / RPM_CLK;
-    state->voters[1].totalNumberOfTimesVotedSinceBoot = stats[XO_COUNT_MPSS];
-
-    /* Update statistics for ADSP voter */
-    state->voters[2].name = "ADSP";
-    state->voters[2].totalTimeInMsecVotedForSinceBoot =
-        stats[XO_ACCUMULATED_DURATION_ADSP] / RPM_CLK;
-    state->voters[2].totalNumberOfTimesVotedSinceBoot = stats[XO_COUNT_ADSP];
-
-    /* Update statistics for SLPI voter */
-    state->voters[3].name = "SLPI";
-    state->voters[3].totalTimeInMsecVotedForSinceBoot =
-        stats[XO_ACCUMULATED_DURATION_SLPI] / RPM_CLK;
-    state->voters[3].totalNumberOfTimesVotedSinceBoot = stats[XO_COUNT_SLPI];
-
-    /* Update statistics for VMIN state */
-    state = &states[RPM_MODE_VMIN];
-
-    state->name = "VMIN";
-    state->residencyInMsecSinceBoot = stats[ACCUMULATED_VMIN_TIME];
-    state->totalTransitions = stats[VMIN_COUNT];
-    state->supportedOnlyInSuspend = false;
-    state->voters.resize(VMIN_VOTERS);
-    //Note: No filling of state voters since VMIN_VOTERS = 0
-
-done:
     _hidl_cb(states, Status::SUCCESS);
     return Void();
 }
