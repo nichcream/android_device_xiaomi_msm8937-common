@@ -390,9 +390,16 @@ else
         esac
     fi
 
-    # Don't account allocstalls for <= 2GB RAM targets
-    if [ $MemTotal -le 2097152 ]; then
-        echo 100 > /sys/module/vmpressure/parameters/allocstall_threshold
+    KernelVersionStr=`cat /proc/sys/kernel/osrelease`
+    KernelVersionS=${KernelVersionStr:2:2}
+    KernelVersionA=${KernelVersionStr:0:1}
+    KernelVersionB=${KernelVersionS%.*}
+
+    # Don't account allocstalls for <= 2GB RAM targets on kernel versions < 4.9
+    if [ $KernelVersionA -lt 4 ] || [ $KernelVersionB -lt 9 ]; then
+        if [ $MemTotal -le 2097152 ]; then
+            echo 100 > /sys/module/vmpressure/parameters/allocstall_threshold
+        fi
     fi
 
     configure_read_ahead_kb_values
