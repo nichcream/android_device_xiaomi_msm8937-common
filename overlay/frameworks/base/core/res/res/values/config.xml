@@ -587,6 +587,9 @@
     in hardware. -->
     <bool name="config_setColorTransformAccelerated">true</bool>
 
+    <!-- Maximum color temperature, in Kelvin, supported by Night display. -->
+    <integer name="config_nightDisplayColorTemperatureMax">5500</integer>
+
     <!-- Boolean indicating if current platform supports HFP inband ringing -->
     <bool name="config_bluetooth_hfp_inband_ringing_support">true</bool>
 
