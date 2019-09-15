@@ -1,2 +1,1 @@
 allow system_server radio_prop:property_service set;
-allow system_server wcnss_filter:unix_stream_socket connectto;

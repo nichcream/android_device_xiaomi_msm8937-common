@@ -2,3 +2,4 @@ type fpc_data_file, file_type, data_file_type, core_data_file_type;
 type fpce_socket, file_type;
 type proc_touchpanel, fs_type, sysfs_type;
 type gx_fpd_data_file, file_type, data_file_type, core_data_file_type;
+type sysfs_fps_attr, fs_type, sysfs_type;
