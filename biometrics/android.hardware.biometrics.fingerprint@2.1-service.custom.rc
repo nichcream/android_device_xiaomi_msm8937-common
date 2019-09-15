@@ -6,7 +6,6 @@ service vendor.fps_hal /vendor/bin/hw/android.hardware.biometrics.fingerprint@2.
     socket fpce stream 0666 system system
     user system
     group system sdcard_rw input
-    system system
     disabled
 
 service vendor.gx_fpd /vendor/bin/gx_fpd
