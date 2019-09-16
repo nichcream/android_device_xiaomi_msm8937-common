@@ -195,8 +195,8 @@ PRODUCT_PACKAGES += \
     libgnsspps \
     libcurl
 
-PRODUCT_BOOT_JARS += \
-    com.qti.location.sdk
+#PRODUCT_BOOT_JARS += \
+#    com.qti.location.sdk
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
@@ -417,10 +417,14 @@ PRODUCT_PACKAGES += \
     libaacwrapper \
     libnl
 
- PRODUCT_BOOT_JARS += \
-    WfdCommon
+#PRODUCT_BOOT_JARS += \
+#   WfdCommon
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 # Inherit common proprietary files
 $(call inherit-product-if-exists, vendor/xiaomi/msm8937-common/msm8937-common-vendor.mk)
+
+# MindTheGapps
+$(call inherit-product-if-exists, vendor/gapps/common/common-vendor.mk)
+
